@@ -1,3 +1,90 @@
-## Fandom-K
+# 🌟Fandom-K
 
-코드잇 스프린트 프론트엔드 15기 3팀 프로젝트입니다.
+좋아하는 아티스트에게 직접 응원을 전하고, 투명한 후원과 간편한 참여로 진짜 팬심을 행동으로 보여줄 수 있는 팬 커뮤니티 플랫폼입니다.
+
+---
+
+## 🚀 배포 주소
+
+👉 [Fadon-K 바로가기](https://your-deploy-url.com)
+
+---
+
+## 🗓️ 프로젝트 기간
+
+- 시작일: 2025.04.15
+- 종료일: 2025.04.30
+
+---
+
+## 💻 기술 스택
+
+| 구분          | 사용 기술                                                                                                                                                                                                                                                                                                           |
+| ------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Frontend**  | ![Vite](https://img.shields.io/badge/Vite-646CFF?style=flat-square&logo=vite&logoColor=white) ![React](https://img.shields.io/badge/React-61DAFB?style=flat-square&logo=react&logoColor=white) ![ReactRouter](https://img.shields.io/badge/React_Router-CA4245?style=flat-square&logo=react-router&logoColor=white) |
+| **Language**  | ![JS](https://img.shields.io/badge/JavaScript-F7DF1E?style=flat-square&logo=javascript&logoColor=black)                                                                                                                                                                                                             |
+| **Style**     | ![Emotion](https://img.shields.io/badge/Emotion-DB7093?style=flat&logo=emotion&logoColor=white)                                                                                                                                                                                                                     |
+| **API 통신**  | ![Axios](https://img.shields.io/badge/Axios-5A29E4?style=flat-square)                                                                                                                                                                                                                                               |
+| **정적 분석** | ![Biome](https://img.shields.io/badge/Biome-%2331C48D?style=flat&logoColor=white)                                                                                                                                                                                                                                   |
+| **배포**      | ![Vercel](https://img.shields.io/badge/Vercel-000000?style=flat&logo=vercel&logoColor=white)                                                                                                                                                                                                                        |
+| **협업 툴**   | ![Notion](https://img.shields.io/badge/Notion-000000?style=flat&logo=notion&logoColor=white) ![Discord](https://img.shields.io/badge/Discord-5865F2?style=flat&logo=discord&logoColor=white)                                                                                                                        |
+
+---
+
+## 📌 주요 기능
+
+### 🌐 랜딩 페이지
+
+< 아미지 삽입 예정 >
+
+### 🎁 후원을 기다리는 조공
+
+### 🌟 이달의 차트
+
+### 💖 모달창
+
+### 💎 마이페이지
+
+---
+
+## 👩🏻‍💻 팀원
+
+| [이지현](https://github.com/two678)                                | [김수민](https://github.com/ddumini)                                 | [유동환](https://github.com/TopiaYu)                                 | [김태일](https://github.com/Taeil08)                                 | [김서연](https://github.com/SeoYeonK-04)                                     |
+| ------------------------------------------------------------------ | -------------------------------------------------------------------- | -------------------------------------------------------------------- | -------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
+| <img src="https://github.com/two678.png" alt="two678" width="100"> | <img src="https://github.com/ddumini.png" alt="ddumini" width="100"> | <img src="https://github.com/TopiaYu.png" alt="TopiaYu" width="100"> | <img src="https://github.com/Taeil08.png" alt="Taeil08" width="100"> | <img src="https://github.com/SeoYeonK-04.png" alt="SeoYeonK-04" width="100"> |
+
+---
+
+## 🎯 역할 소개
+
+🐥 **이지현**
+
+- 팀장
+- 프로젝트 초기 세팅
+- [공통 컴포넌트] - 헤더, 푸터
+- 모달창
+
+🌸 **김수민**
+
+- 디렉토리 초기 세팅
+- 랜딩 페이지
+- [목록 페이지] - 크레딧 충천하기
+
+🌿 **유동환**
+
+- [공통 컴포넌트] - 버튼
+- 마이 페이지
+
+🔥 **김태일**
+
+- [공통 컴포넌트] - 아이돌 프로필
+- [목록 페이지] - 이달의 차트
+
+💫 **김서연**
+
+- [공통 컴포넌트] - 라디오 버튼
+- [목록 페이지] - 후원을 기다리는 조공
+
+---
+
+## 📁 폴더 구조
