@@ -1,0 +1,2 @@
+# 루트에 .gitattributes 파일 생성 후 아래처럼 작성
+* text=auto eol=lf
