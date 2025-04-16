@@ -30,7 +30,7 @@ const Header = () => {
 			<Link to="/list">
 				<img css={logoStyles} src={logo} alt="Fandom-K 로고" />
 			</Link>
-			<Link>
+			<Link to="/mypage">
 				<img css={profileStyles} src={profile} alt="프로필 이미지" />
 			</Link>
 		</header>
