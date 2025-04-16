@@ -49,3 +49,12 @@ body:
         - label: "브랜치 네이밍 검토"
         - label: "테스트 계획"
         - label: "문서화"
+
+  - type: input
+    id: milestone
+    attributes:
+      label: 🏆 마일스톤
+      description: 이 작업이 포함될 마일스톤을 선택하세요.
+      placeholder: 예시) 공통 컴포넌트 구현, MVP 개발 등
+    validations:
+      required: true
