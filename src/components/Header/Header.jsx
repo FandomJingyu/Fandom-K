@@ -1,27 +1,29 @@
+/** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react";
 import { Link } from "react-router-dom";
 import logo from "../../../public/icons/logo.svg";
 import profile from "../../../public/images/profile-default.png";
 
 const headerStyles = css`
-  display: inline-flex;
+  display: flex;
   height: 80px;
   padding: 24px 360px 24px 876px;
   justify-content: flex-end;
-  align-items: flex-start;
+  align-items: center;
   gap: 484px;
   flex-shrink: 0;
 `;
 
 const logoStyles = css`
-  width: 167.918px;
-  height: 32px;
+  width: 10.5rem;
+  height: 2rem;
 `;
 
 const profileStyles = css`
-  width: 50px;
-  height: 76px;
-  flex-shrink: 0;
+  width: 3.125rem;
+  height: 3.125rem;
+  border-radius: 50%;
+  object-fit: cover;
 `;
 
 const Header = () => {

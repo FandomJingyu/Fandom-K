@@ -1,3 +1,4 @@
+/** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react";
 import githubLogo from "../../../public/icons/github-mark-white.svg";
 
@@ -11,7 +12,7 @@ const footerStyles = css`
 `;
 
 const footerFontStyles = css`
-  color: var(--Secondary-400, #9ca3af);
+  color: #ffffff; /* 색상 수정 */
   text-align: center;
   font-size: 16px;
   font-style: normal;
@@ -30,11 +31,11 @@ const buttonStyles = css`
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 8px 16px; /* 버튼 크기 조정 */
+  padding: 8px 16px;
   background-color: transparent;
   border: none;
   cursor: pointer;
-  gap: 8px; /* 이미지와 텍스트 간 간격 */
+  gap: 8px;
 `;
 
 const Footer = () => {
@@ -50,12 +51,12 @@ const Footer = () => {
 				css={buttonStyles}
 				type="button"
 				onClick={handleGithubClick}
-				aria-label="GitHub repository link" // 접근성 추가
+				aria-label="GitHub repository link"
 			>
 				<img
 					css={githubLogoStyles}
 					src={githubLogo}
-					alt="GitHub 레포지토리로 이동" // alt 속성 개선
+					alt="GitHub 레포지토리로 이동"
 				/>
 				<span css={footerFontStyles}>GitHub</span>
 			</button>
