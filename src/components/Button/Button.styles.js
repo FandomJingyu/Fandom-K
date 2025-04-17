@@ -9,8 +9,8 @@ export const getButtonStyles = (
     width: ${currentSize.width};
     height: ${currentSize.height};
     font-size: ${currentSize.fontSize};
-    background: ${disabled ? "#D9D9D9" : currentVariant.background};
-    color: ${disabled ? "#FFFFFF" : currentVariant.color};    
+    background: ${disabled ? "var(--gray-828282)" : currentVariant.background};
+    color: ${disabled ? "var( --white-F7F7F8)" : currentVariant.color};    
     border: ${disabled ? "none" : currentVariant?.border || "none"};    
     border-radius: ${currentSize.borderradius || "3px"};
     cursor: ${disabled ? "not-allowed" : "pointer"};
@@ -68,11 +68,12 @@ const buttonSizeMobile = {
 // 색상
 const buttonVariants = {
 	primary: {
-		background: "linear-gradient(90deg, #f86f65, #fe5493)",
+		background:
+			"linear-gradient(90deg, var(--orange-F96D69), var(--pink-FE5493))",
 		color: "white",
 	},
 	dark: {
-		background: "rgba(255, 255, 255, 0.1)",
+		background: "var(--white-F7F7F8-10)",
 		color: "white",
 		border: "1px solid #F1EEF9CC",
 	},

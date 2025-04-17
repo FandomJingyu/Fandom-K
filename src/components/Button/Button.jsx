@@ -15,9 +15,7 @@ const Button = ({
 	children,
 }) => {
 	const currentSize = buttonSizes[size];
-	const currentVariant = disabled
-		? buttonVariants.disabled
-		: buttonVariants[variant];
+	const currentVariant = buttonVariants[variant];
 	const mobileSize = buttonSizeMobile[size];
 
 	//onClick 함수 예시
