@@ -16,6 +16,8 @@
 	"dependencies": {
 		"@emotion/react": "^11.14.0",
 		"@emotion/styled": "^11.14.0",
+		"@studio-freight/lenis": "^1.0.42",
+		"gsap": "^3.12.7",
 		"react": "^19.0.0",
 		"react-dom": "^19.0.0",
 		"react-router-dom": "^7.5.0"
