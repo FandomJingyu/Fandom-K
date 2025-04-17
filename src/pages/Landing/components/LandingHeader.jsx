@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { useEffect, useRef } from "react";
+import { useCallback, useEffect, useRef } from "react";
 
 export default function LandingHeader() {
 	const headerRef = useRef(null);
