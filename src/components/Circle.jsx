@@ -1,5 +1,5 @@
-import React from "react";
 import styled from "@emotion/styled";
+import React from "react";
 import ProfileXIcon from "./ProfileXIcon";
 
 const ImageCircle = styled.div`
@@ -18,14 +18,14 @@ const IdolImage = styled.img`
 `;
 
 const Circle = () => {
-  return (
-    <div>
-      <ProfileXIcon />
-      <ImageCircle>
-        {/* <IdolImage src="/images/Karina.jpeg" alt="aespa profile" /> */}
-      </ImageCircle>
-    </div>
-  );
+	return (
+		<div>
+			<ProfileXIcon />
+			<ImageCircle>
+				{/* <IdolImage src="/images/Karina.jpeg" alt="aespa profile" /> */}
+			</ImageCircle>
+		</div>
+	);
 };
 
 export default Circle;

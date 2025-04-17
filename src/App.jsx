@@ -5,17 +5,17 @@ import List from "./pages/List";
 import Mypage from "./pages/Mypage";
 
 function App() {
-  return (
-    <>
-      <Routes>
-        <Route path="/" element={<DefaultLayout />}>
-          <Route index element={<Landing />} />
-          <Route path="/list" element={<List />} />
-          <Route path="/mypage" element={<Mypage />} />
-        </Route>
-      </Routes>
-    </>
-  );
+	return (
+		<>
+			<Routes>
+				<Route path="/" element={<DefaultLayout />}>
+					<Route index element={<Landing />} />
+					<Route path="/list" element={<List />} />
+					<Route path="/mypage" element={<Mypage />} />
+				</Route>
+			</Routes>
+		</>
+	);
 }
 
 export default App;

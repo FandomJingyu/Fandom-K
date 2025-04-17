@@ -1,0 +1,41 @@
+{
+	"name": "Fandom-K",
+	"short_name": "Fandom-K",
+	"description": "All your K-pop love, in one place",
+	"start_url": "/",
+	"display": "standalone",
+	"background_color": "#ffffff",
+	"theme_color": "#ffffff",
+	"icons": [
+		{
+			"src": "./android-icon-16x16.png",
+			"sizes": "16x16",
+			"type": "image/png",
+			"density": "0.75"
+		},
+		{
+			"src": "./android-icon-32x32.png",
+			"sizes": "32x32",
+			"type": "image/png",
+			"density": "1.0"
+		},
+		{
+			"src": "./android-icon-512x512.png",
+			"sizes": "512x72",
+			"type": "image/png",
+			"density": "1.5"
+		},
+		{
+			"src": "./apple-touch-icon.png",
+			"sizes": "180x180",
+			"type": "apple-touch-icon",
+			"density": "3.0"
+		},
+		{
+			"src": "./android-chrome-192x192.png",
+			"sizes": "192x192",
+			"type": "image/png",
+			"density": "4.0"
+		}
+	]
+}
