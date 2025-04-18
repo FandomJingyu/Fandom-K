@@ -1,4 +1,4 @@
-import CreditCharge from "../../components/creditCharge";
+import CreditCharge from "./components/creditCharge";
 const List = () => {
 	return (
 		<div className="mainGrid">
