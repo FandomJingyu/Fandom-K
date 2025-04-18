@@ -18,11 +18,6 @@ const Button = ({
 	const currentVariant = buttonVariants[variant];
 	const mobileSize = buttonSizeMobile[size];
 
-	//onClick 함수 예시
-	// const handleOnClick = () => {
-	//     console.log(1)
-	// }
-
 	return (
 		<div>
 			<button

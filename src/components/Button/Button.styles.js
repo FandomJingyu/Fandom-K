@@ -1,5 +1,6 @@
 import { css } from "@emotion/react";
 
+//emotion 함수 사용으로 동적관리 가능
 export const getButtonStyles = (
 	currentSize,
 	currentVariant,
@@ -70,11 +71,11 @@ const buttonVariants = {
 	primary: {
 		background:
 			"linear-gradient(90deg, var(--orange-F96D69), var(--pink-FE5493))",
-		color: "white",
+		color: "var(--white-F7F7F8)",
 	},
 	dark: {
 		background: "var(--white-F7F7F8-10)",
-		color: "white",
+		color: "var(--white-F7F7F8)",
 		border: "1px solid #F1EEF9CC",
 	},
 };
