@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import Modal from "../../components/Modal/Modal";
-import Card from "../List/Donation/components/Card";
 
 const Testpage = () => {
 	const [isOpen, setIsOpen] = useState(false);
@@ -23,7 +22,6 @@ const Testpage = () => {
 			<Modal isOpen={isOpen} onClose={handleClose} title="모달 컨텐츠">
 				<p>여기에 모달 내용이 들어갑니다.</p>
 			</Modal>
-			<Card />
 		</div>
 	);
 };
