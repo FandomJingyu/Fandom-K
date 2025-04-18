@@ -3,12 +3,15 @@ import { css } from "@emotion/react";
 import githubLogo from "../../../public/icons/github-mark-white.svg";
 
 const footerStyles = css`
-  display: flex;
-  height: 160px;
-  padding: 32px 400px;
-  justify-content: space-between;
-  align-items: center;
-  align-self: stretch;
+  top: 0;
+	left: 0;
+  .mainGrid {
+    display: flex;
+    height: 160px;
+    justify-content: space-between;
+    align-items: center;
+    align-self: stretch;
+  }
 `;
 
 const footerFontStyles = css`
@@ -45,21 +48,23 @@ const Footer = () => {
 
 	return (
 		<footer css={footerStyles}>
-			<span css={footerFontStyles}>©codeit - 2025</span>
-			<span css={footerFontStyles}>15기 3조 FandomJingyu</span>
-			<button
-				css={buttonStyles}
-				type="button"
-				onClick={handleGithubClick}
-				aria-label="GitHub repository link"
-			>
-				<img
-					css={githubLogoStyles}
-					src={githubLogo}
-					alt="GitHub 레포지토리로 이동"
-				/>
-				<span css={footerFontStyles}>GitHub</span>
-			</button>
+			<div className="mainGrid">
+				<span css={footerFontStyles}>©codeit - 2025</span>
+				<span css={footerFontStyles}>15기 3조 FandomJingyu</span>
+				<button
+					css={buttonStyles}
+					type="button"
+					onClick={handleGithubClick}
+					aria-label="GitHub repository link"
+				>
+					<img
+						css={githubLogoStyles}
+						src={githubLogo}
+						alt="GitHub 레포지토리로 이동"
+					/>
+					<span css={footerFontStyles}>GitHub</span>
+				</button>
+			</div>
 		</footer>
 	);
 };
