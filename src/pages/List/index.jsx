@@ -1,7 +1,10 @@
+import CreditCharge from "../../components/creditCharge";
 const List = () => {
-  return (
-    <div>List</div>
-  )
-}
+	return (
+		<div className="mainGrid">
+			<CreditCharge />
+		</div>
+	);
+};
 
-export default List
+export default List;
