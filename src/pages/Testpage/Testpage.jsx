@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Button from "../../components/Button/Button";
-import Modal from "../../components/Modal/Modal";
+import Modal from "../../components/Modal";
 
 const Testpage = () => {
 	const [isOpen, setIsOpen] = useState(false);
