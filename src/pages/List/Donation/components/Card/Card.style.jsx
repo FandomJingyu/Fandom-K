@@ -1,6 +1,12 @@
 /** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react";
 
+/**
+ * 카드 전체 컨테이너
+ * - 세로 방향 정렬
+ * - 가운데 정렬
+ * - 크기 고정
+ */
 export const donationCardContainer = css`
 display: flex;
 width: 282px;
@@ -11,12 +17,20 @@ align-items: center;
 flex-shrink: 0;
 `;
 
+/**
+ * 이미지 영역 컨테이너
+ * - 버튼 및 오버레이를 절대 위치로 배치하기 위한 기준 요소
+ */
 export const donatioImgContainer = css`
   position: relative;
   width: 282px;
   height: 293px;
 `;
 
+/**
+ * 프로필 이미지 + 오버레이를 감싸는 wrapper
+ * - border-radius 및 overflow 처리
+ */
 export const imgWrapper = css`
   position: relative;
   width: 100%;
@@ -25,6 +39,10 @@ export const imgWrapper = css`
   overflow: hidden;
 `;
 
+/**
+ * 프로필 이미지
+ * - 전체 채우기 + 라운드
+ */
 export const donationImg = css`
   width: 100%;
   height: 100%;
@@ -34,6 +52,9 @@ export const donationImg = css`
   z-index: 1;
 `;
 
+/**
+ * 이미지 위에 겹쳐지는 SVG 오버레이
+ */
 export const overlaySvg = css`
   position: absolute;
   top: 0;
@@ -43,6 +64,11 @@ export const overlaySvg = css`
   z-index: 2;
 `;
 
+/**
+ * 후원하기 버튼
+ * - 이미지 하단에 절대 위치로 배치
+ * - 배치 제외 나머지는 공통 컴포넌트로 대체 예정
+ */
 export const donationButton = css`
 position: absolute;
 bottom: 30px;
@@ -53,27 +79,41 @@ height: 40px;
 border-radius: 3px;
 background: linear-gradient(90deg, #F86F65 0%, #FE5493 100%); 
 z-index: 3;
+
+font-size: 13px
 `;
 
+/**
+ * 카드 하단 텍스트 영역 전체
+ * - 수직 정렬
+ */
 export const donationDescription = css`
 display: flex;
-width: 282px;
+width: 100%;
 flex-direction: column;
 align-items: flex-start;
 gap: 24px;
 `;
+
+/**
+ * 제목 영역 (서브제목 + 제목)
+ */
 export const donationTitleContainer = css`
 display: flex;
-width: 154px;
+width: 100%;
 flex-direction: column;
 align-items: flex-start;
 gap: 8px;`;
 
+/**
+ * 장소(서브제목) 스타일
+ * - 작은 회색 텍스트
+ * - 투명도 적용
+ */
 export const descriptionSubtitle = css`
 color: #FFF;
 
 text-align: center;
-font-family: Pretendard;
 font-size: 16px;
 font-style: normal;
 font-weight: 400;
@@ -83,43 +123,61 @@ letter-spacing: -0.165px;
 opacity: 0.4;
 `;
 
+/**
+ * 제목(조공 제목) 텍스트 스타일
+ */
 export const descriptionTitle = css`
 color: var(--white-whtie_F7F7F8, #F7F7F8);
 text-align: center;
-font-family: Pretendard;
 font-size: 18px;
 font-style: normal;
 font-weight: 500;
 line-height: normal;
 `;
 
+/**
+ * 하단 정보 라인 (크레딧 + D-day)
+ * - 좌우로 나란히 배치
+ */
 export const donationFooter = css`
 display: flex;
-width: 282px;
+width: 100%;
 justify-content: space-between;
 `;
 
+/**
+ * 크레딧 영역 (아이콘 + 금액)
+ * - 아이콘 옆에 텍스트 배치
+ */
 export const donationFooterLeft = css`
 display: flex;
 align-items: center`;
 
+/**
+ * 크레딧 아이콘 이미지
+ */
 export const creditImg = css`
 width: 12px;
 height: 12px`;
 
+/**
+ * 목표 금액 텍스트 스타일
+ */
 export const targetDonation = css`
-color: var(--Fandom-K-CTA, #F96D69);
-font-family: Pretendard;
+color: var(--orange-F96D69);
 font-size: 12px;
 font-style: normal;
 font-weight: 400;
 line-height: 18px; /* 150% */
 letter-spacing: -0.165px;`;
 
+/**
+ * D-Day 남은 일 수 텍스트
+ * - 오른쪽 정렬 스타일
+ */
 export const donationDday = css`
-color: var(--white-whtie_F7F7F8, #F7F7F8);
+color: var(--white-F7F7F8);
 text-align: right;
-font-family: Pretendard;
 font-size: 12px;
 font-style: normal;
 font-weight: 400;

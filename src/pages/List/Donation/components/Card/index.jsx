@@ -17,65 +17,61 @@ import {
 	imgWrapper,
 	overlaySvg,
 	targetDonation,
-} from "./Card.style";
+} from "./Card.style"; // 스타일 import
 
-// {
-//   status: true,
-//   deadline: '2025-10-10T00:00:00.000Z',
-//   createdAt: '2025-04-15T09:53:35.947Z',
-//   receivedDonations: 500000,
-//   targetDonation: 1000000,
-//   idolId: 0,
-//   subtitle: '강남역 10번 출구',
-//   title: '민지 생일 축하',
-//   id: 0,
-//   idol: {
-//     totalVotes: 1000,
-//     profilePicture: '/mocks/mock01.png',
-//     group: '뉴진스',
-//     gender: 'female',
-//     name: '민지',
-//     id: 0,
-//   }
-// },
+/**
+ * 단일 후원 카드 컴포넌트
+ *
+ * @param {Object} donation - 후원 데이터 객체
+ * @returns JSX
+ */
+function Card({ donation }) {
+	const idol = donation.idol; // 아이돌 정보 분리 추출
 
-function Card() {
-	const donations = DONATIONS[0];
-	const idols = donations.idol;
-
-	// 남은날짜 구하기
+	// 남은 날짜 구하기
 	const today = new Date();
-	const deadline = new Date(donations.deadline);
+	const deadline = new Date(donation.deadline);
 
 	const diffTime = deadline - today;
 	const dDay = Math.ceil(diffTime / (1000 * 60 * 60 * 24)); // 일 단위로 변환
 
 	return (
 		<article css={donationCardContainer}>
+			{/* 상단 이미지 영역 */}
 			<div css={donatioImgContainer}>
 				<div css={imgWrapper}>
-					<img css={donationImg} src={idols.profilePicture} alt={idols.name} />
+					{/* 아이돌 프로필 이미지 */}
+					<img css={donationImg} src={idol.profilePicture} alt={idol.name} />
+					{/* 그라데이션 SVG 오버레이 */}
 					<img
 						css={overlaySvg}
 						src="/images/donation-card-cover.svg"
 						alt="아이돌 프로필 그라데이션 효과 사진"
 					/>
 				</div>
+
+				{/* 후원하기 버튼 - 공통 Button 컴포넌트로 대체 예정*/}
 				<button type="button" css={donationButton}>
 					후원하기
 				</button>
 			</div>
 
+			{/* 카드 하단 텍스트 영역 */}
 			<div css={donationDescription}>
+				{/* 제목 영역 (장소, 제목 등) */}
 				<div css={donationTitleContainer}>
-					<h3 css={descriptionSubtitle}>{donations.subtitle}</h3>
-					<h2 css={descriptionTitle}>{donations.title}</h2>
+					<h4 css={descriptionSubtitle}>{donation.subtitle}</h4>
+					<h3 css={descriptionTitle}>{donation.title}</h3>
 				</div>
+
+				{/* 하단 정보 (크레딧, D-day) */}
 				<div css={donationFooter}>
 					<div css={donationFooterLeft}>
+						{/* 크레딧 아이콘 및 목표 금액 */}
 						<img css={creditImg} src="/images/credit.svg" alt="크레딧 사진" />
-						<span css={targetDonation}>{donations.targetDonation}</span>
+						<span css={targetDonation}>{donation.targetDonation}</span>
 					</div>
+					{/* 남은 날짜 */}
 					<span css={donationDday}>{dDay}일 남음</span>
 				</div>
 			</div>
