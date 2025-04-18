@@ -5,18 +5,27 @@ import logo from "../../../public/icons/logo.svg";
 import profile from "../../../public/images/profile-default.png";
 
 const headerStyles = css`
-  display: flex;
-  height: 80px;
-  padding: 24px 360px 24px 876px;
-  justify-content: flex-end;
-  align-items: center;
-  gap: 484px;
-  flex-shrink: 0;
+  position: sticky;
+	z-index: 99;
+  top: 0;
+	left: 0;
+	width: 100%;
+	.mainGrid {
+		height: 80px;
+	  display: flex;
+	  align-items: center; 
+    justify-content: flex-end;
+	  position: relative; // 전역 속성으로 들어있음
+	}
 `;
 
 const logoStyles = css`
   width: 10.5rem;
   height: 2rem;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 `;
 
 const profileStyles = css`
@@ -29,12 +38,14 @@ const profileStyles = css`
 const Header = () => {
 	return (
 		<header css={headerStyles}>
-			<Link to="/list">
-				<img css={logoStyles} src={logo} alt="Fandom-K 로고" />
-			</Link>
-			<Link to="/mypage">
-				<img css={profileStyles} src={profile} alt="프로필 이미지" />
-			</Link>
+			<div className="mainGrid">
+				<Link to="/list">
+					<img css={logoStyles} src={logo} alt="Fandom-K 로고" />
+				</Link>
+				<Link to="/mypage">
+					<img css={profileStyles} src={profile} alt="프로필 이미지" />
+				</Link>
+			</div>
 		</header>
 	);
 };
