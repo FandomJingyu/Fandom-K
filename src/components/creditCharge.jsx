@@ -1,12 +1,28 @@
 import styled from "@emotion/styled";
+import gsap from "gsap";
 import { useEffect, useState } from "react";
-
 export default function CreditCharge() {
-	const [credit, setCredit] = useState(0);
+	const [credit, setCredit] = useState(36000);
 
 	useEffect(() => {
-		setCredit(Number(36000).toLocaleString());
+		countCredit();
+		return countCredit;
 	}, []);
+
+	const countCredit = () => {
+		const counter = {
+			credit: 0,
+		};
+
+		gsap.to(counter, {
+			credit: 36000,
+			duration: 2,
+			ease: "power1.out",
+			onUpdate: () => {
+				setCredit(Math.floor(counter.credit).toLocaleString());
+			},
+		});
+	};
 
 	return (
 		<StyledCreditCharge>
@@ -14,7 +30,7 @@ export default function CreditCharge() {
 				<p>내 크레딧</p>
 				<div className="credit">
 					<img src="/icons/icon_credit.svg" alt="credit" />
-					<span>{credit}</span>
+					<span id="credit">{credit}</span>
 				</div>
 			</div>
 			<button type="button">충전하기</button>
