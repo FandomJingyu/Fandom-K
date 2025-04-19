@@ -4,8 +4,11 @@ import React, { useState, useEffect, useCallback } from "react";
 import { idolsAPI } from "../../apis/idolsAPI";
 import Button from "../../components/Button/Button";
 import Modal from "../../components/Modal";
+import RadioButton from "../../components/RadioButton";
 
 const Testpage = () => {
+	const credits = [100, 500, 1000]; // 라디오 버튼 test를 위한 크레딧 배열
+	const [select, setSelect] = useState(null); // 라디오 버튼 test를 위한 state설정 (현재 선택된 값을 저장하는 state)
 	const [isOpen, setIsOpen] = useState(false);
 
 	const handleClose = () => {
@@ -58,9 +61,39 @@ const Testpage = () => {
 					</div>
 				))}
 			</div>
+
+			<div css={radio}>
+				{credits.map((credit) => (
+					<RadioButton
+						key={credit}
+						value={credit}
+						checked={select === credit}
+						onChange={setSelect}
+						className="charge"
+					>
+						{credit}
+					</RadioButton>
+				))}
+				{/* 클래스 적용 확인을 위한 test 같은 credit 배열을 사용해서 같이 작동되는 것입니다! */}
+				{credits.map((credit) => (
+					<RadioButton
+						key={credit}
+						value={credit}
+						checked={select === credit}
+						onChange={setSelect}
+						className="vote"
+					>
+						{credit}
+					</RadioButton>
+				))}
+			</div>
 		</div>
 	);
 };
+
+// 라디오버튼 test를위한 css
+const radio = css`
+color: #ffffff`;
 
 const testIdolsCircle = css`
   width: 980px;
