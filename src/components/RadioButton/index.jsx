@@ -12,7 +12,7 @@ const voteRadioButton = css`
   height: 70px;
 `;
 
-// 크레딧 모달창 스타일 정의 & 선택된 경우 border 색상 변경
+// 크레딧 모달창 스타일 정의 & 선택된 경우 border 색상 변경 (input display:none으로 설정해서 className을 지정해 border색상 변경)
 const chargeRadioButton = css`
   display: flex;
   align-items: center;
@@ -22,9 +22,24 @@ const chargeRadioButton = css`
   border-radius: 8px;
   border: 1px solid var(--white-F7F7F8);
 
-  &.selected {
-    border: 1px solid var(--orange-F96D69);
-  }
+  .selected {
+  border-radius: 8px;
+  border: 1px solid var(--orange-F96D69);
+`;
+
+// input 자체는 화면에 표시되지 않도록 숨김 처리
+const inputStyle = css`
+display: none;`;
+
+// 라벨 내부 콘텐츠 영역 스타일
+const contenteWrapper = css`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  height: 100%;
+  padding: 0 16px;
+}
 `;
 
 // 라디오 버튼 스타일 정의
@@ -49,24 +64,30 @@ function RadioButton({ value, checked, onChange, children, className }) {
 		charge: chargeRadioButton,
 	};
 
+	const id = `radio-${value}`; // 선택된 값에 따라 고유 ID 설정 (라벤 연결용)
+
 	return (
-		<div
-			css={styleObj[className]}
-			className={checked ? "selected" : ""}
-			onClick={() => onChange(value)}
-			onKeyDown={(e) => {
-				if (e.key === "Enter" || e.key === " ") {
-					onChange(value);
-				}
-			}}
-		>
-			<div>{children}</div>
-			<img
-				src={checked ? radioTrue : radioFalse}
-				alt="라디오 단일 선택 버튼"
-				css={radioIcon}
+		<label htmlFor={id} css={styleObj[className]}>
+			{/* 실제 라디오 버튼은 숨겨져 있고, onChange로 선택 이벤트 처리 */}
+			<input
+				css={inputStyle}
+				type="radio"
+				id={id}
+				name="radio-group"
+				checked={checked}
+				onChange={() => onChange(value)}
 			/>
-		</div>
+
+			{/* 라벨 내부 콘텐츠: children + 선택 상태에 따라 아이콘 변경 */}
+			<div className={`${checked ? "selected" : ""}`} css={contenteWrapper}>
+				<div>{children}</div>
+				<img
+					src={checked ? radioTrue : radioFalse}
+					alt="라디오 단일 선택 버튼"
+					css={radioIcon}
+				/>
+			</div>
+		</label>
 	);
 }
 
