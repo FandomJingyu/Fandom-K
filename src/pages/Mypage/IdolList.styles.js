@@ -1,0 +1,37 @@
+import { css } from "@emotion/react";
+
+const idolList = css`
+    width: 128px;
+    height: 183px;
+    text-align : center;
+
+    > h3 {
+        font-size: 16px;
+        font-weight: bold;
+    }
+
+    > h4 {
+        font-size: 14px;
+        color: rgba(255, 255, 255, 0.6)
+    }
+
+    // myIdolList 에 들어가는 사이즈
+    &.small {
+        width: 100px;
+        height: 153px;
+    }
+`;
+
+const idolFace = css`
+    width: 100%;
+    border-radius: 50%;
+    margin-bottom: 8px;
+
+    > img {
+        width: 100%;
+        border-radius: 50%;
+        object-fit: cover;
+    }
+`;
+
+export { idolList, idolFace };
