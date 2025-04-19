@@ -29,7 +29,14 @@ const chargeRadioButton = css`
 
 // input 자체는 화면에 표시되지 않도록 숨김 처리
 const inputStyle = css`
-display: none;`;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  position: absolute;
+`;
 
 // 라벨 내부 콘텐츠 영역 스타일
 const contenteWrapper = css`
