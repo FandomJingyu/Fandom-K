@@ -1,4 +1,4 @@
-import { IDOLS } from "../../mocks/idols";
+import { IDOLS } from "../../../../mocks/idols";
 import { idolFace, idolList } from "./IdolList.styles";
 /** @jsxImportSource @emotion/react */
 

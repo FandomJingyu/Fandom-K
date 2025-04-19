@@ -1,5 +1,6 @@
 import { css } from "@emotion/react";
 
+// &.small을 통해 다른 사이즈 제공
 const idolList = css`
     width: 128px;
     height: 183px;

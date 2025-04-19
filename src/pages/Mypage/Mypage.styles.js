@@ -1,5 +1,6 @@
 import { css } from "@emotion/react";
 
+//마이페이지 전체 ui 틀
 const mypage = css`
     display: flex;
     flex-direction: column;
@@ -9,6 +10,7 @@ const mypage = css`
   
 `;
 
+//나의 아이돌
 const myIdol = css`
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     padding: 30px 0px 40px 0px;
@@ -20,11 +22,13 @@ const myIdol = css`
     }
 `;
 
+// 나의 아이돌 리스트
 const myIdolList = css`
     display: flex;
     gap: 24px;
 `;
 
+// 아이돌 추가하기
 const addIdol = css`
     position: relative;
     display: flex;
@@ -37,6 +41,7 @@ const addIdol = css`
     }
 `;
 
+// 아이돌 추가하기 랩퍼 , 안에 버튼 존재: 우선적으로 위치만
 const addIdolListWrapper = css`
     display: flex;
     align-items: center;
@@ -58,12 +63,14 @@ const addIdolListWrapper = css`
     }
 `;
 
+// 아이돌 추가하기 리스트 wrap 사용
 const addIdolList = css`
     display: flex;
     flex-wrap: wrap;
     gap: 24px;
 `;
 
+// 추가하기 버튼
 const addButton = css`
     display: flex;
     justify-content: center;

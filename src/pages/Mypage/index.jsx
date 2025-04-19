@@ -1,5 +1,4 @@
 import Button from "../../components/Button/Button";
-import IdolList from "./IdolList";
 import {
 	addButton,
 	addIdol,
@@ -9,6 +8,7 @@ import {
 	myIdolList,
 	mypage,
 } from "./Mypage.styles";
+import IdolList from "./components/IdolList";
 
 /** @jsxImportSource @emotion/react */
 
