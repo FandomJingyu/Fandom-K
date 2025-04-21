@@ -1,6 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react";
-import React, { useState, useEffect, useCallback } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { idolsAPI } from "../../apis/idolsAPI";
 import Button from "../../components/Button/Button";
 import Modal from "../../components/Modal";
