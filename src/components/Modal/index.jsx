@@ -1,60 +1,84 @@
 /** @jsxImportSource @emotion/react */
-import { useEffect, useState } from "react";
+import React from "react";
 import closeImg from "../../../public/images/btn-modal-close.png";
 import {
+	backdropStyles,
 	buttonStyles,
-	headerStyles,
-	modalContentStyles,
-	modalOverlayStyles,
-} from "./Modal.styles"; // 별도의 스타일 파일 가져오기
+	modalHeaderStyles,
+	modalStyles,
+	rootStyles,
+} from "./Modal.styles";
+import ModalPortal from "./ModalPortal";
 
-const Modal = ({ isOpen, onClose, children, title }) => {
-	const [modalOpen, setModalOpen] = useState(isOpen);
+/**
+ * @param {Object} props
+ * @param {boolean} props.isOpen
+ * @param {Function} props.onClose
+ * @param {React.ReactNode} props.children
+ */
 
-	// isOpen 값이 변경될 때마다 modalOpen 상태 업데이트
-	useEffect(() => {
-		setModalOpen(isOpen);
-	}, [isOpen]);
+const modalData = {
+	donation: {
+		title: "후원하기",
+	},
+	credit: {
+		title: "크레딧 충전",
+	},
+	vote: {
+		title: "투표",
+	},
+	insufficientCredits: {
+		title: "크레딧 부족", // 크레딧 부족 모달에 맞는 title
+	},
+	default: {
+		title: "기본 모달",
+	},
+};
 
-	// 모달을 닫는 공통 함수
-	const handleClose = () => {
-		onClose(); // 모달 닫기
-	};
+const Modal = ({ isOpen, onClose, type = "default", children }) => {
+	if (!isOpen) return null;
 
-	const handleKeyDown = (e) => {
-		// 배경 영역에서 키보드 이벤트 처리
-		if (e.key === "Escape") {
-			onClose(); // ESC 키로 모달 닫기
-		} else if (e.key === "Enter" || e.key === " ") {
-			onClose(); // Enter 또는 스페이스 키로도 모달 닫기
+	const { title } = modalData[type] || modalData.default; // type에 맞는 title 가져오기
+
+	const handleKeyDown = (event) => {
+		// Enter 키 또는 Space 키를 눌렀을 때 모달 닫기
+		if (event.key === "Enter" || event.key === " ") {
+			onClose();
 		}
 	};
 
 	return (
-		modalOpen && (
-			<div
-				css={modalOverlayStyles} // 모달의 배경
-				onClick={handleClose} // 배경 클릭 시 모달 닫기
-				onKeyDown={handleKeyDown}
-				role="presentation" // 접근성을 위한 역할(role) 설정
-			>
-				<div
-					css={modalContentStyles} // 모달 내부의 실제 콘텐츠 박스
-					onClick={(e) => e.stopPropagation()} // 배경 클릭 시 모달 닫히지 않도록
-					onKeyDown={(e) => e.stopPropagation()} // 키보드 입력도 전파 막기
+		<ModalPortal>
+			<div css={rootStyles}>
+				{/* Backdrop */}
+				<button
+					css={backdropStyles}
+					onClick={onClose}
+					onKeyDown={handleKeyDown}
+					type="button"
+					aria-label="모달 닫기"
 				>
-					{/* 제목과 X 버튼을 포함한 헤더 */}
-					<div css={headerStyles}>
+					{/* 비어 있는 버튼이지만 키보드 포커스와 역할이 명확함 */}
+				</button>
+				{/* Modal */}
+				<div css={modalStyles}>
+					<div css={modalHeaderStyles}>
 						<h2>{title}</h2>
-						<button css={buttonStyles} onClick={handleClose} type="button">
+						<button
+							css={buttonStyles}
+							onClick={onClose}
+							onKeyDown={handleKeyDown} // 키보드 이벤트 처리
+							type="button"
+							aria-label="모달 창 닫기" // 접근성을 위한 aria-label
+						>
 							<img src={closeImg} alt="모달 창 닫기 버튼" />
 						</button>
 					</div>
-					{/* 모달 내용 */}
+					{/* Modal Content */}
 					{children}
 				</div>
 			</div>
-		)
+		</ModalPortal>
 	);
 };
 

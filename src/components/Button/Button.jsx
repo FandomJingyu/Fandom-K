@@ -8,6 +8,7 @@ import { getButtonStyles } from "./Button.styles.js";
 /** @jsxImportSource @emotion/react */
 
 const Button = ({
+	type = "button",
 	size = "donate-lg",
 	variant = "primary",
 	disabled = false,
@@ -21,7 +22,7 @@ const Button = ({
 	return (
 		<div>
 			<button
-				type="button"
+				type={type}
 				css={getButtonStyles(currentSize, currentVariant, disabled, mobileSize)}
 				disabled={disabled}
 				onClick={onClick}

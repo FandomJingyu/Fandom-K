@@ -1,8 +1,16 @@
-import CreditCharge from "./components/creditCharge";
+import { CreditProvider } from "../../context/CreditContext";
+import CreditCharge from "./Charge/components/creditCharge";
+import Chart from "./Chart/index";
+import Donation from "./Donation/index";
+
 const List = () => {
 	return (
 		<div className="mainGrid">
-			<CreditCharge />
+			<CreditProvider>
+				<CreditCharge />
+			</CreditProvider>
+			<Donation />
+			<Chart />
 		</div>
 	);
 };
