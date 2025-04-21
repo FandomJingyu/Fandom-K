@@ -7,20 +7,18 @@ import btnRight from "/images/btn-donation-arrow-right.svg";
 import {
 	donationContent,
 	donationTitle,
-	donationWrapper,
 	pageNationLeft,
 	pageNationRight,
-	slider,
 } from "./Donation.style";
 
 function Donation() {
 	const donations = DONATIONS;
 
 	return (
-		<section css={donationWrapper}>
+		<section>
 			<h2 css={donationTitle}>후원을 기다리는 조공</h2>
 
-			<div css={slider}>
+			<div>
 				<button type="button" css={pageNationLeft}>
 					<img src={btnLeft} alt="이전" />
 				</button>
