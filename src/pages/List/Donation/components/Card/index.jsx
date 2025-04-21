@@ -72,7 +72,9 @@ function Card({ donation }) {
 						<div css={donationFooterLeft}>
 							{/* 크레딧 아이콘 및 목표 금액 */}
 							<img css={creditImg} src="/images/credit.svg" alt="크레딧 사진" />
-							<span css={targetDonation}>{donation.targetDonation}</span>
+							<span css={targetDonation}>
+								{Number(donation.targetDonation).toLocaleString()}
+							</span>
 						</div>
 						{/* 남은 날짜 */}
 						<span css={donationDday}>{dDay}일 남음</span>
