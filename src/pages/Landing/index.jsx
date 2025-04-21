@@ -9,14 +9,6 @@ import LandingHeader from "./components/LandingHeader";
 import LandingMiddleSection from "./components/LandingMiddleSection";
 import LandingTopSection from "./components/LandingTopSection";
 
-const LandingContainer = styled.div`
-  overflow: hidden;
-  section {
-    height: 100vh;
-    position: relative;
-  }
-`;
-
 const Landing = () => {
 	const lenisRef = useRef(null);
 
@@ -54,3 +46,11 @@ const Landing = () => {
 };
 
 export default Landing;
+
+const LandingContainer = styled.div`
+  overflow: hidden;
+  section {
+    height: 100vh;
+    position: relative;
+  }
+`;

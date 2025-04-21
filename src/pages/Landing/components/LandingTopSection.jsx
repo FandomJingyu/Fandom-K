@@ -240,11 +240,11 @@ const StyledLandingTopSection = styled.section`
   }
   @media all and (max-width: 375px) {
     h2 {
-      font-size: 13.87vw;
+      font-size: 11.87vw;
       line-height: 1.4;
     }
     .landingGrid {
-      padding-top: 37.33vw;
+      padding-top: 30.33vw;
       > p {
         margin-top: 21.33vw;
         font-size: 4.27vw;
@@ -253,7 +253,7 @@ const StyledLandingTopSection = styled.section`
     .landingTopSectionCards {
       width: 69.33vw;
       height: 107.3vw;
-      top: 92.27vw;
+      top: 74.27vw;
       transform: translate(-50%, 0);
       li {
         width: 69.33vw;
