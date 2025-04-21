@@ -16,7 +16,7 @@ const idolList = css`
         color: rgba(255, 255, 255, 0.6)
     }
 
-    // myIdolList 에 들어가는 사이즈
+    // myIdolList 에 들어가는 사이즈 -> 나중에 ustState 쓸때 사이즈 쓸 예정
     &.small {
         width: 100px;
         height: 153px;
