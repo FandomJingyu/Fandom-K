@@ -12,7 +12,7 @@ position: relative`;
  * 슬라이더 위에 고정되어 나타나는 타이틀 스타일
  */
 export const donationTitle = css`
-left: 70px;
+margin-top: 50px;
 
 color: #ffffff;
 font-family: Pretendard;
@@ -28,6 +28,8 @@ export const donationContent = css`
 display: flex;
 gap: 24px;
 
+position: relative;
+
 margin-top: 34px; /* 타이틀 아래 여백 */
 `;
 
@@ -40,6 +42,10 @@ export const pageNationRight = css`
   height: 78.333px;
   flex-shrink: 0;
 
+  position: absolute;
+  right: -80px;
+  top: 230px;
+
   margin-left: 30px;
 `;
 
@@ -51,6 +57,10 @@ export const pageNationLeft = css`
   width: 40px;
   height: 78.333px;
   flex-shrink: 0;
+
+  position: absolute;
+  left: -80px;
+  top: 240px;
 
   margin-right: 30px;
 `;

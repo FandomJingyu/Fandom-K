@@ -10,7 +10,6 @@ import {
 	donationWrapper,
 	pageNationLeft,
 	pageNationRight,
-	slider,
 } from "./Donation.style";
 
 function Donation() {
