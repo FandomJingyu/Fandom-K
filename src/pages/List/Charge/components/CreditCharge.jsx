@@ -1,8 +1,8 @@
 import styled from "@emotion/styled";
 import gsap from "gsap";
 import { useCallback, useEffect, useRef, useState } from "react";
-import Modal from "../../../../src/components/Modal";
-import { useCredit } from "../../../context/CreditContext";
+import Modal from "../../../../../src/components/Modal";
+import { useCredit } from "../../../../context/CreditContext";
 import CreditRechargeModalContent from "./CreditRechargeModalContent";
 
 export default function CreditCharge() {
