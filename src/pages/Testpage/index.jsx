@@ -4,8 +4,13 @@ import React, { useState, useEffect, useCallback } from "react";
 import { idolsAPI } from "../../apis/idolsAPI";
 import Button from "../../components/Button/Button";
 import Modal from "../../components/Modal";
+import RadioButton from "../../components/RadioButton";
+import { useCredit } from "../../context/CreditContext";
 
 const Testpage = () => {
+	const { credit, addCredit, deductCredit } = useCredit(); // credit context test를 위한 선언
+	const credits = [100, 500, 1000]; // 라디오 버튼 test를 위한 크레딧 배열
+	const [select, setSelect] = useState(null); // 라디오 버튼 test를 위한 state설정 (현재 선택된 값을 저장하는 state)
 	const [isOpen, setIsOpen] = useState(false);
 
 	const handleClose = () => {
@@ -40,7 +45,7 @@ const Testpage = () => {
 				후원하기
 			</Button>
 
-			<Modal isOpen={isOpen} onClose={handleClose} title="모달 컨텐츠">
+			<Modal isOpen={isOpen} onClose={handleClose} type="credit">
 				<p>여기에 모달 내용이 들어갑니다.</p>
 			</Modal>
 
@@ -58,10 +63,57 @@ const Testpage = () => {
 					</div>
 				))}
 			</div>
+
+			<div css={radio}>
+				{credits.map((credit) => (
+					<RadioButton
+						key={credit}
+						value={credit}
+						checked={select === credit}
+						onChange={setSelect}
+						className="charge"
+					>
+						{credit}
+					</RadioButton>
+				))}
+				{/* 클래스 적용 확인을 위한 test 같은 credit 배열을 사용해서 같이 작동되는 것입니다! */}
+				{credits.map((credit) => (
+					<RadioButton
+						key={credit}
+						value={credit}
+						checked={select === credit}
+						onChange={setSelect}
+						className="vote"
+					>
+						{credit}
+					</RadioButton>
+				))}
+			</div>
+
+			{/* 크레딧 context test */}
+			<div css={creditContainer}>
+				<button type="button" onClick={() => addCredit(1000)}>
+					크레딧 충전
+				</button>
+				<button type="button" onClick={() => deductCredit(100)}>
+					크레딧 사용
+				</button>
+				<strong css={creditStyle}>현재 크레딧: {credit}</strong>
+			</div>
 		</div>
 	);
 };
 
+// 라디오버튼 test를위한 css
+const radio = css`
+color: #ffffff`;
+
+// 크레딧 test를 위한 css
+const creditStyle = css`color:#ffffff`;
+
+const creditContainer = css`display: flex; gap: 24px`;
+
+// API 테스트를 위한 css
 const testIdolsCircle = css`
   width: 980px;
   margin: 0 auto;
