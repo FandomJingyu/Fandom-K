@@ -1,6 +1,4 @@
 /** @jsxImportSource @emotion/react */
-
-import { DONATIONS } from "../../../../../mocks/donations";
 import {
 	creditImg,
 	descriptionSubtitle,
@@ -18,6 +16,8 @@ import {
 	overlaySvg,
 	targetDonation,
 } from "./Card.style"; // 스타일 import
+
+import Button from "../../../../../components/Button/Button";
 
 /**
  * 단일 후원 카드 컴포넌트
@@ -50,10 +50,10 @@ function Card({ donation }) {
 					/>
 				</div>
 
-				{/* 후원하기 버튼 - 공통 Button 컴포넌트로 대체 예정*/}
-				<button type="button" css={donationButton}>
-					후원하기
-				</button>
+				{/* 후원하기 버튼 */}
+				<div css={donationButton}>
+					<Button size="donate-md">후원하기</Button>
+				</div>
 			</div>
 
 			{/* 카드 하단 텍스트 영역 */}

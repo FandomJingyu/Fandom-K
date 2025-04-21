@@ -74,10 +74,6 @@ position: absolute;
 bottom: 30px;
 left: 22px;
 
-width: 234px;
-height: 40px;
-border-radius: 3px;
-background: linear-gradient(90deg, #F86F65 0%, #FE5493 100%); 
 z-index: 3;
 
 font-size: 13px
