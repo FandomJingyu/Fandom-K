@@ -1,5 +1,6 @@
 import styled from "@emotion/styled";
 import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { infiniteCarousel } from "../../../utils/infiniteCarousel";
 
 const CarouselCards = ({ className, startIndex }) => {
@@ -21,6 +22,7 @@ const CarouselCards = ({ className, startIndex }) => {
 };
 
 export default function LandingBottomSection() {
+	const navigate = useNavigate();
 	// LandingBottomSection 캐러셀 초기화 및 cleanup
 	useEffect(() => {
 		const carousel1 = infiniteCarousel({
@@ -56,7 +58,9 @@ export default function LandingBottomSection() {
 					이제는 더 쉬운 방법으로 시작해 보세요.
 				</p>
 				<img src="/images/landing/logo_big.png" alt="Fandom-K" />
-				<button type="button">크레딧 받고 시작하기</button>
+				<button type="button" onClick={() => navigate("/list")}>
+					크레딧 받고 시작하기
+				</button>
 				<CarouselCards className="carousel02" startIndex={5} />
 			</div>
 		</StyledLandingBottomSection>

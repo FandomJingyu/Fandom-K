@@ -194,4 +194,6 @@ const StyledLandingTopSection = styled.section`
       }
     }
   }
+  @media all and (max-width: 744px) {
+  }
 `;
