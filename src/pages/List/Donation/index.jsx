@@ -18,20 +18,22 @@ function Donation() {
 		<section>
 			<h2 css={donationTitle}>후원을 기다리는 조공</h2>
 
-			<button type="button" css={pageNationLeft}>
-				<img src={btnLeft} alt="이전" />
-			</button>
+			<div>
+				<button type="button" css={pageNationLeft}>
+					<img src={btnLeft} alt="이전" />
+				</button>
 
-			{/* 카드 리스트만 따로 감쌈 */}
-			<div css={donationContent}>
-				{donations.map((donation) => (
-					<Card key={donation.id} donation={donation} />
-				))}
+				{/* 카드 리스트만 따로 감쌈 */}
+				<div css={donationContent}>
+					{donations.map((donation) => (
+						<Card key={donation.id} donation={donation} />
+					))}
+				</div>
+
+				<button type="button" css={pageNationRight}>
+					<img src={btnRight} alt="이후" />
+				</button>
 			</div>
-
-			<button type="button" css={pageNationRight}>
-				<img src={btnRight} alt="이후" />
-			</button>
 		</section>
 	);
 }

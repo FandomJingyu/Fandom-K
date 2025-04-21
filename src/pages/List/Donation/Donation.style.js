@@ -38,7 +38,7 @@ export const pageNationRight = css`
 
   position: absolute;
   right: -80px;
-  top: 230px;
+  bottom: 150px;
 
   margin-left: 30px;
 
@@ -56,12 +56,12 @@ export const pageNationRight = css`
  */
 export const pageNationLeft = css`
   width: 40px;
-  height: 78.333px;
+  height: 78px;
   flex-shrink: 0;
 
   position: absolute;
   left: -80px;
-  top: 240px;
+  bottom: 150px;
 
   margin-right: 30px;
 
