@@ -15,7 +15,6 @@ export const donationTitle = css`
 margin-top: 50px;
 
 color: #ffffff;
-font-family: Pretendard;
 font-size: 24px;
 font-weight: 700;`;
 
