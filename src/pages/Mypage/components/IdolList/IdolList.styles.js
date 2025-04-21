@@ -25,11 +25,13 @@ const idolList = css`
 
 const idolFace = css`
     width: 100%;
+    aspect-ratio: 1 / 1; // 가로:세로 비율 1:1 (정사각형)
     border-radius: 50%;
     margin-bottom: 8px;
 
     > img {
         width: 100%;
+        aspect-ratio: 1 / 1; // 가로:세로 비율 1:1 (정사각형)
         border-radius: 50%;
         object-fit: cover;
     }
