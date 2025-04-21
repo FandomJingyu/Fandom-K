@@ -46,6 +46,12 @@ export const pageNationRight = css`
   top: 230px;
 
   margin-left: 30px;
+
+  &:hover {
+  background-color: #1B1B1B;
+  border-radius: 4px;
+  }
+
 `;
 
 /**
@@ -62,4 +68,9 @@ export const pageNationLeft = css`
   top: 240px;
 
   margin-right: 30px;
+
+  &:hover {
+  background-color: #1B1B1B;
+  border-radius: 4px;
+  }
 `;
