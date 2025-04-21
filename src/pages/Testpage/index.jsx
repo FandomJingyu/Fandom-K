@@ -45,7 +45,7 @@ const Testpage = () => {
 				후원하기
 			</Button>
 
-			<Modal isOpen={isOpen} onClose={handleClose} title="모달 컨텐츠">
+			<Modal isOpen={isOpen} onClose={handleClose} type="credit">
 				<p>여기에 모달 내용이 들어갑니다.</p>
 			</Modal>
 
