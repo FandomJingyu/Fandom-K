@@ -1,11 +1,23 @@
 import styled from "@emotion/styled";
 import gsap from "gsap";
 import { useCallback, useEffect, useRef, useState } from "react";
+import Modal from "../../../../src/components/Modal";
+import { useCredit } from "../../../context/CreditContext";
+import CreditRechargeModalContent from "./CreditRechargeModalContent";
 
 export default function CreditCharge() {
-	const [credit, setCredit] = useState(36000);
+	const { credit } = useCredit();
 	const creditRef = useRef(null);
 	const animationRef = useRef(null);
+	const [isModalOpen, setIsModalOpen] = useState(false);
+
+	const openModal = () => {
+		setIsModalOpen(true);
+	};
+
+	const closeModal = () => {
+		setIsModalOpen(false);
+	};
 
 	// 크레딧 카운트업 애니메이션 함수
 	const countCredit = useCallback((startValue, endValue) => {
@@ -40,24 +52,41 @@ export default function CreditCharge() {
 		});
 	}, []);
 
+	// 크레딧 선택 시 업데이트 함수
+	const handleCreditSelect = (selectedCredit) => {
+		setCredit(selectedCredit); // 선택된 크레딧 값으로 업데이트
+	};
+
 	// 최초 마운트 시에만 실행
 	useEffect(() => {
-		countCredit(0, 36000);
-	}, [countCredit]);
+		countCredit(0, credit);
+	}, [countCredit, credit]);
 
 	return (
-		<StyledCreditCharge>
-			<div>
-				<p>내 크레딧</p>
-				<div className="credit">
-					<img src="/icons/icon_credit.svg" alt="credit" />
-					<span id="credit" ref={creditRef}>
-						{credit.toLocaleString()}
-					</span>
+		<>
+			<StyledCreditCharge>
+				<div>
+					<p>내 크레딧</p>
+					<div className="credit">
+						<img src="/icons/icon_credit.svg" alt="credit" />
+						<span id="credit" ref={creditRef}>
+							{credit.toLocaleString()}
+						</span>
+					</div>
 				</div>
-			</div>
-			<button type="button">충전하기</button>
-		</StyledCreditCharge>
+				<button type="button" onClick={openModal}>
+					충전하기
+				</button>
+			</StyledCreditCharge>
+
+			{/* 모달 내부에 선택된 크레딧 값을 업데이트할 함수 전달 */}
+			<Modal isOpen={isModalOpen} onClose={closeModal} type="credit">
+				<CreditRechargeModalContent
+					myCredit={credit} // 현재 크레딧 전달
+					closeModal={closeModal} // 모달을 닫는 함수 전달
+				/>
+			</Modal>
+		</>
 	);
 }
 
