@@ -16,7 +16,7 @@ const idolList = css`
         color: rgba(255, 255, 255, 0.6)
     }
 
-    // myIdolList 에 들어가는 사이즈
+    // myIdolList 에 들어가는 사이즈 -> 나중에 ustState 쓸때 사이즈 쓸 예정
     &.small {
         width: 100px;
         height: 153px;
@@ -25,11 +25,13 @@ const idolList = css`
 
 const idolFace = css`
     width: 100%;
+    aspect-ratio: 1 / 1; // 가로:세로 비율 1:1 (정사각형)
     border-radius: 50%;
     margin-bottom: 8px;
 
     > img {
         width: 100%;
+        aspect-ratio: 1 / 1; // 가로:세로 비율 1:1 (정사각형)
         border-radius: 50%;
         object-fit: cover;
     }
