@@ -32,6 +32,7 @@ export const modalStyles = css`
   gap: 8px;
   background-color: var(--black-181D26);
   border-radius: 12px;
+  
 `;
 
 export const modalHeaderStyles = css`
