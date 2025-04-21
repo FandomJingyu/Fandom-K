@@ -206,4 +206,44 @@ const StyledLandingBottomSection = styled.section`
       width: 40vw !important;
     }
   }
+  @media all and (max-width: 375px) {
+    height: 133.33vw !important;
+    .landingGrid {
+      > img {
+        width: 65.07vw;
+        margin-top: 5.33vw;
+      }
+      p {
+        font-size: 4.27vw;
+      }
+      .carousel {
+        top: -20vh !important;
+        width: 34.67vw !important;
+        height: 300vh !important;
+        bottom: auto !important;
+        &.carousel01 {
+          left: -13.33vw;
+        }
+        &.carousel02 {
+          right: -13.33vw;
+        }
+        .item {
+          padding-block: 4.27vw;
+          width: 100%;
+          height: 42.67vw;
+        }
+      }
+      button {
+        margin-top: 16vw;
+        width: 42.67vw;
+        height: 12.8vw;
+        border-radius: 2.67vw;
+        font-size: 3.2vw;
+        border: none;
+        &::after {
+          opacity: 1;
+        }
+      }
+    }
+  }
 `;
