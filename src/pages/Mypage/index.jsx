@@ -1,5 +1,5 @@
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
+import "../Mypage/slider/slick-theme.css";
+import "../Mypage/slider/slick.css";
 import { useEffect, useState } from "react";
 import Slider from "react-slick";
 import { idolsAPI } from "../../apis/idolsAPI";
@@ -14,13 +14,79 @@ import {
 import IdolList from "./components/IdolList";
 /** @jsxImportSource @emotion/react */
 
+// ---------- slider 함수 관련 -------------
+// 오른쪽 화살표 스타일
+const nextArrowStyle = {
+	display: "flex",
+	background: "rgba(27, 27, 27, 0.8)",
+	width: "29px",
+	height: "135px",
+	borderRadius: "4px",
+	justifyContent: "center",
+	alignItems: "center",
+	right: "-57px",
+	zIndex: 1,
+};
+
+//왼쪽 화살표 스타일
+const prevArrowStyle = {
+	display: "flex",
+	background: "rgba(27, 27, 27, 0.8)",
+	width: "29px",
+	height: "135px",
+	borderRadius: "4px",
+	justifyContent: "center",
+	alignItems: "center",
+	left: "-57px",
+	zIndex: 1,
+};
+
+//슬라이더 왼쪽 화살표 버튼
+function PrevArrow(props) {
+	const { className, style, onClick } = props;
+	return (
+		<div
+			className={className}
+			style={{ ...style, ...prevArrowStyle }} //style 덮어 씌우기
+			onClick={onClick}
+			tabIndex={0} // 포커스 가능하게 만듦
+			role="button" // 스크린리더 인식
+			onKeyDown={(e) => {
+				if (e.key === "Enter" || e.key === " " || e.key === "ArrowLeft") {
+					onClick(e);
+				}
+			}}
+		/>
+	);
+}
+
+//슬라이더 오른쪽 화살표 버튼
+function NextArrow(props) {
+	const { className, style, onClick } = props;
+	return (
+		<div
+			className={className}
+			style={{ ...style, ...nextArrowStyle }}
+			onClick={onClick}
+			tabIndex={0}
+			role="button"
+			onKeyDown={(e) => {
+				if (e.key === "Enter" || e.key === " " || e.key === "ArrowRight") {
+					onClick(e);
+				}
+			}}
+		/>
+	);
+}
+
 //슬라이더 함수 세팅값
 const settings = {
 	infinite: true,
 	speed: 500,
-	// slidesPerRow: 8,
 	slidesToShow: 8,
 	rows: 2,
+	prevArrow: <PrevArrow />,
+	nextArrow: <NextArrow />,
 };
 
 const Mypage = () => {

@@ -40,36 +40,6 @@ const addIdol = css`
     }
 `;
 
-// // 아이돌 추가하기 랩퍼 , 안에 버튼 존재: 우선적으로 위치만
-// const addIdolListWrapper = css`
-//     display: flex;
-//     align-items: center;
-//     gap: 34px;
-
-//     > button {
-//         position: absolute;
-//         width: 29px;
-//         height: 135px;
-//         border-radius: 4px;
-//         background: rgba(27, 27, 27, 0.8);
-
-//         &.left {
-//             left: -57px;
-//         }
-
-//         &.right {
-//             right: -57px;
-//         }
-//     }
-// `;
-
-// // 아이돌 추가하기 리스트 wrap 사용
-// const addIdolList = css`
-//     display: flex;
-//     flex-wrap: wrap;
-//     gap: 24px;
-// `;
-
 // 추가하기 버튼
 const addButton = css`
     display: flex;
