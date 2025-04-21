@@ -213,8 +213,7 @@ const StyledLandingTopSection = styled.section`
     .landingTopSectionCards {
       margin-left: 0;
       width: 300px;
-      height: 380px;
-      top: 60vh;
+      top: 65vh;
       li.item02 {
         margin-left: 0;
       }
@@ -229,6 +228,11 @@ const StyledLandingTopSection = styled.section`
         margin-top: 40px;
         font-size: 20px;
       }
+    }
+  }
+  @media all and (max-width: 744px) {
+    h2 {
+      font-size: 48px;
     }
   }
 `;

@@ -70,4 +70,26 @@ const StyledLandingFooter = styled.div`
       width: 100%;
     }
   }
+
+  @media all and (max-width: 744px) {
+    padding-block: 30px;
+    .landingGrid {
+      flex-direction: column;
+      justify-content: flex-start;
+      > div {
+        p {
+          font-size: 16px;
+        }
+      }
+      .footer-copy {
+        justify-content: flex-start;
+        align-items: flex-start;
+      }
+    }
+    .top-btn {
+      position: absolute;
+      top: 0;
+      right: 0;
+    }
+  }
 `;

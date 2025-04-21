@@ -105,6 +105,7 @@ const StyledLandingBottomSection = styled.section`
       line-height: 1.5;
     }
     > img {
+      display: block;
       margin-top: 20px;
       height: 150px;
     }
@@ -175,18 +176,34 @@ const StyledLandingBottomSection = styled.section`
     }
   }
   @media all and (max-width: 1024px) {
+    &::before {
+      height: 60px;
+    }
+    &::after {
+      height: 60px;
+    }
     .landingGrid {
       .carousel {
         .item {
           padding-block: 20px;
           width: 200px;
-          height: 300px;
+          height: 250px;
           img {
             max-width: 100%;
             max-height: 100%;
           }
         }
       }
+      > img {
+        height: auto;
+        width: 80vw;
+      }
+      p {
+        font-size: 20px;
+      }
+    }
+    .carousel {
+      width: 40vw !important;
     }
   }
 `;

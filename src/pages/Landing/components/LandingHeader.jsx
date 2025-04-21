@@ -72,4 +72,24 @@ const StyledLandingHeader = styled.div`
     font-weight: 700;
     color: #fff;
   }
+  @media all and (max-width: 744px) {
+    h1 {
+      width: 120px;
+      img {
+        width: 100%;
+      }
+    }
+  }
+  @media all and (max-width: 375px) {
+    height: 16vw;
+    h1 {
+      width: 26.67vw;
+    }
+    .landingBtn {
+      height: 9.6vw;
+      width: 26.67vw;
+			font-size: 3.2vw;
+			border-radius: 2.67vw;
+    }
+  }
 `;
