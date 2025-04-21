@@ -1,7 +1,15 @@
+// src/components/Modal/Modal.styles.js
+/** @jsxImportSource @emotion/react */
 import { useState } from "react";
-import creditImg from "../../../../public/images/credit.svg";
+import creditIcon from "/icons/icon_credit.svg";
+import Button from "../../../../src/components/Button/Button";
 import RadioButton from "../../../../src/components/RadioButton";
 import { useCredit } from "../../../context/CreditContext";
+import {
+	RadioStyles,
+	buttonSpacing,
+	radioContentStyles,
+} from "../styles/CreditRechargeModalContent.styles";
 
 export default function CreditRechargeModalContent({ myCredit, closeModal }) {
 	const credits = [100, 500, 1000]; // 라디오 버튼 test를 위한 크레딧 배열
@@ -25,23 +33,33 @@ export default function CreditRechargeModalContent({ myCredit, closeModal }) {
 
 	return (
 		<form onSubmit={handleSubmit}>
-			<div>
-				{credits.map((credit) => (
+			{credits.map((credit) => (
+				<div key={credit} css={RadioStyles}>
 					<RadioButton
-						key={credit}
 						value={credit}
 						checked={select === credit}
 						onChange={handleSelect}
 						className="charge"
 					>
-						<img src={creditImg} alt="크레딧 이미지" />
-						{credit}
+						<div css={radioContentStyles}>
+							<img src={creditIcon} alt="크레딧 이미지" />
+							{credit}
+						</div>
 					</RadioButton>
-				))}
+				</div>
+			))}
+
+			<div css={buttonSpacing}>
+				<Button
+					type="submit"
+					size="recharge"
+					variant="primary"
+					disabled={select === null}
+					onClick
+				>
+					충전하기
+				</Button>
 			</div>
-			<button type="submit" disabled={select === null}>
-				충전하기
-			</button>
 		</form>
 	);
 }
