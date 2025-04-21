@@ -92,4 +92,24 @@ const StyledLandingFooter = styled.div`
       right: 0;
     }
   }
+  @media all and (max-width: 375px) {
+    padding-block: 6.13vw;
+    .landingGrid {
+      > div {
+        p {
+          font-size: 3.2vw;
+        }
+      }
+      .footer-logo {
+        gap: 5.33vw;
+        img {
+          width: 31.47vw;
+        }
+      }
+    }
+    .top-btn {
+      width: 8.53vw;
+      height: 8.53vw;
+    }
+  }
 `;

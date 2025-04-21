@@ -176,6 +176,9 @@ export default function LandingMiddleSection() {
 
 const StyledLandingMiddleSection = styled.section`
   position: relative;
+	.is-mobile {
+		display: none !important;
+	}
   article {
     background-color: #02000e;
     height: 100%;
@@ -394,7 +397,6 @@ const StyledLandingMiddleSection = styled.section`
   @media all and (max-width: 375px) {
 		.is-mobile {
 			display: block !important;
-			
 		}
 		span.is-mobile {
 				display: inline-block !important;
