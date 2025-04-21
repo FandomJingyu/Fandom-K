@@ -74,10 +74,6 @@ position: absolute;
 bottom: 30px;
 left: 22px;
 
-width: 234px;
-height: 40px;
-border-radius: 3px;
-background: linear-gradient(90deg, #F86F65 0%, #FE5493 100%); 
 z-index: 3;
 
 font-size: 13px
@@ -136,13 +132,24 @@ line-height: normal;
 `;
 
 /**
+ * 하단 정보 전체 영역
+ * - 세로 정렬로 D-day, 진행률 등 순차적으로 배치
+ */
+export const donationFooter = css`
+width: 100%;
+display: flex;
+flex-direction: column;`;
+
+/**
  * 하단 정보 라인 (크레딧 + D-day)
  * - 좌우로 나란히 배치
  */
-export const donationFooter = css`
-display: flex;
+export const donationFooterUp = css`
 width: 100%;
+display: flex;
 justify-content: space-between;
+
+margin-bottom: 4px;
 `;
 
 /**

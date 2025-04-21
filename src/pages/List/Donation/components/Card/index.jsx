@@ -1,6 +1,4 @@
 /** @jsxImportSource @emotion/react */
-
-import { DONATIONS } from "../../../../../mocks/donations";
 import {
 	creditImg,
 	descriptionSubtitle,
@@ -12,12 +10,16 @@ import {
 	donationDescription,
 	donationFooter,
 	donationFooterLeft,
+	donationFooterUp,
 	donationImg,
 	donationTitleContainer,
 	imgWrapper,
 	overlaySvg,
 	targetDonation,
 } from "./Card.style"; // 스타일 import
+
+import Button from "../../../../../components/Button/Button";
+import ProgressBar from "./ProgressBar";
 
 /**
  * 단일 후원 카드 컴포넌트
@@ -50,10 +52,10 @@ function Card({ donation }) {
 					/>
 				</div>
 
-				{/* 후원하기 버튼 - 공통 Button 컴포넌트로 대체 예정*/}
-				<button type="button" css={donationButton}>
-					후원하기
-				</button>
+				{/* 후원하기 버튼 */}
+				<div css={donationButton}>
+					<Button size="donate-md">후원하기</Button>
+				</div>
 			</div>
 
 			{/* 카드 하단 텍스트 영역 */}
@@ -66,13 +68,21 @@ function Card({ donation }) {
 
 				{/* 하단 정보 (크레딧, D-day) */}
 				<div css={donationFooter}>
-					<div css={donationFooterLeft}>
-						{/* 크레딧 아이콘 및 목표 금액 */}
-						<img css={creditImg} src="/images/credit.svg" alt="크레딧 사진" />
-						<span css={targetDonation}>{donation.targetDonation}</span>
+					<div css={donationFooterUp}>
+						<div css={donationFooterLeft}>
+							{/* 크레딧 아이콘 및 목표 금액 */}
+							<img css={creditImg} src="/images/credit.svg" alt="크레딧 사진" />
+							<span css={targetDonation}>
+								{Number(donation.targetDonation).toLocaleString()}
+							</span>
+						</div>
+						{/* 남은 날짜 */}
+						<span css={donationDday}>{dDay}일 남음</span>
 					</div>
-					{/* 남은 날짜 */}
-					<span css={donationDday}>{dDay}일 남음</span>
+					<ProgressBar
+						receive={donation.receivedDonations}
+						target={donation.targetDonation}
+					/>
 				</div>
 			</div>
 		</article>
