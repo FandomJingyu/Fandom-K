@@ -18,6 +18,7 @@ import {
 } from "./Card.style"; // 스타일 import
 
 import Button from "../../../../../components/Button/Button";
+import ProgressBar from "./ProgressBar";
 
 /**
  * 단일 후원 카드 컴포넌트
@@ -74,6 +75,10 @@ function Card({ donation }) {
 					{/* 남은 날짜 */}
 					<span css={donationDday}>{dDay}일 남음</span>
 				</div>
+				<ProgressBar
+					receive={donation.receivedDonations}
+					target={donation.targetDonation}
+				/>
 			</div>
 		</article>
 	);
