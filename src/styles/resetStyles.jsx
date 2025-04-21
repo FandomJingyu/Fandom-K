@@ -1,4 +1,4 @@
-import { css, Global } from '@emotion/react';
+import { Global, css } from "@emotion/react";
 
 const resetStyles = css`
   :root {
@@ -226,5 +226,5 @@ const resetStyles = css`
 `;
 
 export default function ResetStyles() {
-  return <Global styles={resetStyles} />;
-} 
+	return <Global styles={resetStyles} />;
+}
