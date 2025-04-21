@@ -11,6 +11,9 @@ color: #ffffff;
 font-size: 24px;
 font-weight: 700;`;
 
+export const donationPageNation = css`
+position: relative;`;
+
 /**
  * 카드 리스트 영역
  * 수평으로 카드들을 나열하고 간격 부여
@@ -20,8 +23,6 @@ font-weight: 700;`;
 export const donationContent = css`
 display: flex;
 gap: 24px;
-
-position: relative;
 
 margin-top: 34px; /* 타이틀 아래 여백 */
 `;
@@ -33,12 +34,13 @@ margin-top: 34px; /* 타이틀 아래 여백 */
  */
 export const pageNationRight = css`
   width: 40px;
-  height: 78.333px;
+  height: 78px;
   flex-shrink: 0;
 
   position: absolute;
   right: -80px;
-  bottom: 150px;
+  top: 50%;
+  transform: translateY(-50%);
 
   margin-left: 30px;
 
@@ -61,7 +63,8 @@ export const pageNationLeft = css`
 
   position: absolute;
   left: -80px;
-  bottom: 150px;
+  top: 50%;
+  transform: translateY(-50%);
 
   margin-right: 30px;
 
