@@ -84,6 +84,7 @@ const settings = {
 	infinite: true,
 	speed: 500,
 	slidesToShow: 8,
+	slidesToScroll: 2,
 	rows: 2,
 	prevArrow: <PrevArrow />,
 	nextArrow: <NextArrow />,
