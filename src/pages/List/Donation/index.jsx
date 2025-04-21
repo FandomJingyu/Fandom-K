@@ -7,7 +7,6 @@ import btnRight from "/images/btn-donation-arrow-right.svg";
 import {
 	donationContent,
 	donationTitle,
-	donationWrapper,
 	pageNationLeft,
 	pageNationRight,
 } from "./Donation.style";
@@ -16,7 +15,7 @@ function Donation() {
 	const donations = DONATIONS;
 
 	return (
-		<section css={donationWrapper}>
+		<section>
 			<h2 css={donationTitle}>후원을 기다리는 조공</h2>
 
 			<button type="button" css={pageNationLeft}>
