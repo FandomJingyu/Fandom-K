@@ -2,9 +2,9 @@
 /** @jsxImportSource @emotion/react */
 import { useState } from "react";
 import creditIcon from "/icons/icon_credit.svg";
-import Button from "../../../../src/components/Button/Button";
-import RadioButton from "../../../../src/components/RadioButton";
-import { useCredit } from "../../../context/CreditContext";
+import Button from "../../../../../src/components/Button/Button";
+import RadioButton from "../../../../../src/components/RadioButton";
+import { useCredit } from "../../../../context/CreditContext";
 import {
 	RadioStyles,
 	buttonSpacing,
