@@ -1,13 +1,14 @@
 import { Route, Routes } from "react-router-dom";
+import { CreditProvider } from "./context/CreditContext";
 import DefaultLayout from "./layouts/DefaultLayout";
 import Landing from "./pages/Landing";
 import List from "./pages/List";
 import Mypage from "./pages/Mypage";
-import Testpage from "./pages/TestPage/TestPage";
+import Testpage from "./pages/Testpage/index.jsx";
 
 function App() {
 	return (
-		<>
+		<CreditProvider>
 			<Routes>
 				<Route path="/" element={<DefaultLayout />}>
 					<Route index element={<Landing />} />
@@ -16,7 +17,7 @@ function App() {
 					<Route path="/testpage" element={<Testpage />} />
 				</Route>
 			</Routes>
-		</>
+		</CreditProvider>
 	);
 }
 
