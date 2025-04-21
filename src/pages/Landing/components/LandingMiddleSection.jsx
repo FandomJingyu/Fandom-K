@@ -97,7 +97,7 @@ export default function LandingMiddleSection() {
 				<div className="landingGrid">
 					<h3>
 						<strong>마음</strong>이 <br />
-						닿는 순간, <br />
+						닿는 순간, <br className="is-mobile" />
 						<strong>응원</strong>이 <br />
 						시작돼요
 						<span className="is-floating">
@@ -122,7 +122,7 @@ export default function LandingMiddleSection() {
 				<div className="landingGrid">
 					<h3>
 						이번 달 <br />
-						<strong>가장 빛난 별</strong>은 <br />
+						<strong>가장 빛난 별</strong>은 <br className="is-mobile" />
 						누구?
 						<span className="is-sparkling">
 							<img src="/images/landing/landing_icon02.png" alt="" />
@@ -146,14 +146,17 @@ export default function LandingMiddleSection() {
 				<div className="landingGrid">
 					<h3>
 						내 마음 속
-						<span className="is-pulsing">
+						<span className="is-pulsing is-pc">
 							<img src="/images/landing/landing_icon03.png" alt="" />
 						</span>
 						<br />
-						<strong>나만의 아티스트</strong> <br />
+						<strong>나만의 아티스트</strong> <br className="is-mobile" />
 						소식까지
 						<br />
 						빠르게
+						<span className="is-pulsing is-mobile">
+							<img src="/images/landing/landing_icon03.png" alt="" />
+						</span>
 					</h3>
 					<div className="landing-mockup">
 						<img src="/images/landing/landing_mock03.png" alt="" />
@@ -363,29 +366,72 @@ const StyledLandingMiddleSection = styled.section`
       gap: 20px;
       flex-direction: column;
       justify-content: flex-start;
-			align-items: flex-start;
+      align-items: flex-start;
       padding-top: 100px;
       h3 {
-				font-size: 32px;
-				width: auto;
+        font-size: 32px;
+        width: auto;
         br {
           display: none;
         }
-				span {
-        width: 42px;
-        height: 42px;
-    }
+        span {
+          width: 42px;
+          height: 42px;
+        }
       }
-			p {
-				width: auto;
-			}
+      p {
+        width: auto;
+      }
     }
     .landing-mockup {
       width: 40vw;
-			top: 70%;
+      top: 70%;
       img {
         max-height: calc(65vh - 100px);
       }
     }
+  }
+  @media all and (max-width: 375px) {
+		.is-mobile {
+			display: block !important;
+			
+		}
+		span.is-mobile {
+				display: inline-block !important;
+			}
+		.is-pc {
+			display: none !important;
+		}
+    .landingGrid {
+      padding-top: 21.33vw;
+      gap: 5.33vw;
+      h3 {
+        font-size: 8.53vw;
+        line-height: 1.5;
+        span {
+          width: 8.53vw;
+          height: 8.53vw;
+        }
+      }
+      p {
+        font-size: 4.27vw;
+      }
+    }
+    .landing-mockup {
+      width: 56vw;
+      top: 88.53vw;
+      transform: translate(-50%, 0);
+    }
+		@keyframes icon-float {
+    0% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-2.67vw);
+    }
+    100% {
+      transform: translateY(0);
+    }
+  }
   }
 `;
