@@ -263,4 +263,129 @@ const StyledLandingMiddleSection = styled.section`
       }
     }
   }
+  @keyframes icon-float {
+    0% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-30px);
+    }
+    100% {
+      transform: translateY(0);
+    }
+  }
+  @keyframes icon-sparkle {
+    0% {
+      opacity: 0.2;
+    }
+    20% {
+      opacity: 0.9;
+    }
+    45% {
+      opacity: 0.5;
+    }
+    70% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0.2;
+    }
+  }
+  @keyframes icon-pulse {
+    0% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.3);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+  @keyframes gradientMove {
+    0% {
+      background-position: 0% 0%;
+    }
+    100% {
+      background-position: -200% 0%;
+    }
+  }
+  @media all and (max-width: 1880px) {
+    .landingMiddleSectionNav {
+      display: none;
+    }
+    .landingGrid {
+      padding-inline: 80px;
+      p {
+        font-size: 24px;
+        width: 350px;
+      }
+      h3 {
+        font-size: 50px;
+      }
+    }
+  }
+  @media all and (max-width: 1300px) {
+    .landingGrid {
+      padding-inline: 20px;
+      p {
+        width: 300px;
+        font-size: 20px;
+      }
+      h3 {
+        font-size: 42px;
+        span {
+          width: 50px;
+          height: 50px;
+        }
+      }
+    }
+    .landing-mockup {
+      width: 20vw;
+    }
+  }
+  @media all and (max-width: 1024px) {
+    .landingGrid {
+      padding-inline: 0;
+      justify-content: center;
+      gap: 30vw;
+      p {
+        font-size: 18px;
+      }
+      h3 {
+        width: 300px;
+        font-size: 36px;
+      }
+    }
+  }
+  @media all and (max-width: 744px) {
+    .landingGrid {
+      gap: 20px;
+      flex-direction: column;
+      justify-content: flex-start;
+			align-items: flex-start;
+      padding-top: 100px;
+      h3 {
+				font-size: 32px;
+				width: auto;
+        br {
+          display: none;
+        }
+				span {
+        width: 42px;
+        height: 42px;
+    }
+      }
+			p {
+				width: auto;
+			}
+    }
+    .landing-mockup {
+      width: 40vw;
+			top: 70%;
+      img {
+        max-height: calc(65vh - 100px);
+      }
+    }
+  }
 `;

@@ -156,6 +156,7 @@ const StyledLandingBottomSection = styled.section`
     bottom: 0 !important;
     display: flex;
     flex-direction: column;
+    z-index: -1;
     &.carousel01 {
       left: 0;
       align-items: flex-start;
@@ -171,6 +172,21 @@ const StyledLandingBottomSection = styled.section`
       justify-content: center;
       width: 400px;
       height: 400px;
+    }
+  }
+  @media all and (max-width: 1024px) {
+    .landingGrid {
+      .carousel {
+        .item {
+          padding-block: 20px;
+          width: 200px;
+          height: 300px;
+          img {
+            max-width: 100%;
+            max-height: 100%;
+          }
+        }
+      }
     }
   }
 `;

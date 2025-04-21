@@ -18,6 +18,12 @@ export default function LandingTopSection() {
 		});
 		// LandingTopSection 카드 애니메이션
 		const cardAnimCtx = gsap.context(() => {
+			const checkResponsive = (pc, pc1300) => {
+				if (window.innerWidth <= 1300) {
+					return pc1300;
+				}
+				return pc;
+			};
 			const anim = gsap.timeline({
 				scrollTrigger: {
 					trigger: ".landingTopSection",
@@ -37,7 +43,7 @@ export default function LandingTopSection() {
 				.to(
 					".landingTopSection h2",
 					{
-						gap: 400,
+						gap: () => checkResponsive(400, 0),
 						duration: 1,
 					},
 					0,
@@ -194,6 +200,35 @@ const StyledLandingTopSection = styled.section`
       }
     }
   }
-  @media all and (max-width: 744px) {
+  
+  @media all and (max-width: 1300px) {
+    h2 {
+      font-size: 60px;
+      line-height: 1.2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0;
+    }
+    .landingTopSectionCards {
+      margin-left: 0;
+      width: 300px;
+      height: 380px;
+      top: 60vh;
+      li.item02 {
+        margin-left: 0;
+      }
+      li.item03 {
+        margin-left: 0;
+      }
+    }
+    .landingGrid {
+      padding-top: 100px;
+      justify-content: flex-start;
+      > p {
+        margin-top: 40px;
+        font-size: 20px;
+      }
+    }
   }
 `;
