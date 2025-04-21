@@ -10,10 +10,8 @@ position: relative`;
 
 /**
  * 슬라이더 위에 고정되어 나타나는 타이틀 스타일
- * 좌측 여백 고정 위치로 배치 (position: absolute)
  */
 export const donationTitle = css`
-position: absolute; 
 left: 70px;
 
 color: #ffffff;
@@ -32,14 +30,7 @@ gap: 24px;
 
 margin-top: 34px; /* 타이틀 아래 여백 */
 `;
-/**
- * 슬라이더 전체 레이아웃 (버튼 + 카드)
- * 좌우 정렬을 위한 flex 정렬
- */
-export const slider = css`
-display: flex;
-align-items: center;
-`;
+
 /**
  * 오른쪽 화살표 버튼 스타일
  * 왼쪽 여백을 두어 Card와 분리
