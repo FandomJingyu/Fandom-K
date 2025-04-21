@@ -132,12 +132,21 @@ line-height: normal;
 `;
 
 /**
+ * 하단 정보 전체 영역
+ * - 세로 정렬로 D-day, 진행률 등 순차적으로 배치
+ */
+export const donationFooter = css`
+width: 100%;
+display: flex;
+flex-direction: column;`;
+
+/**
  * 하단 정보 라인 (크레딧 + D-day)
  * - 좌우로 나란히 배치
  */
-export const donationFooter = css`
-display: flex;
+export const donationFooterUp = css`
 width: 100%;
+display: flex;
 justify-content: space-between;
 `;
 

@@ -10,6 +10,7 @@ import {
 	donationDescription,
 	donationFooter,
 	donationFooterLeft,
+	donationFooterUp,
 	donationImg,
 	donationTitleContainer,
 	imgWrapper,
@@ -67,18 +68,20 @@ function Card({ donation }) {
 
 				{/* 하단 정보 (크레딧, D-day) */}
 				<div css={donationFooter}>
-					<div css={donationFooterLeft}>
-						{/* 크레딧 아이콘 및 목표 금액 */}
-						<img css={creditImg} src="/images/credit.svg" alt="크레딧 사진" />
-						<span css={targetDonation}>{donation.targetDonation}</span>
+					<div css={donationFooterUp}>
+						<div css={donationFooterLeft}>
+							{/* 크레딧 아이콘 및 목표 금액 */}
+							<img css={creditImg} src="/images/credit.svg" alt="크레딧 사진" />
+							<span css={targetDonation}>{donation.targetDonation}</span>
+						</div>
+						{/* 남은 날짜 */}
+						<span css={donationDday}>{dDay}일 남음</span>
 					</div>
-					{/* 남은 날짜 */}
-					<span css={donationDday}>{dDay}일 남음</span>
+					<ProgressBar
+						receive={donation.receivedDonations}
+						target={donation.targetDonation}
+					/>
 				</div>
-				<ProgressBar
-					receive={donation.receivedDonations}
-					target={donation.targetDonation}
-				/>
 			</div>
 		</article>
 	);
