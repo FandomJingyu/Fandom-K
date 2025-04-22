@@ -129,5 +129,8 @@ const StyledCreditCharge = styled.div`
     font-size: 16px;
     font-weight: 700;
     letter-spacing: 0.8px;
+		&:hover {
+			background-color: var(--orange-F96D69);
+		}
   }
 `;
