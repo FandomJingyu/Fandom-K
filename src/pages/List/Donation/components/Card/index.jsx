@@ -33,9 +33,17 @@ function Card({ donation }) {
 	// 남은 날짜 구하기
 	const today = new Date();
 	const deadline = new Date(donation.deadline);
-
 	const diffTime = deadline - today;
 	const dDay = Math.ceil(diffTime / (1000 * 60 * 60 * 24)); // 일 단위로 변환
+
+	// 진행률 구하기
+	const progress = Math.min(
+		(donation.receivedDonations / donation.targetDonation) * 100,
+		100,
+	); // 100% 초과 방지
+
+	// 조건에 따라 버튼 비활성화
+	const isButtonDisabled = dDay <= 0 || progress >= 100;
 
 	return (
 		<article css={donationCardContainer}>
@@ -50,7 +58,9 @@ function Card({ donation }) {
 
 				{/* 후원하기 버튼 */}
 				<div css={donationButton}>
-					<Button size="donate-md">후원하기</Button>
+					<Button size="donate-md" disabled={isButtonDisabled}>
+						{isButtonDisabled ? "후원 마감 🎉" : "후원 하기"}
+					</Button>
 				</div>
 			</div>
 
@@ -75,10 +85,7 @@ function Card({ donation }) {
 						{/* 남은 날짜 */}
 						<span css={donationDday}>{dDay}일 남음</span>
 					</div>
-					<ProgressBar
-						receive={donation.receivedDonations}
-						target={donation.targetDonation}
-					/>
+					<ProgressBar progress={progress} />
 				</div>
 			</div>
 		</article>
