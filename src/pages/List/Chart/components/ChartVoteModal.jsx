@@ -1,30 +1,15 @@
 /** @jsxImportSource @emotion/react */
-import React, { useState } from "react";
-import RadioButton from "../../../../../src/components/RadioButton";
-import Button from "../../../../components/Button/Button";
-import Circle from "../../../../components/Circle";
+import { useState } from "react";
+import { votesAPI } from "../../../../apis/voteApi";
 import { useCredit } from "../../../../context/CreditContext";
+import VoteButton from "./voteButton";
+import VoteIdolList from "./voteIdolLIst";
 
-// 스타일 import
-import {
-	CreditInfo,
-	IdolInfo,
-	IdolItem,
-	IdolList,
-	ModalWrapper,
-	RadioContent,
-} from "./ChartVote.styles";
-
-export default function ChartVoteModal({
-	gender,
-	idols,
-	setIdols,
-	closeModal,
-}) {
+export default function ChartVoteModal({ idols, setIdols, closeModal }) {
 	const { credit, deductCredit } = useCredit();
 	const [selectedIdolId, setSelectedIdolId] = useState(null);
 
-	const handleVote = (e) => {
+	const handleVote = async (e) => {
 		e.preventDefault();
 
 		if (credit < 1000) {
@@ -37,20 +22,30 @@ export default function ChartVoteModal({
 			return;
 		}
 
-		// 크레딧 차감
 		deductCredit(1000);
 
-		// 아이돌 목록 업데이트
-		setIdols((prevIdols) =>
-			prevIdols.map((idol) =>
-				idol.id === selectedIdolId
-					? { ...idol, totalVotes: idol.totalVotes + 1 }
-					: idol,
-			),
-		);
+		try {
+			const selectedIdol = idols.find((idol) => idol.id === selectedIdolId);
+			if (!selectedIdol) {
+				alert("아이돌을 찾을 수 없습니다.");
+				return;
+			}
 
-		// 모달 닫기
-		closeModal();
+			const voteResponse = await votesAPI.addVote(selectedIdolId);
+
+			setIdols((prevIdols) =>
+				prevIdols.map((idol) =>
+					idol.id === selectedIdolId
+						? { ...idol, totalVotes: voteResponse.idol.totalVotes }
+						: idol,
+				),
+			);
+
+			closeModal();
+		} catch (error) {
+			console.error("투표 API 에러:", error);
+			alert("투표에 실패했습니다. 다시 시도해주세요.");
+		}
 	};
 
 	const handleIdolSelect = (id) => {
@@ -58,45 +53,13 @@ export default function ChartVoteModal({
 	};
 
 	return (
-		<form onSubmit={handleVote} css={ModalWrapper}>
-			{/* 스크롤 가능한 아이돌 리스트 */}
-			<div css={IdolList}>
-				<ul>
-					{idols.map((idol, index) => (
-						<li key={idol.id} css={IdolItem}>
-							<RadioButton
-								value={idol.id}
-								checked={selectedIdolId === idol.id}
-								onChange={() => handleIdolSelect(idol.id)}
-								className="vote"
-							>
-								<div css={RadioContent}>
-									<Circle
-										size="50px"
-										imageUrl={idol.profilePicture}
-										alt={idol.name}
-										loading="lazy"
-										decoding="async"
-									/>
-									<div css={IdolInfo}>
-										<span className="rank">{index + 1}</span>
-										<span className="group">{idol.group}</span>
-										<span className="artist-name">{idol.name}</span>
-									</div>
-								</div>
-							</RadioButton>
-						</li>
-					))}
-				</ul>
-			</div>
-
-			<Button type="submit" size="vote-lg">
-				투표하기
-			</Button>
-
-			<p css={CreditInfo}>
-				투표하는 데 <span>1000 크레딧</span>이 소모됩니다.
-			</p>
+		<form onSubmit={handleVote}>
+			<VoteIdolList
+				idols={idols}
+				selectedIdolId={selectedIdolId}
+				onSelectIdol={handleIdolSelect}
+			/>
+			<VoteButton onSubmit={handleVote} />
 		</form>
 	);
 }

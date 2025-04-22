@@ -34,13 +34,8 @@ const Chart = () => {
 	const [loading, setLoading] = useState(true);
 	const [isModalOpen, setIsModalOpen] = useState(false);
 
-	const openModal = () => {
-		setIsModalOpen(true);
-	};
-
-	const closeModal = () => {
-		setIsModalOpen(false);
-	};
+	const openModal = () => setIsModalOpen(true);
+	const closeModal = () => setIsModalOpen(false);
 
 	useEffect(() => {
 		const fetchIdols = async () => {
@@ -78,9 +73,28 @@ const Chart = () => {
 	const leftColumnList = visibleList.filter((_, index) => index % 2 === 0);
 	const rightColumnList = visibleList.filter((_, index) => index % 2 !== 0);
 
-	const handleMore = () => {
-		setVisibleCount((prev) => prev + ITEMS_PER_PAGE);
-	};
+	const handleMore = () => setVisibleCount((prev) => prev + ITEMS_PER_PAGE);
+
+	// IdolItem 컴포넌트를 별도로 분리하여 중복을 제거
+	const IdolItem = ({ idol, index }) => (
+		<ListItem key={idol.id}>
+			<ProfileInfo>
+				<Circle
+					size="70px"
+					imageUrl={idol.profilePicture}
+					alt={idol.name}
+					loading={index < 4 ? "eager" : "lazy"}
+					decoding="async"
+				/>
+				<RankAndName>
+					<span className="rank">{index + 1}</span> {/* 1-based index */}
+					<span className="group">{idol.group}</span>
+					<span className="artist-name">{idol.name}</span>
+				</RankAndName>
+			</ProfileInfo>
+			<Votes>{idol.totalVotes}</Votes>
+		</ListItem>
+	);
 
 	return (
 		<ChartContainer>
@@ -148,45 +162,13 @@ const Chart = () => {
 					<ChartList>
 						<ChartColumn>
 							{leftColumnList.map((idol, index) => (
-								<ListItem key={idol.id}>
-									<ProfileInfo>
-										<Circle
-											size="70px"
-											imageUrl={idol.profilePicture}
-											alt={idol.name}
-											loading={index < 4 ? "eager" : "lazy"}
-											decoding="async"
-										/>
-										<RankAndName>
-											<span className="rank">{index * 2 + 1}</span>
-											<span className="group">{idol.group}</span>
-											<span className="artist-name">{idol.name}</span>
-										</RankAndName>
-									</ProfileInfo>
-									<Votes>{idol.totalVotes}</Votes>
-								</ListItem>
+								<IdolItem key={idol.id} idol={idol} index={index * 2} /> // 인덱스를 2배로 변경
 							))}
 						</ChartColumn>
 
 						<ChartColumn>
 							{rightColumnList.map((idol, index) => (
-								<ListItem key={idol.id}>
-									<ProfileInfo>
-										<Circle
-											size="70px"
-											imageUrl={idol.profilePicture}
-											alt={idol.name}
-											loading={index < 4 ? "eager" : "lazy"}
-											decoding="async"
-										/>
-										<RankAndName>
-											<span className="rank">{index * 2 + 2}</span>
-											<span className="group">{idol.group}</span>
-											<span className="artist-name">{idol.name}</span>
-										</RankAndName>
-									</ProfileInfo>
-									<Votes>{idol.totalVotes}</Votes>
-								</ListItem>
+								<IdolItem key={idol.id} idol={idol} index={index * 2 + 1} /> // 인덱스를 2배 + 1로 변경
 							))}
 						</ChartColumn>
 					</ChartList>
