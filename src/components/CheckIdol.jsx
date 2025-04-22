@@ -1,6 +1,9 @@
 /** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react";
 
+// size: 아이돌 원 사이즈
+// checkSize: 체크표시 사이즈
+
 const CheckIdol = ({ isChecked, size, checkSize }) => {
 	if (!isChecked) return null;
 

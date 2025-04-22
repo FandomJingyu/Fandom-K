@@ -11,7 +11,7 @@ const mypage = css`
 `;
 
 //나의 아이돌
-const myIdol = css`
+const myIdolWrapper = css`
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     padding: 30px 0px 40px 0px;
     margin-bottom: 40px;
@@ -47,4 +47,4 @@ const addButton = css`
     margin-top: 48px;
 `;
 
-export { mypage, myIdol, myIdolList, addIdol, addButton };
+export { mypage, myIdolWrapper, myIdolList, addIdol, addButton };

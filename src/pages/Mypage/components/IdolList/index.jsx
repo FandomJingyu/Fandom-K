@@ -1,7 +1,9 @@
 import { css } from "@emotion/react";
 import CheckIdol from "../../../../components/CheckIdol";
 import Circle from "../../../../components/Circle";
+import ProfileXIcon from "../../../../components/ProfileXIcon";
 import { idolList } from "./IdolList.styles";
+
 /** @jsxImportSource @emotion/react */
 
 //imageWrapper 로 감싸면 CheckIdol 사용 가능
@@ -12,7 +14,13 @@ const imageWrapper = (size) => css`
 	margin: 0 auto;
 `;
 
-const IdolList = ({ idol, size = "128px", isChecked = false }) => {
+const IdolList = ({
+	idol,
+	size = "128px",
+	isChecked = false,
+	isMyIdol = false,
+	onRemove,
+}) => {
 	if (!idol) return null; // idol이 없으면 아무 것도 렌더링하지 않음
 
 	return (
@@ -30,6 +38,21 @@ const IdolList = ({ idol, size = "128px", isChecked = false }) => {
 						size={Number.parseInt(size)}
 						checkSize={"52"}
 					/>
+					{isMyIdol && (
+						// biome-ignore lint/a11y/useKeyWithClickEvents: <explanation>
+						<div
+							onClick={() => onRemove(idol.id)}
+							css={css`
+							position: absolute;
+							top: 0px;
+							right: 0px;
+							cursor: pointer;
+							z-index: 10;
+							`}
+						>
+							<ProfileXIcon />
+						</div>
+					)}
 				</div>
 				<h3>{idol.name}</h3>
 				<h4>{idol.group}</h4>
