@@ -2,6 +2,7 @@ import React, { useEffect, useState, useMemo } from "react";
 import { idolsAPI } from "../../../apis/idolsAPI";
 import Button from "../../../components/Button/Button";
 import Circle from "../../../components/Circle";
+
 import {
 	ChartButtonWrap,
 	ChartColumn,
@@ -26,37 +27,42 @@ const Chart = () => {
 	const [activeTab, setActiveTab] = useState("female");
 	const [visibleCount, setVisibleCount] = useState(ITEMS_PER_PAGE);
 	const [loading, setLoading] = useState(true);
+	const [selectedIdolId, setSelectedIdolId] = useState(null);
+	const [isVoteModalOpen, setVoteModalOpen] = useState(false);
 
 	useEffect(() => {
 		const fetchIdols = async () => {
 			try {
 				setLoading(true);
 				const res = await idolsAPI.getIdols(100);
-				const allIdols = res.list;
-
-				setIdols(allIdols);
+				setIdols(res.list);
 			} catch (e) {
 				console.error("아이돌 불러오기 실패", e);
 			} finally {
 				setLoading(false);
 			}
 		};
-
 		fetchIdols();
 	}, []);
 
-	const femaleIdols = useMemo(
-		() => idols.filter((i) => i.gender === "female"),
-		[idols],
-	);
-	const maleIdols = useMemo(
-		() => idols.filter((i) => i.gender === "male"),
-		[idols],
-	);
+	const femaleIdols = useMemo(() => {
+		return idols
+			.filter((i) => i.gender === "female")
+			.sort((a, b) => b.totalVotes - a.totalVotes);
+	}, [idols]);
+
+	const maleIdols = useMemo(() => {
+		return idols
+			.filter((i) => i.gender === "male")
+			.sort((a, b) => b.totalVotes - a.totalVotes);
+	}, [idols]);
+
 	const isFemale = activeTab === "female";
 	const visibleList = isFemale
 		? femaleIdols.slice(0, visibleCount)
 		: maleIdols.slice(0, visibleCount);
+
+	const currentIdolList = isFemale ? femaleIdols : maleIdols;
 
 	const leftColumnList = visibleList.filter((_, index) => index % 2 === 0);
 	const rightColumnList = visibleList.filter((_, index) => index % 2 !== 0);
@@ -65,12 +71,31 @@ const Chart = () => {
 		setVisibleCount((prev) => prev + ITEMS_PER_PAGE);
 	};
 
+	const handleSelectIdol = (idolId) => {
+		setSelectedIdolId(idolId);
+	};
+
+	const handleVote = () => {
+		if (!selectedIdolId) return;
+		setIdols((prevIdols) =>
+			prevIdols.map((idol) =>
+				idol.id === selectedIdolId
+					? { ...idol, totalVotes: idol.totalVotes + 1 }
+					: idol,
+			),
+		);
+		setSelectedIdolId(null);
+		setVoteModalOpen(false);
+	};
+
 	return (
 		<ChartContainer>
 			<ChartHeaderWrap>
 				<ChartTitle>이달의 차트</ChartTitle>
 				<ChartButtonWrap>
-					<Button size="vote-chart">차트 투표하기</Button>
+					<Button size="vote-chart" onClick={() => setVoteModalOpen(true)}>
+						차트 투표하기
+					</Button>
 				</ChartButtonWrap>
 			</ChartHeaderWrap>
 
@@ -165,6 +190,16 @@ const Chart = () => {
 					)}
 				</>
 			)}
+
+			{/* ✅ 투표 모달 컴포넌트 삽입 */}
+			{/* <VoteModal
+				isOpen={isVoteModalOpen}
+				onClose={() => setVoteModalOpen(false)}
+				idols={currentIdolList}
+				selectedIdolId={selectedIdolId}
+				onSelect={handleSelectIdol}
+				onVote={handleVote}
+			/> */}
 		</ChartContainer>
 	);
 };
