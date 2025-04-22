@@ -79,7 +79,7 @@ export default function CreditCharge() {
 					</div>
 				</div>
 				<button type="button" onClick={openModal}>
-					충전하기
+					충전하기 <img src="/icons/icon_credit.svg" alt="credit" />
 				</button>
 			</StyledCreditCharge>
 
@@ -125,12 +125,34 @@ const StyledCreditCharge = styled.div`
     }
   }
   button {
+		display: flex;
+		align-items: center;
+		gap: 4px;
     color: var(--orange-F96D69);
-    font-size: 16px;
+    font-size: 20px;
     font-weight: 700;
     letter-spacing: 0.8px;
+		margin-right: -24px;
+		transition: margin-right 0.3s ease-in-out;
+		img {
+			width: 24px;
+			opacity: 0;
+			transition: opacity 0.2s ease-in-out;
+		}
 		&:hover {
-			background-color: var(--orange-F96D69);
+			margin-right: 0;
+			img {
+				opacity: 1;
+				animation: rotate .6s .2s linear 1;
+				@keyframes rotate {
+					from {
+						transform: perspective(100px) rotateY(0deg);
+					}
+					to {
+						transform: perspective(100px) rotateY(360deg); 
+					}
+				}
+			}
 		}
   }
 `;
