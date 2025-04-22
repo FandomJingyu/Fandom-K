@@ -13,18 +13,14 @@ const voteRadioButton = css`
 `;
 
 // 크레딧 모달창 스타일 정의 & 선택된 경우 border 색상 변경 (input display:none으로 설정해서 className을 지정해 border색상 변경)
-const chargeRadioButton = css`
+const chargeRadioButton = (checked) => css`
   display: flex;
   align-items: center;
   justify-content: space-around;
   width: 295px;
   height: 62px;
   border-radius: 8px;
-  border: 1px solid var(--white-F7F7F8);
-
-  .selected {
-  border-radius: 8px;
-  border: 1px solid var(--orange-F96D69);
+  border: 1px solid ${checked ? "var(--orange-F96D69)" : "var(--white-F7F7F8)"};
 `;
 
 // input 자체는 화면에 표시되지 않도록 숨김 처리
@@ -46,7 +42,6 @@ const contenteWrapper = css`
   width: 100%;
   height: 100%;
   padding: 0 16px;
-}
 `;
 
 // 라디오 버튼 스타일 정의
@@ -68,7 +63,7 @@ const radioIcon = css`
 function RadioButton({ value, checked, onChange, children, className }) {
 	const styleObj = {
 		vote: voteRadioButton,
-		charge: chargeRadioButton,
+		charge: chargeRadioButton(checked),
 	};
 
 	const id = `radio-${value}`; // 선택된 값에 따라 고유 ID 설정 (라벤 연결용)
@@ -86,7 +81,7 @@ function RadioButton({ value, checked, onChange, children, className }) {
 			/>
 
 			{/* 라벨 내부 콘텐츠: children + 선택 상태에 따라 아이콘 변경 */}
-			<div className={`${checked ? "selected" : ""}`} css={contenteWrapper}>
+			<div css={contenteWrapper}>
 				<div>{children}</div>
 				<img
 					src={checked ? radioTrue : radioFalse}

@@ -1,5 +1,5 @@
+import CreditCharge from "./Charge/components/CreditCharge";
 import Chart from "./Chart/index";
-import CreditCharge from "./Donation/components/creditCharge";
 import Donation from "./Donation/index";
 
 const List = () => {

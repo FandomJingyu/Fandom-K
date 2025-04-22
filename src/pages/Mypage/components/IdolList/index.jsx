@@ -1,19 +1,18 @@
-import { IDOLS } from "../../../../mocks/idols";
 import { idolFace, idolList } from "./IdolList.styles";
 /** @jsxImportSource @emotion/react */
 
-const IdolList = () => {
+const IdolList = ({ idol }) => {
+	if (!idol) return null; // idol이 없으면 아무 것도 렌더링하지 않음
+
 	return (
 		<>
-			{IDOLS.map((idol) => (
-				<div css={idolList} key={idol.idol.id}>
-					<div css={idolFace}>
-						<img src={idol.idol.profilePicture} alt={idol.idol.name} />
-					</div>
-					<h3>{idol.idol.name}</h3>
-					<h4>{idol.idol.group}</h4>
+			<div css={idolList} key={idol.id}>
+				<div css={idolFace}>
+					<img src={idol.profilePicture} alt={idol.name} />
 				</div>
-			))}
+				<h3>{idol.name}</h3>
+				<h4>{idol.group}</h4>
+			</div>
 		</>
 	);
 };

@@ -4,7 +4,6 @@ import styled from "@emotion/styled";
 export const ChartContainer = styled.div`
   max-width: 1200px;
   margin: 0 auto;
-  background-color: black;
   padding: 40px 0;
 `;
 
@@ -121,4 +120,11 @@ export const MoreButton = styled.div`
   display: flex;
   justify-content: center;
   margin-top: 40px;
+`;
+
+export const VoteChart = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
 `;

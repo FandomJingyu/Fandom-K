@@ -18,6 +18,12 @@ export default function LandingTopSection() {
 		});
 		// LandingTopSection 카드 애니메이션
 		const cardAnimCtx = gsap.context(() => {
+			const checkResponsive = (pc, pc1300) => {
+				if (window.innerWidth <= 1300) {
+					return pc1300;
+				}
+				return pc;
+			};
 			const anim = gsap.timeline({
 				scrollTrigger: {
 					trigger: ".landingTopSection",
@@ -37,7 +43,7 @@ export default function LandingTopSection() {
 				.to(
 					".landingTopSection h2",
 					{
-						gap: 400,
+						gap: () => checkResponsive(400, 0),
 						duration: 1,
 					},
 					0,
@@ -191,6 +197,73 @@ const StyledLandingTopSection = styled.section`
       &.item03 {
         margin-top: 80px;
         margin-left: 80px;
+      }
+    }
+  }
+
+  @media all and (max-width: 1300px) {
+    h2 {
+      font-size: 60px;
+      line-height: 1.2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0;
+    }
+    .landingTopSectionCards {
+      margin-left: 0;
+      width: 300px;
+      top: 65vh;
+      li.item02 {
+        margin-left: 0;
+      }
+      li.item03 {
+        margin-left: 0;
+      }
+    }
+    .landingGrid {
+      padding-top: 100px;
+      justify-content: flex-start;
+      > p {
+        margin-top: 40px;
+        font-size: 20px;
+      }
+    }
+  }
+  @media all and (max-width: 744px) {
+    .blur {
+      display: none;
+    }
+    h2 {
+      font-size: 48px;
+    }
+  }
+  @media all and (max-width: 375px) {
+    h2 {
+      font-size: 11.87vw;
+      line-height: 1.4;
+    }
+    .landingGrid {
+      padding-top: 30.33vw;
+      > p {
+        margin-top: 21.33vw;
+        font-size: 4.27vw;
+      }
+    }
+    .landingTopSectionCards {
+      width: 69.33vw;
+      height: 107.3vw;
+      top: 74.27vw;
+      transform: translate(-50%, 0);
+      li {
+        width: 69.33vw;
+        height: 88vw;
+      }
+      li.item02 {
+        margin-top: 9.6vw;
+      }
+      li.item03 {
+        margin-top: 19.2vw;
       }
     }
   }

@@ -1,7 +1,7 @@
 export const DONATIONS = [
 	{
 		status: true,
-		deadline: "2025-10-10T00:00:00.000Z",
+		deadline: "2025-04-21T00:00:00.000Z",
 		createdAt: "2025-04-15T09:53:35.947Z",
 		receivedDonations: 500000,
 		targetDonation: 1000000,
@@ -22,7 +22,7 @@ export const DONATIONS = [
 		status: true,
 		deadline: "2025-12-25T00:00:00.000Z",
 		createdAt: "2025-06-20T14:22:15.123Z",
-		receivedDonations: 750000,
+		receivedDonations: 2000000,
 		targetDonation: 2000000,
 		idolId: 1,
 		subtitle: "코엑스몰 메가박스 앞",

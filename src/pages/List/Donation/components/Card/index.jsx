@@ -1,6 +1,4 @@
 /** @jsxImportSource @emotion/react */
-
-import { DONATIONS } from "../../../../../mocks/donations";
 import {
 	creditImg,
 	descriptionSubtitle,
@@ -12,12 +10,16 @@ import {
 	donationDescription,
 	donationFooter,
 	donationFooterLeft,
+	donationFooterUp,
 	donationImg,
 	donationTitleContainer,
 	imgWrapper,
 	overlaySvg,
 	targetDonation,
 } from "./Card.style"; // 스타일 import
+
+import Button from "../../../../../components/Button/Button";
+import ProgressBar from "./ProgressBar";
 
 /**
  * 단일 후원 카드 컴포넌트
@@ -31,9 +33,17 @@ function Card({ donation }) {
 	// 남은 날짜 구하기
 	const today = new Date();
 	const deadline = new Date(donation.deadline);
-
 	const diffTime = deadline - today;
 	const dDay = Math.ceil(diffTime / (1000 * 60 * 60 * 24)); // 일 단위로 변환
+
+	// 진행률 구하기
+	const progress = Math.min(
+		(donation.receivedDonations / donation.targetDonation) * 100,
+		100,
+	); // 100% 초과 방지
+
+	// 조건에 따라 버튼 비활성화
+	const isButtonDisabled = dDay <= 0 || progress >= 100;
 
 	return (
 		<article css={donationCardContainer}>
@@ -43,17 +53,15 @@ function Card({ donation }) {
 					{/* 아이돌 프로필 이미지 */}
 					<img css={donationImg} src={idol.profilePicture} alt={idol.name} />
 					{/* 그라데이션 SVG 오버레이 */}
-					<img
-						css={overlaySvg}
-						src="/images/donation-card-cover.svg"
-						alt="아이돌 프로필 그라데이션 효과 사진"
-					/>
+					<img css={overlaySvg} src="/images/donation-card-cover.svg" alt="" />
 				</div>
 
-				{/* 후원하기 버튼 - 공통 Button 컴포넌트로 대체 예정*/}
-				<button type="button" css={donationButton}>
-					후원하기
-				</button>
+				{/* 후원하기 버튼 */}
+				<div css={donationButton}>
+					<Button size="donate-md" disabled={isButtonDisabled}>
+						{isButtonDisabled ? "후원 마감 🎉" : "후원 하기"}
+					</Button>
+				</div>
 			</div>
 
 			{/* 카드 하단 텍스트 영역 */}
@@ -66,13 +74,18 @@ function Card({ donation }) {
 
 				{/* 하단 정보 (크레딧, D-day) */}
 				<div css={donationFooter}>
-					<div css={donationFooterLeft}>
-						{/* 크레딧 아이콘 및 목표 금액 */}
-						<img css={creditImg} src="/images/credit.svg" alt="크레딧 사진" />
-						<span css={targetDonation}>{donation.targetDonation}</span>
+					<div css={donationFooterUp}>
+						<div css={donationFooterLeft}>
+							{/* 크레딧 아이콘 및 목표 금액 */}
+							<img css={creditImg} src="/images/credit.svg" alt="크레딧 사진" />
+							<span css={targetDonation}>
+								{Number(donation.targetDonation).toLocaleString()}
+							</span>
+						</div>
+						{/* 남은 날짜 */}
+						<span css={donationDday}>{dDay}일 남음</span>
 					</div>
-					{/* 남은 날짜 */}
-					<span css={donationDday}>{dDay}일 남음</span>
+					<ProgressBar progress={progress} />
 				</div>
 			</div>
 		</article>
