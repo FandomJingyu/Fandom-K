@@ -8,8 +8,8 @@ const List = () => {
 		<div className="mainGrid">
 			<CreditProvider>
 				<CreditCharge />
+				<Donation />
 			</CreditProvider>
-			<Donation />
 			<Chart />
 		</div>
 	);

@@ -2,6 +2,7 @@ import React, { useEffect, useState, useMemo } from "react";
 import { idolsAPI } from "../../../apis/idolsAPI";
 import Button from "../../../components/Button/Button";
 import Circle from "../../../components/Circle";
+import Modal from "../../../components/Modal";
 import {
 	ChartButtonWrap,
 	ChartColumn,
@@ -18,6 +19,7 @@ import {
 	RankAndName,
 	Votes,
 } from "./Chart.styles";
+import ChartVoteModal from "./components/ChartVoteModal";
 
 const ITEMS_PER_PAGE = 10;
 
@@ -26,6 +28,15 @@ const Chart = () => {
 	const [activeTab, setActiveTab] = useState("female");
 	const [visibleCount, setVisibleCount] = useState(ITEMS_PER_PAGE);
 	const [loading, setLoading] = useState(true);
+	const [isModalOpen, setIsModalOpen] = useState(false);
+
+	const openModal = () => {
+		setIsModalOpen(true);
+	};
+
+	const closeModal = () => {
+		setIsModalOpen(false);
+	};
 
 	useEffect(() => {
 		const fetchIdols = async () => {
@@ -70,9 +81,18 @@ const Chart = () => {
 			<ChartHeaderWrap>
 				<ChartTitle>이달의 차트</ChartTitle>
 				<ChartButtonWrap>
-					<Button size="vote-chart">차트 투표하기</Button>
+					<Button size="vote-chart" onClick={openModal}>
+						차트 투표하기
+					</Button>
 				</ChartButtonWrap>
 			</ChartHeaderWrap>
+
+			{/* 모달 내부에 선택된 크레딧 값을 업데이트할 함수 전달 */}
+			<Modal isOpen={isModalOpen} onClose={closeModal} type="vote">
+				<ChartVoteModal
+					closeModal={closeModal} // 모달을 닫는 함수 전달
+				/>
+			</Modal>
 
 			<ChartIdol style={{ marginBottom: "20px" }}>
 				<ChartIdolLeft
