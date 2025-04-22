@@ -85,10 +85,7 @@ function Card({ donation }) {
 						{/* 남은 날짜 */}
 						<span css={donationDday}>{dDay}일 남음</span>
 					</div>
-					<ProgressBar
-						receive={donation.receivedDonations}
-						target={donation.targetDonation}
-					/>
+					<ProgressBar progress={progress} />
 				</div>
 			</div>
 		</article>
