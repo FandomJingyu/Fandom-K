@@ -1,6 +1,5 @@
 /** @jsxImportSource @emotion/react */
-import { DONATIONS } from "../../../mocks/donations";
-import Card from "./components/Card";
+import { useCallback, useEffect, useState } from "react";
 
 import btnLeft from "/images/btn-donation-arrow-left.svg";
 import btnRight from "/images/btn-donation-arrow-right.svg";
@@ -12,8 +11,28 @@ import {
 	pageNationRight,
 } from "./Donation.style";
 
+import { donationsAPI } from "../../../apis/donationsAPI";
+import Card from "./components/Card";
+
 function Donation() {
-	const donations = DONATIONS;
+	const [donations, setDonations] = useState([]);
+	const [loading, setLoading] = useState(true);
+
+	const getDonation = useCallback(async () => {
+		const response = await donationsAPI.getDonations();
+		if (response) {
+			setDonations(response.list);
+			setLoading(false);
+		}
+	}, []);
+
+	useEffect(() => {
+		try {
+			getDonation();
+		} catch (e) {
+			console.log("후원을 불러오는데 실패했습니다.", e);
+		}
+	}, [getDonation]);
 
 	return (
 		<section>
