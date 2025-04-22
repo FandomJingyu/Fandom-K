@@ -59,6 +59,7 @@ export const ChartList = styled.div`
   justify-content: space-between;
   gap: 32px;
   margin-top: 24px;
+  
 `;
 
 // 각 열
