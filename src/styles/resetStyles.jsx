@@ -1,4 +1,4 @@
-import { css, Global } from '@emotion/react';
+import { Global, css } from "@emotion/react";
 
 const resetStyles = css`
   :root {
@@ -217,14 +217,8 @@ const resetStyles = css`
   ins {
     text-decoration: none;
   }
-
-  a:focus,
-  button:focus {
-    outline: 2px solid var(--orange-F96D69) !important;
-    outline-offset: 2px;
-  }
 `;
 
 export default function ResetStyles() {
-  return <Global styles={resetStyles} />;
-} 
+	return <Global styles={resetStyles} />;
+}

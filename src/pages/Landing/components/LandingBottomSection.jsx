@@ -1,5 +1,6 @@
 import styled from "@emotion/styled";
 import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { infiniteCarousel } from "../../../utils/infiniteCarousel";
 
 const CarouselCards = ({ className, startIndex }) => {
@@ -21,6 +22,7 @@ const CarouselCards = ({ className, startIndex }) => {
 };
 
 export default function LandingBottomSection() {
+	const navigate = useNavigate();
 	// LandingBottomSection 캐러셀 초기화 및 cleanup
 	useEffect(() => {
 		const carousel1 = infiniteCarousel({
@@ -56,7 +58,9 @@ export default function LandingBottomSection() {
 					이제는 더 쉬운 방법으로 시작해 보세요.
 				</p>
 				<img src="/images/landing/logo_big.png" alt="Fandom-K" />
-				<button type="button">크레딧 받고 시작하기</button>
+				<button type="button" onClick={() => navigate("/list")}>
+					크레딧 받고 시작하기
+				</button>
 				<CarouselCards className="carousel02" startIndex={5} />
 			</div>
 		</StyledLandingBottomSection>
@@ -101,6 +105,7 @@ const StyledLandingBottomSection = styled.section`
       line-height: 1.5;
     }
     > img {
+      display: block;
       margin-top: 20px;
       height: 150px;
     }
@@ -152,6 +157,7 @@ const StyledLandingBottomSection = styled.section`
     bottom: 0 !important;
     display: flex;
     flex-direction: column;
+    z-index: -1;
     &.carousel01 {
       left: 0;
       align-items: flex-start;
@@ -167,6 +173,77 @@ const StyledLandingBottomSection = styled.section`
       justify-content: center;
       width: 400px;
       height: 400px;
+    }
+  }
+  @media all and (max-width: 1024px) {
+    &::before {
+      height: 60px;
+    }
+    &::after {
+      height: 60px;
+    }
+    .landingGrid {
+      .carousel {
+        .item {
+          padding-block: 20px;
+          width: 200px;
+          height: 250px;
+          img {
+            max-width: 100%;
+            max-height: 100%;
+          }
+        }
+      }
+      > img {
+        height: auto;
+        width: 80vw;
+      }
+      p {
+        font-size: 20px;
+      }
+    }
+    .carousel {
+      width: 40vw !important;
+    }
+  }
+  @media all and (max-width: 375px) {
+    height: 133.33vw !important;
+    .landingGrid {
+      > img {
+        width: 65.07vw;
+        margin-top: 5.33vw;
+      }
+      p {
+        font-size: 4.27vw;
+      }
+      .carousel {
+        top: -20vh !important;
+        width: 34.67vw !important;
+        height: 300vh !important;
+        bottom: auto !important;
+        &.carousel01 {
+          left: -13.33vw;
+        }
+        &.carousel02 {
+          right: -13.33vw;
+        }
+        .item {
+          padding-block: 4.27vw;
+          width: 100%;
+          height: 42.67vw;
+        }
+      }
+      button {
+        margin-top: 16vw;
+        width: 42.67vw;
+        height: 12.8vw;
+        border-radius: 2.67vw;
+        font-size: 3.2vw;
+        border: none;
+        &::after {
+          opacity: 1;
+        }
+      }
     }
   }
 `;

@@ -13,7 +13,6 @@ const CreditProvider = ({ children }) => {
 	// 크레딧값이 변경될 때마다 localStorage에 저장
 	useEffect(() => {
 		localStorage.setItem("credit", String(credit));
-		console.log(`credit ${credit}`);
 	}, [credit]);
 
 	// Credit 상태 관리를 위한 함수들
