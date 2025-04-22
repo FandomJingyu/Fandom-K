@@ -10,7 +10,7 @@ import { css } from "@emotion/react";
  */
 export const progressContainer = css`
 width: 100%;
-height: 0.1px;
+height: 1px;
 flex-shrink: 0;
 
 background-color: #ffffff;
