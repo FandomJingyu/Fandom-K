@@ -2,14 +2,14 @@ import Circle from "../../../../components/Circle";
 import { idolList } from "./IdolList.styles";
 /** @jsxImportSource @emotion/react */
 
-const IdolList = ({ idol }) => {
+const IdolList = ({ idol, size = "128px" }) => {
 	if (!idol) return null; // idol이 없으면 아무 것도 렌더링하지 않음
 
 	return (
 		<>
 			<div css={idolList} key={idol.id}>
 				<Circle
-					size="128px"
+					size={size}
 					imageUrl={idol.profilePicture}
 					alt={idol.name}
 					decoding="async"

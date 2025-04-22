@@ -93,6 +93,8 @@ const settings = {
 const Mypage = () => {
 	// api에서 온 아이돌을 담을 idols
 	const [idols, setIdols] = useState([]);
+	// 선택한 아이돌 담는 임시 state
+	const [checkedIdol, setCheckedIdol] = useState([]);
 
 	// 처음에 한 번 idols 불러오기
 	useEffect(() => {
@@ -103,6 +105,17 @@ const Mypage = () => {
 		};
 		fetchData();
 	}, []);
+
+	// 아이돌 선택하는 함수
+	const toggleCheckedIdol = (idolId) => {
+		setCheckedIdol((prev) => {
+			const updated = prev.includes(idolId)
+				? prev.filter((id) => id !== idolId)
+				: [...checkedIdol, idolId];
+			console.log(updated);
+			return updated;
+		});
+	};
 
 	return (
 		<div css={mypage}>
@@ -117,8 +130,9 @@ const Mypage = () => {
 				{/* 슬라이더 사용 */}
 				<Slider {...settings}>
 					{idols.map((idol) => (
-						<div key={idol.id}>
-							<IdolList idol={idol} />
+						// biome-ignore lint/a11y/useKeyWithClickEvents: <explanation>
+						<div key={idol.id} onClick={() => toggleCheckedIdol(idol.id)}>
+							<IdolList idol={idol} size="128px" />
 						</div>
 					))}
 				</Slider>
