@@ -1,4 +1,4 @@
-import { css, Global } from '@emotion/react';
+import { Global, css } from "@emotion/react";
 
 export const layoutStyles = css`
   .mainGrid {
@@ -39,7 +39,7 @@ export const layoutStyles = css`
     }
   }
 
-  @media all and (max-width: 374px) {
+  @media all and (max-width: 375px) {
     .mainGrid,
     .landingGrid {
       width: auto;
@@ -50,5 +50,5 @@ export const layoutStyles = css`
 `;
 
 export default function LayoutStyles() {
-  return <Global styles={layoutStyles} />;
-} 
+	return <Global styles={layoutStyles} />;
+}
