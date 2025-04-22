@@ -1,4 +1,5 @@
-import { idolFace, idolList } from "./IdolList.styles";
+import Circle from "../../../../components/Circle";
+import { idolList } from "./IdolList.styles";
 /** @jsxImportSource @emotion/react */
 
 const IdolList = ({ idol }) => {
@@ -7,9 +8,12 @@ const IdolList = ({ idol }) => {
 	return (
 		<>
 			<div css={idolList} key={idol.id}>
-				<div css={idolFace}>
-					<img src={idol.profilePicture} alt={idol.name} />
-				</div>
+				<Circle
+					size="128px"
+					imageUrl={idol.profilePicture}
+					alt={idol.name}
+					decoding="async"
+				/>
 				<h3>{idol.name}</h3>
 				<h4>{idol.group}</h4>
 			</div>
