@@ -11,5 +11,12 @@
 	"[json]": {
 		"editor.defaultFormatter": "biomejs.biome"
 	},
-	"cSpell.words": ["Testpage"]
+	"cSpell.words": [
+		"borderradius",
+		"gsap",
+		"Jingyu",
+		"Pretendard",
+		"slicktest",
+		"Testpage"
+	]
 }

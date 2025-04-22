@@ -96,9 +96,9 @@ export default function LandingMiddleSection() {
 			<article>
 				<div className="landingGrid">
 					<h3>
-						<strong>마음</strong>이 <br />
+						<strong>마음</strong>이 <br className="hide-375" />
 						닿는 순간, <br />
-						<strong>응원</strong>이 <br />
+						<strong>응원</strong>이 <br className="hide-375" />
 						시작돼요
 						<span className="is-floating">
 							<img src="/images/landing/landing_icon01.png" alt="" />
@@ -121,7 +121,7 @@ export default function LandingMiddleSection() {
 			<article>
 				<div className="landingGrid">
 					<h3>
-						이번 달 <br />
+						이번 달 <br className="hide-375" />
 						<strong>가장 빛난 별</strong>은 <br />
 						누구?
 						<span className="is-sparkling">
@@ -146,14 +146,17 @@ export default function LandingMiddleSection() {
 				<div className="landingGrid">
 					<h3>
 						내 마음 속
-						<span className="is-pulsing">
+						<span className="is-pulsing hide-375">
 							<img src="/images/landing/landing_icon03.png" alt="" />
 						</span>
-						<br />
+						<br className="hide-375" />
 						<strong>나만의 아티스트</strong> <br />
-						소식까지
-						<br />
+						소식까지&nbsp;
+						<br className="hide-375" />
 						빠르게
+						<span className="is-pulsing hide-default show-375">
+							<img src="/images/landing/landing_icon03.png" alt="" />
+						</span>
 					</h3>
 					<div className="landing-mockup">
 						<img src="/images/landing/landing_mock03.png" alt="" />
@@ -173,6 +176,7 @@ export default function LandingMiddleSection() {
 
 const StyledLandingMiddleSection = styled.section`
   position: relative;
+
   article {
     background-color: #02000e;
     height: 100%;
@@ -260,6 +264,164 @@ const StyledLandingMiddleSection = styled.section`
       &.active {
         background-color: #f96d69;
         border-color: #f96d69;
+      }
+    }
+  }
+  @keyframes icon-float {
+    0% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-30px);
+    }
+    100% {
+      transform: translateY(0);
+    }
+  }
+  @keyframes icon-sparkle {
+    0% {
+      opacity: 0.2;
+    }
+    20% {
+      opacity: 0.9;
+    }
+    45% {
+      opacity: 0.5;
+    }
+    70% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0.2;
+    }
+  }
+  @keyframes icon-pulse {
+    0% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.3);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+  @keyframes gradientMove {
+    0% {
+      background-position: 0% 0%;
+    }
+    100% {
+      background-position: -200% 0%;
+    }
+  }
+  @media all and (max-width: 1880px) {
+    .landingMiddleSectionNav {
+      display: none;
+    }
+    .landingGrid {
+      padding-inline: 80px;
+      p {
+        font-size: 24px;
+        width: 350px;
+      }
+      h3 {
+        font-size: 50px;
+      }
+    }
+  }
+  @media all and (max-width: 1300px) {
+    .landingGrid {
+      padding-inline: 20px;
+      p {
+        width: 300px;
+        font-size: 20px;
+      }
+      h3 {
+        font-size: 42px;
+        span {
+          width: 50px;
+          height: 50px;
+        }
+      }
+    }
+    .landing-mockup {
+      width: 20vw;
+    }
+  }
+  @media all and (max-width: 1024px) {
+    .landingGrid {
+      padding-inline: 0;
+      justify-content: center;
+      gap: 30vw;
+      p {
+        font-size: 18px;
+      }
+      h3 {
+        width: 300px;
+        font-size: 36px;
+      }
+    }
+  }
+  @media all and (max-width: 744px) {
+    .landingGrid {
+      gap: 20px;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: flex-start;
+      padding-top: 100px;
+      h3 {
+        font-size: 32px;
+        width: auto;
+        span {
+          width: 42px;
+          height: 42px;
+        }
+      }
+      p {
+        width: auto;
+      }
+    }
+    .landing-mockup {
+      width: 40vw;
+      top: 70%;
+      img {
+        max-height: calc(65vh - 100px);
+      }
+    }
+  }
+  @media all and (max-width: 375px) {
+    span.show-375 {
+      display: inline-block !important;
+    }
+    .landingGrid {
+      padding-top: 21.33vw;
+      gap: 5.33vw;
+      h3 {
+        font-size: 8.53vw;
+        line-height: 1.5;
+        span {
+          width: 8.53vw;
+          height: 8.53vw;
+        }
+      }
+      p {
+        font-size: 4.27vw;
+      }
+    }
+    .landing-mockup {
+      width: 56vw;
+      top: 88.53vw;
+      transform: translate(-50%, 0);
+    }
+    @keyframes icon-float {
+      0% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-2.67vw);
+      }
+      100% {
+        transform: translateY(0);
       }
     }
   }

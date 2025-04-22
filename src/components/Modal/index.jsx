@@ -24,8 +24,11 @@ const modalData = {
 	credit: {
 		title: "크레딧 충전",
 	},
-	vote: {
-		title: "투표",
+	voteWoman: {
+		title: "이달의 여자 아이돌",
+	},
+	voteMan: {
+		title: "이달의 남자 아이돌",
 	},
 	insufficientCredits: {
 		title: "크레딧 부족", // 크레딧 부족 모달에 맞는 title
