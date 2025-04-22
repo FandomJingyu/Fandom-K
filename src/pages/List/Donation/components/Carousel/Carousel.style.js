@@ -1,7 +1,11 @@
 /** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react";
 
-// 슬라이드 트랙 스타일
+/**
+ * 슬라이드 트랙
+ * - 아이템 가로 배치
+ * - startIndex에 따라 X축 이동
+ */
 export const sliderTrack = (
 	startIndex,
 	visibleCount,
@@ -15,7 +19,11 @@ export const sliderTrack = (
   margin-top: 34px;
 `;
 
-// 뷰포트 스타일 (보이는 영역)
+/**
+ * 뷰포트 영역
+ * - 가로 스크롤 영역
+ * - 스크롤 숨김 처리
+ */
 export const sliderViewport = css`
   overflow-x: auto;
 	scroll-snap-type: x mandatory;

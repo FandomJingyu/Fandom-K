@@ -11,6 +11,11 @@ function Donation() {
 	const [donations, setDonations] = useState([]);
 	const [loading, setLoading] = useState(true);
 
+	/**
+	 * 후원 데이터 비동기 호출
+	 * - useCallback을 사용하여 getDonation 함수가 매 렌더링마다 새로 생성되지 않도록 방지
+	 * - 의존성 배열에 있는 useEffect가 불필요하게 재실행되지 않게 하기 위함
+	 */
 	const getDonation = useCallback(async () => {
 		const response = await donationsAPI.getDonations();
 		if (response) {
@@ -19,6 +24,9 @@ function Donation() {
 		}
 	}, []);
 
+	/**
+	 * 컴포넌트 마운트 시 후원 데이터 불러오기
+	 */
 	useEffect(() => {
 		try {
 			getDonation();
