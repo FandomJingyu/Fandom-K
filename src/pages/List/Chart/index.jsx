@@ -17,9 +17,12 @@ import {
 	MoreButton,
 	ProfileInfo,
 	RankAndName,
+	VoteChart,
 	Votes,
 } from "./Chart.styles";
 import ChartVoteModal from "./components/ChartVoteModal";
+
+import chartImg from "../../../../public/images/Chart.png";
 
 const ITEMS_PER_PAGE = 10;
 
@@ -82,7 +85,10 @@ const Chart = () => {
 				<ChartTitle>이달의 차트</ChartTitle>
 				<ChartButtonWrap>
 					<Button size="vote-chart" onClick={openModal}>
-						차트 투표하기
+						<VoteChart>
+							<img src={chartImg} alt="차트 투표 이미지" />
+							차트 투표하기
+						</VoteChart>
 					</Button>
 				</ChartButtonWrap>
 			</ChartHeaderWrap>

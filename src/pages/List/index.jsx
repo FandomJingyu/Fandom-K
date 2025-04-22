@@ -6,10 +6,8 @@ import Donation from "./Donation/index";
 const List = () => {
 	return (
 		<div className="mainGrid">
-			<CreditProvider>
-				<CreditCharge />
-				<Donation />
-			</CreditProvider>
+			<CreditCharge />
+			<Donation />
 			<Chart />
 		</div>
 	);
