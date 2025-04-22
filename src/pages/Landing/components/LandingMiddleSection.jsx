@@ -96,9 +96,9 @@ export default function LandingMiddleSection() {
 			<article>
 				<div className="landingGrid">
 					<h3>
-						<strong>마음</strong>이 <br />
-						닿는 순간, <br className="is-mobile" />
-						<strong>응원</strong>이 <br />
+						<strong>마음</strong>이 <br className="hide-375" />
+						닿는 순간, <br />
+						<strong>응원</strong>이 <br className="hide-375" />
 						시작돼요
 						<span className="is-floating">
 							<img src="/images/landing/landing_icon01.png" alt="" />
@@ -121,8 +121,8 @@ export default function LandingMiddleSection() {
 			<article>
 				<div className="landingGrid">
 					<h3>
-						이번 달 <br />
-						<strong>가장 빛난 별</strong>은 <br className="is-mobile" />
+						이번 달 <br className="hide-375" />
+						<strong>가장 빛난 별</strong>은 <br />
 						누구?
 						<span className="is-sparkling">
 							<img src="/images/landing/landing_icon02.png" alt="" />
@@ -146,15 +146,15 @@ export default function LandingMiddleSection() {
 				<div className="landingGrid">
 					<h3>
 						내 마음 속
-						<span className="is-pulsing is-pc">
+						<span className="is-pulsing hide-375">
 							<img src="/images/landing/landing_icon03.png" alt="" />
 						</span>
-						<br />
-						<strong>나만의 아티스트</strong> <br className="is-mobile" />
-						소식까지
-						<br />
+						<br className="hide-375" />
+						<strong>나만의 아티스트</strong> <br />
+						소식까지&nbsp;
+						<br className="hide-375" />
 						빠르게
-						<span className="is-pulsing is-mobile">
+						<span className="is-pulsing hide-default show-375">
 							<img src="/images/landing/landing_icon03.png" alt="" />
 						</span>
 					</h3>
@@ -176,9 +176,7 @@ export default function LandingMiddleSection() {
 
 const StyledLandingMiddleSection = styled.section`
   position: relative;
-	.is-mobile {
-		display: none !important;
-	}
+
   article {
     background-color: #02000e;
     height: 100%;
@@ -374,9 +372,6 @@ const StyledLandingMiddleSection = styled.section`
       h3 {
         font-size: 32px;
         width: auto;
-        br {
-          display: none;
-        }
         span {
           width: 42px;
           height: 42px;
@@ -395,15 +390,9 @@ const StyledLandingMiddleSection = styled.section`
     }
   }
   @media all and (max-width: 375px) {
-		.is-mobile {
-			display: block !important;
-		}
-		span.is-mobile {
-				display: inline-block !important;
-			}
-		.is-pc {
-			display: none !important;
-		}
+    span.show-375 {
+      display: inline-block !important;
+    }
     .landingGrid {
       padding-top: 21.33vw;
       gap: 5.33vw;
@@ -424,16 +413,16 @@ const StyledLandingMiddleSection = styled.section`
       top: 88.53vw;
       transform: translate(-50%, 0);
     }
-		@keyframes icon-float {
-    0% {
-      transform: translateY(0);
+    @keyframes icon-float {
+      0% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-2.67vw);
+      }
+      100% {
+        transform: translateY(0);
+      }
     }
-    50% {
-      transform: translateY(-2.67vw);
-    }
-    100% {
-      transform: translateY(0);
-    }
-  }
   }
 `;
