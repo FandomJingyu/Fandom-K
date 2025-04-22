@@ -1,14 +1,11 @@
-import { CreditProvider } from "../../context/CreditContext";
-import CreditCharge from "./Charge/components/creditCharge";
+import CreditCharge from "./Charge/components/CreditCharge";
 import Chart from "./Chart/index";
 import Donation from "./Donation/index";
 
 const List = () => {
 	return (
 		<div className="mainGrid">
-			<CreditProvider>
-				<CreditCharge />
-			</CreditProvider>
+			<CreditCharge />
 			<Donation />
 			<Chart />
 		</div>
