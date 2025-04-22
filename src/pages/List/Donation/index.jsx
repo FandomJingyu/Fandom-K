@@ -1,18 +1,11 @@
 /** @jsxImportSource @emotion/react */
 import { useCallback, useEffect, useState } from "react";
 
-import btnLeft from "/images/btn-donation-arrow-left.svg";
-import btnRight from "/images/btn-donation-arrow-right.svg";
-import {
-	donationContent,
-	donationPageNation,
-	donationTitle,
-	pageNationLeft,
-	pageNationRight,
-} from "./Donation.style";
+import { donationTitle } from "./Donation.style";
 
 import { donationsAPI } from "../../../apis/donationsAPI";
 import Card from "./components/Card";
+import Carousel from "./components/Carousel";
 
 function Donation() {
 	const [donations, setDonations] = useState([]);
@@ -31,6 +24,8 @@ function Donation() {
 			getDonation();
 		} catch (e) {
 			console.log("후원을 불러오는데 실패했습니다.", e);
+		} finally {
+			setLoading(false);
 		}
 	}, [getDonation]);
 
@@ -38,22 +33,20 @@ function Donation() {
 		<section>
 			<h2 css={donationTitle}>후원을 기다리는 조공</h2>
 
-			<div css={donationPageNation}>
-				<button type="button" css={pageNationLeft}>
-					<img src={btnLeft} alt="이전" />
-				</button>
+			{loading && <div>로딩 중...</div>}
 
-				{/* 카드 리스트만 따로 감쌈 */}
-				<div css={donationContent}>
-					{donations.map((donation) => (
+			{!loading && donations.length > 0 && (
+				<Carousel
+					items={donations}
+					renderItem={(donation) => (
 						<Card key={donation.id} donation={donation} />
-					))}
-				</div>
+					)}
+				/>
+			)}
 
-				<button type="button" css={pageNationRight}>
-					<img src={btnRight} alt="이후" />
-				</button>
-			</div>
+			{!loading && donations.length === 0 && (
+				<div>현재 진행 중인 후원이 없습니다.</div>
+			)}
 		</section>
 	);
 }

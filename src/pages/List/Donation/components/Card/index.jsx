@@ -45,11 +45,7 @@ function Card({ donation }) {
 					{/* 아이돌 프로필 이미지 */}
 					<img css={donationImg} src={idol.profilePicture} alt={idol.name} />
 					{/* 그라데이션 SVG 오버레이 */}
-					<img
-						css={overlaySvg}
-						src="/images/donation-card-cover.svg"
-						alt="아이돌 프로필 그라데이션 효과 사진"
-					/>
+					<img css={overlaySvg} src="/images/donation-card-cover.svg" alt="" />
 				</div>
 
 				{/* 후원하기 버튼 */}
