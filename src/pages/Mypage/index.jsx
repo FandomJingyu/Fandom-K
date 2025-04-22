@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import Slider from "react-slick";
 import { idolsAPI } from "../../apis/idolsAPI";
 import Button from "../../components/Button/Button";
+import CheckIdol from "../../components/CheckIdol";
 import {
 	addButton,
 	addIdol,
@@ -132,7 +133,11 @@ const Mypage = () => {
 					{idols.map((idol) => (
 						// biome-ignore lint/a11y/useKeyWithClickEvents: <explanation>
 						<div key={idol.id} onClick={() => toggleCheckedIdol(idol.id)}>
-							<IdolList idol={idol} size="128px" />
+							<IdolList
+								idol={idol}
+								size="128px"
+								isChecked={checkedIdol.includes(idol.id)}
+							/>
 						</div>
 					))}
 				</Slider>
