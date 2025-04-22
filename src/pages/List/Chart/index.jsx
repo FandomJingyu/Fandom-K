@@ -88,9 +88,15 @@ const Chart = () => {
 			</ChartHeaderWrap>
 
 			{/* 모달 내부에 선택된 크레딧 값을 업데이트할 함수 전달 */}
-			<Modal isOpen={isModalOpen} onClose={closeModal} type="vote">
+			<Modal
+				isOpen={isModalOpen}
+				onClose={closeModal}
+				type={activeTab === "female" ? "voteWoman" : "voteMan"} // activeTab에 따라 type 설정
+			>
 				<ChartVoteModal
-					closeModal={closeModal} // 모달을 닫는 함수 전달
+					gender={activeTab} // 현재 탭(female/male)
+					idols={isFemale ? femaleIdols : maleIdols} // 성별에 맞는 아이돌 리스트 전달
+					closeModal={closeModal}
 				/>
 			</Modal>
 
