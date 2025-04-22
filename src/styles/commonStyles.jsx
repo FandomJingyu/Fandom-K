@@ -15,7 +15,7 @@ const commonStyles = css`
     --gray-A3A5A8: #a3a5a8;
     --white-F7F7F8: #f7f7f8;
   }
-   @media all and (max-width: 744px) {
+  @media all and (max-width: 744px) {
     .hide-744 {
       display: none !important;
     }
