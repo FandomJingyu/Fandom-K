@@ -32,7 +32,6 @@ const Chart = () => {
 	const [activeTab, setActiveTab] = useState("female");
 	const [visibleCount, setVisibleCount] = useState(ITEMS_PER_PAGE);
 	const [loading, setLoading] = useState(true);
-	const [selectedIdolId, setSelectedIdolId] = useState(null);
 	const [isModalOpen, setIsModalOpen] = useState(false);
 
 	const openModal = () => {
@@ -76,29 +75,11 @@ const Chart = () => {
 		: maleIdols.slice(0, visibleCount);
 
 	const currentIdolList = isFemale ? femaleIdols : maleIdols;
-
 	const leftColumnList = visibleList.filter((_, index) => index % 2 === 0);
 	const rightColumnList = visibleList.filter((_, index) => index % 2 !== 0);
 
 	const handleMore = () => {
 		setVisibleCount((prev) => prev + ITEMS_PER_PAGE);
-	};
-
-	const handleSelectIdol = (idolId) => {
-		setSelectedIdolId(idolId);
-	};
-
-	const handleVote = () => {
-		if (!selectedIdolId) return;
-		setIdols((prevIdols) =>
-			prevIdols.map((idol) =>
-				idol.id === selectedIdolId
-					? { ...idol, totalVotes: idol.totalVotes + 1 }
-					: idol,
-			),
-		);
-		setSelectedIdolId(null);
-		setVoteModalOpen(false);
 	};
 
 	return (
@@ -122,21 +103,12 @@ const Chart = () => {
 				type={activeTab === "female" ? "voteWoman" : "voteMan"} // activeTab에 따라 type 설정
 			>
 				<ChartVoteModal
-					gender={activeTab} // 현재 탭(female/male)
-					idols={isFemale ? femaleIdols : maleIdols} // 성별에 맞는 아이돌 리스트 전달
+					gender={activeTab}
+					idols={currentIdolList} // idols를 전달
+					setIdols={setIdols} // setIdols는 하나의 상태 업데이트 함수 전달
 					closeModal={closeModal}
 				/>
 			</Modal>
-
-			{/* ✅ 투표 모달 컴포넌트 삽입 */}
-			{/* <VoteModal
-				isOpen={isVoteModalOpen}
-				onClose={() => setVoteModalOpen(false)}
-				idols={currentIdolList}
-				selectedIdolId={selectedIdolId}
-				onSelect={handleSelectIdol}
-				onVote={handleVote}
-			/> */}
 
 			<ChartIdol style={{ marginBottom: "20px" }}>
 				<ChartIdolLeft

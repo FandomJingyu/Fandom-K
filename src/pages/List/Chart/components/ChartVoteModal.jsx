@@ -1,6 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import React, { useState } from "react";
-import RadioButton from "../../../../../src/components/RadioButton"; // 여기에 맞는 RadioButton import
+import RadioButton from "../../../../../src/components/RadioButton";
 import Button from "../../../../components/Button/Button";
 import Circle from "../../../../components/Circle";
 import { useCredit } from "../../../../context/CreditContext";
@@ -15,12 +15,17 @@ import {
 	RadioContent,
 } from "./ChartVote.styles";
 
-export default function ChartVoteModal({ gender, idols, closeModal }) {
+export default function ChartVoteModal({
+	gender,
+	idols,
+	setIdols,
+	closeModal,
+}) {
 	const { credit, deductCredit } = useCredit();
 	const [selectedIdolId, setSelectedIdolId] = useState(null);
 
 	const handleVote = (e) => {
-		e.preventDefault(); // 폼 제출 방지
+		e.preventDefault();
 
 		if (credit < 1000) {
 			alert("크레딧이 부족합니다.");
@@ -35,8 +40,14 @@ export default function ChartVoteModal({ gender, idols, closeModal }) {
 		// 크레딧 차감
 		deductCredit(1000);
 
-		// (선택) 투표 로직 추가
-		console.log(`${gender} 아이돌 ${selectedIdolId} 투표 완료!`);
+		// 아이돌 목록 업데이트
+		setIdols((prevIdols) =>
+			prevIdols.map((idol) =>
+				idol.id === selectedIdolId
+					? { ...idol, totalVotes: idol.totalVotes + 1 }
+					: idol,
+			),
+		);
 
 		// 모달 닫기
 		closeModal();
@@ -53,11 +64,10 @@ export default function ChartVoteModal({ gender, idols, closeModal }) {
 				<ul>
 					{idols.map((idol, index) => (
 						<li key={idol.id} css={IdolItem}>
-							{/* 라디오 버튼 감싸기 */}
 							<RadioButton
 								value={idol.id}
 								checked={selectedIdolId === idol.id}
-								onChange={handleIdolSelect}
+								onChange={() => handleIdolSelect(idol.id)}
 								className="vote"
 							>
 								<div css={RadioContent}>
