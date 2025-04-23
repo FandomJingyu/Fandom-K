@@ -1,6 +1,7 @@
 /** @jsxImportSource @emotion/react */
-import React from "react";
-import closeImg from "../../../public/images/btn-modal-close.png";
+import React, { useState, useEffect } from "react";
+import closeArrow from "/public/icons/icon-arrow-left.svg";
+import closeImg from "/public/images/btn-modal-close.png";
 import {
 	backdropStyles,
 	buttonStyles,
@@ -16,6 +17,21 @@ import ModalPortal from "./ModalPortal";
  * @param {Function} props.onClose
  * @param {React.ReactNode} props.children
  */
+
+const useIsMobile = () => {
+	const [isMobile, setIsMobile] = useState();
+
+	useEffect(() => {
+		const handleResize = () => {
+			setIsMobile(window.innerWidth <= 768);
+		};
+		handleResize();
+		window.addEventListener("resize", handleResize);
+		return () => window.removeEventListener("resize", handleResize);
+	}, []);
+
+	return isMobile;
+};
 
 const modalData = {
 	donation: {
@@ -38,10 +54,19 @@ const modalData = {
 	},
 };
 
-const Modal = ({ isOpen, onClose, type = "default", children }) => {
-	if (!isOpen) return null;
+const Modal = ({
+	isOpen,
+	onClose,
+	children,
+	type = "default",
+	isMobileFullScreen = false,
+}) => {
+	const isMobile = useIsMobile();
+	const isFullScreen = isMobile && isMobileFullScreen;
 
 	const { title } = modalData[type] || modalData.default; // type에 맞는 title 가져오기
+
+	if (!isOpen) return null;
 
 	const handleKeyDown = (event) => {
 		// Enter 키 또는 Space 키를 눌렀을 때 모달 닫기
@@ -52,7 +77,7 @@ const Modal = ({ isOpen, onClose, type = "default", children }) => {
 
 	return (
 		<ModalPortal>
-			<div css={rootStyles}>
+			<div css={rootStyles(isFullScreen)}>
 				{/* Backdrop */}
 				<button
 					css={backdropStyles}
@@ -64,17 +89,20 @@ const Modal = ({ isOpen, onClose, type = "default", children }) => {
 					{/* 비어 있는 버튼이지만 키보드 포커스와 역할이 명확함 */}
 				</button>
 				{/* Modal */}
-				<div css={modalStyles}>
-					<div css={modalHeaderStyles}>
+				<div css={modalStyles(isFullScreen)}>
+					<div css={modalHeaderStyles(isFullScreen)}>
 						<h2>{title}</h2>
 						<button
-							css={buttonStyles}
+							css={buttonStyles(isFullScreen)}
 							onClick={onClose}
 							onKeyDown={handleKeyDown} // 키보드 이벤트 처리
 							type="button"
 							aria-label="모달 창 닫기" // 접근성을 위한 aria-label
 						>
-							<img src={closeImg} alt="모달 창 닫기 버튼" />
+							<img
+								src={isFullScreen ? closeArrow : closeImg}
+								alt="모달 닫기 버튼"
+							/>
 						</button>
 					</div>
 					{/* Modal Content */}

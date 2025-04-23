@@ -115,6 +115,7 @@ const Chart = () => {
 				isOpen={isModalOpen}
 				onClose={closeModal}
 				type={activeTab === "female" ? "voteWoman" : "voteMan"} // activeTab에 따라 type 설정
+				isMobileFullScreen={true}
 			>
 				<ChartVoteModal
 					gender={activeTab}
