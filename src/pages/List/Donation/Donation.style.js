@@ -41,7 +41,7 @@ export const pageNationRight = css`
   border-radius: 4px;
   }
 
-  @media (max-width: 769px) {
+  @media (max-width: 1365px) {
   display: none;
   }
 
@@ -69,7 +69,7 @@ export const pageNationLeft = css`
   border-radius: 4px;
   }
 
-  @media (max-width: 769px) {
+  @media (max-width: 1365px) {
   display: none;
   }
 `;

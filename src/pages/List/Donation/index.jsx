@@ -4,6 +4,7 @@ import { useCallback, useEffect, useState } from "react";
 import { donationTitle } from "./Donation.style";
 
 import { donationsAPI } from "../../../apis/donationsAPI";
+import LodaingError from "../../../components/Error";
 import Card from "./components/Card";
 import Carousel from "./components/Carousel";
 
@@ -56,9 +57,7 @@ function Donation() {
 				/>
 			)}
 
-			{!loading && donations.length === 0 && (
-				<div>현재 진행 중인 후원이 없습니다.</div>
-			)}
+			{!loading && donations.length === 0 && <LodaingError />}
 		</section>
 	);
 }
