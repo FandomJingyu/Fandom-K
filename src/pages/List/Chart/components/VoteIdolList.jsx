@@ -1,5 +1,6 @@
-import Circle from "../../../../components/Circle";
+import CheckIdol from "../../../../components/CheckIdol";
 /** @jsxImportSource @emotion/react */
+import Circle from "../../../../components/Circle";
 import RadioButton from "../../../../components/RadioButton";
 import {
 	IdolDetails,
@@ -36,6 +37,12 @@ export default function VoteIdolList({ idols, selectedIdolId, onSelectIdol }) {
 									alt={idol.name}
 									loading="lazy"
 									decoding="async"
+								/>
+								<CheckIdol
+									isVote={true}
+									isChecked={selectedIdolId === idol.id}
+									size={70}
+									checkSize={18}
 								/>
 								<div css={IdolInfo}>
 									<span css={Rank}>{index + 1}</span>
