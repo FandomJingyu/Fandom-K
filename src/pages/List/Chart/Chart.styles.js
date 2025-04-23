@@ -1,13 +1,11 @@
 import styled from "@emotion/styled";
 
-// 전체 컨테이너
 export const ChartContainer = styled.div`
-  max-width: 1200px;
   margin: 0 auto;
   padding: 40px 0;
+  width: clamp(327px, 90vw, 1200px);
 `;
 
-// 상단: 제목 + 버튼
 export const ChartHeaderWrap = styled.div`
   display: flex;
   justify-content: space-between;
@@ -24,7 +22,6 @@ export const ChartTitle = styled.h2`
 
 export const ChartButtonWrap = styled.div``;
 
-// 성별 탭
 export const ChartIdol = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -45,37 +42,40 @@ const ChartIdolBase = styled.div`
 `;
 
 export const ChartIdolLeft = styled(ChartIdolBase)`
-  background-color: #ffffff1a;
-  border-bottom: 1px solid #ffffff;
-`;
-
-export const ChartIdolRight = styled(ChartIdolBase)`
-  color: #828282;
-`;
-
-// 아이돌 리스트 영역
-export const ChartList = styled.div`
-  display: flex;
-  justify-content: space-between;
-  gap: 32px;
-  margin-top: 24px;
+  
   
 `;
 
-// 각 열
-export const ChartColumn = styled.ul`
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
+export const ChartIdolRight = styled(ChartIdolBase)`
+  
 `;
 
-// 리스트 아이템
+export const ChartList = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-top: 24px;
+
+  @media (min-width: 769px) {
+    flex-direction: row;
+    & > li {
+      width: calc(50% - 8px);
+    }
+  }
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    & > li {
+      width: 100%;
+    }
+  }
+`;
+
 export const ListItem = styled.li`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding-bottom:8px;
+  padding-bottom: 8px;
   border-bottom: 1px solid #ffffff1a;
 `;
 
@@ -95,7 +95,7 @@ export const RankAndName = styled.div`
     color: #f96d69;
     font-weight: 400;
     font-size: 16px;
-     opacity :0.57;
+    opacity: 0.57;
   }
 
   .group {
@@ -116,7 +116,6 @@ export const Votes = styled.span`
   font-family: Pretendard;
 `;
 
-// 더보기 버튼
 export const MoreButton = styled.div`
   display: flex;
   justify-content: center;

@@ -1,12 +1,11 @@
 import React, { useEffect, useState, useMemo } from "react";
+import chartImg from "../../../../public/images/Chart.png";
 import { idolsAPI } from "../../../apis/idolsAPI";
 import Button from "../../../components/Button/Button";
 import Circle from "../../../components/Circle";
 import Modal from "../../../components/Modal";
-
 import {
 	ChartButtonWrap,
-	ChartColumn,
 	ChartContainer,
 	ChartHeaderWrap,
 	ChartIdol,
@@ -23,9 +22,13 @@ import {
 } from "./Chart.styles";
 import ChartVoteModal from "./components/ChartVoteModal";
 
-import chartImg from "../../../../public/images/Chart.png";
-
 const ITEMS_PER_PAGE = 10;
+const TABLET_ITEMS_PER_PAGE = 5;
+const MOBILE_ITEMS_PER_PAGE = 5;
+
+const getIsMobile = () => window.matchMedia("(max-width: 425px)").matches;
+const getIsTablet = () =>
+	window.matchMedia("(min-width: 426px) and (max-width: 768px)").matches;
 
 const Chart = () => {
 	const [idols, setIdols] = useState([]);
@@ -52,6 +55,18 @@ const Chart = () => {
 		fetchIdols();
 	}, []);
 
+	useEffect(() => {
+		const handleResize = () => {
+			if (getIsMobile()) setVisibleCount(MOBILE_ITEMS_PER_PAGE);
+			else if (getIsTablet()) setVisibleCount(TABLET_ITEMS_PER_PAGE);
+			else setVisibleCount(ITEMS_PER_PAGE);
+		};
+
+		handleResize();
+		window.addEventListener("resize", handleResize);
+		return () => window.removeEventListener("resize", handleResize);
+	}, []);
+
 	const femaleIdols = useMemo(() => {
 		return idols
 			.filter((i) => i.gender === "female")
@@ -65,17 +80,18 @@ const Chart = () => {
 	}, [idols]);
 
 	const isFemale = activeTab === "female";
-	const visibleList = isFemale
-		? femaleIdols.slice(0, visibleCount)
-		: maleIdols.slice(0, visibleCount);
+	const visibleList = (isFemale ? femaleIdols : maleIdols).slice(
+		0,
+		visibleCount,
+	);
 
-	const currentIdolList = isFemale ? femaleIdols : maleIdols;
-	const leftColumnList = visibleList.filter((_, index) => index % 2 === 0);
-	const rightColumnList = visibleList.filter((_, index) => index % 2 !== 0);
+	const handleMore = () => {
+		if (getIsMobile()) setVisibleCount((prev) => prev + MOBILE_ITEMS_PER_PAGE);
+		else if (getIsTablet())
+			setVisibleCount((prev) => prev + TABLET_ITEMS_PER_PAGE);
+		else setVisibleCount((prev) => prev + ITEMS_PER_PAGE);
+	};
 
-	const handleMore = () => setVisibleCount((prev) => prev + ITEMS_PER_PAGE);
-
-	// IdolItem 컴포넌트를 별도로 분리하여 중복을 제거
 	const IdolItem = ({ idol, index }) => (
 		<ListItem key={idol.id}>
 			<ProfileInfo>
@@ -87,7 +103,7 @@ const Chart = () => {
 					decoding="async"
 				/>
 				<RankAndName>
-					<span className="rank">{index + 1}</span> {/* 1-based index */}
+					<span className="rank">{index + 1}</span>
 					<span className="group">{idol.group}</span>
 					<span className="artist-name">{idol.name}</span>
 				</RankAndName>
@@ -110,16 +126,15 @@ const Chart = () => {
 				</ChartButtonWrap>
 			</ChartHeaderWrap>
 
-			{/* 모달 내부에 선택된 크레딧 값을 업데이트할 함수 전달 */}
 			<Modal
 				isOpen={isModalOpen}
 				onClose={closeModal}
-				type={activeTab === "female" ? "voteWoman" : "voteMan"} // activeTab에 따라 type 설정
+				type={isFemale ? "voteWoman" : "voteMan"}
 			>
 				<ChartVoteModal
 					gender={activeTab}
-					idols={currentIdolList} // idols를 전달
-					setIdols={setIdols} // setIdols는 하나의 상태 업데이트 함수 전달
+					idols={isFemale ? femaleIdols : maleIdols}
+					setIdols={setIdols}
 					closeModal={closeModal}
 				/>
 			</Modal>
@@ -128,12 +143,16 @@ const Chart = () => {
 				<ChartIdolLeft
 					onClick={() => {
 						setActiveTab("female");
-						setVisibleCount(ITEMS_PER_PAGE);
+						if (getIsMobile()) setVisibleCount(MOBILE_ITEMS_PER_PAGE);
+						else if (getIsTablet()) setVisibleCount(TABLET_ITEMS_PER_PAGE);
+						else setVisibleCount(ITEMS_PER_PAGE);
 					}}
 					style={{
 						cursor: "pointer",
 						fontWeight: isFemale ? 700 : 400,
 						backgroundColor: isFemale ? "#ffffff1a" : "transparent",
+						borderBottom: isFemale ? "1px solid #ffffff" : "none",
+						transition: "all 0.3s ease",
 					}}
 				>
 					이달의 여자 아이돌
@@ -141,12 +160,16 @@ const Chart = () => {
 				<ChartIdolRight
 					onClick={() => {
 						setActiveTab("male");
-						setVisibleCount(ITEMS_PER_PAGE);
+						if (getIsMobile()) setVisibleCount(MOBILE_ITEMS_PER_PAGE);
+						else if (getIsTablet()) setVisibleCount(TABLET_ITEMS_PER_PAGE);
+						else setVisibleCount(ITEMS_PER_PAGE);
 					}}
 					style={{
 						cursor: "pointer",
 						fontWeight: !isFemale ? 700 : 400,
 						backgroundColor: !isFemale ? "#ffffff1a" : "transparent",
+						borderBottom: !isFemale ? "1px solid #ffffff" : "none",
+						transition: "all 0.3s ease",
 					}}
 				>
 					이달의 남자 아이돌
@@ -160,17 +183,9 @@ const Chart = () => {
 			) : (
 				<>
 					<ChartList>
-						<ChartColumn>
-							{leftColumnList.map((idol, index) => (
-								<IdolItem key={idol.id} idol={idol} index={index * 2} /> // 인덱스를 2배로 변경
-							))}
-						</ChartColumn>
-
-						<ChartColumn>
-							{rightColumnList.map((idol, index) => (
-								<IdolItem key={idol.id} idol={idol} index={index * 2 + 1} /> // 인덱스를 2배 + 1로 변경
-							))}
-						</ChartColumn>
+						{visibleList.map((idol, index) => (
+							<IdolItem key={idol.id} idol={idol} index={index} />
+						))}
 					</ChartList>
 
 					{visibleList.length <
