@@ -18,6 +18,7 @@ import {
 	targetDonation,
 } from "./Card.style"; // 스타일 import
 
+import { useNavigate } from "react-router-dom";
 import Button from "../../../../../components/Button/Button";
 import ProgressBar from "./ProgressBar";
 
@@ -28,6 +29,7 @@ import ProgressBar from "./ProgressBar";
  * @returns JSX
  */
 function Card({ donation }) {
+	const navigate = useNavigate();
 	const idol = donation.idol; // 아이돌 정보 분리 추출
 
 	// 남은 날짜 구하기
@@ -58,7 +60,11 @@ function Card({ donation }) {
 
 				{/* 후원하기 버튼 */}
 				<div css={donationButton}>
-					<Button size="donate-md" disabled={isButtonDisabled}>
+					<Button
+						size="donate-md"
+						disabled={isButtonDisabled}
+						onClick={() => navigate(`/donation-detail/${donation.id}`)}
+					>
 						{isButtonDisabled ? "후원 마감 🎉" : "후원 하기"}
 					</Button>
 				</div>
