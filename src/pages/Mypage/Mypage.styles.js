@@ -11,10 +11,10 @@ const mypage = css`
 `;
 
 //나의 아이돌
-const myIdol = css`
+const myIdolWrapper = css`
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     padding: 30px 0px 40px 0px;
-    margin-bottom: 40px;
+    margin-bottom: 24px;
   
     > h2 {
         font-size: 26px;
@@ -25,8 +25,10 @@ const myIdol = css`
 // 나의 아이돌 리스트
 const myIdolList = css`
     display: flex;
+    flex-wrap: wrap;
     gap: 24px;
-`;
+    width: 100%;
+    `;
 
 // 아이돌 추가하기
 const addIdol = css`
@@ -36,7 +38,8 @@ const addIdol = css`
 
     > h2 {
         font-size: 26px;
-        margin-bottom: 32px;
+        margin-top: 40px;
+        margin-bottom: 16px;
     }
 `;
 
@@ -47,4 +50,4 @@ const addButton = css`
     margin-top: 48px;
 `;
 
-export { mypage, myIdol, myIdolList, addIdol, addButton };
+export { mypage, myIdolWrapper, myIdolList, addIdol, addButton };
