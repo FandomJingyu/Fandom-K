@@ -5,7 +5,10 @@ const idolList = css`
     width: 128px;
     height: 183px;
     text-align : center;
-    margin-bottom: 32px;
+    margin: 16px 0px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 
     > h3 {
         font-size: 16px;

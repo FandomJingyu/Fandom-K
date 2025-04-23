@@ -96,7 +96,7 @@ const Mypage = () => {
 	const [idols, setIdols] = useState([]);
 	// 선택한 아이돌 담는 임시 state
 	const [checkedIdol, setCheckedIdol] = useState([]);
-	// 내가 선택한 아이돌
+	// 내가 선택한 아이돌 (id만 저장)
 	const [myIdol, setMyIdol] = useState([]);
 	// 내가 선택한 아이돌과 같은 아이디를 같는 요소를 새롭게 만들어줌
 	const selectedIdolList = idols.filter((idol) => myIdol.includes(idol.id));
@@ -106,7 +106,7 @@ const Mypage = () => {
 	// 처음에 한 번 idols 불러오기
 	useEffect(() => {
 		const fetchData = async () => {
-			const result = await idolsAPI.getIdols(19); // 불러올 개수
+			const result = await idolsAPI.getIdols(30); // 불러올 개수
 			const idollist = result.list; // api에서 list만 가져오기
 			setIdols(idollist);
 		};
@@ -149,7 +149,7 @@ const Mypage = () => {
 
 	const handleRemoveIdol = (idol) => {
 		setMyIdol((prev) => {
-			const updated = prev.filter((item) => item.id !== idol.id);
+			const updated = prev.filter((id) => id !== idol.id);
 			console.log("없애기");
 			localStorage.setItem("myIdols", JSON.stringify(updated));
 			return updated;
@@ -167,7 +167,7 @@ const Mypage = () => {
 							key={idol.id}
 							idol={idol}
 							size="98px"
-							className="small"
+							sizeType="small"
 							isMyIdol={true}
 							onRemove={() => handleRemoveIdol(idol)}
 						/>
