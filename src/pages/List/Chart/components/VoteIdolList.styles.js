@@ -39,9 +39,10 @@ export const IdolItem = css`
 `;
 
 export const RadioContent = css`
+  position: relative; /* ✅ CheckIdol 기준점 */
   display: flex;
   align-items: center;
-  gap: 1rem;
+  gap: 12px;
 `;
 
 export const IdolInfo = css`
