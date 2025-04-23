@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import Slider from "react-slick";
 import { idolsAPI } from "../../apis/idolsAPI";
 import Button from "../../components/Button/Button";
+import CheckIdol from "../../components/CheckIdol";
 import {
 	addButton,
 	addIdol,

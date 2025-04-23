@@ -38,6 +38,7 @@ const IdolList = ({
 						size={Number.parseInt(size)}
 						checkSize={"52"}
 					/>
+
 					{isMyIdol && (
 						// biome-ignore lint/a11y/useKeyWithClickEvents: <explanation>
 						<div
