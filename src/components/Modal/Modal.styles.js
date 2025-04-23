@@ -32,7 +32,10 @@ export const backdropStyles = css`
 
 export const modalStyles = (isFullScreen) => css`
   position: relative;
-  background-color: var(--black-181D26);
+  background-color:${isFullScreen ? "var(--black-02000E)" : " var(--black-181D26)"};
+  padding: 24px 16px 32px 16px;
+  gap: 8px;
+
   ${
 		isFullScreen
 			? `
@@ -46,10 +49,6 @@ export const modalStyles = (isFullScreen) => css`
     border-radius: 12px;
   `
 	}
-
-  padding: 24px 16px 32px 16px;
-  gap: 8px;
-  overflow-y: auto;
 `;
 
 export const modalHeaderStyles = (isFullScreen) => css`
@@ -62,10 +61,9 @@ export const modalHeaderStyles = (isFullScreen) => css`
   h2 {
     color: var(--white-F7F7F8);
     font-size: 18px;
-    font-style: normal;
     font-weight: 600;
     line-height: normal;
-    ${isFullScreen ? "position: absolute; left: 50%; transform: translateX(-50%);" : ""}
+    ${isFullScreen && "position: absolute; left: 50%; transform: translateX(-50%);"}
   }
 `;
 
@@ -74,20 +72,12 @@ export const buttonStyles = (isFullScreen) => css`
   border: none;
   padding: 0;
   cursor: pointer;
+  position: relative; 
 
   img {
     width: 24px;
     height: 24px;
   }
 
-  ${
-		isFullScreen
-			? `
-    position: relative;
-    margin-right: auto;
-  `
-			: `
-    position: relative;
-  `
-	}
+  ${isFullScreen && "margin-right: auto;"}
 `;
