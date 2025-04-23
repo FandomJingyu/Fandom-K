@@ -59,6 +59,7 @@ export const ChartList = styled.div`
   justify-content: space-between;
   gap: 32px;
   margin-top: 24px;
+  
 `;
 
 // 각 열
@@ -71,7 +72,6 @@ export const ChartColumn = styled.ul`
 
 // 리스트 아이템
 export const ListItem = styled.li`
-  height: 70px;
   display: flex;
   align-items: center;
   justify-content: space-between;

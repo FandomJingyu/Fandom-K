@@ -16,10 +16,12 @@ export const ImageCircle = styled.div`
 // 아이돌 이미지가 Circle frame보다 더 작게하기 위해 *0.9
 const IdolImage = styled.img`
   object-fit: cover;
+  object-position: top;
   width: calc(${(props) => props.size || "128px"} * 0.9);
   height: calc(${(props) => props.size || "128px"} * 0.9);
   border-radius: 50%;
   cursor:pointer;
+  margin:0 auto;
  
   
 `;
