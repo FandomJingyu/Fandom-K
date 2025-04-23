@@ -12,6 +12,7 @@ const Button = ({
 	size = "donate-lg",
 	variant = "primary",
 	disabled = false,
+	fullWidth = false,
 	onClick,
 	children,
 }) => {
@@ -20,16 +21,22 @@ const Button = ({
 	const mobileSize = buttonSizeMobile[size];
 
 	return (
-		<div>
+		<>
 			<button
 				type={type}
-				css={getButtonStyles(currentSize, currentVariant, disabled, mobileSize)}
+				css={getButtonStyles(
+					currentSize,
+					currentVariant,
+					disabled,
+					mobileSize,
+					fullWidth,
+				)}
 				disabled={disabled}
 				onClick={onClick}
 			>
 				{children}
 			</button>
-		</div>
+		</>
 	);
 };
 
