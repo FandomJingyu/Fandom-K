@@ -17,6 +17,11 @@ export const sliderTrack = (
 	transform: translateX(-${(itemWidth + gap) * startIndex}px);
 	gap: 24px;
   margin-top: 34px;
+  
+  @media (max-width: 426px) {
+  margin-top: 3.76vw;
+  gap: 1.88vw;
+  };
 `;
 
 /**

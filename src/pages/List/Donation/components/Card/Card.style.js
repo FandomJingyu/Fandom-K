@@ -8,13 +8,18 @@ import { css } from "@emotion/react";
  * - 크기 고정
  */
 export const donationCardContainer = css`
-display: flex;
-width: 282px;
-height: 402px;
-flex-direction: column;
-justify-content: center;
-align-items: center;
-flex-shrink: 0;
+  display: flex;
+  width: 282px;
+  height: 402px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
+
+  @media (max-width: 426px) {
+  width: 158px;
+  height: 303px;
+  }
 `;
 
 /**
@@ -25,6 +30,11 @@ export const donatioImgContainer = css`
   position: relative;
   width: 282px;
   height: 293px;
+
+  @media (max-width: 426px) {
+  width: 158px;
+  height: 206px;
+  }
 `;
 
 /**
@@ -32,7 +42,6 @@ export const donatioImgContainer = css`
  * - border-radius 및 overflow 처리
  */
 export const imgWrapper = css`
-  position: relative;
   width: 100%;
   height: 100%;
   border-radius: 8px;
@@ -59,7 +68,6 @@ export const overlaySvg = css`
   position: absolute;
   top: 0;
   left: 0;
-  width: 100%;
   height: 100%;
   z-index: 2;
 `;
@@ -76,7 +84,13 @@ left: 22px;
 
 z-index: 3;
 
-font-size: 13px
+font-size: 13px;
+
+@media (max-width: 426px) {
+bottom: 4vw;
+left: 1.87vw;
+font-size: 2.67vw;
+}
 `;
 
 /**
@@ -99,7 +113,11 @@ display: flex;
 width: 100%;
 flex-direction: column;
 align-items: flex-start;
-gap: 8px;`;
+gap: 8px;
+
+@media (max-width: 426px) {
+gap: 1.6vw;
+}`;
 
 /**
  * 장소(서브제목) 스타일
@@ -117,6 +135,9 @@ line-height: 18px; /* 112.5% */
 letter-spacing: -0.165px;
 
 opacity: 0.4;
+
+@media (max-width: 426px) {
+font-size: 3.2vw;
 `;
 
 /**
@@ -129,6 +150,9 @@ font-size: 18px;
 font-style: normal;
 font-weight: 500;
 line-height: normal;
+
+@media (max-width: 426px) {
+font-size: 100%;
 `;
 
 /**
@@ -150,6 +174,10 @@ display: flex;
 justify-content: space-between;
 
 margin-bottom: 4px;
+
+@media (max-width: 426px) {
+margin-bottom: 0.27vw;
+};
 `;
 
 /**
@@ -176,7 +204,11 @@ font-size: 12px;
 font-style: normal;
 font-weight: 400;
 line-height: 18px; /* 150% */
-letter-spacing: -0.165px;`;
+letter-spacing: -0.165px;
+
+@media (max-width: 426px) {
+font-size: 2.67vw;
+}`;
 
 /**
  * D-Day 남은 일 수 텍스트
@@ -190,4 +222,7 @@ font-style: normal;
 font-weight: 400;
 line-height: 18px; /* 150% */
 letter-spacing: -0.165px;
-`;
+
+@media (max-width: 426px) {
+font-size: 2.67vw;
+}`;

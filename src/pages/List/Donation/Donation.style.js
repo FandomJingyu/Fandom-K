@@ -9,7 +9,12 @@ margin-top: 50px;
 
 color: #ffffff;
 font-size: 24px;
-font-weight: 700;`;
+font-weight: 700;
+
+@media (max-width: 426px) {
+font-size: 4.27vw;
+margin-top: 10.67vw;
+}`;
 
 export const donationPageNation = css`
 position: relative;`;
@@ -36,6 +41,10 @@ export const pageNationRight = css`
   border-radius: 4px;
   }
 
+  @media (max-width: 769px) {
+  display: none;
+  }
+
 `;
 
 /**
@@ -58,5 +67,9 @@ export const pageNationLeft = css`
   &:hover {
   background-color: #1B1B1B;
   border-radius: 4px;
+  }
+
+  @media (max-width: 769px) {
+  display: none;
   }
 `;

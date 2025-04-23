@@ -13,7 +13,8 @@ width: 100%;
 height: 1px;
 flex-shrink: 0;
 
-background-color: #ffffff;
+background-color: #ffffff
+;
 `;
 
 /**

@@ -26,7 +26,7 @@ export const getButtonStyles = (
         transform: ${disabled ? "none" : "scale(1.02)"};
     }
     // 반응형 사이즈
-    @media (max-width: 768px) {
+    @media (max-width: 426px) {
     width: ${mobileSize?.width || currentSize.width};
     height: ${mobileSize?.height || currentSize.height};
     font-size: ${mobileSize?.fontSize || currentSize.fontSize};
