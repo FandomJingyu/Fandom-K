@@ -16,7 +16,7 @@ function App() {
 					<Route path="/list" element={<List />} />
 					<Route path="/mypage" element={<Mypage />} />
 					<Route path="/testpage" element={<Testpage />} />
-					<Route path="/donation-detail" element={<DonationDetail />} />
+					<Route path="/donation-detail/:id" element={<DonationDetail />} />
 				</Route>
 			</Routes>
 		</CreditProvider>

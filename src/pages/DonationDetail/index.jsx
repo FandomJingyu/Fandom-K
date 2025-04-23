@@ -1,6 +1,6 @@
 import { css } from "@emotion/react";
-import Button from "../../components/Button/Button";
-import DonationDetailText from "./DonationDetailText";
+import DonationDetailInfo from "./components/DonationDetailInfo";
+import DonationDetailText from "./components/DonationDetailText";
 /** @jsxImportSource @emotion/react */
 
 export default function DonationDetail() {
@@ -23,54 +23,7 @@ export default function DonationDetail() {
 					<DonationDetailText />
 				</div>
 				<div className="infoArea">
-					<form className="infoAreaScroll">
-						<div className="infoAreaScrollItem">
-							<span>모인 금액</span>
-							<p>
-								<strong>100,000</strong> /&nbsp;100,000 크레딧
-							</p>
-						</div>
-						<div className="infoAreaScrollItem">
-							<span>남은 시간</span>
-							<p>
-								<strong>110</strong>&nbsp;Days <strong>10</strong>&nbsp;:&nbsp;
-								<strong>10</strong>&nbsp;:&nbsp;<strong>52</strong>
-							</p>
-							<p>
-								모집 기간 : <span>2025.08.11</span>
-							</p>
-						</div>
-						<div className="infoAreaScrollItem">
-							<span>
-								내 크레딧 : 10,000 <button type="button">+</button>
-							</span>
-							<div className="input">
-								<input type="text" name="" id="" placeholder="크레딧 입력" />
-							</div>
-							<ul>
-								<li>
-									<button type="button">+100</button>
-								</li>
-								<li>
-									<button type="button">+500</button>
-								</li>
-								<li>
-									<button type="button">+1,000</button>
-								</li>
-								<li>
-									<button type="button">전액</button>
-								</li>
-							</ul>
-						</div>
-						<Button
-							css={DonationDetailButton}
-							type="button"
-							size="donate-lg"
-							variant="primary"
-						>
-							후원하기
-						</Button>
-					</form>
+					<DonationDetailInfo />
 				</div>
 			</div>
 		</div>
@@ -134,70 +87,4 @@ const DonationDetailContent = css`
   .infoArea {
     flex: 1;
   }
-  .infoAreaScroll {
-    display: flex;
-    flex-direction: column;
-    gap: 40px;
-    height: 600px;
-    overflow: hidden;
-    position: sticky;
-    top: 120px;
-  }
-  .infoAreaScrollItem {
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-    font-size: 16px;
-    line-height: 1.4;
-    color: rgba(255, 255, 255, 0.7);
-    strong {
-      font-size: 30px;
-      color: #fff;
-    }
-    .input {
-      height: 64px;
-      border-radius: 10px;
-      background: rgba(255, 255, 255, 0.1);
-      display: flex;
-      padding-inline: 24px;
-      font-size: 18px;
-      font-weight: 500;
-      background-image: url('/icons/icon_credit.svg');
-      background-size: 24px;
-      background-position: right 24px center;
-      background-repeat: no-repeat;
-      input[type='text'] {
-        flex: 1;
-        outline: none;
-      }
-    }
-    ul {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 10px;
-      li {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        button {
-          width: 100%;
-          height: 38px;
-          border-radius: 2em;
-          background: rgba(255, 0, 191, 0.1);
-          font-size: 14px;
-          color: rgba(255, 255, 255, 0.5);
-          transition: color 0.3s ease;
-        }
-        &:hover {
-          button {
-            color: #fff;
-          }
-        }
-      }
-    }
-  }
-`;
-
-const DonationDetailButton = css`
-  margin-top: auto;
 `;
