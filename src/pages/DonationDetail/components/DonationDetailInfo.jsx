@@ -1,6 +1,8 @@
 import { css } from "@emotion/react";
 import { useState } from "react";
 import Button from "../../../components/Button/Button";
+import { useCredit } from "../../../context/CreditContext";
+
 /** @jsxImportSource @emotion/react */
 
 const creditList = [
@@ -21,56 +23,68 @@ const creditList = [
 		value: 10000,
 	},
 ];
-export default function DonationDetailInfo() {
+export default function DonationDetailInfo({ donation, loading }) {
 	const [credit, setCredit] = useState(0);
 	const handleCredit = (value) => {
 		setCredit(value);
 	};
+
 	return (
 		<form css={DonationDetailInfoStyle}>
-			<div className="infoAreaScrollItem">
-				<span>모인 금액</span>
-				<p>
-					<strong>100,000</strong> /&nbsp;100,000 크레딧
-				</p>
-			</div>
-			<div className="infoAreaScrollItem">
-				<span>남은 시간</span>
-				<p>
-					<strong>110</strong>&nbsp;Days <strong>10</strong>&nbsp;:&nbsp;
-					<strong>10</strong>&nbsp;:&nbsp;<strong>52</strong>
-				</p>
-				<p>
-					모집 기간 : <span>2025.08.11</span>
-				</p>
-			</div>
-			<div className="infoAreaScrollItem is-credit">
-				<span className="myCredit">
-					내 크레딧 : 10,000 <button type="button">충전하기 +</button>
-				</span>
-				<div className="input">
-					<input
-						type="text"
-						name=""
-						id=""
-						placeholder="크레딧 입력"
-						value={credit}
-						onChange={(e) => setCredit(e.target.value)}
-					/>
-				</div>
-				<ul>
-					{creditList.map((credit) => (
-						<li key={credit.value}>
-							<button type="button" onClick={() => handleCredit(credit.value)}>
-								{credit.label}
-							</button>
-						</li>
-					))}
-				</ul>
-			</div>
-			<Button type="button" size="donate-lg" variant="primary">
-				후원하기
-			</Button>
+			{loading ? (
+				<div>로딩중...</div>
+			) : (
+				<>
+					<div className="infoAreaScrollItem">
+						<span>모인 금액</span>
+						<p>
+							<strong>{donation.receivedDonations.toLocaleString()}</strong>{" "}
+							/&nbsp;
+							{donation.targetDonation.toLocaleString()} 크레딧
+						</p>
+					</div>
+					<div className="infoAreaScrollItem">
+						<span>남은 시간</span>
+						<p>
+							<strong>110</strong>&nbsp;Days <strong>10</strong>&nbsp;:&nbsp;
+							<strong>10</strong>&nbsp;:&nbsp;<strong>52</strong>
+						</p>
+						<p>
+							모집 기간 : <span>{donation.deadline.split("T")[0]}</span>
+						</p>
+					</div>
+					<div className="infoAreaScrollItem is-credit">
+						<span className="myCredit">
+							내 크레딧 : 10,000 <button type="button">충전하기 +</button>
+						</span>
+						<div className="input">
+							<input
+								type="text"
+								name=""
+								id=""
+								placeholder="크레딧 입력"
+								value={credit}
+								onChange={(e) => setCredit(e.target.value)}
+							/>
+						</div>
+						<ul>
+							{creditList.map((credit) => (
+								<li key={credit.value}>
+									<button
+										type="button"
+										onClick={() => handleCredit(credit.value)}
+									>
+										{credit.label}
+									</button>
+								</li>
+							))}
+						</ul>
+					</div>
+					<Button type="button" size="donate-lg" variant="primary">
+						후원하기
+					</Button>
+				</>
+			)}
 		</form>
 	);
 }

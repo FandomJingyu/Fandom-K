@@ -1,31 +1,70 @@
 import { css } from "@emotion/react";
+import { useCallback, useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import { donationsAPI } from "../../apis/donationsAPI";
 import DonationDetailInfo from "./components/DonationDetailInfo";
 import DonationDetailText from "./components/DonationDetailText";
 /** @jsxImportSource @emotion/react */
 
 export default function DonationDetail() {
+	const { id } = useParams();
+	const [donation, setDonation] = useState(null);
+	const [loading, setLoading] = useState(true);
+
+	const getDonation = useCallback(async () => {
+		try {
+			const response = await donationsAPI.getDonations();
+			if (response) {
+				const foundDonation = response.list.find(
+					(item) => item.id === Number.parseInt(id) || item.id === id,
+				);
+				setDonation(foundDonation || null);
+				setLoading(false);
+			}
+		} catch (error) {
+			console.error("후원을 불러오는데 실패했습니다.", error);
+		} finally {
+			setLoading(false);
+		}
+	}, [id]);
+
+	useEffect(() => {
+		getDonation();
+	}, [getDonation]);
+
+	console.log(donation);
+
 	return (
 		<div className="mainGrid" css={DonationDetailStyle}>
-			<div css={DonationDetailTop}>
-				<h2>
-					제니 <span>(블랙핑크)</span>
-				</h2>
-				<div>
-					<p>'30번째 생일 축하'&nbsp;-&nbsp;</p>
-					<p>합정역 광고</p>
-				</div>
-			</div>
-			<div css={DonationDetailContent}>
-				<div className="contentArea">
-					<div className="profile">
-						<img src="/mocks/mock04.png" alt="" />
+			{loading ? (
+				<div>로딩중...</div>
+			) : (
+				<>
+					<div css={DonationDetailTop}>
+						<h2>
+							{donation.idol.name} <span>({donation.idol.group})</span>
+						</h2>
+						<div>
+							<p>{donation.subtitle}&nbsp;-&nbsp;</p>
+							<p>{donation.title}</p>
+						</div>
 					</div>
-					<DonationDetailText />
-				</div>
-				<div className="infoArea">
-					<DonationDetailInfo />
-				</div>
-			</div>
+					<div css={DonationDetailContent}>
+						<div className="contentArea">
+							<div className="profile">
+								<img
+									src={donation.idol.profilePicture}
+									alt={donation.idol.name}
+								/>
+							</div>
+							<DonationDetailText />
+						</div>
+						<div className="infoArea">
+							<DonationDetailInfo donation={donation} loading={loading} />
+						</div>
+					</div>
+				</>
+			)}
 		</div>
 	);
 }
@@ -40,7 +79,7 @@ const DonationDetailStyle = css`
     bottom: 0;
     left: 0;
     width: 100%;
-    height: 30%;
+    height: 20%;
     background: linear-gradient(180deg, rgba(0, 0, 0, 0) 58.9%, #000 100%);
   }
 `;
@@ -76,7 +115,7 @@ const DonationDetailContent = css`
     flex: none;
     .profile {
       width: 100%;
-      height: 100%;
+      height: 600px;
       border-radius: 10px;
       overflow: hidden;
       img {
