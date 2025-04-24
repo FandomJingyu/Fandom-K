@@ -120,4 +120,43 @@ const DonationDetailTextStyle = css`
       color: #fff;
     }
   }
+  @media all and (max-width: 768px) {
+    margin-top: calc(84vw + 50px);
+    dl {
+      font-size: 2.34vw;
+      margin-bottom: 3.91vw;
+    }
+    dt {
+      font-size: 2.86vw;
+      margin-bottom: 1.3vw;
+    }
+    ul {
+      gap: 1.3vw;
+      margin-bottom: 3.91vw;
+      li {
+        font-size: 2.08vw;
+        padding: 0.65vw 1.3vw;
+        border-radius: 0.65vw;
+      }
+    }
+  }
+  @media all and (max-width: 425px) {
+    margin-top: 125.65vw;
+		 dl {
+      font-size: 3.53vw;
+      margin-bottom: 9.41vw;
+    }
+    dt {
+      font-size: 4.24vw;
+      margin-bottom: 1.88vw;
+    }
+    ul {
+      gap: 2.35vw;
+      li {
+        font-size: 2.82vw;
+        padding: 1.3vw 2.6vw;
+        border-radius: 1.3vw;
+      }
+    }
+  }
 `;
