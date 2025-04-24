@@ -19,6 +19,13 @@ export const IdolList = css`
   &::-webkit-scrollbar-track {
     background-color: transparent;
   }
+
+ /* ✅ 모바일에서는 height를 화면 전체로 */
+  @media (max-width: 425px) {
+    height: calc(100vh - 150px); /* 상단 여백과 버튼영역 고려해서 계산 */
+    max-height: none; /* max-height 제거 */
+  
+  }
 `;
 
 export const IdolItem = css`

@@ -1,5 +1,23 @@
 import { css } from "@emotion/react";
 
+export const centerAlignStyle = css`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center; /* 텍스트 중앙 정렬 */
+
+   @media (max-width: 425px) {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 16px;
+    background-color: rgba(2, 0, 14, 0.8);
+    z-index: 10;
+  }
+`;
+
 export const CreditInfo = css`
   color: #FFFFFF;
   font-size: 12px;
@@ -10,12 +28,5 @@ export const CreditInfo = css`
   span {
     color: var(--orange-F96D69);
   }
-`;
-
-export const centerAlignStyle = () => css`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center; /* 텍스트 중앙 정렬 */
+    
 `;

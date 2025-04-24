@@ -11,13 +11,11 @@ export const rootStyles = (isFullScreen) => css`
   ${
 		isFullScreen
 			? `
-    display: block;
-  `
-			: `
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  `
+      display: block;
+      `
+			: `display: flex; 
+      justify-content: center; 
+      align-items: center; `
 	}
 `;
 

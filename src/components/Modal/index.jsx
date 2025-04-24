@@ -1,7 +1,8 @@
 /** @jsxImportSource @emotion/react */
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import closeArrow from "/public/icons/icon-arrow-left.svg";
 import closeImg from "/public/images/btn-modal-close.png";
+import useIsMobile from "../../hooks/useIsMobile";
 import {
 	backdropStyles,
 	buttonStyles,
@@ -17,21 +18,6 @@ import ModalPortal from "./ModalPortal";
  * @param {Function} props.onClose
  * @param {React.ReactNode} props.children
  */
-
-const useIsMobile = () => {
-	const [isMobile, setIsMobile] = useState();
-
-	useEffect(() => {
-		const handleResize = () => {
-			setIsMobile(window.innerWidth <= 768);
-		};
-		handleResize();
-		window.addEventListener("resize", handleResize);
-		return () => window.removeEventListener("resize", handleResize);
-	}, []);
-
-	return isMobile;
-};
 
 const modalData = {
 	donation: {
@@ -61,10 +47,24 @@ const Modal = ({
 	type = "default",
 	isMobileFullScreen = false,
 }) => {
-	const isMobile = useIsMobile();
+	const isMobile = useIsMobile(); // 여기에서 조건을 하지 않고 항상 호출됨
 	const isFullScreen = isMobile && isMobileFullScreen;
 
 	const { title } = modalData[type] || modalData.default; // type에 맞는 title 가져오기
+
+	// 모달이 열릴 때 body에 overflow-y: hidden 적용
+	useEffect(() => {
+		if (isOpen) {
+			document.body.style.overflowY = "hidden"; // 세로 스크롤만 막기
+		} else {
+			document.body.style.overflowY = ""; // 원래 상태로 복원
+		}
+
+		// 클린업: 모달이 닫히면 스크롤 복원
+		return () => {
+			document.body.style.overflowY = "";
+		};
+	}, [isOpen]);
 
 	if (!isOpen) return null;
 

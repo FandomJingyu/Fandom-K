@@ -1,4 +1,6 @@
 /** @jsxImportSource @emotion/react */
+import { css } from "@emotion/react";
+
 import { useState } from "react";
 import { votesAPI } from "../../../../apis/voteApi";
 import { useCredit } from "../../../../context/CreditContext";
@@ -53,13 +55,32 @@ export default function ChartVoteModal({ idols, setIdols, closeModal }) {
 	};
 
 	return (
-		<form onSubmit={handleVote}>
+		<form onSubmit={handleVote} css={VoteFormStyles}>
 			<VoteIdolList
 				idols={idols}
 				selectedIdolId={selectedIdolId}
 				onSelectIdol={handleIdolSelect}
 			/>
-			<VoteButton onSubmit={handleVote} />
+			<VoteButton onSubmit={handleVote} css={yourButtonStyle} />
 		</form>
 	);
 }
+
+const VoteFormStyles = css`
+  height: 100vh;         // 이게 있어야 max-height도 의미 있음
+  max-height: 100vh;
+  overflow-y: hidden;
+  position: relative;    // 또는 fixed/absolute 등 상황에 맞게
+`;
+
+const yourButtonStyle = css`
+  // @media (max-width: 425px) {
+  //   position: fixed;
+  //   bottom: 0;
+  //   left: 0;
+  //   width: 100%;
+  //   padding: 16px 0;
+  //   background-color: rgba(2, 0, 14, 0.8);  // 반투명 배경
+  //   z-index: 1;
+  // }
+`;
