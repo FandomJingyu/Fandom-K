@@ -230,7 +230,7 @@ const StyledLandingTopSection = styled.section`
       }
     }
   }
-  @media all and (max-width: 744px) {
+  @media all and (max-width: 768px) {
     .blur {
       display: none;
     }
@@ -238,7 +238,7 @@ const StyledLandingTopSection = styled.section`
       font-size: 48px;
     }
   }
-  @media all and (max-width: 375px) {
+  @media all and (max-width: 425px) {
     h2 {
       font-size: 11.87vw;
       line-height: 1.4;

@@ -72,7 +72,7 @@ const StyledLandingHeader = styled.div`
     font-weight: 700;
     color: #fff;
   }
-  @media all and (max-width: 744px) {
+  @media all and (max-width: 768px) {
     h1 {
       width: 120px;
       img {
@@ -80,7 +80,7 @@ const StyledLandingHeader = styled.div`
       }
     }
   }
-  @media all and (max-width: 375px) {
+  @media all and (max-width: 425px) {
     height: 16vw;
     h1 {
       width: 26.67vw;
