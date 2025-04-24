@@ -55,6 +55,7 @@ export default function CreditRechargeModalContent({ myCredit, closeModal }) {
 					size="recharge"
 					variant="primary"
 					disabled={select === null}
+					fullWidth
 					onClick
 				>
 					충전하기

@@ -5,7 +5,7 @@ import { CreditInfo, centerAlignStyle } from "./VoteButton.styles";
 export default function VoteButton({ onSubmit }) {
 	return (
 		<div css={centerAlignStyle}>
-			<Button type="submit" size="vote-lg" onClick={onSubmit}>
+			<Button type="submit" size="vote-lg" fullWidth onClick={onSubmit}>
 				투표하기
 			</Button>
 			<p css={CreditInfo}>

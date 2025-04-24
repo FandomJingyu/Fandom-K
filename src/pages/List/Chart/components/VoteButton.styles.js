@@ -18,4 +18,5 @@ export const centerAlignStyle = () => css`
   justify-content: center;
   align-items: center;
   text-align: center; /* 텍스트 중앙 정렬 */
+  // width: 100%;
 `;
