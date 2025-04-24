@@ -11,14 +11,17 @@ export const ImageCircle = styled.div`
   border: 1.31px solid #f96868;
   align-items: center;
    object-position:center;
+   width:100%;
+   height:100%;
+   padding:3px;
 `;
 // 원하는 사이즈가 있으면 <Circle size=""/> 없을 시 기본 128px
 // 아이돌 이미지가 Circle frame보다 더 작게하기 위해 *0.9
 const IdolImage = styled.img`
   object-fit: cover;
   object-position: top;
-  width: calc(${(props) => props.size || "128px"} * 0.9);
-  height: calc(${(props) => props.size || "128px"} * 0.9);
+  width: calc(${(props) => props.size || "128px"} );
+  height: calc(${(props) => props.size || "128px"} );
   border-radius: 50%;
   cursor:pointer;
   margin:0 auto;

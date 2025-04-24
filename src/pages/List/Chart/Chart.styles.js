@@ -1,9 +1,10 @@
 import styled from "@emotion/styled";
 
 export const ChartContainer = styled.div`
+  max-width:1200px;
   margin: 0 auto;
   padding: 40px 0;
-  width: clamp(327px, 90vw, 1200px);
+  width: clamp(325px, 90vw, 1200px);
 `;
 
 export const ChartHeaderWrap = styled.div`
