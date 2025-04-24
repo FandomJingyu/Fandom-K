@@ -9,7 +9,12 @@ export default function VoteButton({ onSubmit }) {
 
 	return (
 		<div css={centerAlignStyle}>
-			<Button type="submit" size={buttonSize} onClick={onSubmit}>
+			<Button
+				type="submit"
+				size={buttonSize}
+				fullWidth={true}
+				onClick={onSubmit}
+			>
 				투표하기
 			</Button>
 			<p css={CreditInfo}>
