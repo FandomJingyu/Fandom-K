@@ -10,7 +10,10 @@ const voteRadioButton = css`
   justify-content: space-between;
   width: 477px;
   height: 70px;
-	
+
+	@media (max-width: 425px) {
+    width: 100%;
+  }
 `;
 
 // 크레딧 모달창 스타일 정의 & 선택된 경우 border 색상 변경 (input display:none으로 설정해서 className을 지정해 border색상 변경)

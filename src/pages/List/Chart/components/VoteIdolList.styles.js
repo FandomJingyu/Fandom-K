@@ -8,11 +8,11 @@ export const IdolList = css`
 
   /* 웹킷 기반 브라우저용 스크롤바 스타일 */
   &::-webkit-scrollbar {
-    width: 4px;
+    width: 3px;
   }
 
   &::-webkit-scrollbar-thumb {
-    background-color: var(--orange-F96D69);
+    background-color: rgba(249, 109, 105, 0.5); /* 반투명한 오렌지 색 (50% 투명도) */
     border-radius: 3px;
   }
 
@@ -20,12 +20,13 @@ export const IdolList = css`
     background-color: transparent;
   }
 
- /* ✅ 모바일에서는 height를 화면 전체로 */
+
   @media (max-width: 425px) {
-    height: calc(100vh - 150px); /* 상단 여백과 버튼영역 고려해서 계산 */
-    max-height: none; /* max-height 제거 */
-  
+    max-height: calc(100vh - 76px); /* 버튼 영역 + 여유 */
+    overflow-y: auto;                /* ✅ 반드시 필요 */
+    padding-bottom: 96px;            /* 리스트 아이템 마지막 여백 */
   }
+
 `;
 
 export const IdolItem = css`

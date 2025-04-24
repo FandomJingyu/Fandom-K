@@ -61,13 +61,12 @@ export default function ChartVoteModal({ idols, setIdols, closeModal }) {
 				selectedIdolId={selectedIdolId}
 				onSelectIdol={handleIdolSelect}
 			/>
-			<VoteButton onSubmit={handleVote} css={yourButtonStyle} />
+			<VoteButton onSubmit={handleVote} />
 		</form>
 	);
 }
 
-const VoteFormStyles = css`
-   
+const VoteFormStyles = css` 
   max-height: 100vh;
   overflow-y: hidden;
   position: relative;    // 또는 fixed/absolute 등 상황에 맞게
@@ -75,17 +74,4 @@ const VoteFormStyles = css`
 	@media (max-width: 425px) {
 		height: 100vh;
 	}
-`;
-
-const yourButtonStyle = css`
-  // @media (max-width: 425px) {
-  //   position: fixed;
-  //   bottom: 0;
-  //   left: 0;
-  //   width: 100%;
-  //   padding: 16px 0;
-  //   background-color: rgba(2, 0, 14, 0.8);  // 반투명 배경
-  //   z-index: 1;
-  // }
-
 `;
