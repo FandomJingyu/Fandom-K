@@ -11,6 +11,10 @@ export const errorWrapper = css`
   align-items: center;
   justify-content: center;
   gap: 12px;
+
+  @media(max-width: 476px) {
+    gap: 4px;
+  }
 `;
 
 /**
@@ -28,6 +32,11 @@ export const iconWrapper = css`
   background: linear-gradient(90deg, #F86F65 0%, #FE5493 100%);
   border-radius: 50%;
   z-index: 0;
+
+  @media(max-width: 476px) {
+  width: 60px;
+  height: 60px;
+  }
 `;
 
 /**
@@ -47,6 +56,11 @@ export const black = css`
   align-items: center;
   justify-content: center;
   z-index: 1;
+
+  @media(max-width: 476px) {
+  width: 50px;
+  height: 50px;
+  }
 `;
 
 /**
@@ -57,6 +71,11 @@ export const icon = css`
   font-weight: 800;
   color: #ffffff;
   z-index: 2;
+
+  @media(max-width: 476px) {
+    font-size: 30px;
+    font-weight: 800;
+  }
 `;
 
 /**
@@ -66,6 +85,11 @@ export const title = css`
   font-size: 20px;
   font-weight: 800;
   color: #ffffff;
+
+  @media(max-width: 476px) {
+    font-size: 16px;
+    font-weight: 800;
+  }
 `;
 
 /**
@@ -74,6 +98,10 @@ export const title = css`
 export const description = css`
   font-size: 15px;
   color: #ffffff;
+
+  @media(max-width: 476px) {
+    font-size: 13px;
+  }
 `;
 
 /**
@@ -87,4 +115,11 @@ background: linear-gradient(90deg, #F86F65 0%, #FE5493 100%);
 border-radius: 20px;
 
 font-size: 12px;
-font-weight: 400;`;
+font-weight: 400;
+
+@media(max-width: 476px) {
+width: 100px;
+height: 25px;
+
+font-size: 10px;
+}`;
