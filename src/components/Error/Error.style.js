@@ -13,7 +13,7 @@ export const errorWrapper = css`
   gap: 12px;
 
   @media(max-width: 476px) {
-    gap: 4px;
+    gap: 6px;
   }
 `;
 
