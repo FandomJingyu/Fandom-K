@@ -46,17 +46,11 @@ const prevArrowStyle = {
 function PrevArrow(props) {
 	const { className, style, onClick } = props;
 	return (
-		<div
+		<button // 빼기ㅜ -> 버튼 테그로 작성 하면 탭 인덱스, 온키 다운 안써도 들어있음
 			className={className}
 			style={{ ...style, ...prevArrowStyle }} //style 덮어 씌우기
 			onClick={onClick}
-			tabIndex={0} // 포커스 가능하게 만듦
-			role="button" // 스크린리더 인식
-			onKeyDown={(e) => {
-				if (e.key === "Enter" || e.key === " " || e.key === "ArrowLeft") {
-					onClick(e);
-				}
-			}}
+			type="button"
 		/>
 	);
 }
@@ -65,24 +59,18 @@ function PrevArrow(props) {
 function NextArrow(props) {
 	const { className, style, onClick } = props;
 	return (
-		<div
+		<button
 			className={className}
 			style={{ ...style, ...nextArrowStyle }}
 			onClick={onClick}
-			tabIndex={0}
-			role="button"
-			onKeyDown={(e) => {
-				if (e.key === "Enter" || e.key === " " || e.key === "ArrowRight") {
-					onClick(e);
-				}
-			}}
+			type="button"
 		/>
 	);
 }
 
 //슬라이더 함수 세팅값
 const settings = {
-	infinite: true,
+	infinite: false,
 	speed: 500,
 	slidesToShow: 8,
 	slidesToScroll: 2,
@@ -164,13 +152,13 @@ const Mypage = () => {
 				{selectedIdolList.length === 0 && (
 					<h3>아직 아이돌이 선택되지 않았습니다</h3>
 				)}
-				<div css={myIdolList} className="small">
+				<div css={myIdolList}>
 					{selectedIdolList.map((idol) => (
 						<IdolList
 							key={idol.id}
 							idol={idol}
 							size="98px"
-							sizeType="small"
+							// sizeType="small"
 							isMyIdol={true}
 							onRemove={() => handleRemoveIdol(idol)}
 						/>
@@ -182,7 +170,7 @@ const Mypage = () => {
 				{/* 슬라이더 사용 */}
 				<Slider {...settings}>
 					{remainIdols.map((idol) => (
-						// biome-ignore lint/a11y/useKeyWithClickEvents: <explanation>
+						// biome-ignore lint/a11y/useKeyWithClickEvents: <explanation>.
 						<div key={idol.id} onClick={() => toggleCheckedIdol(idol.id)}>
 							<IdolList
 								idol={idol}

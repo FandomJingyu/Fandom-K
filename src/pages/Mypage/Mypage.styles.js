@@ -30,9 +30,13 @@ const myIdolWrapper = css`
 // 나의 아이돌 리스트
 const myIdolList = css`
     display: flex;
-    flex-wrap: wrap;
-    gap: 24px;
+    gap: 28px;
     width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    &::-webkit-scrollbar {
+        display: none;
+    }
     `;
 
 // 아이돌 추가하기
