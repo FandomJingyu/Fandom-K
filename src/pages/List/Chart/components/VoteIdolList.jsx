@@ -37,13 +37,13 @@ export default function VoteIdolList({ idols, selectedIdolId, onSelectIdol }) {
 									alt={idol.name}
 									loading="lazy"
 									decoding="async"
-								/>
-								<CheckIdol
-									isVote={true}
-									isChecked={selectedIdolId === idol.id}
-									size={70}
-									checkSize={18}
-								/>
+								>
+									<CheckIdol
+										isChecked={selectedIdolId === idol.id}
+										size={70}
+										checkSize={18}
+									/>
+								</Circle>
 								<div css={IdolInfo}>
 									<span css={Rank}>{index + 1}</span>
 									<div css={IdolDetails}>
