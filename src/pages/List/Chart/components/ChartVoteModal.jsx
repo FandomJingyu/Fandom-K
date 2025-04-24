@@ -69,8 +69,7 @@ export default function ChartVoteModal({ idols, setIdols, closeModal }) {
 const VoteFormStyles = css` 
   max-height: 100vh;
   overflow-y: hidden;
-  position: relative;    // 또는 fixed/absolute 등 상황에 맞게
-
+  position: relative; 
 	@media (max-width: 425px) {
 		height: 100vh;
 	}

@@ -14,7 +14,7 @@ export const centerAlignStyle = css`
     bottom: 0;
     left: 0;
     width: 100%;
-    padding: 16px 24px 14px 24px;
+    padding: 3.76vw 5.65vw 3.29vw 5.65vw;
     background: rgba(2, 0, 14, 0.8);
     z-index: 10;
   }
