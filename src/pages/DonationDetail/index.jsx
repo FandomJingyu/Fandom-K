@@ -32,8 +32,6 @@ export default function DonationDetail() {
 		getDonation();
 	}, [getDonation]);
 
-	console.log(donation);
-
 	return (
 		<div className="mainGrid" css={DonationDetailStyle}>
 			{loading ? (
@@ -57,7 +55,11 @@ export default function DonationDetail() {
 									alt={donation.idol.name}
 								/>
 							</div>
-							<DonationDetailText />
+							<DonationDetailText
+								donation={donation}
+								idol={donation.idol}
+								loading={loading}
+							/>
 						</div>
 						<div className="infoArea">
 							<DonationDetailInfo donation={donation} loading={loading} />

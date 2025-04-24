@@ -1,7 +1,9 @@
 import { css } from "@emotion/react";
 import { useState } from "react";
+import Modal from "../../../../src/components/Modal";
 import Button from "../../../components/Button/Button";
 import { useCredit } from "../../../context/CreditContext";
+import CreditRechargeModalContent from "../../List/Charge/components/CreditRechargeModalContent";
 
 /** @jsxImportSource @emotion/react */
 
@@ -25,67 +27,85 @@ const creditList = [
 ];
 export default function DonationDetailInfo({ donation, loading }) {
 	const [credit, setCredit] = useState(0);
+	const [isModalOpen, setIsModalOpen] = useState(false);
+
 	const handleCredit = (value) => {
-		setCredit(value);
+		setCredit((prev) => prev + value);
+	};
+	const myCredit = useCredit();
+	const openModal = () => {
+		setIsModalOpen(true);
 	};
 
+	const closeModal = () => {
+		setIsModalOpen(false);
+	};
 	return (
-		<form css={DonationDetailInfoStyle}>
-			{loading ? (
-				<div>로딩중...</div>
-			) : (
-				<>
-					<div className="infoAreaScrollItem">
-						<span>모인 금액</span>
-						<p>
-							<strong>{donation.receivedDonations.toLocaleString()}</strong>{" "}
-							/&nbsp;
-							{donation.targetDonation.toLocaleString()} 크레딧
-						</p>
-					</div>
-					<div className="infoAreaScrollItem">
-						<span>남은 시간</span>
-						<p>
-							<strong>110</strong>&nbsp;Days <strong>10</strong>&nbsp;:&nbsp;
-							<strong>10</strong>&nbsp;:&nbsp;<strong>52</strong>
-						</p>
-						<p>
-							모집 기간 : <span>{donation.deadline.split("T")[0]}</span>
-						</p>
-					</div>
-					<div className="infoAreaScrollItem is-credit">
-						<span className="myCredit">
-							내 크레딧 : 10,000 <button type="button">충전하기 +</button>
-						</span>
-						<div className="input">
-							<input
-								type="text"
-								name=""
-								id=""
-								placeholder="크레딧 입력"
-								value={credit}
-								onChange={(e) => setCredit(e.target.value)}
-							/>
+		<>
+			<form css={DonationDetailInfoStyle}>
+				{loading ? (
+					<div>로딩중...</div>
+				) : (
+					<>
+						<div className="infoAreaScrollItem">
+							<span>모인 금액</span>
+							<p>
+								<strong>{donation.receivedDonations.toLocaleString()}</strong>
+								&nbsp;/&nbsp;
+								{donation.targetDonation.toLocaleString()} 크레딧
+							</p>
 						</div>
-						<ul>
-							{creditList.map((credit) => (
-								<li key={credit.value}>
-									<button
-										type="button"
-										onClick={() => handleCredit(credit.value)}
-									>
-										{credit.label}
-									</button>
-								</li>
-							))}
-						</ul>
-					</div>
-					<Button type="button" size="donate-lg" variant="primary">
-						후원하기
-					</Button>
-				</>
-			)}
-		</form>
+						<div className="infoAreaScrollItem">
+							<span>남은 시간</span>
+							<p>
+								<strong>110</strong>&nbsp;Days <strong>10</strong>&nbsp;:&nbsp;
+								<strong>10</strong>&nbsp;:&nbsp;<strong>52</strong>
+							</p>
+							<p>
+								모집 기간 : <span>{donation.deadline.split("T")[0]}</span>
+							</p>
+						</div>
+						<div className="infoAreaScrollItem is-credit">
+							<span className="myCredit">
+								내 크레딧 :{" "}
+								{myCredit.credit ? myCredit.credit.toLocaleString() : 0}
+								<button type="button" onClick={openModal}>
+									충전하기 +
+								</button>
+							</span>
+							<div className="input">
+								<input
+									type="text"
+									name=""
+									id=""
+									placeholder="크레딧 입력"
+									value={credit}
+									onChange={(e) => setCredit(e.target.value)}
+								/>
+							</div>
+							<ul>
+								{creditList.map((credit) => (
+									<li key={credit.value}>
+										<button
+											type="button"
+											onClick={() => handleCredit(credit.value)}
+										>
+											{credit.label}
+										</button>
+									</li>
+								))}
+							</ul>
+						</div>
+						<Button type="button" size="donate-lg" variant="primary">
+							후원하기
+						</Button>
+					</>
+				)}
+			</form>
+			<Modal isOpen={isModalOpen} onClose={closeModal} type="credit">
+				<CreditRechargeModalContent myCredit={credit} closeModal={closeModal} />
+			</Modal>
+		</>
 	);
 }
 const DonationDetailInfoStyle = css`
