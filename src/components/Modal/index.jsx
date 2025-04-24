@@ -20,9 +20,6 @@ import ModalPortal from "./ModalPortal";
  */
 
 const modalData = {
-	donation: {
-		title: "후원하기",
-	},
 	credit: {
 		title: "크레딧 충전",
 	},
@@ -31,9 +28,6 @@ const modalData = {
 	},
 	voteMan: {
 		title: "이달의 남자 아이돌",
-	},
-	insufficientCredits: {
-		title: "크레딧 부족", // 크레딧 부족 모달에 맞는 title
 	},
 	default: {
 		title: "기본 모달",
@@ -89,7 +83,7 @@ const Modal = ({
 					{/* 비어 있는 버튼이지만 키보드 포커스와 역할이 명확함 */}
 				</button>
 				{/* Modal */}
-				<div css={modalStyles(isFullScreen)}>
+				<div css={modalStyles(isFullScreen, type)}>
 					<div css={modalHeaderStyles(isFullScreen)}>
 						<h2>{title}</h2>
 						<button

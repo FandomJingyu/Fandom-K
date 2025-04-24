@@ -28,24 +28,28 @@ export const backdropStyles = css`
   background-color: rgba(0, 0, 0, 0.5);
 `;
 
-export const modalStyles = (isFullScreen) => css`
+export const modalStyles = (isFullScreen, type) => css`
   position: relative;
-  background-color:${isFullScreen ? "var(--black-02000E)" : " var(--black-181D26)"};
-  padding: 24px 16px 32px 16px;
+  background-color: ${isFullScreen ? "var(--black-02000E)" : "var(--black-181D26)"};
   gap: 8px;
-
+  padding: ${
+		type === "credit"
+			? "24px 16px 32px 16px" // credit 타입일 경우
+			: "24px 16px 12px 16px" // 그 외에는 기본 패딩
+	};
+  
   ${
 		isFullScreen
 			? `
     width: 100%;
     height: 100%;
     border-radius: 0;
-  `
+    `
 			: `
     min-width: 340px;
     min-height: 320px;
     border-radius: 12px;
-  `
+    `
 	}
 `;
 
