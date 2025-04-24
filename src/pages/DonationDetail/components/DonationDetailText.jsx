@@ -19,7 +19,9 @@ export default function DonationDetail({ donation, idol, loading }) {
 	}
 	const idolWithGa = idol ? withPostPosition(idol.name, "이가") : "";
 	const idolWithEun = idol ? withPostPosition(idol.name, "은는") : "";
-	const idolWithEul = idol ? withPostPosition(idol.name, "을를") : "";
+	const donationWithEul = donation
+		? withPostPosition(donation.subtitle, "을를")
+		: "";
 	return (
 		<div className="text" css={DonationDetailTextStyle}>
 			{loading ? (
@@ -28,14 +30,16 @@ export default function DonationDetail({ donation, idol, loading }) {
 				<>
 					<dl>
 						<dt>
-							✨💖 역.대.급. 사건 발생! {idol.name}({idol.group}) 데뷔 1주년,
-							<br />
-							합정역에 {idol.name} 강림 💖✨ <br />
-							{idolWithGa} 뭐다? 존재 자체가 명절임 😭
+							✨💖 역.대.급. 사건 발생! <br />
+							{idol.name}({idol.group}) 데뷔 1주년, 합정역에 {idol.name} 강림
+							💖✨
 						</dt>
 						<dd>
-							1년 전, 세상이 {idol.name}중심으로 돌아가기 시작했던 그 순간 기억
-							나죠?
+							{idolWithGa} 뭐다? 존재 자체가 명절임 😭
+							<br />
+							이건 그냥… 🎉 국가공휴일 지정 가야 돼 🎉 <br />
+							🕊️ {idolWithGa} 강림하던 그 순간 세상의 조도는 조절 당했고 우리
+							눈은 그녀만을 트래킹하기 시작했다 👁️💫
 							<br />
 							그날 이후 우린 알게 되었죠. <br />🧠 "아… {idolWithEun} 그냥
 							아이돌이 아니라 종교다…"
@@ -43,7 +47,8 @@ export default function DonationDetail({ donation, idol, loading }) {
 							<br />
 							🪩무대 위에선 카리스마 풀충전 <br />
 							🐣팬들 앞에선 애교 떡칠
-							<br />이 갭차이 뭐냐고요? 그냥 미쳤다고요 😵‍💫
+							<br />
+							갭차이 보고 진짜 의자에서 슬라이드했잖아요… 의자야 미안해 😭
 						</dd>
 					</dl>
 					<dl>
@@ -52,8 +57,8 @@ export default function DonationDetail({ donation, idol, loading }) {
 							{idol.name}의 1주년을 제대로, 작정하고, 뽝! 터지게 축하할 거예요
 						</dt>
 						<dd>
-							📍합정역을 {idol.name}존으로 물들인다? → ㄹㅇ 가능 📺 초대형
-							디지털 광고
+							📍{donationWithEul} {idol.name}존으로 물들인다? → ㄹㅇ 가능 📺
+							초대형 디지털 광고
 							<br />+ 팬들의 한땀한땀 축하 메시지! 👀 지나가는 사람들 전부
 							<br />
 							“누구세요...? 저 사람 왜 이렇게 예뻐요...?” 자동 입덕 예약 👑
@@ -64,7 +69,7 @@ export default function DonationDetail({ donation, idol, loading }) {
 						<dd>
 							🔹 목표 금액 : {donation.targetDonation.toLocaleString()}원
 							<br />🔹 후원 기간 : ~ 2025.05.23
-							<br />🔹 후원 메시지 : {donation.name}존예해요!
+							<br />🔹 후원 메시지 : {idol.name} 존예해요!
 						</dd>
 					</dl>
 					<dl>
@@ -88,8 +93,14 @@ export default function DonationDetail({ donation, idol, loading }) {
 					</dl>
 					<ul>
 						<li>#{idol.name}</li>
+						<li>#{idol.name}_굿즈</li>
 						<li>#{idol.group}</li>
-						<li>#{donation.name} 존예해요</li>
+						<li>#{idol.group}_조공</li>
+						<li>
+							#{donation.subtitle}_{idol.name}
+						</li>
+						<li>#{donation.subtitle}</li>
+						<li>#{donation.title}</li>
 					</ul>
 				</>
 			)}
@@ -99,26 +110,26 @@ export default function DonationDetail({ donation, idol, loading }) {
 
 const DonationDetailTextStyle = css`
   margin-top: 100px;
-	dl {
-		font-size: 18px;
-		line-height: 1.8;
-		margin-bottom: 30px;
-	}
-	dt {
-		font-size: 22px;
-		margin-bottom: 10px;
-	}
-	ul {
-		display: flex;
-		gap: 10px;
-		flex-wrap: wrap;
-		margin-bottom: 30px;
-		li {
-			font-size: 16px;
-			padding: 5px 10px;
-			border-radius: 5px;
-			background-color: rgba(255, 255, 255, 0.8);
-			color: #000;
-		}
-	}
+  dl {
+    font-size: 18px;
+    line-height: 1.8;
+    margin-bottom: 30px;
+  }
+  dt {
+    font-size: 22px;
+    margin-bottom: 10px;
+  }
+  ul {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 30px;
+    li {
+      font-size: 16px;
+      padding: 5px 10px;
+      border-radius: 5px;
+      border: 1px solid rgba(255, 255, 255, 0.7);
+      color: #fff;
+    }
+  }
 `;

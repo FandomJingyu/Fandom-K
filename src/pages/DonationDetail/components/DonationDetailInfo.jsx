@@ -1,5 +1,5 @@
 import { css } from "@emotion/react";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Modal from "../../../../src/components/Modal";
 import Button from "../../../components/Button/Button";
 import { useCredit } from "../../../context/CreditContext";
@@ -7,27 +7,10 @@ import CreditRechargeModalContent from "../../List/Charge/components/CreditRecha
 
 /** @jsxImportSource @emotion/react */
 
-const creditList = [
-	{
-		label: "+100",
-		value: 100,
-	},
-	{
-		label: "+500",
-		value: 500,
-	},
-	{
-		label: "+1,000",
-		value: 1000,
-	},
-	{
-		label: "전액",
-		value: 10000,
-	},
-];
-export default function DonationDetailInfo({ donation, loading }) {
+export default function DonationDetailInfo({ donation, idol, loading }) {
 	const [credit, setCredit] = useState(0);
 	const [isModalOpen, setIsModalOpen] = useState(false);
+	const scrollRef = useRef(null);
 
 	const handleCredit = (value) => {
 		setCredit((prev) => prev + value);
@@ -36,10 +19,46 @@ export default function DonationDetailInfo({ donation, loading }) {
 	const openModal = () => {
 		setIsModalOpen(true);
 	};
+	const creditList = [
+		{
+			label: "+100",
+			value: 100,
+		},
+		{
+			label: "+500",
+			value: 500,
+		},
+		{
+			label: "+1,000",
+			value: 1000,
+		},
+		{
+			label: "전액",
+			value: myCredit.credit,
+		},
+	];
 
 	const closeModal = () => {
 		setIsModalOpen(false);
 	};
+	const [isScrollDown, setIsScrollDown] = useState(false);
+
+	// window의 스크롤 위치 구하기
+	useEffect(() => {
+		const handleWindowScroll = () => {
+			const scrollTop =
+				window.pageYOffset || document.documentElement.scrollTop;
+			if (scrollTop > 400) {
+				setIsScrollDown(true);
+			} else {
+				setIsScrollDown(false);
+			}
+		};
+
+		window.addEventListener("scroll", handleWindowScroll);
+		return () => window.removeEventListener("scroll", handleWindowScroll);
+	}, []);
+
 	return (
 		<>
 			<form css={DonationDetailInfoStyle}>
@@ -47,6 +66,14 @@ export default function DonationDetailInfo({ donation, loading }) {
 					<div>로딩중...</div>
 				) : (
 					<>
+						<div className={`hideTop ${isScrollDown ? "isScrollDown" : ""}`}>
+							<h3>
+								{idol.name}({idol.group})
+							</h3>
+							<p>
+								{donation.subtitle}&nbsp;-&nbsp;{donation.title}
+							</p>
+						</div>
 						<div className="infoAreaScrollItem">
 							<span>모인 금액</span>
 							<p>
@@ -79,7 +106,7 @@ export default function DonationDetailInfo({ donation, loading }) {
 									name=""
 									id=""
 									placeholder="크레딧 입력"
-									value={credit}
+									value={credit.toLocaleString()}
 									onChange={(e) => setCredit(e.target.value)}
 								/>
 							</div>
@@ -96,7 +123,7 @@ export default function DonationDetailInfo({ donation, loading }) {
 								))}
 							</ul>
 						</div>
-						<Button type="button" size="donate-lg" variant="primary">
+						<Button fullWidth type="button" variant="primary">
 							후원하기
 						</Button>
 					</>
@@ -109,17 +136,39 @@ export default function DonationDetailInfo({ donation, loading }) {
 	);
 }
 const DonationDetailInfoStyle = css`
+  width: 100%;
   display: flex;
   flex-direction: column;
-  gap: 30px;
   height: 600px;
-  overflow: hidden;
   position: sticky;
+  overflow: hidden;
   top: 120px;
   padding: 30px 20px;
   background-color: var(--black-02000E);
   border: 1px solid var(--pink-FE5493);
   border-radius: 10px;
+  .hideTop {
+    font-size: 20px;
+    color: #fff;
+    line-height: 1.4;
+    max-width: 100%;
+    overflow: hidden;
+    margin-bottom: 30px;
+    margin-top: calc((30px + 2.8em) * -1);
+    opacity: 0;
+    transition: margin 0.3s ease, opacity 0.3s ease;
+    p {
+      display: block;
+      max-width: 100%;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    &.isScrollDown {
+      margin-top: 0;
+      opacity: 1;
+    }
+  }
   .infoAreaScrollItem {
     display: flex;
     flex-direction: column;
@@ -198,10 +247,16 @@ const DonationDetailInfoStyle = css`
     }
   }
   button {
-    width: 100%;
     height: 60px;
     border-radius: 10px;
     font-size: 18px;
     font-weight: 500;
+  }
+  .ellipsis-text {
+    display: block;
+    width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
 `;

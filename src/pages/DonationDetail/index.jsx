@@ -32,6 +32,21 @@ export default function DonationDetail() {
 		getDonation();
 	}, [getDonation]);
 
+	const emojis = {
+		heart: "💖",
+		star: "⭐",
+		sparkle: "✨",
+		fire: "🔥",
+		sparkles: "🎆",
+		party: "🎉",
+		gift: "💝",
+		ribbon: "🎀",
+	};
+
+	const emojiKeys = Object.keys(emojis);
+	const randomEmoji =
+		emojis[emojiKeys[Math.floor(Math.random() * emojiKeys.length)]];
+
 	return (
 		<div className="mainGrid" css={DonationDetailStyle}>
 			{loading ? (
@@ -40,7 +55,9 @@ export default function DonationDetail() {
 				<>
 					<div css={DonationDetailTop}>
 						<h2>
+							{randomEmoji}
 							{donation.idol.name} <span>({donation.idol.group})</span>
+							{randomEmoji}
 						</h2>
 						<div>
 							<p>{donation.subtitle}&nbsp;-&nbsp;</p>
@@ -62,7 +79,11 @@ export default function DonationDetail() {
 							/>
 						</div>
 						<div className="infoArea">
-							<DonationDetailInfo donation={donation} loading={loading} />
+							<DonationDetailInfo
+								donation={donation}
+								idol={donation.idol}
+								loading={loading}
+							/>
 						</div>
 					</div>
 				</>
@@ -126,6 +147,8 @@ const DonationDetailContent = css`
     }
   }
   .infoArea {
-    flex: 1;
+    /* flex: 1; */
+    flex: none;
+    width: 500px;
   }
 `;
