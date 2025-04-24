@@ -5,14 +5,9 @@ import Slider from "react-slick";
 import { idolsAPI } from "../../apis/idolsAPI";
 import Button from "../../components/Button/Button";
 import CheckIdol from "../../components/CheckIdol";
-import {
-	addButton,
-	addIdol,
-	myIdolList,
-	myIdolWrapper,
-	mypage,
-} from "./Mypage.styles";
+import { addButton, addIdol, myIdolList, myIdolWrapper } from "./Mypage.styles";
 import IdolList from "./components/IdolList";
+
 /** @jsxImportSource @emotion/react */
 
 // ---------- slider 함수 관련 -------------
@@ -79,7 +74,23 @@ const settings = {
 	nextArrow: <NextArrow />,
 };
 
+function useWindowSize() {
+	const [width, setwidth] = useState(window.innerWidth);
+	const isClient = typeof window !== "undefined";
+
+	useEffect(() => {
+		if (!isClient) return;
+		const handleResize = () => setwidth(window.innerWidth);
+		window.addEventListener("resize", handleResize);
+		return () => window.removeEventListener("resize", handleResize);
+	}, [isClient]);
+	return { width };
+}
+
 const Mypage = () => {
+	//
+	const { width } = useWindowSize();
+	const isMobile = width <= 425;
 	// api에서 온 아이돌을 담을 idols
 	const [idols, setIdols] = useState([]);
 	// 선택한 아이돌 담는 임시 state
@@ -97,6 +108,7 @@ const Mypage = () => {
 			const result = await idolsAPI.getIdols(30); // 불러올 개수
 			const idollist = result.list; // api에서 list만 가져오기
 			setIdols(idollist);
+			//에러처리
 		};
 		fetchData();
 	}, []);
@@ -129,7 +141,7 @@ const Mypage = () => {
 		setMyIdol((prev) => {
 			const updated = [...prev, ...checkedIdol];
 			console.log("추가된 리스트", updated);
-			localStorage.setItem("myIdols", JSON.stringify(updated));
+			localStorage.setItem("myIdols", JSON.stringify(updated)); // ==> set 함수 안에 로컬은 분리하는게 좋다(추후)
 			return updated;
 		});
 		setCheckedIdol([]); // 선택된 아이돌 초기화
@@ -146,7 +158,7 @@ const Mypage = () => {
 	};
 
 	return (
-		<div css={mypage}>
+		<div className={"mainGrid"}>
 			<div css={myIdolWrapper}>
 				<h2>내가 선택한 아이돌</h2>
 				{selectedIdolList.length === 0 && (
@@ -157,8 +169,7 @@ const Mypage = () => {
 						<IdolList
 							key={idol.id}
 							idol={idol}
-							size="98px"
-							// sizeType="small"
+							size={isMobile ? "70px" : "98px"}
 							isMyIdol={true}
 							onRemove={() => handleRemoveIdol(idol)}
 						/>
@@ -174,7 +185,7 @@ const Mypage = () => {
 						<div key={idol.id} onClick={() => toggleCheckedIdol(idol.id)}>
 							<IdolList
 								idol={idol}
-								size="128px"
+								size={isMobile ? "98px" : "128px"}
 								isChecked={checkedIdol.includes(idol.id)}
 							/>
 						</div>

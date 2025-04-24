@@ -1,21 +1,11 @@
 import { css } from "@emotion/react";
 
-//마이페이지 전체 ui 틀
-const mypage = css`
-    display: flex;
-    flex-direction: column;
-    color: white;
-    margin: 0px auto;
-    max-width: 1200px;
-  
-`;
-
 //나의 아이돌
 const myIdolWrapper = css`
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    padding: 30px 0px 40px 0px;
-    margin-bottom: 24px;
-  
+    padding: 70px 0px 40px 0px;
+    color: white;
+
     > h2 {
         font-size: 26px;
         margin-bottom: 32px;
@@ -24,6 +14,27 @@ const myIdolWrapper = css`
     > h3 {
         font-size: 20px;
         color: rgba(255, 255, 255, 0.6)
+    }
+
+    @media (max-width: 768px) {
+        > h2 {
+        font-size: 20px;
+        margin-bottom: 24px;
+        }   
+
+        > h3 {
+        font-size: 16px;
+        }
+    }
+
+    @media (max-width: 425px) {
+        > h2 {
+        font-size: 16px;
+        margin-bottom: 12px;
+        }   
+        > h3 {
+        font-size: 12px;
+        }
     }
 `;
 
@@ -44,11 +55,28 @@ const addIdol = css`
     display: flex;
     flex-direction: column;
     width: 100%;
+    color: white;
 
     > h2 {
         font-size: 26px;
         margin-top: 40px;
+        margin-bottom: 32px;
+    }
+
+    @media (max-width: 768px) {
+        > h2 {
+        font-size: 20px;
+        margin-top: 32px;
+        margin-bottom: 56px;
+        }
+    }
+
+    @media (max-width: 425px) {
+        > h2 {
+        font-size: 16px;
+        margin-top: 32px;
         margin-bottom: 16px;
+        }
     }
 `;
 
@@ -59,4 +87,4 @@ const addButton = css`
     margin-top: 48px;
 `;
 
-export { mypage, myIdolWrapper, myIdolList, addIdol, addButton };
+export { myIdolWrapper, myIdolList, addIdol, addButton };
