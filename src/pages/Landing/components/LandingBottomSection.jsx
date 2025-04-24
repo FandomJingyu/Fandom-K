@@ -206,7 +206,7 @@ const StyledLandingBottomSection = styled.section`
       width: 40vw !important;
     }
   }
-  @media all and (max-width: 375px) {
+  @media all and (max-width: 425px) {
     height: 133.33vw !important;
     .landingGrid {
       > img {

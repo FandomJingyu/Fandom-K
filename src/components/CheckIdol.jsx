@@ -3,11 +3,11 @@ import { css } from "@emotion/react";
 
 // size: 아이돌 원 사이즈
 // checkSize: 체크표시 사이즈
-const CheckIdol = ({ isChecked, size, checkSize, isVote = false }) => {
+const CheckIdol = ({ isChecked, size, checkSize }) => {
 	if (!isChecked) return null;
 
 	return (
-		<div css={checkWrapper(size, isVote)}>
+		<div css={checkWrapper(size)}>
 			<div css={checkBackground(size)} />
 			<img
 				src="../public/icons/Checkmark.png"
@@ -18,10 +18,10 @@ const CheckIdol = ({ isChecked, size, checkSize, isVote = false }) => {
 	);
 };
 
-const checkWrapper = (size, isVote) => css`
+const checkWrapper = (size) => css`
   position: absolute;
   top: 50%;
-  left: ${isVote ? "21%" : "50%"};
+  left: 50%;
   transform: translate(-50%, -50%);
   width: ${size}px;
   height: ${size}px;

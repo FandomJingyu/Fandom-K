@@ -1,4 +1,6 @@
 /** @jsxImportSource @emotion/react */
+import { css } from "@emotion/react";
+
 import { useState } from "react";
 import { votesAPI } from "../../../../apis/voteApi";
 import { useCredit } from "../../../../context/CreditContext";
@@ -53,7 +55,7 @@ export default function ChartVoteModal({ idols, setIdols, closeModal }) {
 	};
 
 	return (
-		<form onSubmit={handleVote}>
+		<form onSubmit={handleVote} css={VoteFormStyles}>
 			<VoteIdolList
 				idols={idols}
 				selectedIdolId={selectedIdolId}
@@ -63,3 +65,12 @@ export default function ChartVoteModal({ idols, setIdols, closeModal }) {
 		</form>
 	);
 }
+
+const VoteFormStyles = css` 
+  max-height: 100vh;
+  overflow-y: hidden;
+  position: relative; 
+	@media (max-width: 425px) {
+		height: 100vh;
+	}
+`;

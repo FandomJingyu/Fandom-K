@@ -30,7 +30,7 @@ export const layoutStyles = css`
     }
   }
 
-  @media all and (max-width: 744px) {
+  @media all and (max-width: 768px) {
     .mainGrid,
     .landingGrid {
       width: auto;
@@ -39,7 +39,7 @@ export const layoutStyles = css`
     }
   }
 
-  @media all and (max-width: 375px) {
+  @media all and (max-width: 425px) {
     .mainGrid,
     .landingGrid {
       width: auto;

@@ -10,6 +10,7 @@ export default function DonationDetail() {
 	const { id } = useParams();
 	const [donation, setDonation] = useState(null);
 	const [loading, setLoading] = useState(true);
+	const [randomEmoji, setRandomEmoji] = useState("");
 
 	const getDonation = useCallback(async () => {
 		try {
@@ -32,7 +33,24 @@ export default function DonationDetail() {
 		getDonation();
 	}, [getDonation]);
 
-	console.log(donation);
+	// 랜덤 이모지 - 초기 렌더링에서만 이모지를 선택
+	useEffect(() => {
+		const emojiKeys = Object.keys(emojis);
+		const selectedEmoji =
+			emojis[emojiKeys[Math.floor(Math.random() * emojiKeys.length)]];
+		setRandomEmoji(selectedEmoji);
+	}, []);
+
+	const emojis = {
+		heart: "💖",
+		star: "⭐",
+		sparkle: "✨",
+		fire: "🔥",
+		sparkles: "🎆",
+		party: "🎉",
+		gift: "💝",
+		ribbon: "🎀",
+	};
 
 	return (
 		<div className="mainGrid" css={DonationDetailStyle}>
@@ -42,7 +60,9 @@ export default function DonationDetail() {
 				<>
 					<div css={DonationDetailTop}>
 						<h2>
+							{randomEmoji}
 							{donation.idol.name} <span>({donation.idol.group})</span>
+							{randomEmoji}
 						</h2>
 						<div>
 							<p>{donation.subtitle}&nbsp;-&nbsp;</p>
@@ -50,16 +70,16 @@ export default function DonationDetail() {
 						</div>
 					</div>
 					<div css={DonationDetailContent}>
-						<div className="contentArea">
+						<div css={DonationDetailContentArea}>
 							<div className="profile">
 								<img
 									src={donation.idol.profilePicture}
 									alt={donation.idol.name}
 								/>
 							</div>
-							<DonationDetailText />
+							<DonationDetailText donation={donation} loading={loading} />
 						</div>
-						<div className="infoArea">
+						<div css={DonationDetailInfoArea}>
 							<DonationDetailInfo donation={donation} loading={loading} />
 						</div>
 					</div>
@@ -110,20 +130,24 @@ const DonationDetailContent = css`
   margin-top: 100px;
   display: flex;
   gap: 100px;
-  .contentArea {
-    width: 600px;
-    flex: none;
-    .profile {
+`;
+
+const DonationDetailContentArea = css`
+  width: 600px;
+  flex: none;
+  .profile {
+    width: 100%;
+    height: 600px;
+    border-radius: 10px;
+    overflow: hidden;
+    img {
       width: 100%;
-      height: 600px;
-      border-radius: 10px;
-      overflow: hidden;
-      img {
-        width: 100%;
-      }
     }
   }
-  .infoArea {
-    flex: 1;
-  }
+`;
+
+const DonationDetailInfoArea = css`
+  /* flex: 1; */
+  flex: none;
+  width: 500px;
 `;

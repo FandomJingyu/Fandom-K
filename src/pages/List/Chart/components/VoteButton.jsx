@@ -1,11 +1,20 @@
 /** @jsxImportSource @emotion/react */
 import Button from "../../../../components/Button/Button";
+import useIsMobile from "../../../../hooks/useIsMobile";
 import { CreditInfo, centerAlignStyle } from "./VoteButton.styles";
 
 export default function VoteButton({ onSubmit }) {
+	const isMobile = useIsMobile();
+	const buttonSize = isMobile ? "vote-md" : "vote-lg";
+
 	return (
 		<div css={centerAlignStyle}>
-			<Button type="submit" size="vote-lg" fullWidth onClick={onSubmit}>
+			<Button
+				type="submit"
+				size={buttonSize}
+				fullWidth={true}
+				onClick={onSubmit}
+			>
 				투표하기
 			</Button>
 			<p css={CreditInfo}>
