@@ -394,5 +394,11 @@ const DonationDetailInfoItem = css`
     &.isCredit {
       margin-bottom: 5.65vw;
     }
+    .myCredit {
+      button {
+        height: 6.59vw;
+        font-size: 2.82vw;
+      }
+    }
   }
 `;
