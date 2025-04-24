@@ -1,16 +1,19 @@
 import { css } from "@emotion/react";
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import Modal from "../../../../src/components/Modal";
 import Button from "../../../components/Button/Button";
 import { useCredit } from "../../../context/CreditContext";
 import CreditRechargeModalContent from "../../List/Charge/components/CreditRechargeModalContent";
-
+import DonationDetailTimer from "./DonationDetailTimer";
 /** @jsxImportSource @emotion/react */
 
-export default function DonationDetailInfo({ donation, idol, loading }) {
+export default function DonationDetailInfo({ donation, loading }) {
+	const { idol, receivedDonations, targetDonation, deadline, subtitle, title } =
+		donation;
+
 	const [credit, setCredit] = useState(0);
 	const [isModalOpen, setIsModalOpen] = useState(false);
-	const scrollRef = useRef(null);
+	const [isScrollDown, setIsScrollDown] = useState(false);
 
 	const handleCredit = (value) => {
 		setCredit((prev) => prev + value);
@@ -41,9 +44,9 @@ export default function DonationDetailInfo({ donation, idol, loading }) {
 	const closeModal = () => {
 		setIsModalOpen(false);
 	};
-	const [isScrollDown, setIsScrollDown] = useState(false);
 
-	// window의 스크롤 위치 구하기
+	// * window의 스크롤 위치 구하기,
+	// * 스크롤 위치가 400px 이상이면 isScrollDown을 true로 설정
 	useEffect(() => {
 		const handleWindowScroll = () => {
 			const scrollTop =
@@ -68,29 +71,22 @@ export default function DonationDetailInfo({ donation, idol, loading }) {
 					<>
 						<div className={`hideTop ${isScrollDown ? "isScrollDown" : ""}`}>
 							<h3>
-								{idol.name}({idol.group})
+								<strong>{idol.name}</strong>({idol.group})
 							</h3>
 							<p>
-								{donation.subtitle}&nbsp;-&nbsp;{donation.title}
+								{subtitle}&nbsp;-&nbsp;{title}
 							</p>
 						</div>
 						<div className="infoAreaScrollItem">
 							<span>모인 금액</span>
 							<p>
-								<strong>{donation.receivedDonations.toLocaleString()}</strong>
+								<strong>{receivedDonations.toLocaleString()}</strong>
 								&nbsp;/&nbsp;
-								{donation.targetDonation.toLocaleString()} 크레딧
+								{targetDonation.toLocaleString()} 크레딧
 							</p>
 						</div>
 						<div className="infoAreaScrollItem">
-							<span>남은 시간</span>
-							<p>
-								<strong>110</strong>&nbsp;Days <strong>10</strong>&nbsp;:&nbsp;
-								<strong>10</strong>&nbsp;:&nbsp;<strong>52</strong>
-							</p>
-							<p>
-								모집 기간 : <span>{donation.deadline.split("T")[0]}</span>
-							</p>
+							<DonationDetailTimer deadline={deadline} />
 						</div>
 						<div className="infoAreaScrollItem is-credit">
 							<span className="myCredit">
@@ -153,11 +149,14 @@ const DonationDetailInfoStyle = css`
     line-height: 1.4;
     max-width: 100%;
     overflow: hidden;
-    margin-bottom: 30px;
-    margin-top: calc((30px + 2.8em) * -1);
+    margin-bottom: 20px;
+    margin-top: calc((20px + 2.8em) * -1);
     opacity: 0;
-    transition: margin 0.3s ease, opacity 0.3s ease;
+    transition:
+      margin 0.3s ease,
+      opacity 0.3s ease;
     p {
+      font-size: 18px;
       display: block;
       max-width: 100%;
       overflow: hidden;
@@ -176,6 +175,7 @@ const DonationDetailInfoStyle = css`
     font-size: 14px;
     line-height: 1.4;
     color: rgba(255, 255, 255, 0.7);
+    margin-bottom: 20px;
     strong {
       line-height: 1;
       font-size: 30px;

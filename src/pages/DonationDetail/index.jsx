@@ -65,25 +65,17 @@ export default function DonationDetail() {
 						</div>
 					</div>
 					<div css={DonationDetailContent}>
-						<div className="contentArea">
+						<div css={DonationDetailContentArea}>
 							<div className="profile">
 								<img
 									src={donation.idol.profilePicture}
 									alt={donation.idol.name}
 								/>
 							</div>
-							<DonationDetailText
-								donation={donation}
-								idol={donation.idol}
-								loading={loading}
-							/>
+							<DonationDetailText donation={donation} loading={loading} />
 						</div>
-						<div className="infoArea">
-							<DonationDetailInfo
-								donation={donation}
-								idol={donation.idol}
-								loading={loading}
-							/>
+						<div css={DonationDetailInfoArea}>
+							<DonationDetailInfo donation={donation} loading={loading} />
 						</div>
 					</div>
 				</>
@@ -133,22 +125,24 @@ const DonationDetailContent = css`
   margin-top: 100px;
   display: flex;
   gap: 100px;
-  .contentArea {
-    width: 600px;
-    flex: none;
-    .profile {
+`;
+
+const DonationDetailContentArea = css`
+  width: 600px;
+  flex: none;
+  .profile {
+    width: 100%;
+    height: 600px;
+    border-radius: 10px;
+    overflow: hidden;
+    img {
       width: 100%;
-      height: 600px;
-      border-radius: 10px;
-      overflow: hidden;
-      img {
-        width: 100%;
-      }
     }
   }
-  .infoArea {
-    /* flex: 1; */
-    flex: none;
-    width: 500px;
-  }
+`;
+
+const DonationDetailInfoArea = css`
+  /* flex: 1; */
+  flex: none;
+  width: 500px;
 `;

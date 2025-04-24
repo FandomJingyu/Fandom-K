@@ -1,7 +1,9 @@
 import { css } from "@emotion/react";
 
 /** @jsxImportSource @emotion/react */
-export default function DonationDetail({ donation, idol, loading }) {
+export default function DonationDetail({ donation, loading }) {
+	const { idol, targetDonation, deadline, subtitle, title } = donation;
+
 	function withPostPosition(word, josa) {
 		if (!word) return "";
 		const lastChar = word[word.length - 1];
@@ -67,8 +69,8 @@ export default function DonationDetail({ donation, idol, loading }) {
 					<dl>
 						<dt>📢후원정보 대방출🔥</dt>
 						<dd>
-							🔹 목표 금액 : {donation.targetDonation.toLocaleString()}원
-							<br />🔹 후원 기간 : ~ 2025.05.23
+							🔹 목표 금액 : {targetDonation.toLocaleString()}원
+							<br />🔹 후원 기간 : ~ {deadline.split("T")[0]}
 							<br />🔹 후원 메시지 : {idol.name} 존예해요!
 						</dd>
 					</dl>
@@ -88,7 +90,7 @@ export default function DonationDetail({ donation, idol, loading }) {
 							함께한 서사집🌟
 							<br />
 							<br />이 아름다운 서포트… 함께해주실 거죠? <br />
-							💖진짜 {donation.name}좋아하면 손모으고 후원하러 가자💖
+							💖진짜 {idol.name}좋아하면 손모으고 후원하러 가자💖
 						</dd>
 					</dl>
 					<ul>
@@ -97,10 +99,10 @@ export default function DonationDetail({ donation, idol, loading }) {
 						<li>#{idol.group}</li>
 						<li>#{idol.group}_조공</li>
 						<li>
-							#{donation.subtitle}_{idol.name}
+							#{subtitle}_{idol.name}
 						</li>
-						<li>#{donation.subtitle}</li>
-						<li>#{donation.title}</li>
+						<li>#{subtitle}</li>
+						<li>#{title}</li>
 					</ul>
 				</>
 			)}
