@@ -1,7 +1,9 @@
+import { css } from "@emotion/react";
 import { useCallback, useEffect, useState } from "react";
 
+/** @jsxImportSource @emotion/react */
+
 export default function DonationDetailTimer({ deadline }) {
-	console.log(deadline);
 	// *** 모집 기간 계산, ***
 	// * 모집 기간이 지나면 후원 버튼 비활성화,
 	// * 남은 시간 카운트다운
@@ -45,8 +47,8 @@ export default function DonationDetailTimer({ deadline }) {
 	return (
 		<>
 			<span>남은 시간</span>
-			<p>
-				<strong>{timeLeftArray[0].value}</strong>&nbsp;Days{" "}
+			<p css={DonationDetailTimerStyle}>
+				<strong>{timeLeftArray[0].value}</strong>&nbsp;Days &nbsp;&nbsp;
 				<strong>{timeLeftArray[1].value}</strong>&nbsp;:&nbsp;
 				<strong>{timeLeftArray[2].value}</strong>&nbsp;:&nbsp;
 				<strong>{timeLeftArray[3].value}</strong>
@@ -57,3 +59,10 @@ export default function DonationDetailTimer({ deadline }) {
 		</>
 	);
 }
+
+const DonationDetailTimerStyle = css`
+  strong:first-of-type {
+    font-size: 24px;
+    color: rgba(255, 255, 255, 0.8);
+  }
+`;

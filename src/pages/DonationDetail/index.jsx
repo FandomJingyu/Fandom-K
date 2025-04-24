@@ -33,6 +33,7 @@ export default function DonationDetail() {
 		getDonation();
 	}, [getDonation]);
 
+	// 랜덤 이모지 - 초기 렌더링에서만 이모지를 선택
 	useEffect(() => {
 		const emojiKeys = Object.keys(emojis);
 		const selectedEmoji =

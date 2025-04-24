@@ -14,9 +14,31 @@ export default function DonationDetailInfo({ donation, loading }) {
 	const [credit, setCredit] = useState(0);
 	const [isModalOpen, setIsModalOpen] = useState(false);
 	const [isScrollDown, setIsScrollDown] = useState(false);
+	const [isError, setIsError] = useState(false);
 
-	const handleCredit = (value) => {
-		setCredit((prev) => prev + value);
+	const handleCredit = (label, value) => {
+		let newCredit;
+
+		if (label === "전액") {
+			newCredit = value;
+		} else {
+			newCredit = credit + value;
+		}
+
+		// 보유 크레딧보다 많은지 확인
+		const isOverLimit = newCredit > (myCredit.credit || 0);
+
+		// 에러 상태 업데이트
+		setIsError(isOverLimit);
+
+		// 크레딧 값 업데이트
+		setCredit(newCredit);
+
+		// 에러 메시지 표시 또는 최대값으로 제한
+		if (isOverLimit) {
+			alert("보유한 크레딧을 초과할 수 없습니다.");
+			setCredit(myCredit.credit || 0); // 최대값으로 제한
+		}
 	};
 	const myCredit = useCredit();
 	const openModal = () => {
@@ -40,7 +62,6 @@ export default function DonationDetailInfo({ donation, loading }) {
 			value: myCredit.credit,
 		},
 	];
-
 	const closeModal = () => {
 		setIsModalOpen(false);
 	};
@@ -62,6 +83,14 @@ export default function DonationDetailInfo({ donation, loading }) {
 		return () => window.removeEventListener("scroll", handleWindowScroll);
 	}, []);
 
+	const inputOnChange = (e) => {
+		const value = e.target.value.replace(/[^0-9]/g, "");
+		const newValue = value === "" ? 0 : Number(value);
+
+		// 입력값이 보유 크레딧보다 크면 에러 상태로 설정
+		setIsError(newValue > myCredit.credit);
+		setCredit(newValue);
+	};
 	return (
 		<>
 			<form css={DonationDetailInfoStyle}>
@@ -77,7 +106,7 @@ export default function DonationDetailInfo({ donation, loading }) {
 								{subtitle}&nbsp;-&nbsp;{title}
 							</p>
 						</div>
-						<div className="infoAreaScrollItem">
+						<div css={DonationDetailInfoItem}>
 							<span>모인 금액</span>
 							<p>
 								<strong>{receivedDonations.toLocaleString()}</strong>
@@ -85,10 +114,10 @@ export default function DonationDetailInfo({ donation, loading }) {
 								{targetDonation.toLocaleString()} 크레딧
 							</p>
 						</div>
-						<div className="infoAreaScrollItem">
+						<div css={DonationDetailInfoItem}>
 							<DonationDetailTimer deadline={deadline} />
 						</div>
-						<div className="infoAreaScrollItem is-credit">
+						<div css={DonationDetailInfoItem} className="isCredit">
 							<span className="myCredit">
 								내 크레딧 :{" "}
 								{myCredit.credit ? myCredit.credit.toLocaleString() : 0}
@@ -96,22 +125,23 @@ export default function DonationDetailInfo({ donation, loading }) {
 									충전하기 +
 								</button>
 							</span>
-							<div className="input">
+							<div className={`input ${isError ? "isError" : ""}`}>
 								<input
 									type="text"
 									name=""
 									id=""
 									placeholder="크레딧 입력"
-									value={credit.toLocaleString()}
-									onChange={(e) => setCredit(e.target.value)}
+									value={credit === 0 ? "" : credit.toLocaleString()}
+									onChange={inputOnChange}
 								/>
+								<span>❗크레딧이 부족합니다.</span>
 							</div>
 							<ul>
 								{creditList.map((credit) => (
 									<li key={credit.value}>
 										<button
 											type="button"
-											onClick={() => handleCredit(credit.value)}
+											onClick={() => handleCredit(credit.label, credit.value)}
 										>
 											{credit.label}
 										</button>
@@ -119,7 +149,12 @@ export default function DonationDetailInfo({ donation, loading }) {
 								))}
 							</ul>
 						</div>
-						<Button fullWidth type="button" variant="primary">
+						<Button
+							disabled={credit === 0 || isError}
+							fullWidth
+							type="button"
+							variant="primary"
+						>
 							후원하기
 						</Button>
 					</>
@@ -168,84 +203,7 @@ const DonationDetailInfoStyle = css`
       opacity: 1;
     }
   }
-  .infoAreaScrollItem {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    font-size: 14px;
-    line-height: 1.4;
-    color: rgba(255, 255, 255, 0.7);
-    margin-bottom: 20px;
-    strong {
-      line-height: 1;
-      font-size: 30px;
-      color: #fff;
-    }
-    .input {
-      height: 60px;
-      border-radius: 10px;
-      background: rgba(255, 255, 255, 0.1);
-      display: flex;
-      padding-inline: 24px;
-      font-size: 18px;
-      font-weight: 500;
-      background-image: url('/icons/icon_credit.svg');
-      background-size: 24px;
-      background-position: right 24px center;
-      background-repeat: no-repeat;
-      input[type='text'] {
-        flex: 1;
-        outline: none;
-      }
-    }
-    ul {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 10px;
-      li {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        button {
-          width: 100%;
-          height: 34px;
-          border-radius: 2em;
-          background: rgba(255, 0, 191, 0.1);
-          font-size: 14px;
-          color: rgba(255, 255, 255, 0.5);
-          transition: color 0.3s ease;
-        }
-        &:hover {
-          button {
-            color: #fff;
-          }
-        }
-      }
-    }
-    .myCredit {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      button {
-        display: flex;
-        align-items: center;
-        gap: 12px;
-        width: auto;
-        padding-inline: 14px;
-        height: 30px;
-        border-radius: 2em;
-        background: rgba(255, 0, 191, 0.2);
-        font-size: 12px;
-        transition: background 0.3s ease;
-        &:hover {
-          background: rgba(255, 0, 191, 0.3);
-        }
-      }
-    }
-    &.is-credit {
-      margin-bottom: auto;
-    }
-  }
+
   button {
     height: 60px;
     border-radius: 10px;
@@ -258,5 +216,95 @@ const DonationDetailInfoStyle = css`
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+  }
+`;
+const DonationDetailInfoItem = css`
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  font-size: 14px;
+  line-height: 1.4;
+  color: rgba(255, 255, 255, 0.7);
+  margin-bottom: 20px;
+  strong {
+    line-height: 1;
+    font-size: 30px;
+    color: #fff;
+  }
+  .input {
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.1);
+    display: flex;
+    padding-inline: 24px 54px;
+    font-size: 18px;
+    font-weight: 500;
+    background-image: url('/icons/icon_credit.svg');
+    background-size: 24px;
+    background-position: right 24px center;
+    background-repeat: no-repeat;
+    input[type='text'] {
+      height: 60px;
+      flex: 1;
+      outline: none;
+    }
+    span {
+      display: none;
+      font-size: 12px;
+      color: rgba(255, 0, 0, 0.6);
+      font-weight: 500;
+      align-items: center;
+    }
+    &.isError {
+      span {
+        display: flex;
+      }
+    }
+  }
+  ul {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    li {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      button {
+        width: 100%;
+        height: 34px;
+        border-radius: 2em;
+        background: rgba(255, 0, 191, 0.1);
+        font-size: 14px;
+        color: rgba(255, 255, 255, 0.5);
+        transition: color 0.3s ease;
+      }
+      &:hover {
+        button {
+          color: #fff;
+        }
+      }
+    }
+  }
+  .myCredit {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    button {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      width: auto;
+      padding-inline: 14px;
+      height: 30px;
+      border-radius: 2em;
+      background: rgba(255, 0, 191, 0.2);
+      font-size: 12px;
+      transition: background 0.3s ease;
+      &:hover {
+        background: rgba(255, 0, 191, 0.3);
+      }
+    }
+  }
+  &.isCredit {
+    margin-bottom: auto;
   }
 `;
