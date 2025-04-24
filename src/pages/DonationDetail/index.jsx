@@ -10,6 +10,7 @@ export default function DonationDetail() {
 	const { id } = useParams();
 	const [donation, setDonation] = useState(null);
 	const [loading, setLoading] = useState(true);
+	const [randomEmoji, setRandomEmoji] = useState("");
 
 	const getDonation = useCallback(async () => {
 		try {
@@ -32,6 +33,13 @@ export default function DonationDetail() {
 		getDonation();
 	}, [getDonation]);
 
+	useEffect(() => {
+		const emojiKeys = Object.keys(emojis);
+		const selectedEmoji =
+			emojis[emojiKeys[Math.floor(Math.random() * emojiKeys.length)]];
+		setRandomEmoji(selectedEmoji);
+	}, []);
+
 	const emojis = {
 		heart: "💖",
 		star: "⭐",
@@ -42,10 +50,6 @@ export default function DonationDetail() {
 		gift: "💝",
 		ribbon: "🎀",
 	};
-
-	const emojiKeys = Object.keys(emojis);
-	const randomEmoji =
-		emojis[emojiKeys[Math.floor(Math.random() * emojiKeys.length)]];
 
 	return (
 		<div className="mainGrid" css={DonationDetailStyle}>
