@@ -10,15 +10,9 @@ export const ImageCircle = styled.div`
   border-radius: 50%;
   border: 1.31px solid #f96868;
   align-items: center;
-   object-position:center;
-<<<<<<< HEAD
-   width:100%;
-   height:100%;
-   padding:3px;
-   position: relative;
-=======
-   
->>>>>>> develop
+  object-position: center;
+  padding: 3px;
+  position: relative;
 `;
 // 원하는 사이즈가 있으면 <Circle size=""/> 없을 시 기본 128px
 // 아이돌 이미지가 Circle frame보다 더 작게하기 위해 *0.9
