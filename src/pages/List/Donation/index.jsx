@@ -1,8 +1,6 @@
 /** @jsxImportSource @emotion/react */
-
 import { donationTitle } from "./Donation.style";
 
-import { donationsAPI } from "../../../apis/donationsAPI";
 import LodaingError from "../../../components/Error";
 import { useDonations } from "../../../hooks/useDonation";
 import Card from "./components/Card";
