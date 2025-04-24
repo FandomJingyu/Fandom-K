@@ -150,7 +150,7 @@ const Mypage = () => {
 	const handleRemoveIdol = (idol) => {
 		setMyIdol((prev) => {
 			const updated = prev.filter((id) => id !== idol.id);
-			console.log("없애기");
+			// console.log("없애기");
 			localStorage.setItem("myIdols", JSON.stringify(updated));
 			return updated;
 		});
@@ -161,6 +161,9 @@ const Mypage = () => {
 		<div css={mypage}>
 			<div css={myIdolWrapper}>
 				<h2>내가 선택한 아이돌</h2>
+				{selectedIdolList.length === 0 && (
+					<h3>아직 아이돌이 선택되지 않았습니다</h3>
+				)}
 				<div css={myIdolList} className="small">
 					{selectedIdolList.map((idol) => (
 						<IdolList

@@ -20,6 +20,11 @@ const myIdolWrapper = css`
         font-size: 26px;
         margin-bottom: 32px;
     }
+
+    > h3 {
+        font-size: 20px;
+        color: rgba(255, 255, 255, 0.6)
+    }
 `;
 
 // 나의 아이돌 리스트
