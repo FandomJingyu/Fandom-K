@@ -96,9 +96,9 @@ export default function LandingMiddleSection() {
 			<article>
 				<div className="landingGrid">
 					<h3>
-						<strong>마음</strong>이 <br className="hide-375" />
+						<strong>마음</strong>이 <br className="hide-768" />
 						닿는 순간, <br />
-						<strong>응원</strong>이 <br className="hide-375" />
+						<strong>응원</strong>이 <br className="hide-768" />
 						시작돼요
 						<span className="is-floating">
 							<img src="/images/landing/landing_icon01.png" alt="" />
@@ -121,7 +121,7 @@ export default function LandingMiddleSection() {
 			<article>
 				<div className="landingGrid">
 					<h3>
-						이번 달 <br className="hide-375" />
+						이번 달 <br className="hide-768" />
 						<strong>가장 빛난 별</strong>은 <br />
 						누구?
 						<span className="is-sparkling">
@@ -146,15 +146,15 @@ export default function LandingMiddleSection() {
 				<div className="landingGrid">
 					<h3>
 						내 마음 속
-						<span className="is-pulsing hide-375">
+						<span className="is-pulsing hide-425">
 							<img src="/images/landing/landing_icon03.png" alt="" />
 						</span>
-						<br className="hide-375" />
+						<br className="hide-768" />
 						<strong>나만의 아티스트</strong> <br />
 						소식까지&nbsp;
-						<br className="hide-375" />
+						<br className="hide-768" />
 						빠르게
-						<span className="is-pulsing hide-default show-375">
+						<span className="is-pulsing hide-default show-425">
 							<img src="/images/landing/landing_icon03.png" alt="" />
 						</span>
 					</h3>
@@ -390,7 +390,7 @@ const StyledLandingMiddleSection = styled.section`
     }
   }
   @media all and (max-width: 425px) {
-    span.show-375 {
+    span.show-425 {
       display: inline-block !important;
     }
     .landingGrid {
