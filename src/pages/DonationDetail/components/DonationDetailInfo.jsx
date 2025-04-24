@@ -69,6 +69,7 @@ export default function DonationDetailInfo({ donation, loading }) {
 	// * window의 스크롤 위치 구하기,
 	// * 스크롤 위치가 400px 이상이면 isScrollDown을 true로 설정
 	useEffect(() => {
+		if (window.innerWidth <= 768) return;
 		const handleWindowScroll = () => {
 			const scrollTop =
 				window.pageYOffset || document.documentElement.scrollTop;
@@ -217,6 +218,41 @@ const DonationDetailInfoStyle = css`
     text-overflow: ellipsis;
     white-space: nowrap;
   }
+  @media all and (max-width: 1300px) {
+    height: auto;
+    top: 80px;
+  }
+  @media all and (max-width: 768px) {
+    position: static;
+    padding: 3.91vw 2.6vw;
+    .hideTop {
+      margin-top: 0;
+      opacity: 1;
+      font-size: 3.13vw;
+      margin-bottom: 2.6vw;
+      p {
+        font-size: 2.6vw;
+      }
+    }
+    button {
+      height: 7.81vw;
+      font-size: 2.86vw;
+      border-radius: 1.3vw;
+    }
+  }
+  @media all and (max-width: 425px) {
+    .hideTop {
+      font-size: 4.71vw;
+      margin-bottom: 2.35vw;
+      p {
+        font-size: 3.76vw;
+      }
+    }
+    button {
+      height: 11.76vw;
+      font-size: 3.76vw;
+    }
+  }
 `;
 const DonationDetailInfoItem = css`
   display: flex;
@@ -306,5 +342,63 @@ const DonationDetailInfoItem = css`
   }
   &.isCredit {
     margin-bottom: auto;
+  }
+  @media all and (max-width: 768px) {
+    gap: 1.3vw;
+    font-size: 2.08vw;
+    margin-bottom: 2.6vw;
+    strong {
+      font-size: 3.91vw;
+    }
+    .input {
+      border-radius: 1.3vw;
+      padding-inline: 3.13vw 8.03vw;
+      font-size: 2.34vw;
+      background-size: 3.13vw;
+      background-position: right 3.13vw center;
+      input[type='text'] {
+        height: 7.81vw;
+        min-width: 0;
+        width: 100%;
+      }
+    }
+    &.isCredit {
+      margin-bottom: 3.91vw;
+    }
+  }
+  @media all and (max-width: 425px) {
+    font-size: 3.29vw;
+    margin-bottom: 5.65vw;
+    gap: 1.88vw;
+    strong {
+      font-size: 5.18vw;
+    }
+    ul {
+      gap: 2.35vw;
+      li {
+        button {
+          height: 7.53vw;
+          font-size: 3.29vw;
+        }
+      }
+    }
+    .input {
+      padding-inline: 3.13vw 9.41vw;
+      font-size: 3.76vw;
+      background-size: 5.65vw;
+      background-position: right 3.29vw center;
+      input[type='text'] {
+        height: 11.76vw;
+      }
+    }
+    &.isCredit {
+      margin-bottom: 5.65vw;
+    }
+    .myCredit {
+      button {
+        height: 6.59vw;
+        font-size: 2.82vw;
+      }
+    }
   }
 `;
