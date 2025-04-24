@@ -95,6 +95,8 @@ export default function CreditCharge() {
 
 // 스타일 컴포넌트 정의
 const CreditChargeStyle = css`
+  z-index: 2;
+  background-color: var(--black-02000E);
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -124,86 +126,86 @@ const CreditChargeStyle = css`
     }
   }
   button {
-		display: flex;
-		align-items: center;
-		gap: 4px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
     color: var(--orange-F96D69);
     font-size: 20px;
     font-weight: 700;
     letter-spacing: 0.8px;
-		margin-right: -24px;
-		transition: margin-right 0.3s ease-in-out;
-		img {
-			width: 24px;
-			opacity: 0;
-			transition: opacity 0.2s ease-in-out;
-		}
-		&:hover {
-			margin-right: 0;
-			img {
-				opacity: 1;
-				animation: rotate .6s .2s linear 1;
-				@keyframes rotate {
-					from {
-						transform: perspective(100px) rotateY(0deg);
-					}
-					to {
-						transform: perspective(100px) rotateY(360deg); 
-					}
-				}
-			}
-		}
+    margin-right: -24px;
+    transition: margin-right 0.3s ease-in-out;
+    img {
+      width: 24px;
+      opacity: 0;
+      transition: opacity 0.2s ease-in-out;
+    }
+    &:hover {
+      margin-right: 0;
+      img {
+        opacity: 1;
+        animation: rotate 0.6s 0.2s linear 1;
+        @keyframes rotate {
+          from {
+            transform: perspective(100px) rotateY(0deg);
+          }
+          to {
+            transform: perspective(100px) rotateY(360deg);
+          }
+        }
+      }
+    }
   }
-	@media all and (max-width: 768px) {
-		padding-inline: 3.13vw;
-		height: 17.06vw;
-		button {
-			margin-right: 0;
-			font-size: 2.34vw;
-			img {
-				display: none;
-			}
-		}
-		>div {
-			gap: 1.82vw;
-		}
-		p {
-			font-size: 2.34vw;
-		}
-		.credit {
-			gap: 0.52vw;
-			span {
-				font-size: 3.13vw;
-			}
-			img {
-				width: 2.6vw;
-			}
-		}
-	}
-	@media all and (max-width: 425px) {
-		padding-inline: 4.71vw;
-		height: 20.47vw;
-		button {
-			margin-right: 0;
-			font-size: 3.76vw;
-			img {
-				display: none;
-			}
-		}
-		>div {
-			gap: 1.88vw;
-		}
-		p {
-			font-size: 3.06vw;
-		}
-		.credit {
-			gap: 0.94vw;
-			span {
-				font-size: 4.71vw;
-			}
-			img {
-				width: 4.71vw;
-			}
-		}
-	}
+  @media all and (max-width: 768px) {
+    padding-inline: 3.13vw;
+    height: 17.06vw;
+    button {
+      margin-right: 0;
+      font-size: 2.34vw;
+      img {
+        display: none;
+      }
+    }
+    > div {
+      gap: 1.82vw;
+    }
+    p {
+      font-size: 2.34vw;
+    }
+    .credit {
+      gap: 0.52vw;
+      span {
+        font-size: 3.13vw;
+      }
+      img {
+        width: 2.6vw;
+      }
+    }
+  }
+  @media all and (max-width: 425px) {
+    padding-inline: 4.71vw;
+    height: 20.47vw;
+    button {
+      margin-right: 0;
+      font-size: 3.76vw;
+      img {
+        display: none;
+      }
+    }
+    > div {
+      gap: 1.88vw;
+    }
+    p {
+      font-size: 3.06vw;
+    }
+    .credit {
+      gap: 0.94vw;
+      span {
+        font-size: 4.71vw;
+      }
+      img {
+        width: 4.71vw;
+      }
+    }
+  }
 `;

@@ -32,4 +32,8 @@ const BlurStyle = css`
     height: 100%;
     object-fit: cover;
   }
+	@media (max-width: 768px) {
+		width: 94.12vw;
+		height: 94.12vw;
+	}
 `;
