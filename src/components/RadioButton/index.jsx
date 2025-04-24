@@ -10,6 +10,10 @@ const voteRadioButton = css`
   justify-content: space-between;
   width: 477px;
   height: 70px;
+
+	@media (max-width: 425px) {
+    width: 100%;
+  }
 `;
 
 // 크레딧 모달창 스타일 정의 & 선택된 경우 border 색상 변경 (input display:none으로 설정해서 className을 지정해 border색상 변경)
@@ -35,13 +39,13 @@ const inputStyle = css`
 `;
 
 // 라벨 내부 콘텐츠 영역 스타일
-const contenteWrapper = css`
+const contentWrapper = (className) => css`
   display: flex;
   align-items: center;
   justify-content: space-between;
   width: 100%;
   height: 100%;
-  padding: 0 16px;
+   padding: ${className === "vote" ? "0" : "0 23px 0 16px"};
 `;
 
 // 라디오 버튼 스타일 정의
@@ -81,7 +85,7 @@ function RadioButton({ value, checked, onChange, children, className }) {
 			/>
 
 			{/* 라벨 내부 콘텐츠: children + 선택 상태에 따라 아이콘 변경 */}
-			<div css={contenteWrapper}>
+			<div css={contentWrapper(className)}>
 				<div>{children}</div>
 				<img
 					src={checked ? radioTrue : radioFalse}

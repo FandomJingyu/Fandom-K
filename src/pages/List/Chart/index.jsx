@@ -130,6 +130,7 @@ const Chart = () => {
 				isOpen={isModalOpen}
 				onClose={closeModal}
 				type={isFemale ? "voteWoman" : "voteMan"}
+				isMobileFullScreen={true}
 			>
 				<ChartVoteModal
 					gender={activeTab}
