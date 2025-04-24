@@ -2,7 +2,7 @@ import { baseAPI } from "./axios";
 
 export const donationsAPI = {
 	// 조공 목록 조회
-	getDonations: async (pageSize = 10) => {
+	getDonations: async (pageSize = 20) => {
 		try {
 			const response = await baseAPI.get(
 				`/15-3/donations?pageSize=${pageSize}`,
