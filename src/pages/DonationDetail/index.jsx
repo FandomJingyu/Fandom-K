@@ -64,10 +64,9 @@ export default function DonationDetail() {
 							{donation.idol.name} <span>({donation.idol.group})</span>
 							{randomEmoji}
 						</h2>
-						<div>
-							<p>{donation.subtitle}&nbsp;-&nbsp;</p>
-							<p>{donation.title}</p>
-						</div>
+						<p>
+							{donation.subtitle}&nbsp;-&nbsp;{donation.title}
+						</p>
 					</div>
 					<div css={DonationDetailContent}>
 						<div css={DonationDetailContentArea}>
@@ -102,15 +101,20 @@ const DonationDetailStyle = css`
     height: 20%;
     background: linear-gradient(180deg, rgba(0, 0, 0, 0) 58.9%, #000 100%);
   }
+  @media all and (max-width: 1300px) {
+    padding-block: 60px;
+    &::after {
+      height: 80px;
+    }
+  }
+  @media all and (max-width: 425px) {
+    padding-block: 9.41vw;
+  }
+  
 `;
 
 const DonationDetailTop = css`
   text-align: center;
-  div {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
   h2 {
     font-size: 48px;
     line-height: 1;
@@ -118,9 +122,26 @@ const DonationDetailTop = css`
     margin-bottom: 30px;
   }
   p {
-    font-size: 16px;
     font-weight: bold;
     font-size: 30px;
+    line-height: 1.2;
+  }
+  @media all and (max-width: 1300px) {
+    h2 {
+      font-size: 38px;
+    }
+    p {
+      font-size: 24px;
+    }
+  }
+  @media all and (max-width: 425px) {
+    h2 {
+      font-size: 7.06vw;
+      margin-bottom: 4.71vw;
+    }
+    p {
+      font-size: 5.18vw;
+    }
   }
 `;
 
@@ -129,7 +150,19 @@ const DonationDetailContent = css`
   height: 100%;
   margin-top: 100px;
   display: flex;
-  gap: 100px;
+  justify-content: space-between;
+  @media all and (max-width: 1300px) {
+    justify-content: center;
+    gap: 40px;
+    margin-top: 60px;
+  }
+  @media all and (max-width: 768px) {
+    flex-direction: column;
+    gap: 0;
+  }
+  @media all and (max-width: 425px) {
+    margin-top: 9.41vw;
+  }
 `;
 
 const DonationDetailContentArea = css`
@@ -144,10 +177,30 @@ const DonationDetailContentArea = css`
       width: 100%;
     }
   }
+  @media all and (max-width: 1300px) {
+    width: auto;
+    flex: 1;
+    .profile {
+      height: auto;
+      aspect-ratio: 1/1;
+    }
+  }
 `;
 
 const DonationDetailInfoArea = css`
   /* flex: 1; */
   flex: none;
   width: 500px;
+  @media all and (max-width: 1300px) {
+    width: 40%;
+  }
+  @media all and (max-width: 768px) {
+    width: 100%;
+    position: absolute;
+    top: 100vw;
+    left: 0;
+  }
+  @media all and (max-width: 425px) {
+    top: 94vw;
+  }
 `;
