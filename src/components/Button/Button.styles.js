@@ -7,8 +7,9 @@ export const getButtonStyles = (
 	currentVariant,
 	disabled,
 	mobileSize,
+	fullWidth = false, // 너비 제어
 ) => css`
-    width: ${currentSize.width};
+    width: ${fullWidth ? "100%" : currentSize.width || "auto"};
     height: ${currentSize.height};
     font-size: ${currentSize.fontSize};
     background: ${disabled ? "var(--gray-828282)" : currentVariant.background};
@@ -27,7 +28,7 @@ export const getButtonStyles = (
     }
     // 반응형 사이즈
     @media (max-width: 426px) {
-    width: ${mobileSize?.width || currentSize.width};
+    width: ${fullWidth ? "100%" : mobileSize?.width || currentSize.width};
     height: ${mobileSize?.height || currentSize.height};
     font-size: ${mobileSize?.fontSize || currentSize.fontSize};
     border-radius: ${mobileSize?.borderradius || currentSize.borderradius || "3px"};
@@ -37,16 +38,16 @@ export const getButtonStyles = (
 const buttonSizes = {
 	// 각 상황에 맞는 사이즈 사용
 	"start-now": { width: "295px", height: "42px", fontSize: "14px" },
-	"donate-lg": { width: "295px", height: "42px", fontSize: "14px" },
+	"donate-lg": { height: "42px", fontSize: "14px" },
 	"donate-md": { width: "234px", height: "40px", fontSize: "13px" },
 	"donate-sm": { width: "142px", height: "31px", fontSize: "13px" },
 
-	"vote-lg": { width: "477px", height: "42px", fontSize: "14px" },
-	"vote-md": { width: "327px", height: "42px", fontSize: "14px" },
+	"vote-lg": { height: "42px", fontSize: "14px" },
+	"vote-md": { height: "42px", fontSize: "14px" },
 
-	check: { width: "295px", height: "42px", fontSize: "14px" },
+	check: { height: "42px", fontSize: "14px" },
 
-	recharge: { width: "295px", height: "42px", fontSize: "14px" },
+	recharge: { height: "42px", fontSize: "14px" },
 
 	"vote-chart": { width: "128px", height: "32px", fontSize: "13px" },
 
@@ -64,7 +65,7 @@ const buttonSizes = {
 const buttonSizeMobile = {
 	"start-now": { width: "230px", height: "48px", fontSize: "14px" },
 	"donate-md": { width: "142px", height: "31px", fontSize: "13px" },
-	"vote-lg": { width: "327px", height: "42px", fontSize: "14px" },
+	"vote-lg": { height: "42px", fontSize: "14px" },
 };
 
 // 색상

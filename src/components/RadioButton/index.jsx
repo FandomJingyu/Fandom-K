@@ -17,7 +17,7 @@ const chargeRadioButton = (checked) => css`
   display: flex;
   align-items: center;
   justify-content: space-around;
-  width: 295px;
+  width: 100%;
   height: 62px;
   border-radius: 8px;
   border: 1px solid ${checked ? "var(--orange-F96D69)" : "var(--white-F7F7F8)"};

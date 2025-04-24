@@ -28,5 +28,4 @@ export const CreditInfo = css`
   span {
     color: var(--orange-F96D69);
   }
-    
 `;
