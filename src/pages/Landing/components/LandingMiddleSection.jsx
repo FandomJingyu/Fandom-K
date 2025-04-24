@@ -362,7 +362,7 @@ const StyledLandingMiddleSection = styled.section`
       }
     }
   }
-  @media all and (max-width: 744px) {
+  @media all and (max-width: 768px) {
     .landingGrid {
       gap: 20px;
       flex-direction: column;
@@ -389,7 +389,7 @@ const StyledLandingMiddleSection = styled.section`
       }
     }
   }
-  @media all and (max-width: 375px) {
+  @media all and (max-width: 425px) {
     span.show-375 {
       display: inline-block !important;
     }

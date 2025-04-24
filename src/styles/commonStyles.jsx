@@ -15,20 +15,20 @@ const commonStyles = css`
     --gray-A3A5A8: #a3a5a8;
     --white-F7F7F8: #f7f7f8;
   }
-  @media all and (max-width: 744px) {
-    .hide-744 {
+  @media all and (max-width: 768px) {
+    .hide-768 {
       display: none !important;
     }
-    .show-744 {
+    .show-768 {
       display: block !important;
     }
   }
 
-  @media all and (max-width: 375px) {
-    .hide-375 {
+  @media all and (max-width: 425px) {
+    .hide-425 {
       display: none !important;
     }
-    .show-375 {
+    .show-425 {
       display: block !important;
     }
   }

@@ -71,7 +71,7 @@ const StyledLandingFooter = styled.div`
     }
   }
 
-  @media all and (max-width: 744px) {
+  @media all and (max-width: 768px) {
     padding-block: 30px;
     .landingGrid {
       flex-direction: column;
@@ -92,7 +92,7 @@ const StyledLandingFooter = styled.div`
       right: 0;
     }
   }
-  @media all and (max-width: 375px) {
+  @media all and (max-width: 425px) {
     padding-block: 6.13vw;
     .landingGrid {
       > div {
