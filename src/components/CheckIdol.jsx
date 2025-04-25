@@ -36,8 +36,8 @@ const checkBackground = (size) => css`
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: ${size * 0.9}px;
-  height: ${size * 0.9}px;
+  width: 100%;
+  aspect-ratio: 1/1;
   background: linear-gradient(271deg, #F96E68 -9.84%, #FE578F 107.18%);
   border-radius: 50%;
   opacity: 0.5;
