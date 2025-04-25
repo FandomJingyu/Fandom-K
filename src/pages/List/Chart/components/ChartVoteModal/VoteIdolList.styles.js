@@ -42,15 +42,16 @@ export const IdolItem = css`
     height: 1px;
     background: rgba(255, 255, 255, 0.1);
     align-self: stretch;
-    margin: 8px 0;
+    margin: 11px 0;
   }
 `;
 
 export const RadioContent = css`
-  position: relative; /* ✅ CheckIdol 기준점 */
+  position: relative; /* ✅ CheckIdol 기준점 */ 
   display: flex;
   align-items: center;
   gap: 12px;
+  
 `;
 
 export const IdolInfo = css`
@@ -58,6 +59,8 @@ export const IdolInfo = css`
   justify-content: center;
   align-items: center;
   gap: 12px;
+
+  
 `;
 
 export const Rank = css`
@@ -83,6 +86,7 @@ export const IdolDetails = css`
   display: flex;
   flex-direction: column;
   gap: 4px;
+ 
 `;
 
 export const IdolVote = css`
