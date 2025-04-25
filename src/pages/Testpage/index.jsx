@@ -5,6 +5,7 @@ import { idolsAPI } from "../../apis/idolsAPI";
 import Button from "../../components/Button/Button";
 import Modal from "../../components/Modal";
 import RadioButton from "../../components/RadioButton";
+import Toastify from "../../components/Toastify";
 import { useCredit } from "../../context/CreditContext";
 
 const Testpage = () => {
@@ -33,6 +34,7 @@ const Testpage = () => {
 
 	return (
 		<div>
+			<Toastify />
 			<h1>모달 테스트</h1>
 			<button type="button" onClick={handleOpen}>
 				모달 열기

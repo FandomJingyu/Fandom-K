@@ -209,12 +209,6 @@ const resetStyles = css`
   ins {
     text-decoration: none;
   }
-
-  a:focus,
-  button:focus {
-    outline: 2px solid var(--orange-F96D69) !important;
-    outline-offset: 2px;
-  }
 `;
 
 export default function ResetStyles() {
