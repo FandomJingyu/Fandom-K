@@ -1,18 +1,13 @@
 import "../Mypage/slider/slick-theme.css";
 import "../Mypage/slider/slick.css";
+import { css } from "@emotion/react";
 import { useEffect, useState } from "react";
 import Slider from "react-slick";
 import { idolsAPI } from "../../apis/idolsAPI";
 import Button from "../../components/Button/Button";
-import CheckIdol from "../../components/CheckIdol";
-import {
-	addButton,
-	addIdol,
-	myIdolList,
-	myIdolWrapper,
-	mypage,
-} from "./Mypage.styles";
+import { addButton, addIdol, myIdolList, myIdolWrapper } from "./Mypage.styles";
 import IdolList from "./components/IdolList";
+import useWindowSize from "./hooks/useWindowSize";
 /** @jsxImportSource @emotion/react */
 
 // ---------- slider 함수 관련 -------------
@@ -45,18 +40,14 @@ const prevArrowStyle = {
 //슬라이더 왼쪽 화살표 버튼
 function PrevArrow(props) {
 	const { className, style, onClick } = props;
+	const windowWidth = useWindowSize();
+	if (windowWidth < 1280) return null;
 	return (
-		<div
+		<button // 빼기ㅜ -> 버튼 테그로 작성 하면 탭 인덱스, 온키 다운 안써도 들어있음
 			className={className}
 			style={{ ...style, ...prevArrowStyle }} //style 덮어 씌우기
 			onClick={onClick}
-			tabIndex={0} // 포커스 가능하게 만듦
-			role="button" // 스크린리더 인식
-			onKeyDown={(e) => {
-				if (e.key === "Enter" || e.key === " " || e.key === "ArrowLeft") {
-					onClick(e);
-				}
-			}}
+			type="button"
 		/>
 	);
 }
@@ -64,37 +55,70 @@ function PrevArrow(props) {
 //슬라이더 오른쪽 화살표 버튼
 function NextArrow(props) {
 	const { className, style, onClick } = props;
+	const windowWidth = useWindowSize();
+	if (windowWidth < 1280) return null;
 	return (
-		<div
+		<button
 			className={className}
 			style={{ ...style, ...nextArrowStyle }}
 			onClick={onClick}
-			tabIndex={0}
-			role="button"
-			onKeyDown={(e) => {
-				if (e.key === "Enter" || e.key === " " || e.key === "ArrowRight") {
-					onClick(e);
-				}
-			}}
+			type="button"
 		/>
 	);
 }
 
 //슬라이더 함수 세팅값
 const settings = {
-	infinite: true,
+	infinite: false,
 	speed: 500,
 	slidesToShow: 8,
 	slidesToScroll: 2,
 	rows: 2,
 	prevArrow: <PrevArrow />,
 	nextArrow: <NextArrow />,
+	responsive: [
+		{
+			breakpoint: 1280,
+			settings: {
+				slidesToShow: 6,
+			},
+		},
+		{
+			breakpoint: 1024,
+			settings: {
+				slidesToShow: 4,
+			},
+		},
+		{
+			breakpoint: 768,
+			settings: {
+				slidesToShow: 4,
+			},
+		},
+		{
+			breakpoint: 585,
+			settings: {
+				slidesToShow: 3,
+			},
+		},
+	],
 };
 
+//슬라이드 2줄 사이 간격
+const slideStyle = css`
+	.slick-slide > div {
+	padding-top: 16px;
+	padding-bottom: 16px;
+	}
+`;
+
 const Mypage = () => {
+	const windowWidth = useWindowSize();
+	const isMobile = windowWidth <= 425;
+
 	// api에서 온 아이돌을 담을 idols
 	const [idols, setIdols] = useState([]);
-	// 선택한 아이돌 담는 임시 state
+	// 선택한 아이돌 담는 임시 statechl
 	const [checkedIdol, setCheckedIdol] = useState([]);
 	// 내가 선택한 아이돌 (id만 저장)
 	const [myIdol, setMyIdol] = useState([]);
@@ -109,6 +133,7 @@ const Mypage = () => {
 			const result = await idolsAPI.getIdols(30); // 불러올 개수
 			const idollist = result.list; // api에서 list만 가져오기
 			setIdols(idollist);
+			//에러처리
 		};
 		fetchData();
 	}, []);
@@ -135,13 +160,13 @@ const Mypage = () => {
 	// 추가하기 클릭시 추가된 아이돌 로컬에 저장하는 함수
 	const handleAddIdol = () => {
 		if (checkedIdol.length === 0) {
-			console.log("선택되지 않았습니다."); // 그냥 추가하기 눌렀을 경우 보여줄 것
+			alert("아이돌이 선택되지 않았습니다."); // 그냥 추가하기 눌렀을 경우 보여줄 것
 			return;
 		}
 		setMyIdol((prev) => {
 			const updated = [...prev, ...checkedIdol];
 			console.log("추가된 리스트", updated);
-			localStorage.setItem("myIdols", JSON.stringify(updated));
+			localStorage.setItem("myIdols", JSON.stringify(updated)); // ==> set 함수 안에 로컬은 분리하는게 좋다(추후)
 			return updated;
 		});
 		setCheckedIdol([]); // 선택된 아이돌 초기화
@@ -150,7 +175,7 @@ const Mypage = () => {
 	const handleRemoveIdol = (idol) => {
 		setMyIdol((prev) => {
 			const updated = prev.filter((id) => id !== idol.id);
-			console.log("없애기");
+			// console.log("없애기");
 			localStorage.setItem("myIdols", JSON.stringify(updated));
 			return updated;
 		});
@@ -158,16 +183,18 @@ const Mypage = () => {
 	};
 
 	return (
-		<div css={mypage}>
+		<div className={"mainGrid"}>
 			<div css={myIdolWrapper}>
 				<h2>내가 선택한 아이돌</h2>
-				<div css={myIdolList} className="small">
+				{selectedIdolList.length === 0 && (
+					<h3>아직 아이돌이 선택되지 않았습니다</h3>
+				)}
+				<div css={myIdolList}>
 					{selectedIdolList.map((idol) => (
 						<IdolList
 							key={idol.id}
 							idol={idol}
-							size="98px"
-							sizeType="small"
+							size={isMobile ? "70px" : "100px"}
 							isMyIdol={true}
 							onRemove={() => handleRemoveIdol(idol)}
 						/>
@@ -177,13 +204,13 @@ const Mypage = () => {
 			<div css={addIdol}>
 				<h2>관심있는 아이돌을 추가해보세요!</h2>
 				{/* 슬라이더 사용 */}
-				<Slider {...settings}>
+				<Slider css={slideStyle} {...settings}>
 					{remainIdols.map((idol) => (
-						// biome-ignore lint/a11y/useKeyWithClickEvents: <explanation>
+						// biome-ignore lint/a11y/useKeyWithClickEvents: <explanation>.
 						<div key={idol.id} onClick={() => toggleCheckedIdol(idol.id)}>
 							<IdolList
 								idol={idol}
-								size="128px"
+								size={isMobile ? "98px" : "128px"}
 								isChecked={checkedIdol.includes(idol.id)}
 							/>
 						</div>
