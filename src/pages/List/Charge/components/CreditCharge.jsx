@@ -10,7 +10,8 @@ export default function CreditCharge() {
 	const { credit } = useCredit();
 	const creditRef = useRef(null);
 	const animationRef = useRef(null);
-	const previousCreditRef = useRef(credit);
+	const previousCreditRef = useRef(0);
+	// const isInitialMount = useRef(true);
 	const [isModalOpen, setIsModalOpen] = useState(false);
 
 	const openModal = () => {
@@ -47,19 +48,9 @@ export default function CreditCharge() {
 			duration: 2,
 			ease: "power3.out",
 			onUpdate: updateDisplay, // 매 프레임마다 실행될 함수
-			// 애니메이션이 완료되면 최종값을 state에 반영
-			// onComplete: () => {
-			// 	setCredit(endValue);
-			// },
 		});
 	}, []);
 
-	// 크레딧 선택 시 업데이트 함수
-	// const handleCreditSelect = (selectedCredit) => {
-	// 	setCredit(selectedCredit);
-	// };
-
-	// 최초 마운트 시에만 실행
 	useEffect(() => {
 		// 이전 크레딧 값에서 새로운 크레딧 값으로 애니메이션
 		countCredit(previousCreditRef.current, credit);
