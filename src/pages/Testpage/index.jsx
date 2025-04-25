@@ -1,13 +1,13 @@
 /** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react";
 import { useCallback, useEffect, useState } from "react";
+import { toast } from "react-toastify";
 import { idolsAPI } from "../../apis/idolsAPI";
 import Button from "../../components/Button/Button";
 import Modal from "../../components/Modal";
 import RadioButton from "../../components/RadioButton";
 import Toastify from "../../components/Toastify";
 import { useCredit } from "../../context/CreditContext";
-
 const Testpage = () => {
 	const { credit, addCredit, deductCredit } = useCredit(); // credit context test를 위한 선언
 	const credits = [100, 500, 1000]; // 라디오 버튼 test를 위한 크레딧 배열
@@ -34,6 +34,9 @@ const Testpage = () => {
 
 	return (
 		<div>
+			<button type="button" onClick={() => toast("toastify test!")}>
+				test
+			</button>
 			<Toastify />
 			<h1>모달 테스트</h1>
 			<button type="button" onClick={handleOpen}>
