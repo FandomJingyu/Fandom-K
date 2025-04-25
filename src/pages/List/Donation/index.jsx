@@ -5,7 +5,7 @@ import LodaingError from "../../../components/Error";
 import { useDonations } from "../../../hooks/useDonation";
 import Card from "./components/Card";
 import Carousel from "./components/Carousel";
-import DonationSkeletion from "./components/Skeleton";
+import DonationSkeleton from "./components/Skeleton";
 
 function Donation() {
 	const { donations, loading, error } = useDonations();
@@ -16,7 +16,7 @@ function Donation() {
 
 			{loading ? (
 				<div>
-					<DonationSkeletion />
+					<DonationSkeleton />
 				</div>
 			) : error ? (
 				<LodaingError />
