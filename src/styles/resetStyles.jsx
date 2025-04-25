@@ -103,14 +103,6 @@ const resetStyles = css`
     padding: 0;
   }
 
-  @media all and (max-width: 767px) {
-    html,
-    body {
-      font-size: 13px;
-      line-height: 1.4em;
-    }
-  }
-
   select,
   input,
   textarea,

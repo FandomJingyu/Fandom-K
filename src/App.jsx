@@ -1,4 +1,5 @@
 import { Route, Routes } from "react-router-dom";
+import Toastify from "./components/Toastify";
 import { CreditProvider } from "./context/CreditContext";
 import DefaultLayout from "./layouts/DefaultLayout";
 import DonationDetail from "./pages/DonationDetail/index.jsx";
@@ -11,6 +12,7 @@ import Testpage from "./pages/Testpage/index.jsx";
 function App() {
 	return (
 		<CreditProvider>
+			<Toastify />
 			<Routes>
 				<Route index element={<Landing />} />
 				<Route path="/" element={<DefaultLayout />}>
