@@ -69,6 +69,7 @@ function NextArrow(props) {
 
 //슬라이더 함수 세팅값
 const settings = {
+	initialSlide: 0,
 	infinite: false,
 	speed: 500,
 	slidesToShow: 8,
@@ -116,6 +117,8 @@ const Mypage = () => {
 	const windowWidth = useWindowSize();
 	const isMobile = windowWidth <= 425;
 
+	const [sliderKey, setSliderKey] = useState(0);
+
 	// api에서 온 아이돌을 담을 idols
 	const [idols, setIdols] = useState([]);
 	// 선택한 아이돌 담는 임시 statechl
@@ -130,7 +133,7 @@ const Mypage = () => {
 	// 처음에 한 번 idols 불러오기
 	useEffect(() => {
 		const fetchData = async () => {
-			const result = await idolsAPI.getIdols(30); // 불러올 개수
+			const result = await idolsAPI.getIdols(80); // 불러올 개수
 			const idollist = result.list; // api에서 list만 가져오기
 			setIdols(idollist);
 			//에러처리
@@ -182,6 +185,14 @@ const Mypage = () => {
 		setCheckedIdol((prev) => [...prev, idol]);
 	};
 
+	// breakpoint에서 새로고침 할 경우 슬라이더 원위치
+	// key 값 변경을 통해 슬라이더 재랜더링하여서 원위치를 잡게 함
+	useEffect(() => {
+		setTimeout(() => {
+			setSliderKey((prev) => prev + 1);
+		}, 100);
+	}, []);
+
 	return (
 		<div className={"mainGrid"}>
 			<div css={myIdolWrapper}>
@@ -204,7 +215,7 @@ const Mypage = () => {
 			<div css={addIdol}>
 				<h2>관심있는 아이돌을 추가해보세요!</h2>
 				{/* 슬라이더 사용 */}
-				<Slider css={slideStyle} {...settings}>
+				<Slider key={sliderKey} css={slideStyle} {...settings}>
 					{remainIdols.map((idol) => (
 						// biome-ignore lint/a11y/useKeyWithClickEvents: <explanation>.
 						<div key={idol.id} onClick={() => toggleCheckedIdol(idol.id)}>

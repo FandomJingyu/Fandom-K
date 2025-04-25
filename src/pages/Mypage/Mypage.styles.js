@@ -41,7 +41,7 @@ const myIdolWrapper = css`
 // 나의 아이돌 리스트
 const myIdolList = css`
     display: flex;
-    gap: 28px;
+    gap: 22px;
     width: 100%;
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
