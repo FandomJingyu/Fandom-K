@@ -39,7 +39,6 @@ function NotFound() {
 	];
 
 	const randomImg = imgSrc[Math.floor(Math.random() * imgSrc.length)];
-	console.log(randomImg);
 
 	return (
 		<main css={container}>
