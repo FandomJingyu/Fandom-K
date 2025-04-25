@@ -1,10 +1,10 @@
 import styled from "@emotion/styled";
-import React, { useEffect, useState, useMemo } from "react";
+import React, { useState } from "react";
 import chartImg from "../../../../public/images/Chart.png";
-import { idolsAPI } from "../../../apis/idolsAPI";
 import Button from "../../../components/Button/Button";
 import Circle from "../../../components/Circle";
 import Modal from "../../../components/Modal";
+import { useChartIdols } from "../../../hooks/useChartIdols"; // 새로운 훅 import
 import ChartVoteModal from "./components/ChartVoteModal";
 import IdolProfileModal from "./components/IdolProfileModal";
 import { idolProfiles } from "./components/IdolProfiles";
@@ -39,76 +39,23 @@ const Overlay = styled.div`
   align-items: center;
 `;
 
-const ITEMS_PER_PAGE = 10;
-const TABLET_ITEMS_PER_PAGE = 5;
-const MOBILE_ITEMS_PER_PAGE = 5;
-
-const getIsMobile = () => window.matchMedia("(max-width: 425px)").matches;
-const getIsTablet = () =>
-	window.matchMedia("(min-width: 426px) and (max-width: 768px)").matches;
-
 const Chart = () => {
-	const [idols, setIdols] = useState([]);
-	const [activeTab, setActiveTab] = useState("female");
-	const [visibleCount, setVisibleCount] = useState(ITEMS_PER_PAGE);
-	const [loading, setLoading] = useState(true);
+	const {
+		idols,
+		loading,
+		error,
+		activeTab,
+		visibleList,
+		handleTabChange,
+		handleMore,
+		femaleIdols,
+		maleIdols,
+	} = useChartIdols();
 	const [isModalOpen, setIsModalOpen] = useState(false);
 	const [selectedIdol, setSelectedIdol] = useState(null);
 
 	const openModal = () => setIsModalOpen(true);
 	const closeModal = () => setIsModalOpen(false);
-
-	useEffect(() => {
-		const fetchIdols = async () => {
-			try {
-				setLoading(true);
-				const res = await idolsAPI.getIdols(100);
-				setIdols(res.list);
-			} catch (e) {
-				console.error("아이돌 불러오기 실패", e);
-			} finally {
-				setLoading(false);
-			}
-		};
-		fetchIdols();
-	}, []);
-
-	useEffect(() => {
-		const handleResize = () => {
-			if (getIsMobile()) setVisibleCount(MOBILE_ITEMS_PER_PAGE);
-			else if (getIsTablet()) setVisibleCount(TABLET_ITEMS_PER_PAGE);
-			else setVisibleCount(ITEMS_PER_PAGE);
-		};
-
-		handleResize();
-		window.addEventListener("resize", handleResize);
-		return () => window.removeEventListener("resize", handleResize);
-	}, []);
-
-	const femaleIdols = useMemo(() => {
-		return idols
-			.filter((i) => i.gender === "female")
-			.sort((a, b) => b.totalVotes - a.totalVotes);
-	}, [idols]);
-
-	const maleIdols = useMemo(() => {
-		return idols
-			.filter((i) => i.gender === "male")
-			.sort((a, b) => b.totalVotes - a.totalVotes);
-	}, [idols]);
-
-	const isFemale = activeTab === "female";
-	const visibleList = (isFemale ? femaleIdols : maleIdols).slice(
-		0,
-		visibleCount,
-	);
-
-	const handleMore = () => {
-		if (getIsMobile()) setVisibleCount((prev) => prev + MOBILE_ITEMS_PER_PAGE);
-		else if (getIsTablet())
-			setVisibleCount((prev) => prev + TABLET_ITEMS_PER_PAGE);
-		else setVisibleCount((prev) => prev + ITEMS_PER_PAGE);
-	};
 
 	const handleIdolClick = (idol) => {
 		const mockData = idolProfiles[idol.name];
@@ -161,47 +108,38 @@ const Chart = () => {
 				<Modal
 					isOpen={isModalOpen}
 					onClose={closeModal}
-					type={isFemale ? "voteWoman" : "voteMan"}
+					type={activeTab === "female" ? "voteWoman" : "voteMan"}
 					isMobileFullScreen={true}
 				>
 					<ChartVoteModal
-						gender={activeTab}
-						idols={isFemale ? femaleIdols : maleIdols}
-						setIdols={setIdols}
+						idols={activeTab === "female" ? femaleIdols : maleIdols}
 						closeModal={closeModal}
 					/>
 				</Modal>
 
 				<ChartIdol style={{ marginBottom: "20px" }}>
 					<ChartIdolLeft
-						onClick={() => {
-							setActiveTab("female");
-							if (getIsMobile()) setVisibleCount(MOBILE_ITEMS_PER_PAGE);
-							else if (getIsTablet()) setVisibleCount(TABLET_ITEMS_PER_PAGE);
-							else setVisibleCount(ITEMS_PER_PAGE);
-						}}
+						onClick={() => handleTabChange("female")}
 						style={{
 							cursor: "pointer",
-							fontWeight: isFemale ? 700 : 400,
-							backgroundColor: isFemale ? "#ffffff1a" : "transparent",
-							borderBottom: isFemale ? "1px solid #ffffff" : "none",
+							fontWeight: activeTab === "female" ? 700 : 400,
+							backgroundColor:
+								activeTab === "female" ? "#ffffff1a" : "transparent",
+							borderBottom:
+								activeTab === "female" ? "1px solid #ffffff" : "none",
 							transition: "all 0.3s ease",
 						}}
 					>
 						이달의 여자 아이돌
 					</ChartIdolLeft>
 					<ChartIdolRight
-						onClick={() => {
-							setActiveTab("male");
-							if (getIsMobile()) setVisibleCount(MOBILE_ITEMS_PER_PAGE);
-							else if (getIsTablet()) setVisibleCount(TABLET_ITEMS_PER_PAGE);
-							else setVisibleCount(ITEMS_PER_PAGE);
-						}}
+						onClick={() => handleTabChange("male")}
 						style={{
 							cursor: "pointer",
-							fontWeight: !isFemale ? 700 : 400,
-							backgroundColor: !isFemale ? "#ffffff1a" : "transparent",
-							borderBottom: !isFemale ? "1px solid #ffffff" : "none",
+							fontWeight: activeTab === "male" ? 700 : 400,
+							backgroundColor:
+								activeTab === "male" ? "#ffffff1a" : "transparent",
+							borderBottom: activeTab === "male" ? "1px solid #ffffff" : "none",
 							transition: "all 0.3s ease",
 						}}
 					>
@@ -213,6 +151,10 @@ const Chart = () => {
 					<div style={{ color: "white", textAlign: "center" }}>
 						불러오는 중...
 					</div>
+				) : error ? (
+					<div style={{ color: "red", textAlign: "center" }}>
+						아이돌 목록을 불러오는데 실패했습니다.
+					</div>
 				) : (
 					<>
 						<ChartList>
@@ -222,7 +164,9 @@ const Chart = () => {
 						</ChartList>
 
 						{visibleList.length <
-							(isFemale ? femaleIdols.length : maleIdols.length) && (
+							(activeTab === "female"
+								? femaleIdols.length
+								: maleIdols.length) && (
 							<MoreButton>
 								<Button size="load-more" onClick={handleMore}>
 									더 보기
