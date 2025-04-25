@@ -1,10 +1,11 @@
 /** @jsxImportSource @emotion/react */
 import { donationTitle } from "./Donation.style";
 
-import LodaingError from "../../../components/Error";
+import LoadingError from "../../../components/Error";
 import { useDonations } from "../../../hooks/useDonation";
 import Card from "./components/Card";
 import Carousel from "./components/Carousel";
+import DonationSkeleton from "./components/Skeleton";
 
 function Donation() {
 	const { donations, loading, error } = useDonations();
@@ -14,9 +15,11 @@ function Donation() {
 			<h2 css={donationTitle}>후원을 기다리는 조공</h2>
 
 			{loading ? (
-				<div>로딩 중...</div>
+				<div>
+					<DonationSkeleton />
+				</div>
 			) : error ? (
-				<LodaingError />
+				<LoadingError />
 			) : (
 				<Carousel
 					items={donations}

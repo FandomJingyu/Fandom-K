@@ -15,7 +15,9 @@ export const useDonations = () => {
 			if (response?.list) {
 				setDonations(response.list); // donations에 후원 목록 저장
 				localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(response.list)); // 로컬 스토리지에 데이터 캐시
-				setLoading(false); // 로딩 완료 전달
+				setTimeout(() => {
+					setLoading(false);
+				}, 600); // 로딩 완료 전달
 			} else throw new Error("응답이 없음"); // 데이터가 비어있는 경우 에러 처리
 		} catch (e) {
 			console.error("API 실패", e);
@@ -23,7 +25,7 @@ export const useDonations = () => {
 			setTimeout(() => {
 				setError(true);
 				setLoading(false);
-			}, 600);
+			}, 1000);
 		}
 	}, []);
 
@@ -33,7 +35,9 @@ export const useDonations = () => {
 			// 로컬 스토리지에 데이터가 존재한다면
 			try {
 				setDonations(JSON.parse(stored)); // 파싱하여 donations에 후원 목록 저장
-				setLoading(false); // 로딩 완료 처리
+				setTimeout(() => {
+					setLoading(false);
+				}, 1000); // 로딩 완료 처리
 			} catch {} // 파싱 실패시 무시
 		}
 		getDonation(); // API 호출을 통해 데이터 최신화
