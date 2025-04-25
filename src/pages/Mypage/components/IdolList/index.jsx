@@ -16,7 +16,6 @@ const imageWrapper = (size) => css`
 
 const IdolList = ({
 	idol,
-	sizeType = "default", // idolList 사이즈
 	size = "128px", //circle 사이즈
 	isChecked = false,
 	isMyIdol = false,
@@ -26,7 +25,7 @@ const IdolList = ({
 
 	return (
 		<>
-			<div css={idolList} key={idol.id} className={sizeType}>
+			<div css={idolList} key={idol.id}>
 				<div css={imageWrapper(size)}>
 					<Circle
 						size={size}

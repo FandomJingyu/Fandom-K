@@ -2,13 +2,13 @@ import { css } from "@emotion/react";
 
 // &.small을 통해 다른 사이즈 제공
 const idolList = css`
-    width: 128px;
-    height: 183px;
+    // width: 128px;
+    // height: 183px;
     text-align : center;
-    margin: 16px 0px;
+    // margin: 16px 0px;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    // justify-content: space-between;
 
     > h3 {
         font-size: 16px;
@@ -22,10 +22,10 @@ const idolList = css`
     }
 
     // myIdolList 에 들어가는 사이즈 -> 나중에 ustState 쓸때 사이즈 쓸 예정
-    &.small {
-        width: 100px;
-        height: 153px;
-    }
+    // &.small {
+    //     width: 100px;
+    //     height: 153px;
+    // }
 `;
 
 export { idolList };
