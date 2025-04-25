@@ -12,6 +12,7 @@ export default function DonationDetailInfo({ donation, loading }) {
 		donation;
 
 	const [credit, setCredit] = useState(0);
+	const myCredit = useCredit();
 	const [isModalOpen, setIsModalOpen] = useState(false);
 	const [isScrollDown, setIsScrollDown] = useState(false);
 	const [isError, setIsError] = useState(false);
@@ -40,10 +41,7 @@ export default function DonationDetailInfo({ donation, loading }) {
 			setCredit(myCredit.credit || 0); // 최대값으로 제한
 		}
 	};
-	const myCredit = useCredit();
-	const openModal = () => {
-		setIsModalOpen(true);
-	};
+
 	const creditList = [
 		{
 			label: "+100",
@@ -62,8 +60,20 @@ export default function DonationDetailInfo({ donation, loading }) {
 			value: myCredit.credit,
 		},
 	];
+
+	const openModal = () => {
+		setIsModalOpen(true);
+	};
+
 	const closeModal = () => {
 		setIsModalOpen(false);
+	};
+
+	const handleDonate = () => {
+		if (credit === 0 || isError) return;
+
+		myCredit.deductCredit(credit);
+		setCredit(0);
 	};
 
 	// * window의 스크롤 위치 구하기,
@@ -155,6 +165,7 @@ export default function DonationDetailInfo({ donation, loading }) {
 							fullWidth
 							type="button"
 							variant="primary"
+							onClick={handleDonate}
 						>
 							후원하기
 						</Button>
