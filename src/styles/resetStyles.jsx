@@ -103,14 +103,6 @@ const resetStyles = css`
     padding: 0;
   }
 
-  @media all and (max-width: 767px) {
-    html,
-    body {
-      font-size: 13px;
-      line-height: 1.4em;
-    }
-  }
-
   select,
   input,
   textarea,
@@ -216,6 +208,12 @@ const resetStyles = css`
 
   ins {
     text-decoration: none;
+  }
+
+  a:focus,
+  button:focus {
+    outline: 2px solid var(--orange-F96D69) !important;
+    outline-offset: 2px;
   }
 `;
 
