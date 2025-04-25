@@ -90,7 +90,7 @@ function Card({ donation }) {
 						</div>
 						{/* 남은 날짜 */}
 						<span css={donationDday}>
-							{dDay === 0 ? "기한 만료" : `${dDay}일 남음`}
+							{dDay <= 0 ? "기한 만료" : `${dDay}일 남음`}
 						</span>
 					</div>
 					<ProgressBar progress={progress} />
