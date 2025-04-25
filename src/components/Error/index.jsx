@@ -25,10 +25,10 @@ const ERROR_MESSAGE = {
  *        정의되지 않은 값이 들어오면 그대로 출력됩니다.
  * @returns 오류 메시지와 다시 시도 버튼
  */
-function LodaingError({ error = "페이지를" }) {
+function LoadingError({ error = "페이지를" }) {
 	const errorMessage = ERROR_MESSAGE[error] || error;
 
-	const handleReroad = () => {
+	const handleReload = () => {
 		location.reload();
 	};
 	return (
@@ -40,11 +40,11 @@ function LodaingError({ error = "페이지를" }) {
 			</div>
 			<h1 css={title}>문제가 발생했습니다.</h1>
 			<p css={description}>{errorMessage} 불러오는데 실패했습니다.</p>
-			<button onClick={handleReroad} css={button} type="button">
+			<button onClick={handleReload} css={button} type="button">
 				다시 시도하기
 			</button>
 		</div>
 	);
 }
 
-export default LodaingError;
+export default LoadingError;

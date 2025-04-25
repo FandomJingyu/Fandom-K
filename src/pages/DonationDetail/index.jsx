@@ -2,6 +2,7 @@ import { css } from "@emotion/react";
 import { useCallback, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { donationsAPI } from "../../apis/donationsAPI";
+import LoadingError from "../../components/Error";
 import DonationDetailInfo from "./components/DonationDetailInfo";
 import DonationDetailText from "./components/DonationDetailText";
 /** @jsxImportSource @emotion/react */
@@ -11,6 +12,7 @@ export default function DonationDetail() {
 	const [donation, setDonation] = useState(null);
 	const [loading, setLoading] = useState(true);
 	const [randomEmoji, setRandomEmoji] = useState("");
+	const [error, setError] = useState(false);
 
 	const getDonation = useCallback(async () => {
 		try {
@@ -20,10 +22,12 @@ export default function DonationDetail() {
 					(item) => item.id === Number.parseInt(id) || item.id === id,
 				);
 				setDonation(foundDonation || null);
-				setLoading(false);
 			}
 		} catch (error) {
-			console.error("후원을 불러오는데 실패했습니다.", error);
+			// 로딩 UI 잠시 유지
+			setTimeout(() => {
+				setError(true);
+			}, 600); // 600초 정도 기다렸다가 에러 표시
 		} finally {
 			setLoading(false);
 		}
@@ -55,7 +59,9 @@ export default function DonationDetail() {
 	return (
 		<div className="mainGrid" css={DonationDetailStyle}>
 			{loading ? (
-				<div>로딩중...</div>
+				<div>로딩 중...</div>
+			) : error ? (
+				<LoadingError />
 			) : (
 				<>
 					<div css={DonationDetailTop}>

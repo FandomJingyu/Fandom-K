@@ -1,6 +1,8 @@
 import { css } from "@emotion/react";
 import { useCallback, useEffect, useRef, useState } from "react";
+import { toast } from "react-toastify";
 import Modal from "../../../../src/components/Modal";
+import { donationsAPI } from "../../../apis/donationsAPI";
 import Button from "../../../components/Button/Button";
 import { useCredit } from "../../../context/CreditContext";
 import CreditRechargeModalContent from "../../List/Charge/components/CreditRechargeModalContent";
@@ -12,9 +14,11 @@ export default function DonationDetailInfo({ donation, loading }) {
 		donation;
 
 	const [credit, setCredit] = useState(0);
+	const myCredit = useCredit();
 	const [isModalOpen, setIsModalOpen] = useState(false);
 	const [isScrollDown, setIsScrollDown] = useState(false);
 	const [isError, setIsError] = useState(false);
+	const [donatedAmount, setDonatedAmount] = useState(receivedDonations);
 
 	const handleCredit = (label, value) => {
 		let newCredit;
@@ -36,14 +40,11 @@ export default function DonationDetailInfo({ donation, loading }) {
 
 		// 에러 메시지 표시 또는 최대값으로 제한
 		if (isOverLimit) {
-			alert("보유한 크레딧을 초과할 수 없습니다.");
+			toast.error("보유한 크레딧을 초과할 수 없습니다.");
 			setCredit(myCredit.credit || 0); // 최대값으로 제한
 		}
 	};
-	const myCredit = useCredit();
-	const openModal = () => {
-		setIsModalOpen(true);
-	};
+
 	const creditList = [
 		{
 			label: "+100",
@@ -62,8 +63,30 @@ export default function DonationDetailInfo({ donation, loading }) {
 			value: myCredit.credit,
 		},
 	];
+
+	const openModal = () => {
+		setIsModalOpen(true);
+	};
+
 	const closeModal = () => {
 		setIsModalOpen(false);
+	};
+
+	const handleDonate = async () => {
+		if (credit === 0 || isError) return;
+
+		try {
+			// 후원 요청
+			await donationsAPI.contribute(donation.id, credit);
+			// 후원 금액 반영
+			myCredit.deductCredit(credit);
+			// 후원 금액 반영
+			setDonatedAmount((prev) => prev + credit); // 상태 업데이트
+			toast.success("후원에 성공하셨습니다!");
+			setCredit(0); //크레딧 초기화
+		} catch (error) {
+			alert(error.message);
+		}
 	};
 
 	// * window의 스크롤 위치 구하기,
@@ -110,7 +133,7 @@ export default function DonationDetailInfo({ donation, loading }) {
 						<div css={DonationDetailInfoItem}>
 							<span>모인 금액</span>
 							<p>
-								<strong>{receivedDonations.toLocaleString()}</strong>
+								<strong>{donatedAmount.toLocaleString()}</strong>
 								&nbsp;/&nbsp;
 								{targetDonation.toLocaleString()} 크레딧
 							</p>
@@ -155,6 +178,7 @@ export default function DonationDetailInfo({ donation, loading }) {
 							fullWidth
 							type="button"
 							variant="primary"
+							onClick={handleDonate}
 						>
 							후원하기
 						</Button>
