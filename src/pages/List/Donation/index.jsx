@@ -1,7 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import { donationTitle } from "./Donation.style";
 
-import LodaingError from "../../../components/Error";
+import LoadingError from "../../../components/Error";
 import { useDonations } from "../../../hooks/useDonation";
 import Card from "./components/Card";
 import Carousel from "./components/Carousel";
@@ -16,7 +16,7 @@ function Donation() {
 			{loading ? (
 				<div>로딩 중...</div>
 			) : error ? (
-				<LodaingError />
+				<LoadingError />
 			) : (
 				<Carousel
 					items={donations}
