@@ -2,10 +2,14 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 function Toastify() {
+	const checkDevice = () => {
+		return window.innerWidth < 768 ? "mobile" : "desktop";
+	};
+
 	return (
 		<>
 			<ToastContainer
-				position="top-right" // 알람 위치 지정
+				position={checkDevice() === "mobile" ? "bottom-center" : "top-right"} // 알람 위치 지정
 				autoClose={3000} // 자동 off 시간
 				hideProgressBar={false} // 진행시간바 숨김
 				closeOnClick // 클릭으로 알람 닫기

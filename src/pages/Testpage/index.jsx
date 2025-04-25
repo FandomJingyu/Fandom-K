@@ -6,7 +6,6 @@ import { idolsAPI } from "../../apis/idolsAPI";
 import Button from "../../components/Button/Button";
 import Modal from "../../components/Modal";
 import RadioButton from "../../components/RadioButton";
-import Toastify from "../../components/Toastify";
 import { useCredit } from "../../context/CreditContext";
 const Testpage = () => {
 	const { credit, addCredit, deductCredit } = useCredit(); // credit context test를 위한 선언
@@ -34,10 +33,18 @@ const Testpage = () => {
 
 	return (
 		<div>
-			<button type="button" onClick={() => toast("toastify test!")}>
-				test
-			</button>
-			<Toastify />
+			{/* Toast 사용법
+			 * 상단에 import { toast } from "react-toastify"; 선언
+			 * 성공일 때 toast.success("나올 문구")
+			 * 실패일 때 toast.error("나올 문구")
+			 */}
+			<Button size="donate-md" onClick={() => toast.success("이렇게 테스트!")}>
+				성공일 때
+			</Button>
+			<Button size="donate-md" onClick={() => toast.error("애라다 애라!")}>
+				실패일 때
+			</Button>
+
 			<h1>모달 테스트</h1>
 			<button type="button" onClick={handleOpen}>
 				모달 열기
@@ -111,12 +118,18 @@ const Testpage = () => {
 
 // 라디오버튼 test를위한 css
 const radio = css`
-color: #ffffff`;
+  color: #ffffff;
+`;
 
 // 크레딧 test를 위한 css
-const creditStyle = css`color:#ffffff`;
+const creditStyle = css`
+  color: #ffffff;
+`;
 
-const creditContainer = css`display: flex; gap: 24px`;
+const creditContainer = css`
+  display: flex;
+  gap: 24px;
+`;
 
 // API 테스트를 위한 css
 const testIdolsCircle = css`
