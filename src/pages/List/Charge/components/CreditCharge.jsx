@@ -1,8 +1,8 @@
+import Modal from "@/components/Modal";
+import { useCredit } from "@/context/CreditContext";
 import { css } from "@emotion/react";
 import gsap from "gsap";
 import { useCallback, useEffect, useRef, useState } from "react";
-import Modal from "../../../../../src/components/Modal";
-import { useCredit } from "../../../../context/CreditContext";
 import CreditRechargeModalContent from "./CreditRechargeModalContent";
 /** @jsxImportSource @emotion/react */
 
