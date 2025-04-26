@@ -5,7 +5,7 @@ export const donationsAPI = {
 	getDonations: async (pageSize = 20) => {
 		try {
 			const response = await baseAPI.get(
-				`/15-3/donations?pageSize=${pageSize}`,
+				`/15-3/donations?&priorityIdolIds=5023&pageSize=${pageSize}`,
 			);
 			return response.data;
 		} catch (error) {

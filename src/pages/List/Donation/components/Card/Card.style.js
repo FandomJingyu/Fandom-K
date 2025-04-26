@@ -87,9 +87,8 @@ z-index: 3;
 font-size: 13px;
 
 @media (max-width: 426px) {
-bottom: 4vw;
-left: 1.87vw;
-font-size: 2.67vw;
+  bottom: 4vw;
+  left: 1.87vw;
 }
 `;
 
@@ -137,7 +136,7 @@ letter-spacing: -0.165px;
 opacity: 0.4;
 
 @media (max-width: 426px) {
-font-size: 3.2vw;
+font-size: 2.82vw;
 `;
 
 /**
@@ -152,7 +151,7 @@ font-weight: 500;
 line-height: normal;
 
 @media (max-width: 426px) {
-font-size: 100%;
+font-size: 3.05vw;
 `;
 
 /**

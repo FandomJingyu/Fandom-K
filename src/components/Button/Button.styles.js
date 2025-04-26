@@ -64,7 +64,7 @@ const buttonSizes = {
 // 줄어드는 버튼만 반응형 구현
 const buttonSizeMobile = {
 	"start-now": { width: "230px", height: "48px", fontSize: "14px" },
-	"donate-md": { width: "142px", height: "31px", fontSize: "13px" },
+	"donate-md": { width: "142px", height: "31px", fontSize: "10px" },
 	"vote-lg": { height: "42px", fontSize: "14px" },
 };
 
