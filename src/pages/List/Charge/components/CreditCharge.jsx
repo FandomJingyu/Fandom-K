@@ -80,13 +80,8 @@ export default function CreditCharge() {
 					충전하기 <img src="/icons/icon_credit.svg" alt="credit" />
 				</button>
 			</div>
-
-			{/* 모달 내부에 선택된 크레딧 값을 업데이트할 함수 전달 */}
 			<Modal isOpen={isModalOpen} onClose={closeModal} type="credit">
-				<CreditRechargeModalContent
-					myCredit={credit} // 현재 크레딧 전달
-					closeModal={closeModal} // 모달을 닫는 함수 전달
-				/>
+				<CreditRechargeModalContent closeModal={closeModal} />
 			</Modal>
 		</>
 	);
