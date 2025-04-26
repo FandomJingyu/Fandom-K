@@ -163,6 +163,9 @@ const DonationDetailContent = css`
     gap: 40px;
     margin-top: 60px;
   }
+  @media all and (max-width: 1024px) {
+    gap: 4vw;
+  }
   @media all and (max-width: 768px) {
     flex-direction: column;
     gap: 0;

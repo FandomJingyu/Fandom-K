@@ -229,7 +229,7 @@ const DonationDetailInfoStyle = css`
     }
   }
 
-  button {
+  > button {
     height: 60px;
     border-radius: 10px;
     font-size: 18px;
@@ -243,8 +243,13 @@ const DonationDetailInfoStyle = css`
     white-space: nowrap;
   }
   @media all and (max-width: 1300px) {
-    height: auto;
     top: 80px;
+  }
+  @media all and (max-width: 1024px) {
+    height: auto;
+    > button {
+      margin-top: 30px;
+    }
   }
   @media all and (max-width: 768px) {
     position: static;
@@ -258,7 +263,8 @@ const DonationDetailInfoStyle = css`
         font-size: 2.6vw;
       }
     }
-    button {
+    > button {
+      margin-top: 0;
       height: 7.81vw;
       font-size: 2.86vw;
       border-radius: 1.3vw;
@@ -272,7 +278,7 @@ const DonationDetailInfoStyle = css`
         font-size: 3.76vw;
       }
     }
-    button {
+    > button {
       height: 11.76vw;
       font-size: 3.76vw;
     }
