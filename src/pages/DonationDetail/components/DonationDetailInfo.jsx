@@ -2,12 +2,13 @@ import { donationsAPI } from "@/apis/donationsAPI";
 import Button from "@/components/Button/Button";
 import Modal from "@/components/Modal";
 import { useCredit } from "@/context/CreditContext";
+import { useSafeSubmit } from "@/hooks/useSafeSubmit";
 import CreditRechargeModalContent from "@/pages/List/Charge/components/CreditRechargeModalContent";
+/** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react";
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import DonationDetailTimer from "./DonationDetailTimer";
-/** @jsxImportSource @emotion/react */
 
 export default function DonationDetailInfo({ donation, loading }) {
 	const { idol, receivedDonations, targetDonation, deadline, subtitle, title } =
@@ -19,6 +20,7 @@ export default function DonationDetailInfo({ donation, loading }) {
 	const [isScrollDown, setIsScrollDown] = useState(false);
 	const [isError, setIsError] = useState(false);
 	const [donatedAmount, setDonatedAmount] = useState(receivedDonations);
+	const { isSubmitting, handleSubmit } = useSafeSubmit();
 
 	const checkIsLimitOver = (newCredit) => {
 		// 보유 크레딧보다 많은지 확인
@@ -175,11 +177,11 @@ export default function DonationDetailInfo({ donation, loading }) {
 							</ul>
 						</div>
 						<Button
-							disabled={credit === 0 || isError}
+							disabled={credit === 0 || isError || isSubmitting}
 							fullWidth
 							type="button"
 							variant="primary"
-							onClick={handleDonate}
+							onClick={handleSubmit(handleDonate)}
 						>
 							후원하기
 						</Button>

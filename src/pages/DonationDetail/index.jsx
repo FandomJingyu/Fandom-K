@@ -1,8 +1,8 @@
+import { donationsAPI } from "@/apis/donationsAPI";
+import LoadingError from "@/components/Error";
 import { css } from "@emotion/react";
 import { useCallback, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { donationsAPI } from "../../apis/donationsAPI";
-import LoadingError from "../../components/Error";
 import DonationDetailInfo from "./components/DonationDetailInfo";
 import DonationDetailSkeleton from "./components/DonationDetailSkeleton";
 import DonationDetailText from "./components/DonationDetailText";
