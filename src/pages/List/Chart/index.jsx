@@ -1,13 +1,13 @@
+import Button from "@/components/Button/Button";
+import Circle from "@/components/Circle";
+import Modal from "@/components/Modal";
 import styled from "@emotion/styled";
 import React, { useState } from "react";
-import chartImg from "../../../../public/images/Chart.png";
-import Button from "../../../components/Button/Button";
-import Circle from "../../../components/Circle";
-import Modal from "../../../components/Modal";
-import useChart from "../../../hooks/useChart"; // useChart 훅 import
+import chartImg from "/images/Chart.png";
 import ChartVoteModal from "./components/ChartVoteModal";
 import IdolProfileModal from "./components/IdolProfileModal";
 import { idolProfiles } from "./components/IdolProfiles";
+import useChart from "./components/hooks/useChart";
 
 import {
 	ChartButtonWrap,
@@ -112,7 +112,12 @@ const Chart = () => {
 					type={activeTab === "female" ? "voteWoman" : "voteMan"}
 					isMobileFullScreen={true}
 				>
-					<ChartVoteModal gender={activeTab} closeModal={closeModal} />
+					<ChartVoteModal
+						gender={activeTab}
+						closeModal={closeModal}
+						idols={activeTab === "female" ? femaleIdols : maleIdols}
+						setIdols={setIdols}
+					/>
 				</Modal>
 
 				<ChartIdol style={{ marginBottom: "20px" }}>

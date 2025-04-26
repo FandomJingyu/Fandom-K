@@ -1,23 +1,25 @@
+import LoadingError from "@/components/Error";
+import useSafeSubmit from "@/hooks/useSafeSubmit";
 /** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react";
-import LoadingError from "../../../../../components/Error";
-import { useChartVoteModal } from "../../../../../hooks/useChartVoteModal";
+import { useChartVoteModal } from "../hooks/useChartVoteModal";
 import VoteIdolSkeleton from "./Skeleton";
 import VoteButton from "./VoteButton";
 import VoteIdolList from "./VoteIdolList";
 
-export default function ChartVoteModal({ gender, closeModal }) {
-	const {
-		idols,
-		selectedIdolId,
-		handleVote,
-		handleIdolSelect,
-		loading,
-		error,
-	} = useChartVoteModal(gender, closeModal);
+export default function ChartVoteModal({
+	gender,
+	closeModal,
+	idols,
+	setIdols,
+}) {
+	const { selectedIdolId, handleVote, handleIdolSelect, loading, error } =
+		useChartVoteModal(gender, closeModal, idols, setIdols);
+
+	const { isSubmitting, safeSubmit } = useSafeSubmit(handleVote);
 
 	return (
-		<form onSubmit={handleVote} css={VoteFormStyles}>
+		<form onSubmit={safeSubmit} css={VoteFormStyles}>
 			{loading ? (
 				<div>
 					<VoteIdolSkeleton />
@@ -31,7 +33,7 @@ export default function ChartVoteModal({ gender, closeModal }) {
 					onSelectIdol={handleIdolSelect}
 				/>
 			)}
-			<VoteButton />
+			<VoteButton isSubmitting={isSubmitting} />
 		</form>
 	);
 }

@@ -1,7 +1,7 @@
-import CheckIdol from "../../../../../components/CheckIdol";
+import CheckIdol from "@/components/CheckIdol";
 /** @jsxImportSource @emotion/react */
-import Circle from "../../../../../components/Circle";
-import RadioButton from "../../../../../components/RadioButton";
+import Circle from "@/components/Circle";
+import RadioButton from "@/components/RadioButton";
 import {
 	IdolDetails,
 	IdolInfo,
