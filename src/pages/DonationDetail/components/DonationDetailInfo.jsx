@@ -2,7 +2,7 @@ import { donationsAPI } from "@/apis/donationsAPI";
 import Button from "@/components/Button/Button";
 import Modal from "@/components/Modal";
 import { useCredit } from "@/context/CreditContext";
-import { useSafeSubmit } from "@/hooks/useSafeSubmit";
+import useSafeSubmit from "@/hooks/useSafeSubmit";
 import CreditRechargeModalContent from "@/pages/List/Charge/components/CreditRechargeModalContent";
 /** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react";
