@@ -1,6 +1,7 @@
 // src/components/Modal/Modal.styles.js
 /** @jsxImportSource @emotion/react */
 import { useState } from "react";
+import { toast } from "react-toastify";
 import creditIcon from "/icons/icon_credit.svg";
 import Button from "../../../../../src/components/Button/Button";
 import RadioButton from "../../../../../src/components/RadioButton";
@@ -56,7 +57,9 @@ export default function CreditRechargeModalContent({ myCredit, closeModal }) {
 					variant="primary"
 					disabled={select === null}
 					fullWidth
-					onClick
+					onClick={() =>
+						toast.success(`🎉 ${select.toLocaleString()} 크레딧 충전 완료!`)
+					}
 				>
 					충전하기
 				</Button>
