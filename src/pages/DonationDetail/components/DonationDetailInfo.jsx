@@ -20,15 +20,7 @@ export default function DonationDetailInfo({ donation, loading }) {
 	const [isError, setIsError] = useState(false);
 	const [donatedAmount, setDonatedAmount] = useState(receivedDonations);
 
-	const handleCredit = (label, value) => {
-		let newCredit;
-
-		if (label === "전액") {
-			newCredit = value;
-		} else {
-			newCredit = credit + value;
-		}
-
+	const checkIsLimitOver = (newCredit) => {
 		// 보유 크레딧보다 많은지 확인
 		const isOverLimit = newCredit > (myCredit.credit || 0);
 
@@ -38,11 +30,22 @@ export default function DonationDetailInfo({ donation, loading }) {
 		// 크레딧 값 업데이트
 		setCredit(newCredit);
 
-		// 에러 메시지 표시 또는 최대값으로 제한
 		if (isOverLimit) {
+			// 에러 메시지 표시 또는 최대값으로 제한
 			toast.error("보유한 크레딧을 초과할 수 없습니다.");
 			setCredit(myCredit.credit || 0); // 최대값으로 제한
 		}
+	};
+	const handleCredit = (label, value) => {
+		let newCredit;
+
+		if (label === "전액") {
+			newCredit = value;
+		} else {
+			newCredit = credit + value;
+		}
+
+		checkIsLimitOver(newCredit);
 	};
 
 	const creditList = [
@@ -112,8 +115,7 @@ export default function DonationDetailInfo({ donation, loading }) {
 		const newValue = value === "" ? 0 : Number(value);
 
 		// 입력값이 보유 크레딧보다 크면 에러 상태로 설정
-		setIsError(newValue > myCredit.credit);
-		setCredit(newValue);
+		checkIsLimitOver(newValue);
 	};
 	return (
 		<>
@@ -142,14 +144,14 @@ export default function DonationDetailInfo({ donation, loading }) {
 							<DonationDetailTimer deadline={deadline} />
 						</div>
 						<div css={DonationDetailInfoItem} className="isCredit">
-							<span className="myCredit">
+							<div className="myCredit">
 								내 크레딧 :{" "}
 								{myCredit.credit ? myCredit.credit.toLocaleString() : 0}
 								<button type="button" onClick={openModal}>
 									충전하기 +
 								</button>
-							</span>
-							<div className={`input ${isError ? "isError" : ""}`}>
+							</div>
+							<div className="input">
 								<input
 									type="text"
 									name=""
@@ -158,7 +160,6 @@ export default function DonationDetailInfo({ donation, loading }) {
 									value={credit === 0 ? "" : credit.toLocaleString()}
 									onChange={inputOnChange}
 								/>
-								<span>❗크레딧이 부족합니다.</span>
 							</div>
 							<ul>
 								{creditList.map((credit) => (
@@ -308,22 +309,11 @@ const DonationDetailInfoItem = css`
     background-size: 24px;
     background-position: right 24px center;
     background-repeat: no-repeat;
+    position: relative;
     input[type='text'] {
       height: 60px;
       flex: 1;
       outline: none;
-    }
-    span {
-      display: none;
-      font-size: 12px;
-      color: rgba(255, 0, 0, 0.6);
-      font-weight: 500;
-      align-items: center;
-    }
-    &.isError {
-      span {
-        display: flex;
-      }
     }
   }
   ul {
