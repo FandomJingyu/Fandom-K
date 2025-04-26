@@ -6,7 +6,9 @@ import Slider from "react-slick";
 import { idolsAPI } from "../../apis/idolsAPI";
 import Button from "../../components/Button/Button";
 import { addButton, addIdol, myIdolList, myIdolWrapper } from "./Mypage.styles";
+import SkeletonSlider from "./SkeletonSlider";
 import IdolList from "./components/IdolList";
+import { idolList } from "./components/IdolList/IdolList.styles";
 import useWindowSize from "./hooks/useWindowSize";
 /** @jsxImportSource @emotion/react */
 
@@ -117,7 +119,12 @@ const Mypage = () => {
 	const windowWidth = useWindowSize();
 	const isMobile = windowWidth <= 425;
 
+	// sliderkey로 화면을 불러올때 새로운 슬라이더 생성
 	const [sliderKey, setSliderKey] = useState(0);
+
+	// 로딩, 에러 처리 변수
+	const [loading, setLoading] = useState(true);
+	const [error, setError] = useState(null);
 
 	// api에서 온 아이돌을 담을 idols
 	const [idols, setIdols] = useState([]);
@@ -133,10 +140,18 @@ const Mypage = () => {
 	// 처음에 한 번 idols 불러오기
 	useEffect(() => {
 		const fetchData = async () => {
-			const result = await idolsAPI.getIdols(80); // 불러올 개수
-			const idollist = result.list; // api에서 list만 가져오기
-			setIdols(idollist);
-			//에러처리
+			try {
+				const result = await idolsAPI.getIdols(80); // 불러올 개수
+				const idollist = result.list; // api에서 list만 가져오기
+				if (idolList) {
+					setIdols(idollist);
+					setTimeout(() => {
+						setLoading(false);
+					}, 600); // 로딩 완료 전달
+				}
+			} catch (e) {
+				console.error(e);
+			}
 		};
 		fetchData();
 	}, []);
@@ -214,19 +229,25 @@ const Mypage = () => {
 			</div>
 			<div css={addIdol}>
 				<h2>관심있는 아이돌을 추가해보세요!</h2>
-				{/* 슬라이더 사용 */}
-				<Slider key={sliderKey} css={slideStyle} {...settings}>
-					{remainIdols.map((idol) => (
-						// biome-ignore lint/a11y/useKeyWithClickEvents: <explanation>.
-						<div key={idol.id} onClick={() => toggleCheckedIdol(idol.id)}>
-							<IdolList
-								idol={idol}
-								size={isMobile ? "98px" : "128px"}
-								isChecked={checkedIdol.includes(idol.id)}
-							/>
-						</div>
-					))}
-				</Slider>
+
+				{loading ? (
+					<SkeletonSlider />
+					// <div>로딩중입니다</div>
+				) : (
+					<Slider key={sliderKey} css={slideStyle} {...settings}>
+						{remainIdols.map((idol) => (
+							// biome-ignore lint/a11y/useKeyWithClickEvents: <explanation>.
+							<div key={idol.id} onClick={() => toggleCheckedIdol(idol.id)}>
+								<IdolList
+									idol={idol}
+									size={isMobile ? "98px" : "128px"}
+									isChecked={checkedIdol.includes(idol.id)}
+								/>
+							</div>
+						))}
+					</Slider>
+				)}
+
 				<div css={addButton}>
 					<Button size={"add"} onClick={handleAddIdol}>
 						<img src="../public/images/plus_24px.svg" alt="플러스 이미지" />
