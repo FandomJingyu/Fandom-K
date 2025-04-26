@@ -23,7 +23,6 @@ export const IdolList = css`
 
   @media (max-width: 425px) {
     max-height: calc(100vh - 17.88vw); /* 버튼 영역 + 여유 */
-    overflow-y: auto;                /* ✅ 반드시 필요 */
     padding-bottom: 24vw;            /* 리스트 아이템 마지막 여백 */
   }
 
@@ -42,15 +41,16 @@ export const IdolItem = css`
     height: 1px;
     background: rgba(255, 255, 255, 0.1);
     align-self: stretch;
-    margin: 8px 0;
+    margin: 11px 0;
   }
 `;
 
 export const RadioContent = css`
-  position: relative; /* ✅ CheckIdol 기준점 */
+  position: relative; /* ✅ CheckIdol 기준점 */ 
   display: flex;
   align-items: center;
   gap: 12px;
+  
 `;
 
 export const IdolInfo = css`
@@ -58,6 +58,8 @@ export const IdolInfo = css`
   justify-content: center;
   align-items: center;
   gap: 12px;
+
+  
 `;
 
 export const Rank = css`
@@ -83,6 +85,7 @@ export const IdolDetails = css`
   display: flex;
   flex-direction: column;
   gap: 4px;
+ 
 `;
 
 export const IdolVote = css`
