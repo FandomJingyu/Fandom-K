@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import Slider from "react-slick";
 import { idolsAPI } from "../../apis/idolsAPI";
 import Button from "../../components/Button/Button";
+import LoadingError from "../../components/Error";
 import { addButton, addIdol, myIdolList, myIdolWrapper } from "./Mypage.styles";
 import SkeletonSlider from "./SkeletonSlider";
 import IdolList from "./components/IdolList";
@@ -143,14 +144,18 @@ const Mypage = () => {
 			try {
 				const result = await idolsAPI.getIdols(80); // 불러올 개수
 				const idollist = result.list; // api에서 list만 가져오기
-				if (idolList) {
+				if (idollist) {
 					setIdols(idollist);
 					setTimeout(() => {
 						setLoading(false);
-					}, 600); // 로딩 완료 전달
-				}
+					}, 600);
+				} else throw new Error("응답이 없음");
 			} catch (e) {
 				console.error(e);
+				setTimeout(() => {
+					setError(true);
+					setLoading(false);
+				}, 1000);
 			}
 		};
 		fetchData();
@@ -232,7 +237,8 @@ const Mypage = () => {
 
 				{loading ? (
 					<SkeletonSlider />
-					// <div>로딩중입니다</div>
+				) : error ? (
+					<LoadingError />
 				) : (
 					<Slider key={sliderKey} css={slideStyle} {...settings}>
 						{remainIdols.map((idol) => (
@@ -249,10 +255,14 @@ const Mypage = () => {
 				)}
 
 				<div css={addButton}>
-					<Button size={"add"} onClick={handleAddIdol}>
-						<img src="../public/images/plus_24px.svg" alt="플러스 이미지" />
-						<span>추가하기</span>
-					</Button>
+					{error ? (
+						<></>
+					) : (
+						<Button size={"add"} onClick={handleAddIdol}>
+							<img src="../public/images/plus_24px.svg" alt="플러스 이미지" />
+							<span>추가하기</span>
+						</Button>
+					)}
 				</div>
 			</div>
 		</div>
