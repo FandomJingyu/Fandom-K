@@ -32,10 +32,16 @@ export default function DonationDetailInfo({ donation, loading }) {
 
 		if (isOverLimit) {
 			// 에러 메시지 표시 또는 최대값으로 제한
-			toast.error("보유한 크레딧을 초과할 수 없습니다.");
+			// toast.error 호출 시 toastId 옵션 추가 - 연속 입력 시 중복 표시 방지
+			toast.error("보유한 크레딧을 초과할 수 없습니다.", {
+				toastId: "credit-error",
+			});
 			setCredit(myCredit.credit || 0); // 최대값으로 제한
+		} else {
+			toast.dismiss("credit-error");
 		}
 	};
+
 	const handleCredit = (label, value) => {
 		let newCredit;
 
