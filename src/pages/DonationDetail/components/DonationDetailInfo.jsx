@@ -20,7 +20,7 @@ export default function DonationDetailInfo({ donation, loading }) {
 	const [isScrollDown, setIsScrollDown] = useState(false);
 	const [isError, setIsError] = useState(false);
 	const [donatedAmount, setDonatedAmount] = useState(receivedDonations);
-	const { isSubmitting, handleSubmit } = useSafeSubmit();
+	const { isSubmitting, safeSubmit } = useSafeSubmit();
 
 	const checkIsLimitOver = (newCredit) => {
 		// 보유 크레딧보다 많은지 확인
@@ -121,7 +121,7 @@ export default function DonationDetailInfo({ donation, loading }) {
 	};
 	return (
 		<>
-			<form css={DonationDetailInfoStyle}>
+			<form onSubmit={safeSubmit} css={DonationDetailInfoStyle}>
 				{loading ? (
 					<div>로딩중...</div>
 				) : (
@@ -181,9 +181,9 @@ export default function DonationDetailInfo({ donation, loading }) {
 							fullWidth
 							type="button"
 							variant="primary"
-							onClick={handleSubmit(handleDonate)}
+							onClick={handleDonate}
 						>
-							후원하기
+							{isSubmitting ? "충전 중..." : "충전하기"}
 						</Button>
 					</>
 				)}
