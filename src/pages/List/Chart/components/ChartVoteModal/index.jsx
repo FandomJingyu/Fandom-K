@@ -6,15 +6,14 @@ import VoteIdolSkeleton from "./Skeleton";
 import VoteButton from "./VoteButton";
 import VoteIdolList from "./VoteIdolList";
 
-export default function ChartVoteModal({ gender, closeModal }) {
-	const {
-		idols,
-		selectedIdolId,
-		handleVote,
-		handleIdolSelect,
-		loading,
-		error,
-	} = useChartVoteModal(gender, closeModal);
+export default function ChartVoteModal({
+	gender,
+	closeModal,
+	idols,
+	setIdols,
+}) {
+	const { selectedIdolId, handleVote, handleIdolSelect, loading, error } =
+		useChartVoteModal(gender, closeModal, idols, setIdols);
 
 	return (
 		<form onSubmit={handleVote} css={VoteFormStyles}>

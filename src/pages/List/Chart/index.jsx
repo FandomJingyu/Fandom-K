@@ -112,7 +112,12 @@ const Chart = () => {
 					type={activeTab === "female" ? "voteWoman" : "voteMan"}
 					isMobileFullScreen={true}
 				>
-					<ChartVoteModal gender={activeTab} closeModal={closeModal} />
+					<ChartVoteModal
+						gender={activeTab}
+						closeModal={closeModal}
+						idols={activeTab === "female" ? femaleIdols : maleIdols}
+						setIdols={setIdols}
+					/>
 				</Modal>
 
 				<ChartIdol style={{ marginBottom: "20px" }}>

@@ -76,6 +76,7 @@ const useChart = () => {
 
 	return {
 		idols,
+		setIdols,
 		activeTab,
 		loading,
 		visibleList,
