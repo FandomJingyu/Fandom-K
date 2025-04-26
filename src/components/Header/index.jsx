@@ -1,7 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import { Link } from "react-router-dom";
-import logo from "../../../public/icons/logo.svg";
-import profile from "../../../public/images/profile-default.png";
+import logo from "/icons/logo.svg";
+import profile from "/images/profile.jpg";
 import { headerStyles, logoStyles, profileStyles } from "./Header.styles";
 
 const Header = () => {

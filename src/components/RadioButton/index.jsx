@@ -9,7 +9,8 @@ const voteRadioButton = css`
   display: flex;
   justify-content: space-between;
   width: 477px;
-  height: 70px;
+	height: 70px;
+	padding-top: 8px;
 
 	@media (max-width: 425px) {
     width: 100%;

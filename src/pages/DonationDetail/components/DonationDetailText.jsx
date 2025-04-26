@@ -1,5 +1,5 @@
+import withPostPosition from "@/utils/postPosition";
 import { css } from "@emotion/react";
-import withPostPosition from "../../../utils/postPosition";
 
 /** @jsxImportSource @emotion/react */
 export default function DonationDetail({ donation, loading }) {

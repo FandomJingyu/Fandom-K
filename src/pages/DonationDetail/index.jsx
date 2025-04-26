@@ -1,9 +1,10 @@
+import { donationsAPI } from "@/apis/donationsAPI";
+import LoadingError from "@/components/Error";
 import { css } from "@emotion/react";
 import { useCallback, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { donationsAPI } from "../../apis/donationsAPI";
-import LoadingError from "../../components/Error";
 import DonationDetailInfo from "./components/DonationDetailInfo";
+import DonationDetailSkeleton from "./components/DonationDetailSkeleton";
 import DonationDetailText from "./components/DonationDetailText";
 /** @jsxImportSource @emotion/react */
 
@@ -59,7 +60,7 @@ export default function DonationDetail() {
 	return (
 		<div className="mainGrid" css={DonationDetailStyle}>
 			{loading ? (
-				<div>로딩 중...</div>
+				<DonationDetailSkeleton />
 			) : error ? (
 				<LoadingError />
 			) : (
@@ -161,6 +162,9 @@ const DonationDetailContent = css`
     justify-content: center;
     gap: 40px;
     margin-top: 60px;
+  }
+  @media all and (max-width: 1024px) {
+    gap: 4vw;
   }
   @media all and (max-width: 768px) {
     flex-direction: column;

@@ -1,13 +1,14 @@
-import { css } from "@emotion/react";
-import { useCallback, useEffect, useRef, useState } from "react";
-import { toast } from "react-toastify";
-import Modal from "../../../../src/components/Modal";
-import { donationsAPI } from "../../../apis/donationsAPI";
-import Button from "../../../components/Button/Button";
-import { useCredit } from "../../../context/CreditContext";
-import CreditRechargeModalContent from "../../List/Charge/components/CreditRechargeModalContent";
-import DonationDetailTimer from "./DonationDetailTimer";
+import { donationsAPI } from "@/apis/donationsAPI";
+import Button from "@/components/Button/Button";
+import Modal from "@/components/Modal";
+import { useCredit } from "@/context/CreditContext";
+import useSafeSubmit from "@/hooks/useSafeSubmit";
+import CreditRechargeModalContent from "@/pages/List/Charge/components/CreditRechargeModalContent";
 /** @jsxImportSource @emotion/react */
+import { css } from "@emotion/react";
+import { useEffect, useState } from "react";
+import { toast } from "react-toastify";
+import DonationDetailTimer from "./DonationDetailTimer";
 
 export default function DonationDetailInfo({ donation, loading }) {
 	const { idol, receivedDonations, targetDonation, deadline, subtitle, title } =
@@ -19,6 +20,29 @@ export default function DonationDetailInfo({ donation, loading }) {
 	const [isScrollDown, setIsScrollDown] = useState(false);
 	const [isError, setIsError] = useState(false);
 	const [donatedAmount, setDonatedAmount] = useState(receivedDonations);
+	const { isSubmitting, safeSubmit } = useSafeSubmit();
+
+	const checkIsLimitOver = (newCredit) => {
+		// 보유 크레딧보다 많은지 확인
+		const isOverLimit = newCredit > (myCredit.credit || 0);
+
+		// 에러 상태 업데이트
+		setIsError(isOverLimit);
+
+		// 크레딧 값 업데이트
+		setCredit(newCredit);
+
+		if (isOverLimit) {
+			// 에러 메시지 표시 또는 최대값으로 제한
+			// toast.error 호출 시 toastId 옵션 추가 - 연속 입력 시 중복 표시 방지
+			toast.error("보유한 크레딧을 초과할 수 없습니다.", {
+				toastId: "credit-error",
+			});
+			setCredit(myCredit.credit || 0); // 최대값으로 제한
+		} else {
+			toast.dismiss("credit-error");
+		}
+	};
 
 	const handleCredit = (label, value) => {
 		let newCredit;
@@ -29,20 +53,7 @@ export default function DonationDetailInfo({ donation, loading }) {
 			newCredit = credit + value;
 		}
 
-		// 보유 크레딧보다 많은지 확인
-		const isOverLimit = newCredit > (myCredit.credit || 0);
-
-		// 에러 상태 업데이트
-		setIsError(isOverLimit);
-
-		// 크레딧 값 업데이트
-		setCredit(newCredit);
-
-		// 에러 메시지 표시 또는 최대값으로 제한
-		if (isOverLimit) {
-			toast.error("보유한 크레딧을 초과할 수 없습니다.");
-			setCredit(myCredit.credit || 0); // 최대값으로 제한
-		}
+		checkIsLimitOver(newCredit);
 	};
 
 	const creditList = [
@@ -112,12 +123,11 @@ export default function DonationDetailInfo({ donation, loading }) {
 		const newValue = value === "" ? 0 : Number(value);
 
 		// 입력값이 보유 크레딧보다 크면 에러 상태로 설정
-		setIsError(newValue > myCredit.credit);
-		setCredit(newValue);
+		checkIsLimitOver(newValue);
 	};
 	return (
 		<>
-			<form css={DonationDetailInfoStyle}>
+			<form onSubmit={safeSubmit} css={DonationDetailInfoStyle}>
 				{loading ? (
 					<div>로딩중...</div>
 				) : (
@@ -142,14 +152,14 @@ export default function DonationDetailInfo({ donation, loading }) {
 							<DonationDetailTimer deadline={deadline} />
 						</div>
 						<div css={DonationDetailInfoItem} className="isCredit">
-							<span className="myCredit">
+							<div className="myCredit">
 								내 크레딧 :{" "}
 								{myCredit.credit ? myCredit.credit.toLocaleString() : 0}
 								<button type="button" onClick={openModal}>
 									충전하기 +
 								</button>
-							</span>
-							<div className={`input ${isError ? "isError" : ""}`}>
+							</div>
+							<div className="input">
 								<input
 									type="text"
 									name=""
@@ -158,7 +168,6 @@ export default function DonationDetailInfo({ donation, loading }) {
 									value={credit === 0 ? "" : credit.toLocaleString()}
 									onChange={inputOnChange}
 								/>
-								<span>❗크레딧이 부족합니다.</span>
 							</div>
 							<ul>
 								{creditList.map((credit) => (
@@ -174,13 +183,13 @@ export default function DonationDetailInfo({ donation, loading }) {
 							</ul>
 						</div>
 						<Button
-							disabled={credit === 0 || isError}
+							disabled={credit === 0 || isError || isSubmitting}
 							fullWidth
 							type="button"
 							variant="primary"
 							onClick={handleDonate}
 						>
-							후원하기
+							{isSubmitting ? "충전 중..." : "충전하기"}
 						</Button>
 					</>
 				)}
@@ -229,7 +238,7 @@ const DonationDetailInfoStyle = css`
     }
   }
 
-  button {
+  > button {
     height: 60px;
     border-radius: 10px;
     font-size: 18px;
@@ -243,8 +252,13 @@ const DonationDetailInfoStyle = css`
     white-space: nowrap;
   }
   @media all and (max-width: 1300px) {
-    height: auto;
     top: 80px;
+  }
+  @media all and (max-width: 1024px) {
+    height: auto;
+    > button {
+      margin-top: 30px;
+    }
   }
   @media all and (max-width: 768px) {
     position: static;
@@ -258,7 +272,8 @@ const DonationDetailInfoStyle = css`
         font-size: 2.6vw;
       }
     }
-    button {
+    > button {
+      margin-top: 0;
       height: 7.81vw;
       font-size: 2.86vw;
       border-radius: 1.3vw;
@@ -272,7 +287,7 @@ const DonationDetailInfoStyle = css`
         font-size: 3.76vw;
       }
     }
-    button {
+    > button {
       height: 11.76vw;
       font-size: 3.76vw;
     }
@@ -302,22 +317,11 @@ const DonationDetailInfoItem = css`
     background-size: 24px;
     background-position: right 24px center;
     background-repeat: no-repeat;
+    position: relative;
     input[type='text'] {
       height: 60px;
       flex: 1;
       outline: none;
-    }
-    span {
-      display: none;
-      font-size: 12px;
-      color: rgba(255, 0, 0, 0.6);
-      font-weight: 500;
-      align-items: center;
-    }
-    &.isError {
-      span {
-        display: flex;
-      }
     }
   }
   ul {
