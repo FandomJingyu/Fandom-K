@@ -1,7 +1,7 @@
-import CheckIdol from "../../../../components/CheckIdol";
+import CheckIdol from "../../../../../components/CheckIdol";
 /** @jsxImportSource @emotion/react */
-import Circle from "../../../../components/Circle";
-import RadioButton from "../../../../components/RadioButton";
+import Circle from "../../../../../components/Circle";
+import RadioButton from "../../../../../components/RadioButton";
 import {
 	IdolDetails,
 	IdolInfo,
@@ -20,7 +20,7 @@ const formatVotes = (votes) => {
 
 export default function VoteIdolList({ idols, selectedIdolId, onSelectIdol }) {
 	return (
-		<div>
+		<>
 			<ul css={IdolList}>
 				{idols.map((idol, index) => (
 					<li key={idol.id} css={IdolItem}>
@@ -59,6 +59,6 @@ export default function VoteIdolList({ idols, selectedIdolId, onSelectIdol }) {
 					</li>
 				))}
 			</ul>
-		</div>
+		</>
 	);
 }
