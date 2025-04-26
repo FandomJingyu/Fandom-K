@@ -1,6 +1,6 @@
 /** @jsxImportSource @emotion/react */
-import Button from "../../../../components/Button/Button";
-import useIsMobile from "../../../../hooks/useIsMobile";
+import Button from "../../../../../components/Button/Button";
+import useIsMobile from "../../../../../hooks/useIsMobile";
 import { CreditInfo, centerAlignStyle } from "./VoteButton.styles";
 
 export default function VoteButton({ onSubmit }) {
