@@ -1,20 +1,20 @@
 /** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react";
 import LoadingError from "../../../../../components/Error";
-import { useChartIdols } from "../../../../../hooks/useChartIdols"; // 새로운 훅 import
+import { useChartVoteModal } from "../../../../../hooks/useChartVoteModal";
 import VoteIdolSkeleton from "./Skeleton";
 import VoteButton from "./VoteButton";
-import VoteIdolList from "./VoteIdolList"; // 자식 컴포넌트
+import VoteIdolList from "./VoteIdolList";
 
-export default function ChartVoteModal({ closeModal }) {
+export default function ChartVoteModal({ gender, closeModal }) {
 	const {
+		idols,
+		selectedIdolId,
+		handleVote,
+		handleIdolSelect,
 		loading,
 		error,
-		visibleList: idols, // 현재 탭에 맞는 아이돌 목록 사용
-		handleVote,
-		selectedIdolId,
-		handleIdolSelect,
-	} = useChartIdols();
+	} = useChartVoteModal(gender, closeModal);
 
 	return (
 		<form onSubmit={handleVote} css={VoteFormStyles}>
@@ -31,16 +31,16 @@ export default function ChartVoteModal({ closeModal }) {
 					onSelectIdol={handleIdolSelect}
 				/>
 			)}
-			<VoteButton onSubmit={handleVote} />
+			<VoteButton />
 		</form>
 	);
 }
 
 const VoteFormStyles = css`
-  max-height: 100vh;
-  overflow-y: hidden;
-  position: relative;
-  @media (max-width: 425px) {
-    height: 100vh;
-  }
+	max-height: 100vh;
+	overflow-y: hidden;
+	position: relative;
+	@media (max-width: 425px) {
+		height: 100vh;
+	}
 `;

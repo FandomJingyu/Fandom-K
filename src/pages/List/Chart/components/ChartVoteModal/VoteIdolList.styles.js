@@ -23,7 +23,6 @@ export const IdolList = css`
 
   @media (max-width: 425px) {
     max-height: calc(100vh - 17.88vw); /* 버튼 영역 + 여유 */
-    overflow-y: auto;                /* ✅ 반드시 필요 */
     padding-bottom: 24vw;            /* 리스트 아이템 마지막 여백 */
   }
 

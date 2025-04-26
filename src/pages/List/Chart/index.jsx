@@ -4,7 +4,7 @@ import chartImg from "../../../../public/images/Chart.png";
 import Button from "../../../components/Button/Button";
 import Circle from "../../../components/Circle";
 import Modal from "../../../components/Modal";
-import { useChartIdols } from "../../../hooks/useChartIdols"; // 새로운 훅 import
+import useChart from "../../../hooks/useChart"; // useChart 훅 import
 import ChartVoteModal from "./components/ChartVoteModal";
 import IdolProfileModal from "./components/IdolProfileModal";
 import { idolProfiles } from "./components/IdolProfiles";
@@ -27,30 +27,31 @@ import {
 } from "./Chart.styles";
 
 const Overlay = styled.div`
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background-color: rgba(0, 0, 0, 0.6);
-  z-index: 1000;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100vw;
+	height: 100vh;
+	background-color: rgba(0, 0, 0, 0.6);
+	z-index: 1000;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 `;
 
 const Chart = () => {
 	const {
 		idols,
-		loading,
-		error,
+		setIdols,
 		activeTab,
+		loading,
 		visibleList,
-		handleTabChange,
 		handleMore,
+		handleTabChange,
 		femaleIdols,
 		maleIdols,
-	} = useChartIdols();
+	} = useChart();
+
 	const [isModalOpen, setIsModalOpen] = useState(false);
 	const [selectedIdol, setSelectedIdol] = useState(null);
 
@@ -111,10 +112,7 @@ const Chart = () => {
 					type={activeTab === "female" ? "voteWoman" : "voteMan"}
 					isMobileFullScreen={true}
 				>
-					<ChartVoteModal
-						idols={activeTab === "female" ? femaleIdols : maleIdols}
-						closeModal={closeModal}
-					/>
+					<ChartVoteModal gender={activeTab} closeModal={closeModal} />
 				</Modal>
 
 				<ChartIdol style={{ marginBottom: "20px" }}>
@@ -150,10 +148,6 @@ const Chart = () => {
 				{loading ? (
 					<div style={{ color: "white", textAlign: "center" }}>
 						불러오는 중...
-					</div>
-				) : error ? (
-					<div style={{ color: "red", textAlign: "center" }}>
-						아이돌 목록을 불러오는데 실패했습니다.
 					</div>
 				) : (
 					<>
