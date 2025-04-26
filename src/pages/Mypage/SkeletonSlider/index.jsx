@@ -24,7 +24,7 @@ const SkeletonSlider = () => {
 		<>
 			<div css={skeletonWrapper}>
 				{Array.from({ length: itemsToRender }).map((_, index) => (
-					<SkeletonSlide key={itemIds[index]} />
+					<SkeletonSlide key={itemId[index]} />
 				))}
 			</div>
 		</>
