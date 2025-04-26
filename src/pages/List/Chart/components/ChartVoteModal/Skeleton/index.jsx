@@ -1,6 +1,6 @@
+import useIsMobile from "@/hooks/useIsMobile";
 /** @jsxImportSource @emotion/react */
 import { v4 as uuidv4 } from "uuid";
-import useIsMobile from "../../../../../../hooks/useIsMobile";
 import { IdolItem, IdolList, RadioContent } from "../VoteIdolList.styles";
 import {
 	SkeletonCircle,

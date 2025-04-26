@@ -1,5 +1,5 @@
+import { idolsAPI } from "@/apis/idolsAPI";
 import { useEffect, useMemo, useState } from "react";
-import { idolsAPI } from "../apis/idolsAPI";
 
 const ITEMS_PER_PAGE = 10;
 const TABLET_ITEMS_PER_PAGE = 5;
