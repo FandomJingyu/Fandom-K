@@ -1,11 +1,11 @@
+import { donationsAPI } from "@/apis/donationsAPI";
+import Button from "@/components/Button/Button";
+import Modal from "@/components/Modal";
+import { useCredit } from "@/context/CreditContext";
+import CreditRechargeModalContent from "@/pages/List/Charge/components/CreditRechargeModalContent";
 import { css } from "@emotion/react";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
-import Modal from "../../../../src/components/Modal";
-import { donationsAPI } from "../../../apis/donationsAPI";
-import Button from "../../../components/Button/Button";
-import { useCredit } from "../../../context/CreditContext";
-import CreditRechargeModalContent from "../../List/Charge/components/CreditRechargeModalContent";
 import DonationDetailTimer from "./DonationDetailTimer";
 /** @jsxImportSource @emotion/react */
 

@@ -1,5 +1,5 @@
+import { shimmerStyle } from "@/styles/skeletonAnimation";
 import { css } from "@emotion/react";
-import { shimmerStyle } from "../../../styles/skeletonAnimation";
 
 /** @jsxImportSource @emotion/react */
 export default function DonationDetailSkeleton() {
