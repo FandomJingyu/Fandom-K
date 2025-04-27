@@ -9,6 +9,7 @@ on:
 jobs:
   check-project:
     runs-on: ubuntu-latest
+    container: pandoc/latex
 
     steps:
       - name: 📥 Checkout code
@@ -27,6 +28,9 @@ jobs:
         
       - name: 🏗️ Build Project
         run: npm run build
+
+      - name: Install mustache (to update the date)
+        run: apk add ruby && gem install mustache
         
       - name: creates output
         run: sh ./build.sh  
