@@ -2,9 +2,9 @@ name: Biome CI for React
 
 on:
   pull_request:
-    branches: [main]
+    branches: [main, develop]
   push:
-    branches: [main]
+    branches: [main, develop]
 
 jobs:
   check-project:
