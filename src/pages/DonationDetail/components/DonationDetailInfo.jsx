@@ -20,25 +20,33 @@ export default function DonationDetailInfo({ donation, loading }) {
 	const [isScrollDown, setIsScrollDown] = useState(false);
 	const [isError, setIsError] = useState(false);
 	const [donatedAmount, setDonatedAmount] = useState(receivedDonations);
-	const { isSubmitting, safeSubmit } = useSafeSubmit();
+	const { isSubmitting, safeSubmit } = useSafeSubmit(async () => {
+		if (credit === 0 || isError) return;
+
+		try {
+			await donationsAPI.contribute(donation.id, credit);
+			myCredit.deductCredit(credit);
+			setDonatedAmount((prev) => prev + credit);
+			toast.success("후원에 성공하셨습니다!");
+			setCredit(0);
+		} catch (error) {
+			console.error("후원 처리 중 오류 발생:", error);
+			alert(error.message || "후원 처리 중 오류가 발생했습니다.");
+		}
+	});
 
 	const checkIsLimitOver = (newCredit) => {
-		// 보유 크레딧보다 많은지 확인
 		const isOverLimit = newCredit > (myCredit.credit || 0);
 
-		// 에러 상태 업데이트
 		setIsError(isOverLimit);
 
-		// 크레딧 값 업데이트
 		setCredit(newCredit);
 
 		if (isOverLimit) {
-			// 에러 메시지 표시 또는 최대값으로 제한
-			// toast.error 호출 시 toastId 옵션 추가 - 연속 입력 시 중복 표시 방지
 			toast.error("보유한 크레딧을 초과할 수 없습니다.", {
 				toastId: "credit-error",
 			});
-			setCredit(myCredit.credit || 0); // 최대값으로 제한
+			setCredit(myCredit.credit || 0);
 		} else {
 			toast.dismiss("credit-error");
 		}
@@ -83,25 +91,6 @@ export default function DonationDetailInfo({ donation, loading }) {
 		setIsModalOpen(false);
 	};
 
-	const handleDonate = async () => {
-		if (credit === 0 || isError) return;
-
-		try {
-			// 후원 요청
-			await donationsAPI.contribute(donation.id, credit);
-			// 후원 금액 반영
-			myCredit.deductCredit(credit);
-			// 후원 금액 반영
-			setDonatedAmount((prev) => prev + credit); // 상태 업데이트
-			toast.success("후원에 성공하셨습니다!");
-			setCredit(0); //크레딧 초기화
-		} catch (error) {
-			alert(error.message);
-		}
-	};
-
-	// * window의 스크롤 위치 구하기,
-	// * 스크롤 위치가 400px 이상이면 isScrollDown을 true로 설정
 	useEffect(() => {
 		if (window.innerWidth <= 768) return;
 		const handleWindowScroll = () => {
@@ -122,7 +111,6 @@ export default function DonationDetailInfo({ donation, loading }) {
 		const value = e.target.value.replace(/[^0-9]/g, "");
 		const newValue = value === "" ? 0 : Number(value);
 
-		// 입력값이 보유 크레딧보다 크면 에러 상태로 설정
 		checkIsLimitOver(newValue);
 	};
 	return (
@@ -185,11 +173,10 @@ export default function DonationDetailInfo({ donation, loading }) {
 						<Button
 							disabled={credit === 0 || isError || isSubmitting}
 							fullWidth
-							type="button"
+							type="submit"
 							variant="primary"
-							onClick={handleDonate}
 						>
-							{isSubmitting ? "후원 중..." : "후원하기"}
+							{isSubmitting ? "후원 처리 중..." : "후원하기"}
 						</Button>
 					</>
 				)}
