@@ -1,7 +1,5 @@
-/** @jsxImportSource @emotion/react */
-import React, { useState, useEffect } from "react"; // useState, useEffect 추가!
-import Circle from "../../../../components/Circle";
-import Modal from "../../../../components/Modal";
+import Circle from "@/components/Circle";
+import Modal from "@/components/Modal";
 import {
 	CircleContainer,
 	CloseButton,
@@ -22,10 +20,13 @@ import {
 	VoteCount,
 	VoteLabel,
 	VoteSection,
-} from "./IdolProfileModal.styles";
+} from "@/pages/List/Chart/components/IdolProfileModal.styles"; // ✨ styles 파일도 절대경로로 변경
+/** @jsxImportSource @emotion/react */
+import { useEffect, useState } from "react";
 
 const IdolProfileModal = ({ idol, onClose }) => {
-	const [isMobile, setIsMobile] = useState(window.innerWidth <= 425); // ✅ 컴포넌트 최상단에 위치
+	const [isMobile, setIsMobile] = useState(window.innerWidth <= 425);
+
 	useEffect(() => {
 		const handleResize = () => {
 			setIsMobile(window.innerWidth <= 425);
@@ -34,7 +35,7 @@ const IdolProfileModal = ({ idol, onClose }) => {
 		return () => window.removeEventListener("resize", handleResize);
 	}, []);
 
-	if (!idol) return null; // ✅ useState/useEffect 호출 "다음에" return
+	if (!idol) return null;
 
 	return (
 		<Modal isOpen={!!idol} onClose={onClose} type="default">
@@ -46,13 +47,13 @@ const IdolProfileModal = ({ idol, onClose }) => {
 								src="/icons/icon-arrow-left.svg"
 								alt="뒤로가기"
 								className="back"
-							/> // ✅ 모바일이면 < 모양
+							/>
 						) : (
 							<img
 								src="/images/btn-modal-close.png"
 								alt="닫기"
 								className="close"
-							/> // ✅ 데스크탑이면 X 모양
+							/>
 						)}
 					</CloseButton>
 

@@ -1,13 +1,12 @@
+import Button from "@/components/Button/Button";
+import Circle from "@/components/Circle";
+import LoadingError from "@/components/Error";
+import Modal from "@/components/Modal";
+import { useChart } from "@/hooks/useChart";
+import ChartVoteModal from "@/pages/List/Chart/components/ChartVoteModal";
+import IdolProfileModal from "@/pages/List/Chart/components/IdolProfileModal";
+import { idolProfiles } from "@/pages/List/Chart/components/IdolProfiles";
 import React, { useState } from "react";
-import chartImg from "../../../../public/images/Chart.png";
-import LoadingError from "../../../../src/components/Error/index";
-import Button from "../../../components/Button/Button";
-import Circle from "../../../components/Circle";
-import Modal from "../../../components/Modal";
-import { useChart } from "../../../hooks/useChart";
-import ChartVoteModal from "./components/ChartVoteModal";
-import IdolProfileModal from "./components/IdolProfileModal";
-import { idolProfiles } from "./components/IdolProfiles";
 
 import {
 	ChartButtonWrap,
@@ -30,7 +29,7 @@ import {
 	SkeletonVotes,
 	VoteChart,
 	Votes,
-} from "./Chart.styles";
+} from "@/pages/List/Chart/Chart.styles";
 
 const Chart = () => {
 	const [activeTab, setActiveTab] = useState("female");
@@ -128,7 +127,7 @@ const Chart = () => {
 					<ChartButtonWrap>
 						<Button size="vote-chart" onClick={openModal}>
 							<VoteChart>
-								<img src={chartImg} alt="차트 투표 이미지" />
+								<img src="/images/Chart.png" alt="차트 투표 이미지" />
 								차트 투표하기
 							</VoteChart>
 						</Button>

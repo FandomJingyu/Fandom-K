@@ -1,5 +1,5 @@
+import { idolsAPI } from "@/apis/idolsAPI";
 import { useEffect, useMemo, useState } from "react";
-import { idolsAPI } from "../apis/idolsAPI"; // 네 프로젝트 경로 맞춰서 import
 
 const ITEMS_PER_PAGE = 10;
 const TABLET_ITEMS_PER_PAGE = 5;
