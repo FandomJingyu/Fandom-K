@@ -27,6 +27,7 @@ const BlurStyle = css`
   width: 800px;
   height: 800px;
   transform: translate(-50%, -50%);
+	z-index: 100;
   img {
     width: 100%;
     height: 100%;
