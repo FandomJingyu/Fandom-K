@@ -22,7 +22,7 @@ export default Landing;
 const LandingContainer = styled.div`
   overflow: hidden;
   section {
-    height: 100vh;
+    height: 100lvh;
     position: relative;
   }
 `;
