@@ -2,14 +2,13 @@ name: Biome CI for React
 
 on:
   pull_request:
-    branches: [main, develop]
+    branches: [main, dev]
   push:
-    branches: [main, develop]
+    branches: [main, dev]
 
 jobs:
   check-project:
     runs-on: ubuntu-latest
-    container: pandoc/latex
 
     steps:
       - name: 📥 Checkout code
@@ -25,28 +24,6 @@ jobs:
 
       - name: 🔎 Run Biome Check
         run: npm run check
-        
+
       - name: 🏗️ Build Project
         run: npm run build
-
-      - name: Install mustache (to update the date)
-        run: apk add ruby && gem install mustache
-        
-      - name: creates output
-        run: sh ./build.sh  
-      # Build 후 다른 레포지토리로 푸시
-      - name: Push to Another Repository
-        uses: cpina/github-action-push-to-another-repository@main
-        env:
-          API_TOKEN_GITHUB: ${{ secrets.AUTO_ACTIONS }}
-        with:
-          source-directory: 'output'  
-          destination-github-username: two678  # 내 GitHub 계정
-          destination-repository-name: Fandom-K  # 푸시할 레포지토리 이름
-          user-email: ${{ secrets.EMAIL }}  # 이메일 (GitHub Secrets로 저장된 이메일)
-          commit-message: ${{ github.event.commits[0].message }}
-          target-branch: main  # 푸시할 브랜치
-
-      # (옵션) 푸시 후 다른 작업을 위한 변수 출력 (디버깅 용도)
-      - name: Test get variable exported by push-to-another-repository
-        run: echo $DESTINATION_CLONED_DIRECTORY
