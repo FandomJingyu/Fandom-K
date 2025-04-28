@@ -1,0 +1,60 @@
+name: 새로운 작업
+description: 새로운 작업을 시작할 때 사용합니다.
+title: "[작업]"
+labels: ["작업", "기능개발"]
+assignees: []
+body:
+  - type: input
+    id: summary
+    attributes:
+      label: 📜 작업 상세히 작성
+      description: 이 작업에 대해 상세하게 설명해주세요.
+      placeholder: ex) 로그인 기능 구현, API 연결 등
+    validations:
+      required: true
+
+  - type: input
+    id: branch-name
+    attributes:
+      label: 🗂️ 브랜치 네이밍
+      description: 해당 작업에 대한 브랜치 이름을 지정해주세요.
+      placeholder: ex) feature/login-api, fix/button-bug
+    validations:
+      required: true
+
+  - type: input
+    id: due-date
+    attributes:
+      label: 📅 Due Date
+      description: 작업 마감일을 입력해주세요.
+      placeholder: ex) 2025/04/20
+    validations:
+      required: true
+
+  - type: input
+    id: references
+    attributes:
+      label: 🔗 References
+      description: 관련 자료나 참고 링크를 입력해주세요.
+      placeholder: ex) Jira, 문서 링크 등
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: ✅ 할 일 리스트
+      options:
+        - label: "기능 구현 계획"
+        - label: "브랜치 네이밍 검토"
+        - label: "테스트 계획"
+        - label: "문서화"
+
+  - type: input
+    id: milestone
+    attributes:
+      label: 🏆 마일스톤
+      description: 이 작업이 포함될 마일스톤을 선택하세요.
+      placeholder: 예시) 공통 컴포넌트 구현, MVP 개발 등
+    validations:
+      required: true

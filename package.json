@@ -1,0 +1,55 @@
+{
+	"name": "fandom-k",
+	"private": true,
+	"version": "0.0.0",
+	"type": "module",
+	"scripts": {
+		"dev": "vite --host",
+		"build": "vite build",
+		"lint": "biome lint --write",
+		"format": "biome format --write",
+		"check": "biome check --write",
+		"reporter": "biome check --reporter=summary",
+		"prepare": "husky",
+		"preview": "vite preview"
+	},
+	"dependencies": {
+		"@emotion/css": "^11.13.5",
+		"@emotion/react": "^11.14.0",
+		"@emotion/styled": "^11.14.0",
+		"@studio-freight/lenis": "^1.0.42",
+		"axios": "^1.8.4",
+		"framer-motion": "^12.8.0",
+		"gsap": "^3.12.7",
+		"prop-types": "^15.8.1",
+		"react": "^19.0.0",
+		"react-dom": "^19.0.0",
+		"react-router-dom": "^7.5.0",
+		"react-slick": "^0.30.3",
+		"react-toastify": "^11.0.5",
+		"slick-carousel": "^1.8.1",
+		"uuid": "^11.1.0"
+	},
+	"devDependencies": {
+		"@biomejs/biome": "^1.9.4",
+		"@commitlint/cli": "^19.8.0",
+		"@commitlint/config-conventional": "^19.8.0",
+		"@eslint/js": "^9.21.0",
+		"@types/react": "^19.0.10",
+		"@types/react-dom": "^19.0.4",
+		"@vitejs/plugin-react": "^4.3.4",
+		"biome": "^0.2.2",
+		"esbuild": "^0.25.2",
+		"eslint": "^9.24.0",
+		"eslint-plugin-react-hooks": "^5.1.0",
+		"eslint-plugin-react-refresh": "^0.4.19",
+		"globals": "^15.15.0",
+		"husky": "^9.1.7",
+		"lint-staged": "^15.5.1",
+		"prettier": "^3.5.3",
+		"vite": "^6.2.0"
+	},
+	"lint-staged": {
+		"*.{js,jsx,ts,tsx,json,css,scss,md}": ["biome check --apply"]
+	}
+}

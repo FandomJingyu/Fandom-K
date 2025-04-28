@@ -1,0 +1,29 @@
+name: Biome CI for React
+
+on:
+  pull_request:
+    branches: [main, dev]
+  push:
+    branches: [main, dev]
+
+jobs:
+  check-project:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 📥 Checkout code
+        uses: actions/checkout@v4
+
+      - name: 🟢 Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 22.x
+
+      - name: 📦 Install dependencies
+        run: npm ci
+
+      - name: 🔎 Run Biome Check
+        run: npm run check
+
+      - name: 🏗️ Build Project
+        run: npm run build

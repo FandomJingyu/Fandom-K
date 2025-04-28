@@ -1,0 +1,60 @@
+{
+	"editor.defaultFormatter": "biomejs.biome",
+	"editor.formatOnSave": true,
+
+	"[javascript]": {
+		"editor.defaultFormatter": "biomejs.biome"
+	},
+	"[javascriptreact]": {
+		"editor.defaultFormatter": "biomejs.biome"
+	},
+	"[json]": {
+		"editor.defaultFormatter": "biomejs.biome"
+	},
+	"cSpell.words": [
+		"ADOR",
+		"AESPA",
+		"Batchim",
+		"borderradius",
+		"CHAEWON",
+		"ENFP",
+		"ENTP",
+		"ESTJ",
+		"EUNCHAE",
+		"fancam",
+		"GAEUL",
+		"gsap",
+		"HAERIN",
+		"HAEWON",
+		"HANNI",
+		"HYEIN",
+		"ILLIT",
+		"INFJ",
+		"INFP",
+		"ISFJ",
+		"ISFP",
+		"ISTJ",
+		"ISTP",
+		"JANG",
+		"Jingyu",
+		"JIWOO",
+		"josa",
+		"KAZUHA",
+		"Laneun",
+		"LEESEO",
+		"mbti",
+		"MINJI",
+		"NINGNING",
+		"NMIXX",
+		"Pretendard",
+		"SAKURA",
+		"slicktest",
+		"SSERAFIM",
+		"SULLYOON",
+		"Testpage",
+		"uuidv",
+		"WONYOUNG",
+		"YUJIN",
+		"YUNJIN"
+	]
+}
