@@ -1,10 +1,10 @@
-import styled from "@emotion/styled";
-import React, { useEffect, useState, useMemo } from "react";
+import React, { useState } from "react";
 import chartImg from "../../../../public/images/Chart.png";
-import { idolsAPI } from "../../../apis/idolsAPI";
+import LoadingError from "../../../../src/components/Error/index";
 import Button from "../../../components/Button/Button";
 import Circle from "../../../components/Circle";
 import Modal from "../../../components/Modal";
+import { useChart } from "../../../hooks/useChart";
 import ChartVoteModal from "./components/ChartVoteModal";
 import IdolProfileModal from "./components/IdolProfileModal";
 import { idolProfiles } from "./components/IdolProfiles";
@@ -20,82 +20,35 @@ import {
 	ChartTitle,
 	ListItem,
 	MoreButton,
+	Overlay,
 	ProfileInfo,
 	RankAndName,
+	SkeletonListItem,
+	SkeletonName,
+	SkeletonProfile,
+	SkeletonRankAndName,
+	SkeletonVotes,
 	VoteChart,
 	Votes,
 } from "./Chart.styles";
 
-const Overlay = styled.div`
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background-color: rgba(0, 0, 0, 0.6);
-  z-index: 1000;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
-
-const ITEMS_PER_PAGE = 10;
-const TABLET_ITEMS_PER_PAGE = 5;
-const MOBILE_ITEMS_PER_PAGE = 5;
-
-const getIsMobile = () => window.matchMedia("(max-width: 425px)").matches;
-const getIsTablet = () =>
-	window.matchMedia("(min-width: 426px) and (max-width: 768px)").matches;
-
 const Chart = () => {
-	const [idols, setIdols] = useState([]);
 	const [activeTab, setActiveTab] = useState("female");
-	const [visibleCount, setVisibleCount] = useState(ITEMS_PER_PAGE);
-	const [loading, setLoading] = useState(true);
 	const [isModalOpen, setIsModalOpen] = useState(false);
 	const [selectedIdol, setSelectedIdol] = useState(null);
 
+	const {
+		loading,
+		error,
+		femaleIdols,
+		maleIdols,
+		setIdols,
+		visibleCount,
+		setVisibleCount,
+	} = useChart();
+
 	const openModal = () => setIsModalOpen(true);
 	const closeModal = () => setIsModalOpen(false);
-
-	useEffect(() => {
-		const fetchIdols = async () => {
-			try {
-				setLoading(true);
-				const res = await idolsAPI.getIdols(100);
-				setIdols(res.list);
-			} catch (e) {
-				console.error("아이돌 불러오기 실패", e);
-			} finally {
-				setLoading(false);
-			}
-		};
-		fetchIdols();
-	}, []);
-
-	useEffect(() => {
-		const handleResize = () => {
-			if (getIsMobile()) setVisibleCount(MOBILE_ITEMS_PER_PAGE);
-			else if (getIsTablet()) setVisibleCount(TABLET_ITEMS_PER_PAGE);
-			else setVisibleCount(ITEMS_PER_PAGE);
-		};
-
-		handleResize();
-		window.addEventListener("resize", handleResize);
-		return () => window.removeEventListener("resize", handleResize);
-	}, []);
-
-	const femaleIdols = useMemo(() => {
-		return idols
-			.filter((i) => i.gender === "female")
-			.sort((a, b) => b.totalVotes - a.totalVotes);
-	}, [idols]);
-
-	const maleIdols = useMemo(() => {
-		return idols
-			.filter((i) => i.gender === "male")
-			.sort((a, b) => b.totalVotes - a.totalVotes);
-	}, [idols]);
 
 	const isFemale = activeTab === "female";
 	const visibleList = (isFemale ? femaleIdols : maleIdols).slice(
@@ -104,10 +57,15 @@ const Chart = () => {
 	);
 
 	const handleMore = () => {
-		if (getIsMobile()) setVisibleCount((prev) => prev + MOBILE_ITEMS_PER_PAGE);
-		else if (getIsTablet())
-			setVisibleCount((prev) => prev + TABLET_ITEMS_PER_PAGE);
-		else setVisibleCount((prev) => prev + ITEMS_PER_PAGE);
+		if (window.matchMedia("(max-width: 425px)").matches) {
+			setVisibleCount((prev) => prev + 5);
+		} else if (
+			window.matchMedia("(min-width: 426px) and (max-width: 768px)").matches
+		) {
+			setVisibleCount((prev) => prev + 5);
+		} else {
+			setVisibleCount((prev) => prev + 10);
+		}
 	};
 
 	const handleIdolClick = (idol) => {
@@ -143,6 +101,25 @@ const Chart = () => {
 		</ListItem>
 	);
 
+	// ✨ for문으로 스켈레톤 10개 생성하는 함수 추가
+	const renderSkeletonItems = () => {
+		const items = [];
+		for (let i = 0; i < 10; i++) {
+			items.push(
+				<SkeletonListItem key={`skeleton-${i}`}>
+					<ProfileInfo>
+						<SkeletonProfile />
+						<SkeletonRankAndName>
+							<SkeletonName />
+						</SkeletonRankAndName>
+					</ProfileInfo>
+					<SkeletonVotes />
+				</SkeletonListItem>,
+			);
+		}
+		return items;
+	};
+
 	return (
 		<>
 			<ChartContainer>
@@ -176,9 +153,16 @@ const Chart = () => {
 					<ChartIdolLeft
 						onClick={() => {
 							setActiveTab("female");
-							if (getIsMobile()) setVisibleCount(MOBILE_ITEMS_PER_PAGE);
-							else if (getIsTablet()) setVisibleCount(TABLET_ITEMS_PER_PAGE);
-							else setVisibleCount(ITEMS_PER_PAGE);
+							if (window.matchMedia("(max-width: 425px)").matches) {
+								setVisibleCount(5);
+							} else if (
+								window.matchMedia("(min-width: 426px) and (max-width: 768px)")
+									.matches
+							) {
+								setVisibleCount(5);
+							} else {
+								setVisibleCount(10);
+							}
 						}}
 						style={{
 							cursor: "pointer",
@@ -193,9 +177,16 @@ const Chart = () => {
 					<ChartIdolRight
 						onClick={() => {
 							setActiveTab("male");
-							if (getIsMobile()) setVisibleCount(MOBILE_ITEMS_PER_PAGE);
-							else if (getIsTablet()) setVisibleCount(TABLET_ITEMS_PER_PAGE);
-							else setVisibleCount(ITEMS_PER_PAGE);
+							if (window.matchMedia("(max-width: 425px)").matches) {
+								setVisibleCount(5);
+							} else if (
+								window.matchMedia("(min-width: 426px) and (max-width: 768px)")
+									.matches
+							) {
+								setVisibleCount(5);
+							} else {
+								setVisibleCount(10);
+							}
 						}}
 						style={{
 							cursor: "pointer",
@@ -209,10 +200,10 @@ const Chart = () => {
 					</ChartIdolRight>
 				</ChartIdol>
 
-				{loading ? (
-					<div style={{ color: "white", textAlign: "center" }}>
-						불러오는 중...
-					</div>
+				{error ? (
+					<LoadingError error="chart" />
+				) : loading ? (
+					<ChartList>{renderSkeletonItems()}</ChartList>
 				) : (
 					<>
 						<ChartList>

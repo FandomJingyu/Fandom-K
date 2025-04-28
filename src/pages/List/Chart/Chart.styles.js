@@ -1,10 +1,11 @@
 import styled from "@emotion/styled";
+import { shimmerStyle } from "../../../styles/skeletonAnimation"; // ⭐ 스켈레톤 애니메이션 import
 
 export const ChartContainer = styled.div`
-  max-width:1200px;
+  max-width: 1200px;
   margin: 0 auto;
   padding: 40px 0;
-  width: clamp(325px, 90vw, 1200px);
+  width: 100%
 `;
 
 export const ChartHeaderWrap = styled.div`
@@ -42,16 +43,11 @@ const ChartIdolBase = styled.div`
   height: 42px;
 `;
 
-export const ChartIdolLeft = styled(ChartIdolBase)`
-  
-  
-`;
+export const ChartIdolLeft = styled(ChartIdolBase)``;
 
-export const ChartIdolRight = styled(ChartIdolBase)`
-  
-`;
+export const ChartIdolRight = styled(ChartIdolBase)``;
 
-export const ChartList = styled.div`
+export const ChartList = styled.ul`
   display: flex;
   flex-wrap: wrap;
   gap: 16px;
@@ -128,4 +124,54 @@ export const VoteChart = styled.div`
   justify-content: center;
   align-items: center;
   gap: 4px;
+`;
+export const Overlay = styled.div`
+   position: fixed;
+   top: 0;
+   left: 0;
+   width: 100vw;
+   height: 100vh;
+   background-color: rgba(0, 0, 0, 0.6);
+   z-index: 1000;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+ `;
+
+// ✨ 스켈레톤 컴포넌트 추가
+
+export const SkeletonListItem = styled.li`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #ffffff1a;
+`;
+
+export const SkeletonProfile = styled.div`
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  ${shimmerStyle};
+`;
+
+export const SkeletonRankAndName = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-left: 16px;
+`;
+
+export const SkeletonName = styled.div`
+  width: 100px;
+  height: 16px;
+  border-radius: 8px;
+  ${shimmerStyle};
+`;
+
+export const SkeletonVotes = styled.div`
+  width: 40px;
+  height: 16px;
+  border-radius: 8px;
+  ${shimmerStyle};
 `;

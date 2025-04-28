@@ -1,5 +1,5 @@
 /** @jsxImportSource @emotion/react */
-import React from "react";
+import React, { useState, useEffect } from "react"; // useState, useEffect 추가!
 import Circle from "../../../../components/Circle";
 import Modal from "../../../../components/Modal";
 import {
@@ -25,14 +25,35 @@ import {
 } from "./IdolProfileModal.styles";
 
 const IdolProfileModal = ({ idol, onClose }) => {
-	if (!idol) return null;
+	const [isMobile, setIsMobile] = useState(window.innerWidth <= 425); // ✅ 컴포넌트 최상단에 위치
+	useEffect(() => {
+		const handleResize = () => {
+			setIsMobile(window.innerWidth <= 425);
+		};
+		window.addEventListener("resize", handleResize);
+		return () => window.removeEventListener("resize", handleResize);
+	}, []);
+
+	if (!idol) return null; // ✅ useState/useEffect 호출 "다음에" return
 
 	return (
 		<Modal isOpen={!!idol} onClose={onClose} type="default">
 			<Profile>
 				<ProfileWrapper>
 					<CloseButton onClick={onClose}>
-						<img src="/images/btn-modal-close.png" alt="닫기" />
+						{isMobile ? (
+							<img
+								src="/icons/icon-arrow-left.svg"
+								alt="뒤로가기"
+								className="back"
+							/> // ✅ 모바일이면 < 모양
+						) : (
+							<img
+								src="/images/btn-modal-close.png"
+								alt="닫기"
+								className="close"
+							/> // ✅ 데스크탑이면 X 모양
+						)}
 					</CloseButton>
 
 					<ProfileHeader>
