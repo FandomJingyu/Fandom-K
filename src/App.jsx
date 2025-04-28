@@ -1,3 +1,7 @@
+import Lenis from "@studio-freight/lenis";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useEffect, useRef } from "react";
 import { Route, Routes } from "react-router-dom";
 import Toastify from "./components/Toastify";
 import { CreditProvider } from "./context/CreditContext";
@@ -10,6 +14,30 @@ import NotFound from "./pages/NotFound/index.jsx";
 import Testpage from "./pages/Testpage/index.jsx";
 
 function App() {
+	const lenisRef = useRef(null);
+
+	// Lenis 스크롤 초기화
+	useEffect(() => {
+		lenisRef.current = new Lenis({
+			smoothWheel: true,
+			duration: 1.2,
+		});
+
+		lenisRef.current.on("scroll", ScrollTrigger.update);
+
+		const animate = (time) => {
+			lenisRef.current?.raf(time * 1000);
+		};
+
+		gsap.ticker.add(animate);
+		gsap.ticker.lagSmoothing(0);
+
+		return () => {
+			gsap.ticker.remove(animate);
+			lenisRef.current?.destroy();
+		};
+	}, []);
+
 	return (
 		<CreditProvider>
 			<Toastify />
