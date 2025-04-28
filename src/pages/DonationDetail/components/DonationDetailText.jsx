@@ -1,5 +1,5 @@
+import withPostPosition from "@/utils/postPosition";
 import { css } from "@emotion/react";
-import withPostPosition from "../../../utils/postPosition";
 
 /** @jsxImportSource @emotion/react */
 export default function DonationDetail({ donation, loading }) {
@@ -7,6 +7,7 @@ export default function DonationDetail({ donation, loading }) {
 
 	const idolWithGa = idol ? withPostPosition(idol.name, "이가") : "";
 	const idolWithEun = idol ? withPostPosition(idol.name, "은는") : "";
+	const idolWithLaneun = idol ? withPostPosition(idol.name, "라는이라는") : "";
 	const donationWithEul = donation
 		? withPostPosition(donation.subtitle, "을를")
 		: "";
@@ -72,7 +73,7 @@ export default function DonationDetail({ donation, loading }) {
 					<dl>
 						<dt>⚡{idol.name}의 1년 = 우리가 만든 기적 ⚡</dt>
 						<dd>
-							단순한 시간이 아니라 <br />🌟{idol.name}라는 이름 아래, 우리가
+							단순한 시간이 아니라 <br />🌟{idolWithLaneun} 이름 아래, 우리가
 							함께한 서사집🌟
 							<br />
 							<br />이 아름다운 서포트… 함께해주실 거죠? <br />

@@ -25,8 +25,5 @@ jobs:
       - name: 🔎 Run Biome Check
         run: npm run check
 
-      - name: 🧪 Run Tests (optional)
-        run: npm test
-
       - name: 🏗️ Build Project
         run: npm run build

@@ -34,7 +34,7 @@ export const description = css`
   display: flex;
   width: 100%;
   flex-direction: column;
-  align-items: felx-start;
+  align-items: flex-start;
   gap: 24px;
 `;
 

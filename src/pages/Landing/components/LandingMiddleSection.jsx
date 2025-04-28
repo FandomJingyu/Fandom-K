@@ -1,87 +1,136 @@
 import styled from "@emotion/styled";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 
 export default function LandingMiddleSection() {
 	// LandingMiddleSection 애니메이션
 	useEffect(() => {
-		const ctx = gsap.context(() => {
-			const anim = gsap.timeline({
-				scrollTrigger: {
-					trigger: ".landingMiddleSection",
-					start: "top top",
-					end: "+=300%",
-					pin: true,
-					scrub: 1,
-					id: "sec02Trigger",
-				},
-			});
+		const ctx =
+			window.innerWidth < 768
+				? gsap.context(() => {
+						// 모바일 디바이스에서 각 article에 대한 애니메이션
+						const articles = document.querySelectorAll(
+							".landingMiddleSection article",
+						);
 
-			gsap.set(".landingMiddleSection article:nth-of-type(2)", {
-				y: "100%",
-			});
-			gsap.set(".landingMiddleSection article:nth-of-type(3)", {
-				y: "100%",
-			});
+						for (const article of articles) {
+							const fadeInRight = article.querySelector(".fade-in-right");
+							const fadeInUp = article.querySelectorAll(".fade-in-up");
 
-			// 네비게이션 초기 설정
-			const navButtons = document.querySelectorAll(
-				".landingMiddleSectionNav button",
-			);
-			navButtons[0].classList.add("active");
+							if (fadeInRight || fadeInUp) {
+								gsap
+									.timeline({
+										scrollTrigger: {
+											trigger: article,
+											start: "top 50%",
+											end: "bottom 50%",
+										},
+									})
+									.fromTo(
+										fadeInUp,
+										{
+											y: 30,
+											opacity: 0,
+										},
+										{
+											y: 0,
+											opacity: 1,
+											duration: 0.5,
+										},
+									)
+									.fromTo(
+										fadeInRight,
+										{
+											x: 100,
+											opacity: 0,
+										},
+										{
+											x: 0,
+											opacity: 1,
+											duration: 0.5,
+										},
+									);
+							}
+						}
+					})
+				: gsap.context(() => {
+						const anim = gsap.timeline({
+							scrollTrigger: {
+								trigger: ".landingMiddleSection",
+								start: "top top",
+								end: "+=300%",
+								pin: true,
+								scrub: 1,
+								id: "sec02Trigger",
+							},
+						});
 
-			// 네비게이션 활성화
-			const st = ScrollTrigger.create({
-				trigger: ".landingMiddleSection",
-				start: "top top",
-				end: "+=300%",
-				onUpdate: (self) => {
-					const progress = self.progress;
-					for (const btn of navButtons) {
-						btn.classList.remove("active");
-					}
+						gsap.set(".landingMiddleSection article:nth-of-type(2)", {
+							y: "100%",
+						});
+						gsap.set(".landingMiddleSection article:nth-of-type(3)", {
+							y: "100%",
+						});
 
-					if (progress < 0.33) {
+						// 네비게이션 초기 설정
+						const navButtons = document.querySelectorAll(
+							".landingMiddleSectionNav button",
+						);
 						navButtons[0].classList.add("active");
-					} else if (progress < 0.66) {
-						navButtons[1].classList.add("active");
-					} else {
-						navButtons[2].classList.add("active");
-					}
-				},
-			});
 
-			// 네비게이션 클릭 이벤트
-			navButtons.forEach((btn, index) => {
-				btn.addEventListener("click", () => {
-					const targetProgress = index * 0.5;
-					const targetScroll = st.start + (st.end - st.start) * targetProgress;
+						// 네비게이션 활성화
+						const st = ScrollTrigger.create({
+							trigger: ".landingMiddleSection",
+							start: "top top",
+							end: "+=300%",
+							onUpdate: (self) => {
+								const progress = self.progress;
+								for (const btn of navButtons) {
+									btn.classList.remove("active");
+								}
 
-					gsap.to(window, {
-						scrollTo: targetScroll,
-						duration: 1,
-						ease: "power2.inOut",
+								if (progress < 0.33) {
+									navButtons[0].classList.add("active");
+								} else if (progress < 0.66) {
+									navButtons[1].classList.add("active");
+								} else {
+									navButtons[2].classList.add("active");
+								}
+							},
+						});
+
+						// 네비게이션 클릭 이벤트
+						navButtons.forEach((btn, index) => {
+							btn.addEventListener("click", () => {
+								const targetProgress = index * 0.5;
+								const targetScroll =
+									st.start + (st.end - st.start) * targetProgress;
+
+								gsap.to(window, {
+									scrollTo: targetScroll,
+									duration: 1,
+									ease: "power2.inOut",
+								});
+							});
+						});
+
+						anim
+							.to(".landingMiddleSection article:nth-of-type(2)", {
+								y: 0,
+								delay: 0.5,
+								duration: 1,
+								ease: "power1.inOut",
+							})
+							.to(".landingMiddleSection article:nth-of-type(3)", {
+								y: 0,
+								duration: 1,
+								ease: "power1.inOut",
+							})
+							.to(".landingMiddleSection", {
+								delay: 0.2,
+							});
 					});
-				});
-			});
-
-			anim
-				.to(".landingMiddleSection article:nth-of-type(2)", {
-					y: 0,
-					delay: 0.5,
-					duration: 1,
-					ease: "power1.inOut",
-				})
-				.to(".landingMiddleSection article:nth-of-type(3)", {
-					y: 0,
-					duration: 1,
-					ease: "power1.inOut",
-				})
-				.to(".landingMiddleSection", {
-					delay: 0.2,
-				});
-		});
 
 		return () => ctx.revert();
 	}, []);
@@ -95,7 +144,7 @@ export default function LandingMiddleSection() {
 			</nav>
 			<article>
 				<div className="landingGrid">
-					<h3>
+					<h3 className="fade-in-up">
 						<strong>마음</strong>이 <br className="hide-768" />
 						닿는 순간, <br />
 						<strong>응원</strong>이 <br className="hide-768" />
@@ -104,10 +153,10 @@ export default function LandingMiddleSection() {
 							<img src="/images/landing/landing_icon01.png" alt="" />
 						</span>
 					</h3>
-					<div className="landing-mockup">
+					<div className="landing-mockup fade-in-right">
 						<img src="/images/landing/landing_mock01.png" alt="" />
 					</div>
-					<p>
+					<p className="fade-in-up">
 						좋아하는 아티스트에게 직접 후원하고
 						<br />
 						팬심을 행동으로 보여주세요.
@@ -120,7 +169,7 @@ export default function LandingMiddleSection() {
 			</article>
 			<article>
 				<div className="landingGrid">
-					<h3>
+					<h3 className="fade-in-up">
 						이번 달 <br className="hide-768" />
 						<strong>가장 빛난 별</strong>은 <br />
 						누구?
@@ -128,10 +177,10 @@ export default function LandingMiddleSection() {
 							<img src="/images/landing/landing_icon02.png" alt="" />
 						</span>
 					</h3>
-					<div className="landing-mockup">
+					<div className="landing-mockup fade-in-right">
 						<img src="/images/landing/landing_mock02.png" alt="" />
 					</div>
-					<p>
+					<p className="fade-in-up">
 						팬들의 사랑을 가장 많이 받은
 						<br />
 						이달의 아티스트를 소개합니다!
@@ -144,7 +193,7 @@ export default function LandingMiddleSection() {
 			</article>
 			<article>
 				<div className="landingGrid">
-					<h3>
+					<h3 className="fade-in-up">
 						내 마음 속
 						<span className="is-pulsing hide-425">
 							<img src="/images/landing/landing_icon03.png" alt="" />
@@ -158,10 +207,10 @@ export default function LandingMiddleSection() {
 							<img src="/images/landing/landing_icon03.png" alt="" />
 						</span>
 					</h3>
-					<div className="landing-mockup">
+					<div className="landing-mockup fade-in-right">
 						<img src="/images/landing/landing_mock03.png" alt="" />
 					</div>
-					<p>
+					<p className="fade-in-up">
 						내가 좋아하는 아티스트 소식만 골라보고 <br />
 						새로운 콘텐츠와 스케줄도 한눈에!
 						<br />
@@ -173,7 +222,6 @@ export default function LandingMiddleSection() {
 		</StyledLandingMiddleSection>
 	);
 }
-
 const StyledLandingMiddleSection = styled.section`
   position: relative;
 
@@ -363,6 +411,7 @@ const StyledLandingMiddleSection = styled.section`
     }
   }
   @media all and (max-width: 768px) {
+    height: auto !important;
     .landingGrid {
       gap: 20px;
       flex-direction: column;
@@ -385,8 +434,12 @@ const StyledLandingMiddleSection = styled.section`
       width: 40vw;
       top: 70%;
       img {
-        max-height: calc(65vh - 100px);
+        max-height: 400px;
       }
+    }
+    article {
+      position: static;
+      height: 850px;
     }
   }
   @media all and (max-width: 425px) {

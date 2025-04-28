@@ -100,7 +100,8 @@ const Modal = ({
 						</button>
 					</div>
 					{/* Modal Content */}
-					{children}
+					{/* 모달 오픈시 lenis스크롤 막는 data-lenis-prevent 속성 추가 */}
+					<div data-lenis-prevent="true">{children}</div>
 				</div>
 			</div>
 		</ModalPortal>

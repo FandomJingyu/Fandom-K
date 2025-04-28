@@ -101,7 +101,7 @@ const Chart = () => {
 		</ListItem>
 	);
 
-	// ✨ for문으로 스켈레톤 10개 생성하는 함수 추가
+	// ✨ for문으로 스켈레톤 10개 생성하는 함수
 	const renderSkeletonItems = () => {
 		const items = [];
 		for (let i = 0; i < 10; i++) {

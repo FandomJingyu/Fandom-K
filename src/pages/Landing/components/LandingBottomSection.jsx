@@ -1,7 +1,7 @@
+import { infiniteCarousel } from "@/utils/infiniteCarousel";
 import styled from "@emotion/styled";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { infiniteCarousel } from "../../../utils/infiniteCarousel";
 
 const CarouselCards = ({ className, startIndex }) => {
 	const images = Array.from({ length: 4 }, (_, i) => ({
@@ -207,7 +207,7 @@ const StyledLandingBottomSection = styled.section`
     }
   }
   @media all and (max-width: 425px) {
-    height: 133.33vw !important;
+    height: 520px !important;
     .landingGrid {
       > img {
         width: 65.07vw;

@@ -9,14 +9,13 @@ import { idolList } from "./IdolList.styles";
 //imageWrapper 로 감싸면 CheckIdol 사용 가능
 const imageWrapper = (size) => css`
 	position: relative;
-	width: ${size};
-	height: ${size};
 	margin: 0 auto;
 `;
 
 const IdolList = ({
 	idol,
-	size = "128px", //circle 사이즈
+	size,
+	// size = "128px", //circle 사이즈
 	isChecked = false,
 	isMyIdol = false,
 	onRemove,
