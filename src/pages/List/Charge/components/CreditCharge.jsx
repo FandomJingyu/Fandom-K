@@ -52,20 +52,20 @@ export default function CreditCharge() {
 	}, []);
 
 	useEffect(() => {
-		// credit이 0이 아닌 정수일 때 동작하게 처리
+		// credit이 변했을 때만(충전시에만) 애니메이션 호출되고,
+		// 초기 렌더링 시에는 0부터 카운트업
 		if (typeof credit === "number") {
 			if (isInitialMount.current) {
-				// 새로고침 혹은 처음 마운트 시
 				countCredit(0, credit);
 				previousCreditRef.current = credit;
 				isInitialMount.current = false;
-			} else {
-				// 그 이후 credit 변경 시
+			} else if (previousCreditRef.current !== credit) {
 				countCredit(previousCreditRef.current, credit);
 				previousCreditRef.current = credit;
 			}
 		}
 	}, [countCredit, credit]);
+
 	return (
 		<>
 			<div css={CreditChargeStyle}>
@@ -73,7 +73,7 @@ export default function CreditCharge() {
 					<p>내 크레딧</p>
 					<div className="credit">
 						<img src="/icons/icon_credit.svg" alt="credit" />
-						<span ref={creditRef}>{credit.toLocaleString()}</span>
+						<span ref={creditRef}>0</span>
 					</div>
 				</div>
 				<button type="button" onClick={openModal}>
