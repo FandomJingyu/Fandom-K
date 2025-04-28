@@ -1,7 +1,7 @@
-import { donationsAPI } from "@/apis/donationsAPI";
 import LoadingError from "@/components/Error";
+import { useDonations } from "@/hooks/useDonation";
 import { css } from "@emotion/react";
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import DonationDetailInfo from "./components/DonationDetailInfo";
 import DonationDetailSkeleton from "./components/DonationDetailSkeleton";
@@ -10,35 +10,23 @@ import DonationDetailText from "./components/DonationDetailText";
 
 export default function DonationDetail() {
 	const { id } = useParams();
+	const {
+		donations,
+		loading: donationsLoading,
+		error: donationsError,
+	} = useDonations();
 	const [donation, setDonation] = useState(null);
-	const [loading, setLoading] = useState(true);
 	const [randomEmoji, setRandomEmoji] = useState("");
-	const [error, setError] = useState(false);
-
-	const getDonation = useCallback(async () => {
-		try {
-			const response = await donationsAPI.getDonations();
-			if (response) {
-				const foundDonation = response.list.find(
-					(item) => item.id === Number.parseInt(id) || item.id === id,
-				);
-				setDonation(foundDonation || null);
-			}
-		} catch (error) {
-			// 로딩 UI 잠시 유지
-			setTimeout(() => {
-				setError(true);
-			}, 600); // 600초 정도 기다렸다가 에러 표시
-		} finally {
-			setLoading(false);
-		}
-	}, [id]);
 
 	useEffect(() => {
-		getDonation();
-	}, [getDonation]);
+		if (!donationsLoading && donations.length > 0) {
+			const foundDonation = donations.find(
+				(item) => item.id === Number.parseInt(id) || item.id === id,
+			);
+			setDonation(foundDonation || null);
+		}
+	}, [donations, donationsLoading, id]);
 
-	// 랜덤 이모지 - 초기 렌더링에서만 이모지를 선택
 	useEffect(() => {
 		const emojiKeys = Object.keys(emojis);
 		const selectedEmoji =
@@ -57,13 +45,18 @@ export default function DonationDetail() {
 		ribbon: "🎀",
 	};
 
+	const isLoading =
+		donationsLoading || (!donationsError && !donation && donations.length > 0);
+	const hasError =
+		donationsError || (!donationsLoading && !donation && donations.length > 0);
+
 	return (
 		<div className="mainGrid" css={DonationDetailStyle}>
-			{loading ? (
+			{isLoading ? (
 				<DonationDetailSkeleton />
-			) : error ? (
+			) : hasError ? (
 				<LoadingError />
-			) : (
+			) : donation ? (
 				<>
 					<div css={DonationDetailTop}>
 						<h2>
@@ -83,13 +76,15 @@ export default function DonationDetail() {
 									alt={donation.idol.name}
 								/>
 							</div>
-							<DonationDetailText donation={donation} loading={loading} />
+							<DonationDetailText donation={donation} />
 						</div>
 						<div css={DonationDetailInfoArea}>
-							<DonationDetailInfo donation={donation} loading={loading} />
+							<DonationDetailInfo donation={donation} />
 						</div>
 					</div>
 				</>
+			) : (
+				<LoadingError message="해당 후원 정보를 찾을 수 없습니다." />
 			)}
 		</div>
 	);

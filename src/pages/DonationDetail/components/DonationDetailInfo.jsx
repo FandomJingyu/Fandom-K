@@ -189,7 +189,7 @@ export default function DonationDetailInfo({ donation, loading }) {
 							variant="primary"
 							onClick={handleDonate}
 						>
-							{isSubmitting ? "충전 중..." : "충전하기"}
+							{isSubmitting ? "후원 중..." : "후원하기"}
 						</Button>
 					</>
 				)}
