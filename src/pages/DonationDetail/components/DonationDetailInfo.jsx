@@ -217,6 +217,7 @@ const DonationDetailInfoStyle = css`
   flex-direction: column;
   height: 600px;
   position: sticky;
+  z-index: 99;
   overflow: hidden;
   top: 120px;
   padding: 30px 20px;
