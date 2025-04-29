@@ -11,6 +11,7 @@ export default function DonationDetail({ donation, loading }) {
 	const donationWithEul = donation
 		? withPostPosition(donation.subtitle, "을를")
 		: "";
+	const checkGender = idol.gender === "male" ? "그" : "그녀";
 	return (
 		<div className="text" css={DonationDetailTextStyle}>
 			{loading ? (
@@ -28,7 +29,7 @@ export default function DonationDetail({ donation, loading }) {
 							<br />
 							이건 그냥… 🎉 국가공휴일 지정 가야 돼 🎉 <br />
 							🕊️ {idolWithGa} 강림하던 그 순간 세상의 조도는 조절 당했고 우리
-							눈은 그녀만을 트래킹하기 시작했다 👁️💫
+							눈은 {checkGender}만을 트래킹하기 시작했다 👁️💫
 							<br />
 							그날 이후 우린 알게 되었죠. <br />🧠 "아… {idolWithEun} 그냥
 							아이돌이 아니라 종교다…"
@@ -143,7 +144,7 @@ const DonationDetailTextStyle = css`
   }
   @media all and (max-width: 425px) {
     margin-top: 125.65vw;
-		 dl {
+    dl {
       font-size: 3.53vw;
       margin-bottom: 9.41vw;
     }
