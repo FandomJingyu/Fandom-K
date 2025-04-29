@@ -5,14 +5,16 @@ export default function LandingFooter() {
 	const btnRef = useRef(null);
 
 	useEffect(() => {
-		btnRef.current?.addEventListener("click", () => {
-			window.scrollTo({ top: 0, behavior: "smooth" });
-		});
+		btnRef.current?.addEventListener("click", handleTopBtnClick);
 
 		return () => {
 			btnRef.current?.removeEventListener("click");
 		};
 	}, []);
+
+	const handleTopBtnClick = () => {
+		window.scrollTo({ top: 0, behavior: "smooth" });
+	};
 
 	return (
 		<StyledLandingFooter>
@@ -22,7 +24,7 @@ export default function LandingFooter() {
 					<p>All your K-pop love, in one place</p>
 				</div>
 				<div className="footer-copy">
-					<button type="button" className="top-btn">
+					<button type="button" className="top-btn" ref={btnRef}>
 						<img src="/images/landing/top_btn.png" alt="top" />
 					</button>
 					<p className="copy">&copy; FandomJingyu.2025 All rights reserved.</p>
