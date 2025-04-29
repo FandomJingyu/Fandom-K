@@ -20,7 +20,7 @@ import {
 	overlay,
 	text,
 	title,
-} from "./NotFound.style";
+} from "./NotFound.styles";
 
 import { useNavigate } from "react-router-dom";
 

@@ -46,7 +46,7 @@ const contentWrapper = (className) => css`
   justify-content: space-between;
   width: 100%;
   height: 100%;
-   padding: ${className === "vote" ? "0" : "0 23px 0 16px"};
+  padding: ${className === "vote" ? "0" : "0 23px 0 16px"};
 `;
 
 // 라디오 버튼 스타일 정의

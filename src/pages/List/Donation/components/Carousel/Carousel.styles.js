@@ -19,8 +19,8 @@ export const sliderTrack = (
   margin-top: 34px;
   
   @media (max-width: 426px) {
-  margin-top: 3.76vw;
-  gap: 1.88vw;
+    margin-top: 3.76vw;
+    gap: 1.88vw;
   };
 `;
 
@@ -39,5 +39,5 @@ export const sliderViewport = css`
 
 	&::-webkit-scrollbar {
 		display: none;
-	}
+	};
 `;

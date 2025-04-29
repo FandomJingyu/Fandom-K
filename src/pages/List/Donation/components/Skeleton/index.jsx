@@ -10,9 +10,9 @@ import {
 	progress,
 	subTitle,
 	text,
-} from "./style/CardSkeleton.style";
+} from "./style/CardSkeleton.styles";
 /** @jsxImportSource @emotion/react */
-import { button, content, pageNation } from "./style/Skeleton.style";
+import { button, content, pageNation } from "./style/Skeleton.styles";
 
 function CardSkeleton() {
 	return (

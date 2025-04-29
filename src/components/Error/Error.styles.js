@@ -14,7 +14,7 @@ export const errorWrapper = css`
 
   @media(max-width: 476px) {
     gap: 6px;
-  }
+  };
 `;
 
 /**
@@ -36,7 +36,7 @@ export const iconWrapper = css`
   @media(max-width: 476px) {
   width: 60px;
   height: 60px;
-  }
+  };
 `;
 
 /**
@@ -48,7 +48,7 @@ export const black = css`
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background: #000000; /* = 대신 : */
+  background: #000000; 
   width: 75px;
   height: 75px;
   border-radius: 50%;
@@ -58,8 +58,8 @@ export const black = css`
   z-index: 1;
 
   @media(max-width: 476px) {
-  width: 50px;
-  height: 50px;
+    width: 50px;
+    height: 50px;
   }
 `;
 
@@ -89,7 +89,7 @@ export const title = css`
   @media(max-width: 476px) {
     font-size: 16px;
     font-weight: 800;
-  }
+  };
 `;
 
 /**
@@ -101,25 +101,26 @@ export const description = css`
 
   @media(max-width: 476px) {
     font-size: 13px;
-  }
+  };
 `;
 
 /**
  * '다시 시도하기' 버튼 스타일
  */
 export const button = css`
-width: 140px;
-height: 30px;
+  width: 140px;
+  height: 30px;
 
-background: linear-gradient(90deg, #F86F65 0%, #FE5493 100%); 
-border-radius: 20px;
+  background: linear-gradient(90deg, #F86F65 0%, #FE5493 100%); 
+  border-radius: 20px;
 
-font-size: 12px;
-font-weight: 400;
+  font-size: 12px;
+  font-weight: 400;
 
-@media(max-width: 476px) {
-width: 100px;
-height: 25px;
+  @media(max-width: 476px) {
+    width: 100px;
+    height: 25px;
 
-font-size: 10px;
-}`;
+    font-size: 10px;
+  };
+`;

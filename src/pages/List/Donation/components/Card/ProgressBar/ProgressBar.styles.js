@@ -9,12 +9,11 @@ import { css } from "@emotion/react";
  * - 배경색은 흰색으로 설정되어, 진행 바의 배경 역할
  */
 export const progressContainer = css`
-width: 100%;
-height: 1px;
-flex-shrink: 0;
+  width: 100%;
+  height: 1px;
+  flex-shrink: 0;
 
-background-color: #ffffff
-;
+  background-color: #ffffff;
 `;
 
 /**
@@ -27,6 +26,7 @@ background-color: #ffffff
  * - 배경색은 CSS 변수 `--orange-F96D69` 사용
  */
 export const progressContent = (progress) => css`
-width:${progress}%;
-height: 100%;
-background-color: var(--orange-F96D69)`;
+  width:${progress}%;
+  height: 100%;
+  background-color: var(--orange-F96D69);
+`;

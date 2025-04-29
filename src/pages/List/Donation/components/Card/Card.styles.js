@@ -17,24 +17,24 @@ export const donationCardContainer = css`
   flex-shrink: 0;
 
   @media (max-width: 426px) {
-  width: 158px;
-  height: 303px;
-  }
+    width: 158px;
+    height: 303px;
+  };
 `;
 
 /**
  * 이미지 영역 컨테이너
  * - 버튼 및 오버레이를 절대 위치로 배치하기 위한 기준 요소
  */
-export const donatioImgContainer = css`
+export const donationImgContainer = css`
   position: relative;
   width: 282px;
   height: 293px;
 
   @media (max-width: 426px) {
-  width: 158px;
-  height: 206px;
-  }
+    width: 158px;
+    height: 206px;
+  };
 `;
 
 /**
@@ -78,18 +78,18 @@ export const overlaySvg = css`
  * - 배치 제외 나머지는 공통 컴포넌트로 대체 예정
  */
 export const donationButton = css`
-position: absolute;
-bottom: 30px;
-left: 22px;
+  position: absolute;
+  bottom: 30px;
+  left: 22px;
 
-z-index: 3;
+  z-index: 3;
 
-font-size: 13px;
+  font-size: 13px;
 
-@media (max-width: 426px) {
-  bottom: 4vw;
-  left: 1.87vw;
-}
+  @media (max-width: 426px) {
+    bottom: 4vw;
+    left: 1.87vw;
+  };
 `;
 
 /**
@@ -97,26 +97,27 @@ font-size: 13px;
  * - 수직 정렬
  */
 export const donationDescription = css`
-display: flex;
-width: 100%;
-flex-direction: column;
-align-items: flex-start;
-gap: 24px;
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 24px;
 `;
 
 /**
  * 제목 영역 (서브제목 + 제목)
  */
 export const donationTitleContainer = css`
-display: flex;
-width: 100%;
-flex-direction: column;
-align-items: flex-start;
-gap: 8px;
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
 
-@media (max-width: 426px) {
-gap: 1.6vw;
-}`;
+  @media (max-width: 426px) {
+    gap: 1.6vw;
+  };
+`;
 
 /**
  * 장소(서브제목) 스타일
@@ -124,34 +125,36 @@ gap: 1.6vw;
  * - 투명도 적용
  */
 export const descriptionSubtitle = css`
-color: #FFF;
+  color: #FFF;
 
-text-align: center;
-font-size: 16px;
-font-style: normal;
-font-weight: 400;
-line-height: 18px; /* 112.5% */
-letter-spacing: -0.165px;
+  text-align: center;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 18px; /* 112.5% */
+  letter-spacing: -0.165px;
 
-opacity: 0.4;
+  opacity: 0.4;
 
-@media (max-width: 426px) {
-font-size: 2.82vw;
+  @media (max-width: 426px) {
+    font-size: 2.82vw;
+  };
 `;
 
 /**
  * 제목(조공 제목) 텍스트 스타일
  */
 export const descriptionTitle = css`
-color: var(--white-whtie_F7F7F8, #F7F7F8);
-text-align: center;
-font-size: 18px;
-font-style: normal;
-font-weight: 500;
-line-height: normal;
+  color: var(--white-F7F7F8, #F7F7F8);
+  text-align: center;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
 
-@media (max-width: 426px) {
-font-size: 3.05vw;
+  @media (max-width: 426px) {
+    font-size: 3.05vw;
+  };
 `;
 
 /**
@@ -159,24 +162,25 @@ font-size: 3.05vw;
  * - 세로 정렬로 D-day, 진행률 등 순차적으로 배치
  */
 export const donationFooter = css`
-width: 100%;
-display: flex;
-flex-direction: column;`;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+`;
 
 /**
  * 하단 정보 라인 (크레딧 + D-day)
  * - 좌우로 나란히 배치
  */
 export const donationFooterUp = css`
-width: 100%;
-display: flex;
-justify-content: space-between;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
 
-margin-bottom: 4px;
+  margin-bottom: 4px;
 
-@media (max-width: 426px) {
-margin-bottom: 0.27vw;
-};
+  @media (max-width: 426px) {
+    margin-bottom: 0.27vw;
+  };
 `;
 
 /**
@@ -184,44 +188,48 @@ margin-bottom: 0.27vw;
  * - 아이콘 옆에 텍스트 배치
  */
 export const donationFooterLeft = css`
-display: flex;
-align-items: center`;
+  display: flex;
+  align-items: center;
+`;
 
 /**
  * 크레딧 아이콘 이미지
  */
 export const creditImg = css`
-width: 12px;
-height: 12px`;
+  width: 12px;
+  height: 12px;
+`;
 
 /**
  * 목표 금액 텍스트 스타일
  */
 export const targetDonation = css`
-color: var(--orange-F96D69);
-font-size: 12px;
-font-style: normal;
-font-weight: 400;
-line-height: 18px; /* 150% */
-letter-spacing: -0.165px;
+  color: var(--orange-F96D69);
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 18px; /* 150% */
+  letter-spacing: -0.165px;
 
-@media (max-width: 426px) {
-font-size: 2.67vw;
-}`;
+  @media (max-width: 426px) {
+    font-size: 2.67vw;
+  };
+`;
 
 /**
  * D-Day 남은 일 수 텍스트
  * - 오른쪽 정렬 스타일
  */
 export const donationDday = css`
-color: var(--white-F7F7F8);
-text-align: right;
-font-size: 12px;
-font-style: normal;
-font-weight: 400;
-line-height: 18px; /* 150% */
-letter-spacing: -0.165px;
+  color: var(--white-F7F7F8);
+  text-align: right;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 18px; /* 150% */
+  letter-spacing: -0.165px;
 
-@media (max-width: 426px) {
-font-size: 2.67vw;
-}`;
+  @media (max-width: 426px) {
+    font-size: 2.67vw;
+  };
+`;
