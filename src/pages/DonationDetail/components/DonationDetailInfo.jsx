@@ -11,6 +11,7 @@ import { toast } from "react-toastify";
 import DonationDetailTimer from "./DonationDetailTimer";
 
 let isCreditErrorToastShown = false;
+let isTargetErrorToastShown = false;
 
 export default function DonationDetailInfo({ donation, loading }) {
 	const { idol, receivedDonations, targetDonation, deadline, subtitle, title } =
@@ -82,6 +83,7 @@ export default function DonationDetailInfo({ donation, loading }) {
 		}
 
 		checkIsLimitOver(newCredit);
+		checkIsTargetOver(newCredit);
 	};
 
 	const creditList = [
@@ -133,7 +135,44 @@ export default function DonationDetailInfo({ donation, loading }) {
 		const newValue = value === "" ? 0 : Number(value);
 
 		checkIsLimitOver(newValue);
+		checkIsTargetOver(newValue);
 	};
+
+	const checkIsTargetOver = (newCredit) => {
+		const isOverLimit = newCredit + donatedAmount > targetDonation;
+		const availableCredit = isOverLimit ? 0 : targetDonation - donatedAmount;
+
+		setIsError(isOverLimit);
+		setCredit(newCredit);
+
+		if (isOverLimit) {
+			if (!isTargetErrorToastShown) {
+				// 1. 초과했으면 토스트 띄우기 (이미 뜬 상태가 아니면)
+				toast.error("목표 금액을 초과할 수 없습니다.", {
+					toastId: "target-error",
+				});
+				isTargetErrorToastShown = true;
+			}
+			// 2. 초과했으면 인풋을 현재 보유 크레딧으로 리셋
+			setCredit(availableCredit);
+
+			// 3. 에러 상태도 해제 (버튼 disabled 해제)
+			setIsError(false);
+
+			// 4. 토스트 상태 초기화
+			isTargetErrorToastShown = false;
+		} else {
+			setCredit(newCredit);
+			setIsError(false);
+
+			// 이미 에러 토스트가 떠 있었으면 닫기
+			if (isTargetErrorToastShown) {
+				toast.dismiss("target-error");
+				isTargetErrorToastShown = false;
+			}
+		}
+	};
+
 	return (
 		<>
 			<form onSubmit={safeSubmit} css={DonationDetailInfoStyle}>
