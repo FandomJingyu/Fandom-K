@@ -151,16 +151,18 @@ const Chart = () => {
 				<ChartIdol style={{ marginBottom: "20px" }}>
 					<ChartIdolLeft
 						onClick={() => {
-							setActiveTab("female");
-							if (window.matchMedia("(max-width: 425px)").matches) {
-								setVisibleCount(5);
-							} else if (
-								window.matchMedia("(min-width: 426px) and (max-width: 768px)")
-									.matches
-							) {
-								setVisibleCount(5);
-							} else {
-								setVisibleCount(10);
+							if (!isFemale) {
+								setActiveTab("female");
+								if (window.matchMedia("(max-width: 425px)").matches) {
+									setVisibleCount(5);
+								} else if (
+									window.matchMedia("(min-width: 426px) and (max-width: 768px)")
+										.matches
+								) {
+									setVisibleCount(5);
+								} else {
+									setVisibleCount(10);
+								}
 							}
 						}}
 						style={{
@@ -173,18 +175,21 @@ const Chart = () => {
 					>
 						이달의 여자 아이돌
 					</ChartIdolLeft>
+
 					<ChartIdolRight
 						onClick={() => {
-							setActiveTab("male");
-							if (window.matchMedia("(max-width: 425px)").matches) {
-								setVisibleCount(5);
-							} else if (
-								window.matchMedia("(min-width: 426px) and (max-width: 768px)")
-									.matches
-							) {
-								setVisibleCount(5);
-							} else {
-								setVisibleCount(10);
+							if (isFemale) {
+								setActiveTab("male");
+								if (window.matchMedia("(max-width: 425px)").matches) {
+									setVisibleCount(5);
+								} else if (
+									window.matchMedia("(min-width: 426px) and (max-width: 768px)")
+										.matches
+								) {
+									setVisibleCount(5);
+								} else {
+									setVisibleCount(10);
+								}
 							}
 						}}
 						style={{
