@@ -13,7 +13,7 @@ export const useChart = () => {
 	const [idols, setIdols] = useState([]);
 	const [loading, setLoading] = useState(true);
 	const [error, setError] = useState(null);
-	const [visibleCount, setVisibleCount] = useState(ITEMS_PER_PAGE);
+	const [visibleCount, setVisibleCount] = useState(ITEMS_PER_PAGE); // ✅ useState 유지
 
 	useEffect(() => {
 		const fetchIdols = async () => {
@@ -32,17 +32,21 @@ export const useChart = () => {
 		fetchIdols();
 	}, []);
 
+	// ✅ 오직 최초 1회만 visibleCount 초기화
 	useEffect(() => {
-		const handleResize = () => {
-			if (getIsMobile()) setVisibleCount(MOBILE_ITEMS_PER_PAGE);
-			else if (getIsTablet()) setVisibleCount(TABLET_ITEMS_PER_PAGE);
-			else setVisibleCount(ITEMS_PER_PAGE);
-		};
-
-		handleResize();
-		window.addEventListener("resize", handleResize);
-		return () => window.removeEventListener("resize", handleResize);
+		if (getIsMobile()) setVisibleCount(MOBILE_ITEMS_PER_PAGE);
+		else if (getIsTablet()) setVisibleCount(TABLET_ITEMS_PER_PAGE);
+		else setVisibleCount(ITEMS_PER_PAGE);
 	}, []);
+
+	// ✅ 더보기 버튼 로직
+	const handleMore = () => {
+		if (getIsMobile() || getIsTablet()) {
+			setVisibleCount((prev) => prev + 5);
+		} else {
+			setVisibleCount((prev) => prev + 10);
+		}
+	};
 
 	const femaleIdols = useMemo(() => {
 		return idols
@@ -65,5 +69,6 @@ export const useChart = () => {
 		setIdols,
 		visibleCount,
 		setVisibleCount,
+		handleMore, // ✅ Chart.jsx에서 사용
 	};
 };

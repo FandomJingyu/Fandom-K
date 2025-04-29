@@ -44,6 +44,7 @@ const Chart = () => {
 		setIdols,
 		visibleCount,
 		setVisibleCount,
+		handleMore, // ✅ useChart에서 내려받음
 	} = useChart();
 
 	const openModal = () => setIsModalOpen(true);
@@ -54,18 +55,6 @@ const Chart = () => {
 		0,
 		visibleCount,
 	);
-
-	const handleMore = () => {
-		if (window.matchMedia("(max-width: 425px)").matches) {
-			setVisibleCount((prev) => prev + 5);
-		} else if (
-			window.matchMedia("(min-width: 426px) and (max-width: 768px)").matches
-		) {
-			setVisibleCount((prev) => prev + 5);
-		} else {
-			setVisibleCount((prev) => prev + 10);
-		}
-	};
 
 	const handleIdolClick = (idol) => {
 		const mockData = idolProfiles[idol.name];
