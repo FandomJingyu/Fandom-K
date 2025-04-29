@@ -44,6 +44,7 @@ const Chart = () => {
 		setIdols,
 		visibleCount,
 		setVisibleCount,
+		handleMore,
 	} = useChart();
 
 	const openModal = () => setIsModalOpen(true);
@@ -54,18 +55,6 @@ const Chart = () => {
 		0,
 		visibleCount,
 	);
-
-	const handleMore = () => {
-		if (window.matchMedia("(max-width: 425px)").matches) {
-			setVisibleCount((prev) => prev + 5);
-		} else if (
-			window.matchMedia("(min-width: 426px) and (max-width: 768px)").matches
-		) {
-			setVisibleCount((prev) => prev + 5);
-		} else {
-			setVisibleCount((prev) => prev + 10);
-		}
-	};
 
 	const handleIdolClick = (idol) => {
 		const mockData = idolProfiles[idol.name];
@@ -100,7 +89,6 @@ const Chart = () => {
 		</ListItem>
 	);
 
-	// ✨ for문으로 스켈레톤 10개 생성하는 함수
 	const renderSkeletonItems = () => {
 		const items = [];
 		for (let i = 0; i < 10; i++) {
@@ -124,14 +112,16 @@ const Chart = () => {
 			<ChartContainer>
 				<ChartHeaderWrap>
 					<ChartTitle>이달의 차트</ChartTitle>
-					<ChartButtonWrap>
-						<Button size="vote-chart" onClick={openModal}>
-							<VoteChart>
-								<img src="/images/Chart.png" alt="차트 투표 이미지" />
-								차트 투표하기
-							</VoteChart>
-						</Button>
-					</ChartButtonWrap>
+					{!error && (
+						<ChartButtonWrap>
+							<Button size="vote-chart" onClick={openModal}>
+								<VoteChart>
+									<img src="/images/Chart.png" alt="차트 투표 이미지" />
+									차트 투표하기
+								</VoteChart>
+							</Button>
+						</ChartButtonWrap>
+					)}
 				</ChartHeaderWrap>
 
 				<Modal
