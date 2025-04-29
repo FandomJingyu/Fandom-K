@@ -61,12 +61,14 @@ const sliderFace = css`
 const sliderName = css`
 	width: 30%;
 	height: 20px;
+	border-radius: 4px;
 	${shimmerStyle}
 `;
 
 const sliderGroup = css`
 	width: 50%;
 	height: 20px;
+	border-radius: 4px;
 	${shimmerStyle}
 `;
 
