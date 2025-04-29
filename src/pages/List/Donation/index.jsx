@@ -1,8 +1,8 @@
 /** @jsxImportSource @emotion/react */
-import { donationTitle } from "./Donation.style";
+import { donationTitle } from "./Donation.styles";
 
-import LoadingError from "../../../components/Error";
-import { useDonations } from "../../../hooks/useDonation";
+import LoadingError from "@/components/Error";
+import { useDonations } from "@/hooks/useDonation";
 import Card from "./components/Card";
 import Carousel from "./components/Carousel";
 import DonationSkeleton from "./components/Skeleton";

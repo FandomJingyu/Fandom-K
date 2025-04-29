@@ -3,7 +3,6 @@ import {
 	creditImg,
 	descriptionSubtitle,
 	descriptionTitle,
-	donatioImgContainer,
 	donationButton,
 	donationCardContainer,
 	donationDday,
@@ -12,14 +11,15 @@ import {
 	donationFooterLeft,
 	donationFooterUp,
 	donationImg,
+	donationImgContainer,
 	donationTitleContainer,
 	imgWrapper,
 	overlaySvg,
 	targetDonation,
-} from "./Card.style"; // 스타일 import
+} from "./Card.styles"; // 스타일 import
 
+import Button from "@/components/Button/Button";
 import { useNavigate } from "react-router-dom";
-import Button from "../../../../../components/Button/Button";
 import ProgressBar from "./ProgressBar";
 
 /**
@@ -50,7 +50,7 @@ function Card({ donation }) {
 	return (
 		<article css={donationCardContainer}>
 			{/* 상단 이미지 영역 */}
-			<div css={donatioImgContainer}>
+			<div css={donationImgContainer}>
 				<div css={imgWrapper}>
 					{/* 아이돌 프로필 이미지 */}
 					<img css={donationImg} src={idol.profilePicture} alt={idol.name} />

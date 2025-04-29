@@ -1,6 +1,6 @@
+import { shimmerStyle } from "@/styles/skeletonAnimation";
 /** @jsxImportSource @emotion/react */
-import { css, keyframes } from "@emotion/react";
-import { shimmerStyle } from "../../../../../../styles/skeletonAnimation";
+import { css } from "@emotion/react";
 
 export const container = css`
   display: flex;

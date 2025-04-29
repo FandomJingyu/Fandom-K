@@ -11,6 +11,7 @@ export default function DonationDetail({ donation, loading }) {
 	const donationWithEul = donation
 		? withPostPosition(donation.subtitle, "을를")
 		: "";
+	const checkIsMale = idol.gender === "male";
 	return (
 		<div className="text" css={DonationDetailTextStyle}>
 			{loading ? (
@@ -28,7 +29,7 @@ export default function DonationDetail({ donation, loading }) {
 							<br />
 							이건 그냥… 🎉 국가공휴일 지정 가야 돼 🎉 <br />
 							🕊️ {idolWithGa} 강림하던 그 순간 세상의 조도는 조절 당했고 우리
-							눈은 그녀만을 트래킹하기 시작했다 👁️💫
+							눈은 {checkIsMale ? "그" : "그녀"}만을 트래킹하기 시작했다 👁️💫
 							<br />
 							그날 이후 우린 알게 되었죠. <br />🧠 "아… {idolWithEun} 그냥
 							아이돌이 아니라 종교다…"
@@ -37,20 +38,21 @@ export default function DonationDetail({ donation, loading }) {
 							🪩무대 위에선 카리스마 풀충전 <br />
 							🐣팬들 앞에선 애교 떡칠
 							<br />
-							갭차이 보고 진짜 의자에서 슬라이드했잖아요… 의자야 미안해 😭
+							갭차이 보고 진짜 의자에서 슬라이드 했잖아요… 의자야 미안해 😭
 						</dd>
 					</dl>
 					<dl>
 						<dt>
-							🧨 이렇게 존예로운 날 그냥 넘길 수 있냐고! <br />🎉 우린{" "}
-							{idol.name}의 1주년을 제대로, 작정하고, 뽝! 터지게 축하할 거예요
+							🧨 이런 역사적인 날을 그냥 지나칠 수 없죠! <br />
+							{idolWithEun} 무대를 찢어..🐻 조공은 우리가 찢을게🙊
 						</dt>
 						<dd>
 							📍{donationWithEul} {idol.name}존으로 물들인다? → ㄹㅇ 가능 📺
 							초대형 디지털 광고
 							<br />+ 팬들의 한땀한땀 축하 메시지! 👀 지나가는 사람들 전부
 							<br />
-							“누구세요...? 저 사람 왜 이렇게 예뻐요...?” 자동 입덕 예약 👑
+							“누구세요...? 저 사람 왜 이렇게{" "}
+							{checkIsMale ? "멋져요" : "예뻐요"}...?” 자동 입덕 예약 👑
 						</dd>
 					</dl>
 					<dl>
@@ -58,7 +60,7 @@ export default function DonationDetail({ donation, loading }) {
 						<dd>
 							🔹 목표 금액 : {targetDonation.toLocaleString()}원
 							<br />🔹 후원 기간 : ~ {deadline.split("T")[0]}
-							<br />🔹 후원 메시지 : {idol.name} 존예해요!
+							<br />🔹 후원 메시지 : 우주가 선택한 {idol.name}⭐
 						</dd>
 					</dl>
 					<dl>
@@ -143,7 +145,7 @@ const DonationDetailTextStyle = css`
   }
   @media all and (max-width: 425px) {
     margin-top: 125.65vw;
-		 dl {
+    dl {
       font-size: 3.53vw;
       margin-bottom: 9.41vw;
     }
