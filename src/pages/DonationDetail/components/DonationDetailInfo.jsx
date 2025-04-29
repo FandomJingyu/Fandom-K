@@ -10,6 +10,8 @@ import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import DonationDetailTimer from "./DonationDetailTimer";
 
+let isCreditErrorToastShown = false;
+
 export default function DonationDetailInfo({ donation, loading }) {
 	const { idol, receivedDonations, targetDonation, deadline, subtitle, title } =
 		donation;
@@ -36,19 +38,37 @@ export default function DonationDetailInfo({ donation, loading }) {
 	});
 
 	const checkIsLimitOver = (newCredit) => {
-		const isOverLimit = newCredit > (myCredit.credit || 0);
+		const availableCredit = myCredit.credit || 0;
+		const isOverLimit = newCredit > availableCredit;
 
 		setIsError(isOverLimit);
-
 		setCredit(newCredit);
 
 		if (isOverLimit) {
-			toast.error("보유한 크레딧을 초과할 수 없습니다.", {
-				toastId: "credit-error",
-			});
-			setCredit(myCredit.credit || 0);
+			if (!isCreditErrorToastShown) {
+				// 1. 초과했으면 토스트 띄우기 (이미 뜬 상태가 아니면)
+				toast.error("보유한 크레딧을 초과할 수 없습니다.", {
+					toastId: "credit-error",
+				});
+				isCreditErrorToastShown = true;
+			}
+			// 2. 초과했으면 인풋을 현재 보유 크레딧으로 리셋
+			setCredit(availableCredit);
+
+			// 3. 에러 상태도 해제 (버튼 disabled 해제)
+			setIsError(false);
+
+			// 4. 토스트 상태 초기화
+			isCreditErrorToastShown = false;
 		} else {
-			toast.dismiss("credit-error");
+			setCredit(newCredit);
+			setIsError(false);
+
+			// 이미 에러 토스트가 떠 있었으면 닫기
+			if (isCreditErrorToastShown) {
+				toast.dismiss("credit-error");
+				isCreditErrorToastShown = false;
+			}
 		}
 	};
 
@@ -62,6 +82,7 @@ export default function DonationDetailInfo({ donation, loading }) {
 		}
 
 		checkIsLimitOver(newCredit);
+		checkIsTargetOver(newCredit);
 	};
 
 	const creditList = [
@@ -91,6 +112,7 @@ export default function DonationDetailInfo({ donation, loading }) {
 		setIsModalOpen(false);
 	};
 
+	// 스크롤 내리면 box 내부에 제목 표시
 	useEffect(() => {
 		if (window.innerWidth <= 768) return;
 		const handleWindowScroll = () => {
@@ -112,7 +134,9 @@ export default function DonationDetailInfo({ donation, loading }) {
 		const newValue = value === "" ? 0 : Number(value);
 
 		checkIsLimitOver(newValue);
+		checkIsTargetOver(newValue);
 	};
+
 	return (
 		<>
 			<form onSubmit={safeSubmit} css={DonationDetailInfoStyle}>

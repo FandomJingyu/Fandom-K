@@ -10,7 +10,7 @@ const CheckIdol = ({ isChecked, size, checkSize }) => {
 		<div css={checkWrapper(size)}>
 			<div css={checkBackground(size)} />
 			<img
-				src="../public/icons/Checkmark.png"
+				src="/icons/Checkmark.png"
 				alt="체크표시"
 				css={checkIconStyle(checkSize)}
 			/>

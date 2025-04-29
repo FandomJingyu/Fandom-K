@@ -14,7 +14,8 @@ export const Profile = styled.div`
   transform: translate(-50%, -50%);
   z-index: 1001;
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
-  width: clamp(325px, 90vw, 1200px);
+  width: 100%;
+  padding:0 8px;
 
 
 `;
@@ -149,8 +150,7 @@ export const StyledVoteButton = styled.div`
 `;
 
 export const Logo = styled.div`
-  width:150px;
-  height:200px;
+  width:250px;
   display: flex;
   gap: 4px;
   padding-left: 15px;
@@ -173,8 +173,17 @@ export const CloseButton = styled.button`
   padding: 0;
   z-index: 10;
 
-  img {
+  img.close{
     width: 24px;
     height: 24px;
+  }
+    img.back{
+    width: 24px;
+    height: 24px;
+    
+    }
+    @media (max-width: 425px) {
+    left: 12px;
+    top:40px;
   }
 `;

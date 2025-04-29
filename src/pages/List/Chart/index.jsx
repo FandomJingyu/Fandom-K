@@ -1,13 +1,12 @@
 import Button from "@/components/Button/Button";
 import Circle from "@/components/Circle";
+import LoadingError from "@/components/Error";
 import Modal from "@/components/Modal";
-import styled from "@emotion/styled";
+import { useChart } from "@/hooks/useChart";
+import ChartVoteModal from "@/pages/List/Chart/components/ChartVoteModal";
+import IdolProfileModal from "@/pages/List/Chart/components/IdolProfileModal";
+import { idolProfiles } from "@/pages/List/Chart/components/IdolProfiles";
 import React, { useState } from "react";
-import chartImg from "/images/Chart.png";
-import ChartVoteModal from "./components/ChartVoteModal";
-import IdolProfileModal from "./components/IdolProfileModal";
-import { idolProfiles } from "./components/IdolProfiles";
-import useChart from "./components/hooks/useChart";
 
 import {
 	ChartButtonWrap,
@@ -20,43 +19,53 @@ import {
 	ChartTitle,
 	ListItem,
 	MoreButton,
+	Overlay,
 	ProfileInfo,
 	RankAndName,
+	SkeletonListItem,
+	SkeletonName,
+	SkeletonProfile,
+	SkeletonRankAndName,
+	SkeletonVotes,
 	VoteChart,
 	Votes,
-} from "./Chart.styles";
-
-const Overlay = styled.div`
-	position: fixed;
-	top: 0;
-	left: 0;
-	width: 100vw;
-	height: 100vh;
-	background-color: rgba(0, 0, 0, 0.6);
-	z-index: 1000;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-`;
+} from "@/pages/List/Chart/Chart.styles";
 
 const Chart = () => {
-	const {
-		idols,
-		setIdols,
-		activeTab,
-		loading,
-		visibleList,
-		handleMore,
-		handleTabChange,
-		femaleIdols,
-		maleIdols,
-	} = useChart();
-
+	const [activeTab, setActiveTab] = useState("female");
 	const [isModalOpen, setIsModalOpen] = useState(false);
 	const [selectedIdol, setSelectedIdol] = useState(null);
 
+	const {
+		loading,
+		error,
+		femaleIdols,
+		maleIdols,
+		setIdols,
+		visibleCount,
+		setVisibleCount,
+	} = useChart();
+
 	const openModal = () => setIsModalOpen(true);
 	const closeModal = () => setIsModalOpen(false);
+
+	const isFemale = activeTab === "female";
+	const visibleList = (isFemale ? femaleIdols : maleIdols).slice(
+		0,
+		visibleCount,
+	);
+
+	const handleMore = () => {
+		if (window.matchMedia("(max-width: 425px)").matches) {
+			setVisibleCount((prev) => prev + 5);
+		} else if (
+			window.matchMedia("(min-width: 426px) and (max-width: 768px)").matches
+		) {
+			setVisibleCount((prev) => prev + 5);
+		} else {
+			setVisibleCount((prev) => prev + 10);
+		}
+	};
 
 	const handleIdolClick = (idol) => {
 		const mockData = idolProfiles[idol.name];
@@ -91,6 +100,25 @@ const Chart = () => {
 		</ListItem>
 	);
 
+	// ✨ for문으로 스켈레톤 10개 생성하는 함수
+	const renderSkeletonItems = () => {
+		const items = [];
+		for (let i = 0; i < 10; i++) {
+			items.push(
+				<SkeletonListItem key={`skeleton-${i}`}>
+					<ProfileInfo>
+						<SkeletonProfile />
+						<SkeletonRankAndName>
+							<SkeletonName />
+						</SkeletonRankAndName>
+					</ProfileInfo>
+					<SkeletonVotes />
+				</SkeletonListItem>,
+			);
+		}
+		return items;
+	};
+
 	return (
 		<>
 			<ChartContainer>
@@ -99,7 +127,7 @@ const Chart = () => {
 					<ChartButtonWrap>
 						<Button size="vote-chart" onClick={openModal}>
 							<VoteChart>
-								<img src={chartImg} alt="차트 투표 이미지" />
+								<img src="/images/Chart.png" alt="차트 투표 이미지" />
 								차트 투표하기
 							</VoteChart>
 						</Button>
@@ -109,40 +137,66 @@ const Chart = () => {
 				<Modal
 					isOpen={isModalOpen}
 					onClose={closeModal}
-					type={activeTab === "female" ? "voteWoman" : "voteMan"}
+					type={isFemale ? "voteWoman" : "voteMan"}
 					isMobileFullScreen={true}
 				>
 					<ChartVoteModal
 						gender={activeTab}
-						closeModal={closeModal}
-						idols={activeTab === "female" ? femaleIdols : maleIdols}
+						idols={isFemale ? femaleIdols : maleIdols}
 						setIdols={setIdols}
+						closeModal={closeModal}
 					/>
 				</Modal>
 
 				<ChartIdol style={{ marginBottom: "20px" }}>
 					<ChartIdolLeft
-						onClick={() => handleTabChange("female")}
+						onClick={() => {
+							if (!isFemale) {
+								setActiveTab("female");
+								if (window.matchMedia("(max-width: 425px)").matches) {
+									setVisibleCount(5);
+								} else if (
+									window.matchMedia("(min-width: 426px) and (max-width: 768px)")
+										.matches
+								) {
+									setVisibleCount(5);
+								} else {
+									setVisibleCount(10);
+								}
+							}
+						}}
 						style={{
 							cursor: "pointer",
-							fontWeight: activeTab === "female" ? 700 : 400,
-							backgroundColor:
-								activeTab === "female" ? "#ffffff1a" : "transparent",
-							borderBottom:
-								activeTab === "female" ? "1px solid #ffffff" : "none",
+							fontWeight: isFemale ? 700 : 400,
+							backgroundColor: isFemale ? "#ffffff1a" : "transparent",
+							borderBottom: isFemale ? "1px solid #ffffff" : "none",
 							transition: "all 0.3s ease",
 						}}
 					>
 						이달의 여자 아이돌
 					</ChartIdolLeft>
+
 					<ChartIdolRight
-						onClick={() => handleTabChange("male")}
+						onClick={() => {
+							if (isFemale) {
+								setActiveTab("male");
+								if (window.matchMedia("(max-width: 425px)").matches) {
+									setVisibleCount(5);
+								} else if (
+									window.matchMedia("(min-width: 426px) and (max-width: 768px)")
+										.matches
+								) {
+									setVisibleCount(5);
+								} else {
+									setVisibleCount(10);
+								}
+							}
+						}}
 						style={{
 							cursor: "pointer",
-							fontWeight: activeTab === "male" ? 700 : 400,
-							backgroundColor:
-								activeTab === "male" ? "#ffffff1a" : "transparent",
-							borderBottom: activeTab === "male" ? "1px solid #ffffff" : "none",
+							fontWeight: !isFemale ? 700 : 400,
+							backgroundColor: !isFemale ? "#ffffff1a" : "transparent",
+							borderBottom: !isFemale ? "1px solid #ffffff" : "none",
 							transition: "all 0.3s ease",
 						}}
 					>
@@ -150,10 +204,10 @@ const Chart = () => {
 					</ChartIdolRight>
 				</ChartIdol>
 
-				{loading ? (
-					<div style={{ color: "white", textAlign: "center" }}>
-						불러오는 중...
-					</div>
+				{error ? (
+					<LoadingError error="chart" />
+				) : loading ? (
+					<ChartList>{renderSkeletonItems()}</ChartList>
 				) : (
 					<>
 						<ChartList>
@@ -163,9 +217,7 @@ const Chart = () => {
 						</ChartList>
 
 						{visibleList.length <
-							(activeTab === "female"
-								? femaleIdols.length
-								: maleIdols.length) && (
+							(isFemale ? femaleIdols.length : maleIdols.length) && (
 							<MoreButton>
 								<Button size="load-more" onClick={handleMore}>
 									더 보기

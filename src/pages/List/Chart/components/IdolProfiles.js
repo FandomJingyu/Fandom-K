@@ -695,4 +695,16 @@ export const idolProfiles = {
 		instagram: " https://www.instagram.com/official.boynextdoor/",
 		fancam: "https://www.youtube.com/watch?v=PX05ht8so7s",
 	},
+	정진규: {
+		englishName: "JEONG JINGYU",
+		birth: "1995",
+		hometown: "서울",
+		hobby: "라이브 코딩",
+		mbti: "INTP",
+		group: "FANDOM ",
+		agency: "Codeit",
+		groupLogo: "/images/FANDOM.png",
+		instagram: "https://www.instagram.com/codeit_kr/",
+		fancam: "https://www.youtube.com/watch?v=IyvijbB8jmc",
+	},
 };
