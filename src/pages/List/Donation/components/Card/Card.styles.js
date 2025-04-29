@@ -17,8 +17,8 @@ export const donationCardContainer = css`
   flex-shrink: 0;
 
   @media (max-width: 426px) {
-  width: 158px;
-  height: 303px;
+    width: 158px;
+    height: 303px;
   };
 `;
 
@@ -89,7 +89,7 @@ export const donationButton = css`
   @media (max-width: 426px) {
     bottom: 4vw;
     left: 1.87vw;
-  }
+  };
 `;
 
 /**

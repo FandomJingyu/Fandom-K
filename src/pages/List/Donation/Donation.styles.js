@@ -5,16 +5,17 @@ import { css } from "@emotion/react";
  * 슬라이더 위에 고정되어 나타나는 타이틀 스타일
  */
 export const donationTitle = css`
-margin-top: 50px;
+  margin-top: 50px;
 
-color: #ffffff;
-font-size: 24px;
-font-weight: 700;
+  color: #ffffff;
+  font-size: 24px;
+  font-weight: 700;
 
-@media (max-width: 426px) {
-font-size: 4.27vw;
-margin-top: 10.67vw;
-}`;
+  @media (max-width: 426px) {
+    font-size: 4.27vw;
+    margin-top: 10.67vw;
+  };
+`;
 
 export const donationPageNation = css`
 position: relative;`;
@@ -39,11 +40,11 @@ export const pageNationRight = css`
   &:hover {
   background-color: #1B1B1B;
   border-radius: 4px;
-  }
+  };
 
   @media (max-width: 1365px) {
-  display: none;
-  }
+    display: none;
+  };
 
 `;
 
@@ -65,11 +66,11 @@ export const pageNationLeft = css`
   margin-right: 30px;
 
   &:hover {
-  background-color: #1B1B1B;
-  border-radius: 4px;
-  }
+    background-color: #1B1B1B;
+    border-radius: 4px;
+  };
 
   @media (max-width: 1365px) {
-  display: none;
-  }
+    display: none;
+  };
 `;
