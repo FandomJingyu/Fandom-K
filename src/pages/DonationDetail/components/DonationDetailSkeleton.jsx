@@ -53,7 +53,7 @@ const DonationDetailSkeletonTop = css`
   span {
     height: 36px;
     width: 400px;
-    &:first-child {
+    &:first-of-type {
       height: 58px;
       width: 300px;
       margin-bottom: 30px;
@@ -63,7 +63,7 @@ const DonationDetailSkeletonTop = css`
     span {
       width: 52.08vw;
       height: 3.13vw;
-      &:first-child {
+      &:first-of-type {
         height: 5.86vw;
         width: 39.06vw;
         margin-bottom: 3.91vw;
