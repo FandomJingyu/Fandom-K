@@ -1,6 +1,6 @@
 # 🌟Fandom-K
 
-Fnadom-K는 좋아하는 아티스트에게 직접 응원을 전하고, 투명한 후원과 간편한 참여로 진짜 팬심을 행동으로 보여줄 수 있는 팬 커뮤니티 플랫폼입니다.
+Fandom-K는 좋아하는 아티스트에게 직접 응원을 전하고, 투명한 후원과 간편한 참여로 진짜 팬심을 행동으로 보여줄 수 있는 팬 커뮤니티 플랫폼입니다.
 
 ---
 
@@ -44,36 +44,53 @@ npm run dev
 ## 📌 주요 기능
 
 ### 🌐 랜딩 페이지
+- 사이트의 전반적인 정보와 주요 기능을 소개
+- GSAP 라이브러리를 활용해 인터랙티브 스크롤 애니메이션과 부드러운 요소 전환 효과 구현
 
 <img src="https://github.com/user-attachments/assets/59425eee-d02b-4fe4-ab5e-c37c55f60d9a" width="600" />
 
 
 ### 🎁 후원을 기다리는 조공 & 🌟 이달의 차트
+- **후원을 기다리는 조공**: 아이돌 후원 참여 및 목표 달성률·상세 정보 확인 슬라이드를 통해 탐색
+- **이달의 차트**: 투표를 통해 아이돌 순위를 반영하고, 실시간 차트 변동을 확인
+
 
 <img src="https://github.com/user-attachments/assets/b4ef33fa-6a2b-44e2-9d00-341c9a6079f6" width="600" />
 
 
 ### 💸 충전하기 모달창
+- 사용자가 크레딧 금액을 선택하고 충전 요청을 진행
+
 
 <img src="https://github.com/user-attachments/assets/75acdfc6-1a89-4f49-bbe6-ecc5e76692d2" width="600" />
 
-
 ### 💖 투표하기 모달창
+- 사용자가 아이돌을 선택해 투표를 진행하고, 결과에 반영
 
+  
 <img src="https://github.com/user-attachments/assets/4902bd8b-ef24-4e06-a68c-62108004fa09" width="600" />
 
 ### 🎤 아이돌 상세 정보 모달창
+- 선택한 아이돌의 프로필과 상세 정보를 확인
+
 
 <img src="https://github.com/user-attachments/assets/2524b865-501d-44d5-af73-abe54a9d613e" width="600" />
 
 ### 💌 후원하기 상세 페이지
+- 조공할 아이돌의 목표 금액, 설명, 남은 시간을 확인하고 후원에 참여
 
+
+<img src="https://github.com/user-attachments/assets/d9d1f7d3-8135-4118-8f7c-f117803dfb69" width="600" />
 
 ### 💎 마이페이지
+- 관심 등록한 아이돌을 리스트로 관리하고, 슬라이드를 통해 탐색
+
 
 <img src="https://github.com/user-attachments/assets/58db54de-ffcb-40d9-ad5e-47310074e5c0" width="600" />
 
 ### ⛔ NotFound 페이지
+- 잘못된 경로 접근 시 에러를 안내, 이전 또는 메인 페이지로 이동
+
 
 <img src="https://github.com/user-attachments/assets/9692fcdf-8027-4b23-a199-18f9c7d49b39" width="600" />
 
@@ -139,7 +156,7 @@ npm run dev
   - localStorage 기반 관심 아이돌 관리 기능
   - 슬라이더 라이브러리를 활용 관심 아이돌 탐색
 
-- **발표**
+- **발표 및 발표 자료 제작**
 
 🔥 **김태일**
 
@@ -163,6 +180,7 @@ npm run dev
   - 슬라이더 캐러셀 구현
   - ProgressBar 달성률 표시
 
+- **발표 자료 제작**
 
 ---
 
@@ -177,7 +195,7 @@ npm run dev
 
 ┣ src            🚀 소스 코드
 ┃ ┣ apis        🔗 API 호출 모듈
-┃ ┣ components  🧩 재사용 컴포넌트 (Button, Error, Header & Footer, Modal, RadioButon, IdolProfile)
+┃ ┣ components  🧩 재사용 컴포넌트 (Button, Error, Header & Footer, Modal, RadioButton, IdolProfile)
 ┃ ┣ context     🌍 글로벌 상태 관리 (Credit)
 ┃ ┣ hooks       🪝 커스텀 훅 (useChart, useDonation, useMobile, useSafeSubmit)
 ┃ ┣ layouts     🧱 레이아웃 컴포넌트
