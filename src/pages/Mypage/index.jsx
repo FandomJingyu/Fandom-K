@@ -9,7 +9,6 @@ import LoadingError from "../../components/Error";
 import { addButton, addIdol, myIdolList, myIdolWrapper } from "./Mypage.styles";
 import SkeletonSlider from "./SkeletonSlider";
 import IdolList from "./components/IdolList";
-import { idolList } from "./components/IdolList/IdolList.styles";
 import useWindowSize from "./hooks/useWindowSize";
 /** @jsxImportSource @emotion/react */
 
@@ -259,7 +258,7 @@ const Mypage = () => {
 						<></>
 					) : (
 						<Button size={"add"} onClick={handleAddIdol}>
-							<img src="../public/images/plus_24px.svg" alt="플러스 이미지" />
+							<img src="/images/plus_24px.svg" alt="플러스 이미지" />
 							<span>추가하기</span>
 						</Button>
 					)}
