@@ -8,7 +8,7 @@ import {
 	icon,
 	iconWrapper,
 	title,
-} from "./Error.style";
+} from "./Error.styles";
 
 const ERROR_MESSAGE = {
 	donation: "후원 목록을",
