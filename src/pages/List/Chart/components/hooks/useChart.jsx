@@ -1,4 +1,4 @@
-import { chartAPI } from "@/apis/chartAPI";
+import { chartAPI } from "@/apis/charAPI";
 import { useEffect, useState } from "react";
 
 const ITEMS_PER_PAGE = 10;
