@@ -2,11 +2,11 @@ import Button from "@/components/Button/Button";
 import Circle from "@/components/Circle";
 import LoadingError from "@/components/Error";
 import Modal from "@/components/Modal";
-import { useChart } from "@/hooks/useChart";
 import ChartVoteModal from "@/pages/List/Chart/components/ChartVoteModal";
 import IdolProfileModal from "@/pages/List/Chart/components/IdolProfileModal";
 import { idolProfiles } from "@/pages/List/Chart/components/IdolProfiles";
 import React, { useState } from "react";
+import { useChart } from "./components/hooks/useChart";
 
 import {
 	ChartButtonWrap,
@@ -41,7 +41,8 @@ const Chart = () => {
 		error,
 		femaleIdols,
 		maleIdols,
-		setIdols,
+		setFemaleIdols,
+		setMaleIdols,
 		visibleCount,
 		setVisibleCount,
 		handleMore,
@@ -51,10 +52,8 @@ const Chart = () => {
 	const closeModal = () => setIsModalOpen(false);
 
 	const isFemale = activeTab === "female";
-	const visibleList = (isFemale ? femaleIdols : maleIdols).slice(
-		0,
-		visibleCount,
-	);
+	const visibleList =
+		(isFemale ? femaleIdols : maleIdols)?.slice(0, visibleCount) || [];
 
 	const handleIdolClick = (idol) => {
 		const mockData = idolProfiles[idol.name];
@@ -133,7 +132,7 @@ const Chart = () => {
 					<ChartVoteModal
 						gender={activeTab}
 						idols={isFemale ? femaleIdols : maleIdols}
-						setIdols={setIdols}
+						setIdols={isFemale ? setFemaleIdols : setMaleIdols}
 						closeModal={closeModal}
 					/>
 				</Modal>
@@ -194,10 +193,10 @@ const Chart = () => {
 					</ChartIdolRight>
 				</ChartIdol>
 
-				{error ? (
-					<LoadingError error="chart" />
-				) : loading ? (
+				{loading ? (
 					<ChartList>{renderSkeletonItems()}</ChartList>
+				) : error ? (
+					<LoadingError error="chart" />
 				) : (
 					<>
 						<ChartList>
@@ -206,8 +205,8 @@ const Chart = () => {
 							))}
 						</ChartList>
 
-						{visibleList.length <
-							(isFemale ? femaleIdols.length : maleIdols.length) && (
+						{(isFemale ? femaleIdols : maleIdols)?.length >
+							visibleList.length && (
 							<MoreButton>
 								<Button size="load-more" onClick={handleMore}>
 									더 보기
