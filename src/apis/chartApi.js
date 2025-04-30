@@ -1,19 +1,3 @@
-// export const chartAPI = {
-// 	getRanks: async (gender = "female", pageSize = "") => {
-// 		try {
-// 			const response = await baseAPI.get("/15-3/charts", {
-// 				params: {
-// 					gender,
-// 					pageSize,
-// 				},
-// 			});
-// 			return response.data;
-// 		} catch (error) {
-// 			throw new Error("목록을 불러오는데 실패했습니다.");
-// 		}
-// 	},
-// };
-
 import { baseAPI } from "./axios";
 
 export const chartAPI = {
