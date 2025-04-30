@@ -10,8 +10,6 @@ import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import DonationDetailTimer from "./DonationDetailTimer";
 
-let isCreditErrorToastShown = false;
-
 export default function DonationDetailInfo({ donation, loading }) {
 	const { idol, receivedDonations, targetDonation, deadline, subtitle, title } =
 		donation;
@@ -37,41 +35,6 @@ export default function DonationDetailInfo({ donation, loading }) {
 		}
 	});
 
-	const checkIsLimitOver = (newCredit) => {
-		const availableCredit = myCredit.credit || 0;
-		const isOverLimit = newCredit > availableCredit;
-
-		setIsError(isOverLimit);
-		setCredit(newCredit);
-
-		if (isOverLimit) {
-			if (!isCreditErrorToastShown) {
-				// 1. 초과했으면 토스트 띄우기 (이미 뜬 상태가 아니면)
-				toast.error("보유한 크레딧을 초과할 수 없습니다.", {
-					toastId: "credit-error",
-				});
-				isCreditErrorToastShown = true;
-			}
-			// 2. 초과했으면 인풋을 현재 보유 크레딧으로 리셋
-			setCredit(availableCredit);
-
-			// 3. 에러 상태도 해제 (버튼 disabled 해제)
-			setIsError(false);
-
-			// 4. 토스트 상태 초기화
-			isCreditErrorToastShown = false;
-		} else {
-			setCredit(newCredit);
-			setIsError(false);
-
-			// 이미 에러 토스트가 떠 있었으면 닫기
-			if (isCreditErrorToastShown) {
-				toast.dismiss("credit-error");
-				isCreditErrorToastShown = false;
-			}
-		}
-	};
-
 	const handleCredit = (label, value) => {
 		let newCredit;
 
@@ -81,8 +44,30 @@ export default function DonationDetailInfo({ donation, loading }) {
 			newCredit = credit + value;
 		}
 
-		checkIsLimitOver(newCredit);
-		checkIsTargetOver(newCredit);
+		changeCredit(newCredit);
+	};
+
+	const inputOnChange = (e) => {
+		const value = e.target.value.replace(/[^0-9]/g, "");
+		changeCredit(value === "" ? 0 : Number(value));
+	};
+
+	const changeCredit = (value) => {
+		const availableCredit = myCredit.credit || 0;
+		const diffCredit = targetDonation - donatedAmount;
+
+		if (value > diffCredit || value > availableCredit) {
+			const message =
+				value > diffCredit
+					? "목표 금액을 초과할 수 없습니다."
+					: "보유한 크레딧을 초과할 수 없습니다.";
+
+			toast.error(message, {
+				toastId: "credit-error",
+			});
+		}
+
+		setCredit(Math.min(value, diffCredit, availableCredit));
 	};
 
 	const creditList = [
@@ -128,14 +113,6 @@ export default function DonationDetailInfo({ donation, loading }) {
 		window.addEventListener("scroll", handleWindowScroll);
 		return () => window.removeEventListener("scroll", handleWindowScroll);
 	}, []);
-
-	const inputOnChange = (e) => {
-		const value = e.target.value.replace(/[^0-9]/g, "");
-		const newValue = value === "" ? 0 : Number(value);
-
-		checkIsLimitOver(newValue);
-		checkIsTargetOver(newValue);
-	};
 
 	return (
 		<>
@@ -217,6 +194,7 @@ const DonationDetailInfoStyle = css`
   flex-direction: column;
   height: 600px;
   position: sticky;
+  z-index: 99;
   overflow: hidden;
   top: 120px;
   padding: 30px 20px;

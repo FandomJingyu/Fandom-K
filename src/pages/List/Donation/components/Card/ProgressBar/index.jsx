@@ -1,6 +1,6 @@
 /** @jsxImportSource @emotion/react */
 
-import { progressContainer, progressContent } from "./ProgressBar.style";
+import { progressContainer, progressContent } from "./ProgressBar.styles";
 
 /**
  * ProgressBar 컴포넌트

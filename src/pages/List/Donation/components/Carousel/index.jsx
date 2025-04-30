@@ -6,8 +6,8 @@ import {
 	donationPageNation,
 	pageNationLeft,
 	pageNationRight,
-} from "../../Donation.style";
-import { sliderTrack, sliderViewport } from "./Carousel.style";
+} from "../../Donation.styles";
+import { sliderTrack, sliderViewport } from "./Carousel.styles";
 
 /**
  * 캐러셀(슬라이더) 컴포넌트
