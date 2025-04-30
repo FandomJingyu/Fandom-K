@@ -3,6 +3,7 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useEffect, useRef } from "react";
 import { Route, Routes } from "react-router-dom";
+import ScrollToTop from "./components/ScrollTop";
 import Toastify from "./components/Toastify";
 import { CreditProvider } from "./context/CreditContext";
 import DefaultLayout from "./layouts/DefaultLayout";
@@ -40,6 +41,7 @@ function App() {
 	return (
 		<CreditProvider>
 			<Toastify />
+			<ScrollToTop />
 			<Routes>
 				<Route index element={<Landing />} />
 				<Route path="/" element={<DefaultLayout />}>
