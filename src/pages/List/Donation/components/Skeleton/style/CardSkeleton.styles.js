@@ -3,6 +3,8 @@ import { shimmerStyle } from "@/styles/skeletonAnimation";
 import { css } from "@emotion/react";
 
 export const container = css`
+  flex-shrink: 0;
+  
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -47,7 +49,7 @@ export const text = css`
 
   @media (max-width: 426px) {
     gap: 1.6vw;
-  }
+  };
   `;
 
 export const subTitle = css`

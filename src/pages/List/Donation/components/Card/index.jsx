@@ -65,7 +65,7 @@ function Card({ donation }) {
 						disabled={isButtonDisabled}
 						onClick={() => navigate(`/donation-detail/${donation.id}`)}
 					>
-						{isButtonDisabled ? "후원 마감 🎉" : "후원 하기"}
+						{isButtonDisabled ? "후원마감 🎉" : "후원하기"}
 					</Button>
 				</div>
 			</div>
