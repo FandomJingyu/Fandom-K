@@ -6,7 +6,7 @@ import useSafeSubmit from "@/hooks/useSafeSubmit";
 import CreditRechargeModalContent from "@/pages/List/Charge/components/CreditRechargeModalContent";
 /** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { toast } from "react-toastify";
 import DonationDetailTimer from "./DonationDetailTimer";
 
@@ -47,14 +47,25 @@ export default function DonationDetailInfo({ donation, loading }) {
 		changeCredit(newCredit);
 	};
 
+	const inputRef = useRef(null);
 	const inputOnChange = (e) => {
-		const value = e.target.value.replace(/[^0-9]/g, "");
-		changeCredit(value === "" ? 0 : Number(value));
+		const el = inputRef.current;
+		const rawValue = e.target.value;
+		const cursorPos = el.selectionStart;
+
+		// 쉼표 제거
+		const cleanValue = rawValue.replace(/[^0-9]/g, "");
+		const numericValue = cleanValue === "" ? 0 : Number(cleanValue);
+
+		// 상태 업데이트
+		changeCredit(numericValue, rawValue, cursorPos);
 	};
 
-	const changeCredit = (value) => {
+	const changeCredit = (value, rawValue, prevCursorPos) => {
 		const availableCredit = myCredit.credit || 0;
 		const diffCredit = targetDonation - donatedAmount;
+
+		const clampedValue = Math.min(value, diffCredit, availableCredit);
 
 		if (value > diffCredit || value > availableCredit) {
 			const message =
@@ -67,7 +78,34 @@ export default function DonationDetailInfo({ donation, loading }) {
 			});
 		}
 
-		setCredit(Math.min(value, diffCredit, availableCredit));
+		setCredit(clampedValue);
+
+		// 커서 복원
+		setTimeout(() => {
+			if (!inputRef.current) return;
+
+			// 새 포맷된 문자열
+			const formatted = clampedValue === 0 ? "" : clampedValue.toLocaleString();
+
+			// 이전 값에서 커서까지 몇 개의 숫자가 있었는지 계산
+			const numbersBeforeCursor = rawValue
+				.slice(0, prevCursorPos)
+				.replace(/[^0-9]/g, "").length;
+
+			// 새 포맷 문자열에서 그 숫자 위치를 다시 찾음
+			let newCursorPos = 0;
+			let digitsSeen = 0;
+
+			for (let i = 0; i < formatted.length; i++) {
+				if (/\d/.test(formatted[i])) digitsSeen++;
+				if (digitsSeen === numbersBeforeCursor) {
+					newCursorPos = i + 1;
+					break;
+				}
+			}
+
+			inputRef.current.setSelectionRange(newCursorPos, newCursorPos);
+		}, 0);
 	};
 
 	const creditList = [
@@ -151,11 +189,10 @@ export default function DonationDetailInfo({ donation, loading }) {
 							<div className="input">
 								<input
 									type="text"
-									name=""
-									id=""
 									placeholder="크레딧 입력"
 									value={credit === 0 ? "" : credit.toLocaleString()}
 									onChange={inputOnChange}
+									ref={inputRef}
 								/>
 							</div>
 							<ul>
