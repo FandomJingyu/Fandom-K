@@ -47,7 +47,9 @@ npm run dev
 - 사이트의 전반적인 정보와 주요 기능을 소개
 - GSAP 라이브러리를 활용해 인터랙티브 스크롤 애니메이션과 부드러운 요소 전환 효과 구현
 
-<img src="https://github.com/user-attachments/assets/59425eee-d02b-4fe4-ab5e-c37c55f60d9a" width="600" />
+
+![Animation01](https://github.com/user-attachments/assets/af07c4d6-1083-492a-87ef-78bba06a7151)
+
 
 
 ### 🎁 후원을 기다리는 조공 & 🌟 이달의 차트
