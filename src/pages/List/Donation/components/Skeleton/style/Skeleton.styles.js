@@ -11,6 +11,8 @@ export const content = css`
   margin-top: 34px;
   gap: 24px;
 
+  overflow: hidden;
+
   @media (max-width: 426px){
     gap: 1.88vw;
   };
